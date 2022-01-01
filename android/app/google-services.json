@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "785713279686",
+    "project_id": "flutter-habit-note",
+    "storage_bucket": "flutter-habit-note.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:785713279686:android:14066a207b940a5f42ddc7",
+        "android_client_info": {
+          "package_name": "com.habit.habit_note"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "785713279686-7a6bvmi304bmfltgjdfdko0f1cnorpm5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.habit.habit_note",
+            "certificate_hash": "c6839c333d3773ac12941a201bbff60cac145449"
+          }
+        },
+        {
+          "client_id": "785713279686-n5mjet6rdjpgeohjkjnrtrmrvenjq0aq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqd9HIi3nsYKp5zQQx4zK5mNCwvL4JcsQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "785713279686-n5mjet6rdjpgeohjkjnrtrmrvenjq0aq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
