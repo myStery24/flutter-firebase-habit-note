@@ -36,7 +36,7 @@ android {
         // This applicationId is the package name in google-services.json
         applicationId "com.habit.habit_note"
         minSdkVersion 23
-        targetSdkVersion 30
+        targetSdkVersion 31
         versionCode 4
         versionName "1.0.0"
         multiDexEnabled true
