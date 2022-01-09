@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mighty_notes/providers/base_model.dart';
-import 'package:mighty_notes/providers/text_provider.dart';
+import 'package:habit_note/providers/base_model.dart';
+import 'package:habit_note/providers/text_provider.dart';
 import 'package:provider/provider.dart';
 
-import 'display_text.dart';
+import 'DisplayText.dart';
 
 class ResultPage extends StatelessWidget {
   const ResultPage({Key? key}) : super(key: key);

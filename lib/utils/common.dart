@@ -1,14 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:mighty_notes/utils/Colors.dart';
-import 'package:mighty_notes/utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../main.dart';
-import 'Constants.dart';
-import 'StringConstant.dart';
+import 'colors.dart';
+import 'constants.dart';
+import 'string_constant.dart';
 
+/// Notes Colour Palette
 List<Color> getNoteColors() {
   List<Color> colors = [];
   colors.add(getColorFromHex('#FFFFFF'));
@@ -47,7 +47,10 @@ class SelectNoteColor extends StatelessWidget {
         return Container(
           height: 40,
           width: 40,
-          decoration: BoxDecoration(shape: BoxShape.circle, color: e, border: Border.all(color: Colors.grey.shade300)),
+          decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: e,
+              border: Border.all(color: Colors.grey.shade300)),
         ).onTap(() {
           onTap!(e);
         });
@@ -56,11 +59,13 @@ class SelectNoteColor extends StatelessWidget {
   }
 }
 
-Widget commonCacheImageWidget(String? url, double height, {double? width, BoxFit? fit}) {
+Widget commonCacheImageWidget(String? url, double height,
+    {double? width, BoxFit? fit}) {
   if (url.validate().startsWith('http')) {
     if (isMobile) {
       return CachedNetworkImage(
-        placeholder: placeholderWidgetFn() as Widget Function(BuildContext, String)?,
+        placeholder:
+            placeholderWidgetFn() as Widget Function(BuildContext, String)?,
         imageUrl: '$url',
         height: height,
         width: width,
@@ -76,9 +81,13 @@ Widget commonCacheImageWidget(String? url, double height, {double? width, BoxFit
   }
 }
 
-Function(BuildContext, String) placeholderWidgetFn() => (_, s) => placeholderWidget();
+Function(BuildContext, String) placeholderWidgetFn() =>
+    (_, s) => placeholderWidget();
 
-Widget placeholderWidget() => CircleAvatar(child: Icon(Icons.person, color: Colors.black), radius: imageRadius - 10, backgroundColor: Colors.grey.shade300);
+Widget placeholderWidget() => CircleAvatar(
+    child: Icon(Icons.person, color: Colors.black),
+    radius: imageRadius - 10,
+    backgroundColor: Colors.grey.shade300);
 
 subscriptionInputDecoration({String? name}) {
   return InputDecoration(
@@ -102,7 +111,8 @@ subscriptionInputDecoration({String? name}) {
 }
 
 Widget getLayoutTypeIcon() {
-  String type = getStringAsync(SELECTED_LAYOUT_TYPE_DASHBOARD, defaultValue: GRID_VIEW);
+  String type =
+      getStringAsync(SELECTED_LAYOUT_TYPE_DASHBOARD, defaultValue: GRID_VIEW);
   if (type == GRID_VIEW) {
     return Icon(Icons.grid_view);
   } else if (type == LIST_VIEW) {
@@ -116,8 +126,12 @@ appTextFieldInputDeco({String? hint, double? counterSize}) {
   return InputDecoration(
     labelText: hint.validate(),
     labelStyle: primaryTextStyle(),
-    enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: appStore.isDarkMode ? Colors.white : Colors.grey)),
-    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: appStore.isDarkMode ? Colors.white : Colors.grey)),
+    enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+            color: appStore.isDarkMode ? Colors.white : Colors.grey)),
+    focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+            color: appStore.isDarkMode ? Colors.white : Colors.grey)),
     border: OutlineInputBorder(borderSide: BorderSide()),
     counterStyle: primaryTextStyle(size: counterSize as int? ?? 12),
   );
@@ -129,9 +143,14 @@ Widget noDataWidget(BuildContext context) {
       mainAxisSize: MainAxisSize.min,
       children: [
         Image.asset(AppImages.empty),
-        // Image.asset(no_data, height: 80, fit: BoxFit.fitHeight),
+        // Image.asset(AppImages.empty, height: 80, fit: BoxFit.fitHeight),
         8.height,
-        Text(home_empty_note, style: boldTextStyle(color: appStore.isDarkMode ? Colors.white : AppColors.kHabitDark)).center(),
+        Text(home_empty_note,
+                style: boldTextStyle(
+                    color: appStore.isDarkMode
+                        ? Colors.white
+                        : AppColors.kHabitDark))
+            .center(),
       ],
     ).center(),
   );

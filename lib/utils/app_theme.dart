@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mighty_notes/utils/Colors.dart';
 import 'package:nb_utils/nb_utils.dart';
+
+import 'colors.dart';
 
 class AppTheme {
   AppTheme._();
@@ -26,7 +27,9 @@ class AppTheme {
       backgroundColor: AppColors.kHabitWhite,
       systemOverlayStyle: SystemUiOverlayStyle.light,
     ),
-    scrollbarTheme: ScrollbarThemeData(thumbColor: MaterialStateProperty.all(AppColors.kHabitDark), radius: Radius.circular(8)),
+    scrollbarTheme: ScrollbarThemeData(
+        thumbColor: MaterialStateProperty.all(AppColors.kHabitDark),
+        radius: Radius.circular(8)),
     dialogTheme: DialogTheme(shape: dialogShape()),
   ).copyWith(
     pageTransitionsTheme: PageTransitionsTheme(
@@ -54,7 +57,9 @@ class AppTheme {
     dividerColor: Colors.white12,
     cardColor: AppColors.kHabitDarkGrey,
     canvasColor: AppColors.kHabitDarkGrey,
-    scrollbarTheme: ScrollbarThemeData(thumbColor: MaterialStateProperty.all(AppColors.kHabitOrange), radius: Radius.circular(8)),
+    scrollbarTheme: ScrollbarThemeData(
+        thumbColor: MaterialStateProperty.all(AppColors.kHabitOrange),
+        radius: Radius.circular(8)),
     appBarTheme: AppBarTheme(
       titleTextStyle: TextStyle(color: Colors.white, fontSize: 22),
       backgroundColor: AppColors.kHabitDarkGrey,

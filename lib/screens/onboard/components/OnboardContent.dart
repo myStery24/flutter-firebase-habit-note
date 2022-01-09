@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mighty_notes/utils/Constants.dart';
+import 'package:habit_note/utils/constants.dart';
 
 import 'OnboardScreenData.dart';
 import 'PageIndicator.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'Colors.dart';
+import 'colors.dart';
 
 const imageRadius = 40.0;
 
@@ -52,35 +52,6 @@ class TextFontWeight {
   static const medium = FontWeight.w500;
   static const bold = FontWeight.w700;
   static const black = FontWeight.w900;
-}
-
-class AppStrings {
-  // App name
-  static const String appName = 'HaBIT Note';
-
-  // Button texts
-  static const String createAccount = 'CREATE ACCOUNT';
-  static const String login = 'LOG IN';
-  static const String submit = 'SUBMIT';
-  static const String logout = 'LOG OUT';
-  static const String exit = 'Exit';
-  static const String optionNo = 'No';
-
-  static const String clearImage = 'Clear Image';
-  static const String scanImage = 'Scan Image';
-
-  // Handle form error
-  final RegExp emailValidatorRegex =
-  RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-  static const String kEmailNullError = 'Email is required';
-  static const String kInvalidEmailError = 'Enter in the format: name@example.com';
-  static const String kPassNullError = 'Cannot be blank';
-  static const String kShortPassError = 'At least 6 characters';
-  static const String kMatchPassError = 'Passwords do not match';
-  static const String kNameNullError = 'Username is required';
-
-  // Handle Return/Back Button
-  static const String pressAgain = 'Press back again to exit app';
 }
 
 class AppImages {

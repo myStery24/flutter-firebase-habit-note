@@ -2,34 +2,35 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:mighty_notes/screens/SplashScreen.dart';
-import 'package:mighty_notes/services/AuthService.dart';
-import 'package:mighty_notes/services/NotesServices.dart';
-import 'package:mighty_notes/services/NotificationManager.dart';
-import 'package:mighty_notes/services/SubscriptionService.dart';
-import 'package:mighty_notes/services/UserDBService.dart';
-import 'package:mighty_notes/store/AppStore.dart';
-import 'package:mighty_notes/utils/Constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:timezone/data/latest.dart' as tz;
 
-import 'AppTheme.dart';
+import 'screens/SplashScreen.dart';
+import 'services/auth_service.dart';
+import 'services/notes_service.dart';
+import 'services/notification_manager.dart';
+import 'services/subscription_service.dart';
+import 'services/user_db_service.dart';
+import 'store/AppStore.dart';
+import 'utils/app_theme.dart';
+import 'utils/constants.dart';
+import 'utils/string_constant.dart';
 
-HaBITNoteApp appStore = HaBITNoteApp();
+AppStore appStore = AppStore();
 
 FirebaseFirestore db = FirebaseFirestore.instance;
 
-int adShowCount = 0;
+// int adShowCount = 0;
 
 AuthService service = AuthService();
 UserDBService userDBService = UserDBService();
-NotesServices notesService = NotesServices();
+NotesService notesService = NotesService();
 SubscriptionService subscriptionService = SubscriptionService();
 NotificationManager manager = NotificationManager();
 UserDBService userService = UserDBService();
 
 Future<void> main() async {
+  // TODO: Licensing Fonts: https://pub.dev/packages/google_fonts
   WidgetsFlutterBinding.ensureInitialized();
 
   defaultRadius = 8.0;
@@ -38,7 +39,7 @@ Future<void> main() async {
   await initialize();
 
   await Firebase.initializeApp().then((value) {
-    MobileAds.instance.initialize();
+    // .instance.initialize();
   });
   tz.initializeTimeZones();
 
@@ -50,10 +51,10 @@ Future<void> main() async {
 
   appStore.setLoggedIn(getBoolAsync(IS_LOGGED_IN));
 
-  runApp(MyApp());
+  runApp(HaBITNoteApp());
 }
 
-class MyApp extends StatelessWidget {
+class HaBITNoteApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Observer(

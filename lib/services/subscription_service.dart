@@ -1,8 +1,9 @@
-import 'package:mighty_notes/main.dart';
-import 'package:mighty_notes/model/subscription_model.dart';
-import 'package:mighty_notes/services/BaseService.dart';
-import 'package:mighty_notes/utils/Constants.dart';
+import 'package:habit_note/model/subscription_model.dart';
+import 'package:habit_note/utils/constants.dart';
 import 'package:nb_utils/nb_utils.dart';
+
+import '../main.dart';
+import 'base_service.dart';
 
 class SubscriptionService extends BaseService {
   SubscriptionService() {

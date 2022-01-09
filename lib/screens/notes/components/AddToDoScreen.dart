@@ -1,16 +1,14 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:mighty_notes/model/notes_model.dart';
-import 'package:mighty_notes/screens/DashboardScreen.dart';
-import 'package:mighty_notes/screens/notes/components/NoteCollaboratorScreen.dart';
-import 'package:mighty_notes/utils/Colors.dart';
-import 'package:mighty_notes/utils/Common.dart';
-import 'package:mighty_notes/utils/Constants.dart';
-import 'package:mighty_notes/utils/StringConstant.dart';
+import 'package:habit_note/model/notes_model.dart';
+import 'package:habit_note/utils/colors.dart';
+import 'package:habit_note/utils/common.dart';
+import 'package:habit_note/utils/constants.dart';
+import 'package:habit_note/utils/string_constant.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../../../main.dart';
+import '../../DashboardScreen.dart';
+import 'NoteCollaboratorScreen.dart';
 
 class AddToDoScreen extends StatefulWidget {
   static String tag = '/AddToDoScreen';
@@ -44,7 +42,7 @@ class AddToDoScreenState extends State<AddToDoScreen> {
   }
 
   Future<void> init() async {
-    log(adShowCount);
+    // log(adShowCount);
 
     setStatusBarColor(Colors.transparent,
         statusBarIconBrightness: Brightness.light, delayInMilliSeconds: 100);
@@ -260,7 +258,8 @@ class AddToDoScreenState extends State<AddToDoScreen> {
                 todoController.clear();
               });
             } else {
-              toast(write_something_here);
+              toast(type_something_here2);
+              // toast(type_something_here);
             }
           },
         ).expand(),
@@ -308,6 +307,7 @@ class AddToDoScreenState extends State<AddToDoScreen> {
     }
   }
 
+  /// To-do Options: Delete + Colour
   toDoColorPicker() {
     return showModalBottomSheet(
       context: context,
@@ -321,11 +321,11 @@ class AddToDoScreenState extends State<AddToDoScreen> {
               IgnorePointer(
                 ignoring: _mIsUpdateTodo ? false : true,
                 child: ListTile(
-                  leading: Icon(Icons.delete_rounded,
+                  leading: Icon(Icons.delete_forever_outlined,
                       color: appStore.isDarkMode
                           ? AppColors.kHabitOrange
                           : AppColors.scaffoldSecondaryDark),
-                  title: Text(delete_note, style: primaryTextStyle()),
+                  title: Text(delete_todo, style: primaryTextStyle()),
                   onTap: () {
                     if (widget.notesModel == null ||
                         widget.notesModel!.collaborateWith!.first ==
@@ -333,6 +333,7 @@ class AddToDoScreenState extends State<AddToDoScreen> {
                       notesService
                           .removeDocument(widget.notesModel!.noteId)
                           .then((value) {
+                        toast('To-do deleted');
                         finish(context);
                         DashboardScreen().launch(context, isNewTask: true);
                       }).catchError((error) {
@@ -344,30 +345,31 @@ class AddToDoScreenState extends State<AddToDoScreen> {
                   },
                 ),
               ),
-              ListTile(
-                leading: Icon(Icons.person_add_alt_1_rounded,
-                    color: appStore.isDarkMode
-                        ? AppColors.kHabitOrange
-                        : AppColors.scaffoldSecondaryDark),
-                title: Text(collaborator, style: primaryTextStyle()),
-                onTap: () async {
-                  finish(context);
-                  if (widget.notesModel == null ||
-                      widget.notesModel!.collaborateWith!.first ==
-                          getStringAsync(USER_EMAIL)) {
-                    List<String>? list = await NoteCollaboratorScreen(
-                            notesModel: widget.notesModel)
-                        .launch(context);
-                    if (list != null) {
-                      collaborateList.addAll(list);
-                    }
-                  } else {
-                    toast(share_note_change_not_allow);
-                  }
-                },
-              ),
+              // TODO: Collaborator Feature
+              // ListTile(
+              //   leading: Icon(Icons.person_add_alt_1_rounded,
+              //       color: appStore.isDarkMode
+              //           ? AppColors.kHabitOrange
+              //           : AppColors.scaffoldSecondaryDark),
+              //   title: Text(collaborator, style: primaryTextStyle()),
+              //   onTap: () async {
+              //     finish(context);
+              //     if (widget.notesModel == null ||
+              //         widget.notesModel!.collaborateWith!.first ==
+              //             getStringAsync(USER_EMAIL)) {
+              //       List<String>? list = await NoteCollaboratorScreen(
+              //               notesModel: widget.notesModel)
+              //           .launch(context);
+              //       if (list != null) {
+              //         collaborateList.addAll(list);
+              //       }
+              //     } else {
+              //       toast(share_note_change_not_allow);
+              //     }
+              //   },
+              // ),
               Divider(thickness: 1),
-              Text(select_color, style: boldTextStyle()),
+              Text(select_colour, style: boldTextStyle()),
               20.height,
               SelectNoteColor(onTap: (color) {
                 setState(() {

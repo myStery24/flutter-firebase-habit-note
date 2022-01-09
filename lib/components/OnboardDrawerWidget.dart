@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mighty_notes/screens/password/ForgotPasswordScreen.dart';
-import 'package:mighty_notes/services/PrivacyPolicy.dart';
-import 'package:mighty_notes/utils/Colors.dart';
-import 'package:mighty_notes/utils/Constants.dart';
+import 'package:habit_note/screens/password/ForgotPasswordScreen.dart';
+import 'package:habit_note/screens/PrivacyPolicy.dart';
+import 'package:habit_note/utils/colors.dart';
+import 'package:habit_note/utils/constants.dart';
 
-import '../services/TermsOfUse.dart';
+import '../screens/TermsOfUse.dart';
 
 class OnboardDrawerWidget extends StatelessWidget {
   final padding = const EdgeInsets.symmetric(horizontal: 20.0);

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mighty_notes/utils/Colors.dart';
+import 'package:habit_note/utils/colors.dart';
 
 class HelpScreen extends StatelessWidget {
   const HelpScreen({Key? key}) : super(key: key);

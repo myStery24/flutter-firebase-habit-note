@@ -2,14 +2,14 @@ import 'dart:core';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:habit_note/model/subscription_model.dart';
+import 'package:habit_note/utils/colors.dart';
+import 'package:habit_note/utils/common.dart';
+import 'package:habit_note/utils/string_constant.dart';
 import 'package:intl/intl.dart';
-import 'package:mighty_notes/model/subscription_model.dart';
-import 'package:mighty_notes/utils/Colors.dart';
-import 'package:mighty_notes/utils/Common.dart';
-import 'package:mighty_notes/utils/StringConstant.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import '../main.dart';
+import '../../main.dart';
 
 class NotificationScreen extends StatefulWidget {
   final SubscriptionModel? subscriptionModel;
@@ -68,7 +68,8 @@ class NotificationScreenState extends State<NotificationScreen> {
         });
     if (picked != null) {
       setState(() {
-        notificationTime = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, picked.hour, picked.minute);
+        notificationTime = DateTime(DateTime.now().year, DateTime.now().month,
+            DateTime.now().day, picked.hour, picked.minute);
       });
     }
   }
@@ -91,7 +92,7 @@ class NotificationScreenState extends State<NotificationScreen> {
             Row(
               children: [
                 Radio(
-                  activeColor: blueButtonColor,
+                  activeColor: AppColors.blueButtonColor,
                   value: 0,
                   groupValue: radioValue,
                   onChanged: (dynamic val) {
@@ -108,7 +109,7 @@ class NotificationScreenState extends State<NotificationScreen> {
             Row(
               children: [
                 Radio(
-                  activeColor: blueButtonColor,
+                  activeColor: AppColors.blueButtonColor,
                   value: 1,
                   groupValue: radioValue,
                   onChanged: (dynamic val) {
@@ -119,7 +120,7 @@ class NotificationScreenState extends State<NotificationScreen> {
                 ),
                 AppTextField(
                   controller: notificationUnitController,
-                  cursorColor: blueButtonColor,
+                  cursorColor: AppColors.blueButtonColor,
                   textStyle: primaryTextStyle(),
                   textFieldType: TextFieldType.PHONE,
                   decoration: subscriptionInputDecoration(name: '1'),
@@ -128,7 +129,9 @@ class NotificationScreenState extends State<NotificationScreen> {
                 Container(
                   margin: EdgeInsets.only(right: 16),
                   padding: EdgeInsets.only(left: 8, right: 8),
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: Colors.grey.withOpacity(0.2)),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: Colors.grey.withOpacity(0.2)),
                   child: DropdownButton<String>(
                     value: durationUnit,
                     isExpanded: true,
@@ -140,7 +143,8 @@ class NotificationScreenState extends State<NotificationScreen> {
                         durationUnit = newValue;
                       });
                     },
-                    items: <String>[DAY].map<DropdownMenuItem<String>>((String value) {
+                    items: <String>[DAY]
+                        .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
                         child: Text(value, style: primaryTextStyle()),
@@ -160,7 +164,7 @@ class NotificationScreenState extends State<NotificationScreen> {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
-                  color: grayColor.withOpacity(0.2),
+                  color: AppColors.grayColor.withOpacity(0.2),
                 ),
                 padding: EdgeInsets.all(8),
                 child: Text(
@@ -171,14 +175,25 @@ class NotificationScreenState extends State<NotificationScreen> {
             ),
             16.height,
             AppButton(
-              color: appStore.isDarkMode ? AppColors.kHabitOrange : AppColors.kHabitDark,
+              color: appStore.isDarkMode
+                  ? AppColors.kHabitOrange
+                  : AppColors.kHabitDark,
               width: context.width(),
               onTap: () {
                 _handleRadioValueChange(radioValue);
               },
-              child: Text(save, style: boldTextStyle(color: appStore.isDarkMode ? AppColors.kHabitDark : Colors.white)),
+              child: Text(save,
+                  style: boldTextStyle(
+                      color: appStore.isDarkMode
+                          ? AppColors.kHabitDark
+                          : Colors.white)),
             ),
-            Observer(builder: (_) => Loader(color: appStore.isDarkMode ? AppColors.kHabitDark:AppColors.kHabitOrange).visible(appStore.isLoading))
+            Observer(
+                builder: (_) => Loader(
+                        color: appStore.isDarkMode
+                            ? AppColors.kHabitDark
+                            : AppColors.kHabitOrange)
+                    .visible(appStore.isLoading))
           ],
         ).paddingOnly(left: 16, right: 16),
       ),
@@ -194,8 +209,11 @@ class NotificationScreenState extends State<NotificationScreen> {
       }
     } else if (value == 1) {
       log('Remain day ${date!.difference(DateTime.now()).inDays}');
-      if (date!.difference(DateTime.now()).inDays >= notificationUnitController.text.trim().toInt()) {
-        date = date!.subtract(Duration(days: notificationUnitController.text.trim().toInt(defaultValue: 1)));
+      if (date!.difference(DateTime.now()).inDays >=
+          notificationUnitController.text.trim().toInt()) {
+        date = date!.subtract(Duration(
+            days:
+                notificationUnitController.text.trim().toInt(defaultValue: 1)));
         return true;
       } else {
         return false;
@@ -228,32 +246,48 @@ class NotificationScreenState extends State<NotificationScreen> {
     } else if (value == 1) {
       if (durationUnit == DAY) {
         date = widget.subscriptionModel!.nextPayDate;
-        if (date!.difference(DateTime.now()).inDays >= notificationUnitController.text.trim().toInt()) {
-          date = date!.subtract(Duration(days: notificationUnitController.text.trim().toInt(defaultValue: 1)));
+        if (date!.difference(DateTime.now()).inDays >=
+            notificationUnitController.text.trim().toInt()) {
+          date = date!.subtract(Duration(
+              days: notificationUnitController.text
+                  .trim()
+                  .toInt(defaultValue: 1)));
           return true;
         } else {
           return false;
         }
       } else if (durationUnit == WEEK) {
         date = widget.subscriptionModel!.nextPayDate;
-        if (date!.difference(DateTime.now()).inDays >= notificationUnitController.text.trim().toInt()) {
-          date = date!.subtract(Duration(days: notificationUnitController.text.trim().toInt(defaultValue: 1)));
+        if (date!.difference(DateTime.now()).inDays >=
+            notificationUnitController.text.trim().toInt()) {
+          date = date!.subtract(Duration(
+              days: notificationUnitController.text
+                  .trim()
+                  .toInt(defaultValue: 1)));
           return true;
         } else {
           return false;
         }
       } else if (durationUnit == MONTH) {
         date = widget.subscriptionModel!.nextPayDate;
-        if (date!.difference(DateTime.now()).inDays >= notificationUnitController.text.trim().toInt()) {
-          date = date!.subtract(Duration(days: notificationUnitController.text.trim().toInt(defaultValue: 1)));
+        if (date!.difference(DateTime.now()).inDays >=
+            notificationUnitController.text.trim().toInt()) {
+          date = date!.subtract(Duration(
+              days: notificationUnitController.text
+                  .trim()
+                  .toInt(defaultValue: 1)));
           return true;
         } else {
           return false;
         }
       } else if (durationUnit == YEAR) {
         date = widget.subscriptionModel!.nextPayDate;
-        if (date!.difference(DateTime.now()).inDays >= notificationUnitController.text.trim().toInt()) {
-          date = date!.subtract(Duration(days: notificationUnitController.text.trim().toInt(defaultValue: 1)));
+        if (date!.difference(DateTime.now()).inDays >=
+            notificationUnitController.text.trim().toInt()) {
+          date = date!.subtract(Duration(
+              days: notificationUnitController.text
+                  .trim()
+                  .toInt(defaultValue: 1)));
           return true;
         } else {
           return false;
@@ -279,10 +313,13 @@ class NotificationScreenState extends State<NotificationScreen> {
 
       subscriptionService.updateDocument({
         'notificationId': dateTime,
-        'notificationDate': date!.add(Duration(hours: notificationTime!.hour, minutes: notificationTime!.minute)),
+        'notificationDate': date!.add(Duration(
+            hours: notificationTime!.hour, minutes: notificationTime!.minute)),
       }, widget.subscriptionModel!.id).then((value) async {
         await manager.showScheduleNotification(
-          scheduledNotificationDateTime: date!.add(Duration(hours: notificationTime!.hour, minutes: notificationTime!.minute)),
+          scheduledNotificationDateTime: date!.add(Duration(
+              hours: notificationTime!.hour,
+              minutes: notificationTime!.minute)),
           title: widget.subscriptionModel!.name,
           description: widget.subscriptionModel!.amount,
           id: dateTime,

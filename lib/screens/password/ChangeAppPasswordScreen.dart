@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:mighty_notes/utils/Colors.dart';
-import 'package:mighty_notes/utils/Common.dart';
-import 'package:mighty_notes/utils/Constants.dart';
-import 'package:mighty_notes/utils/StringConstant.dart';
+import 'package:habit_note/utils/colors.dart';
+import 'package:habit_note/utils/common.dart';
+import 'package:habit_note/utils/constants.dart';
+import 'package:habit_note/utils/string_constant.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../main.dart';
@@ -66,8 +66,11 @@ class ChangeAppPasswordScreenState extends State<ChangeAppPasswordScreen> {
                         textFieldType: TextFieldType.PASSWORD,
                         keyboardType: TextInputType.text,
                         isPassword: true,
-                        cursorColor: appStore.isDarkMode ? Colors.white : AppColors.kHabitDark,
-                        decoration: appTextFieldInputDeco(hint: 'Current password'),
+                        cursorColor: appStore.isDarkMode
+                            ? Colors.white
+                            : AppColors.kHabitDark,
+                        decoration:
+                            appTextFieldInputDeco(hint: 'Current password'),
                         errorThisFieldRequired: errorThisFieldRequired,
                         validator: (val) {
                           if (val!.trim() != getStringAsync(PASSWORD)) {
@@ -83,7 +86,9 @@ class ChangeAppPasswordScreenState extends State<ChangeAppPasswordScreen> {
                       textFieldType: TextFieldType.PASSWORD,
                       keyboardType: TextInputType.text,
                       isPassword: true,
-                      cursorColor: appStore.isDarkMode ? Colors.white : AppColors.kHabitDark,
+                      cursorColor: appStore.isDarkMode
+                          ? Colors.white
+                          : AppColors.kHabitDark,
                       decoration: appTextFieldInputDeco(hint: new_pwd),
                       errorThisFieldRequired: errorThisFieldRequired,
                     ),
@@ -94,13 +99,19 @@ class ChangeAppPasswordScreenState extends State<ChangeAppPasswordScreen> {
                       textFieldType: TextFieldType.PASSWORD,
                       keyboardType: TextInputType.text,
                       isPassword: true,
-                      cursorColor: appStore.isDarkMode ? Colors.white : AppColors.kHabitDark,
+                      cursorColor: appStore.isDarkMode
+                          ? Colors.white
+                          : AppColors.kHabitDark,
                       decoration: appTextFieldInputDeco(hint: confirm_pwd),
                       errorThisFieldRequired: errorThisFieldRequired,
                       validator: (value) {
-                        if (value!.trim().isEmpty) return errorThisFieldRequired;
-                        if (value.trim().length < passwordLengthGlobal) return 'Minimum password length should be $passwordLengthGlobal';
-                        return newPwdController.text == value.trim() ? null : pwd_not_match;
+                        if (value!.trim().isEmpty)
+                          return errorThisFieldRequired;
+                        if (value.trim().length < passwordLengthGlobal)
+                          return 'Minimum password length should be $passwordLengthGlobal';
+                        return newPwdController.text == value.trim()
+                            ? null
+                            : AppStrings.kMatchPassError;
                       },
                       onFieldSubmitted: (val) {
                         resetPassword();
@@ -108,8 +119,14 @@ class ChangeAppPasswordScreenState extends State<ChangeAppPasswordScreen> {
                     ),
                     16.height,
                     AppButton(
-                      child: Text(change_pwd, style: boldTextStyle(color: appStore.isDarkMode ? AppColors.kHabitDark : Colors.white)),
-                      color: appStore.isDarkMode ? AppColors.kHabitOrange: AppColors.kHabitDark,
+                      child: Text(change_pwd,
+                          style: boldTextStyle(
+                              color: appStore.isDarkMode
+                                  ? AppColors.kHabitDark
+                                  : Colors.white)),
+                      color: appStore.isDarkMode
+                          ? AppColors.kHabitOrange
+                          : AppColors.kHabitDark,
                       width: context.width(),
                       onTap: () {
                         resetPassword();
@@ -120,7 +137,12 @@ class ChangeAppPasswordScreenState extends State<ChangeAppPasswordScreen> {
               ).center(),
             ),
           ),
-          Observer(builder: (_) => Loader(color: appStore.isDarkMode ? AppColors.kHabitOrange : AppColors.kHabitDark).visible(appStore.isLoading)),
+          Observer(
+              builder: (_) => Loader(
+                      color: appStore.isDarkMode
+                          ? AppColors.kHabitOrange
+                          : AppColors.kHabitDark)
+                  .visible(appStore.isLoading)),
         ],
       ),
     );
@@ -130,7 +152,9 @@ class ChangeAppPasswordScreenState extends State<ChangeAppPasswordScreen> {
     if (_formKey.currentState!.validate()) {
       appStore.setLoading(true);
 
-      service.resetPassword(newPassword: newPwdController.text.trim()).then((value) async {
+      service
+          .resetPassword(newPassword: newPwdController.text.trim())
+          .then((value) async {
         appStore.setLoading(false);
 
         await setValue(PASSWORD, newPwdController.text.trim());

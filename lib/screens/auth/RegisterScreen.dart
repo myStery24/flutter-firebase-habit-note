@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mighty_notes/components/CustomButton.dart';
-import 'package:mighty_notes/screens/DashboardScreen.dart';
-import 'package:mighty_notes/screens/LoginScreen.dart';
-import 'package:mighty_notes/utils/Colors.dart';
-import 'package:mighty_notes/utils/Common.dart';
-import 'package:mighty_notes/utils/Constants.dart';
-import 'package:mighty_notes/utils/StringConstant.dart';
+import 'package:habit_note/components/CustomButton.dart';
+import 'package:habit_note/utils/colors.dart';
+import 'package:habit_note/utils/common.dart';
+import 'package:habit_note/utils/constants.dart';
+import 'package:habit_note/utils/string_constant.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:the_apple_sign_in/the_apple_sign_in.dart';
 
-import '../main.dart';
+import '../../main.dart';
+import '../DashboardScreen.dart';
+import 'LoginScreen.dart';
 
 class RegisterScreen extends StatefulWidget {
   static String tag = '/RegisterScreen';
@@ -39,7 +40,19 @@ class RegisterScreenState extends State<RegisterScreen> {
   }
 
   Future<void> init() async {
-    //
+    setStatusBarColor(
+      appStore.isDarkMode ? AppColors.kHabitDark : Colors.transparent,
+      statusBarIconBrightness:
+          appStore.isDarkMode ? Brightness.light : Brightness.dark,
+      delayInMilliSeconds: 100,
+    );
+
+    if (isIos) {
+      TheAppleSignIn.onCredentialRevoked!.listen((_) {
+        log("Credentials revoked");
+      });
+    }
+    setState(() {});
   }
 
   @override
@@ -60,16 +73,16 @@ class RegisterScreenState extends State<RegisterScreen> {
           elevation: 0,
         ),
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: ListView(
             children: [
               SizedBox(height: screenHeight * .02),
               Text(
                 'Create Account,',
                 style: GoogleFonts.roboto(
-                  color: getBoolAsync(IS_DARK_MODE, defaultValue: true)
-                      ? Colors.white
-                      : Colors.black,
+                  color: getBoolAsync(IS_DARK_MODE, defaultValue: false)
+                      ? AppColors.kTextWhite
+                      : AppColors.kTextBlack,
                   fontSize: 28.0,
                   fontWeight: TextFontWeight.bold,
                 ),
@@ -78,9 +91,9 @@ class RegisterScreenState extends State<RegisterScreen> {
               Text(
                 "Let's get to know you !",
                 style: GoogleFonts.roboto(
-                  color: getBoolAsync(IS_DARK_MODE, defaultValue: true)
-                      ? Colors.white
-                      : Colors.black,
+                  color: getBoolAsync(IS_DARK_MODE, defaultValue: false)
+                      ? AppColors.kTextWhite
+                      : AppColors.kTextBlack,
                   fontSize: 28.0,
                   fontWeight: TextFontWeight.bold,
                 ),
@@ -89,9 +102,9 @@ class RegisterScreenState extends State<RegisterScreen> {
               Text(
                 'Enter your details to continue',
                 style: GoogleFonts.roboto(
-                  color: getBoolAsync(IS_DARK_MODE, defaultValue: true)
-                      ? Colors.white
-                      : Colors.black,
+                  color: getBoolAsync(IS_DARK_MODE, defaultValue: false)
+                      ? AppColors.kTextWhite
+                      : AppColors.kTextBlack,
                   fontSize: 14.0,
                   fontWeight: TextFontWeight.regular,
                 ),
@@ -109,14 +122,6 @@ class RegisterScreenState extends State<RegisterScreen> {
                         // padding: EdgeInsets.all(16),
                         child: Column(
                           children: [
-                            // commonCacheImageWidget(
-                            //     getBoolAsync(IS_DARK_MODE, defaultValue: true)
-                            //         ? dark_mode_image
-                            //         : light_mode_image,
-                            //     150,
-                            //     fit: BoxFit.cover),
-                            // Text('Create Account', style: boldTextStyle(size: 30)),
-                            // 30.height,
                             AppTextField(
                               autoFocus: false,
                               controller: usernameController,
@@ -127,11 +132,12 @@ class RegisterScreenState extends State<RegisterScreen> {
                               textStyle: primaryTextStyle(),
                               keyboardType: TextInputType.text,
                               cursorColor: appStore.isDarkMode
-                                  ? Colors.white
+                                  ? AppColors.kHabitOrange
                                   : AppColors.kHabitDark,
                               decoration:
                                   appTextFieldInputDeco(hint: 'Display Name'),
-                              errorInvalidEmail: 'Enter valid email',
+                              errorInvalidUsername: AppStrings.kNameNullError,
+                              errorThisFieldRequired: errorThisFieldRequired,
                             ),
                             16.height,
                             AppTextField(
@@ -143,11 +149,11 @@ class RegisterScreenState extends State<RegisterScreen> {
                               textStyle: primaryTextStyle(),
                               keyboardType: TextInputType.emailAddress,
                               cursorColor: appStore.isDarkMode
-                                  ? Colors.white
+                                  ? AppColors.kHabitOrange
                                   : AppColors.kHabitDark,
                               decoration:
                                   appTextFieldInputDeco(hint: 'Email Address'),
-                              errorInvalidEmail: 'Enter valid email',
+                              errorInvalidEmail: AppStrings.kInvalidEmailError,
                               errorThisFieldRequired: errorThisFieldRequired,
                             ),
                             16.height,
@@ -158,8 +164,8 @@ class RegisterScreenState extends State<RegisterScreen> {
                               textFieldType: TextFieldType.PASSWORD,
                               textStyle: primaryTextStyle(),
                               cursorColor: appStore.isDarkMode
-                                  ? Colors.white
-                                  : AppColors.kHabitDark,
+                                  ? AppColors.kHabitWhite
+                                  : AppColors.kHabitOrange,
                               decoration:
                                   appTextFieldInputDeco(hint: 'Password'),
                               errorThisFieldRequired: errorThisFieldRequired,
@@ -171,8 +177,8 @@ class RegisterScreenState extends State<RegisterScreen> {
                               textFieldType: TextFieldType.PASSWORD,
                               textStyle: primaryTextStyle(),
                               cursorColor: appStore.isDarkMode
-                                  ? Colors.white
-                                  : AppColors.kHabitDark,
+                                  ? AppColors.kHabitWhite
+                                  : AppColors.kHabitOrange,
                               decoration: appTextFieldInputDeco(
                                   hint: 'Confirm Password'),
                               errorThisFieldRequired: errorThisFieldRequired,
@@ -186,11 +192,12 @@ class RegisterScreenState extends State<RegisterScreen> {
                                   return 'Minimum password length should be $passwordLengthGlobal';
                                 return passController.text == value.trim()
                                     ? null
-                                    : pwd_not_match;
+                                    : AppStrings.kMatchPassError;
                               },
                             ),
                             32.height,
-                            /// Login Screen
+
+                            /// Navigate to Login Screen
                             InkWell(
                               onTap: () => Navigator.push(
                                   context,
@@ -204,9 +211,9 @@ class RegisterScreenState extends State<RegisterScreen> {
                                       text: "Already have an account ? ",
                                       style: TextStyle(
                                         color: getBoolAsync(IS_DARK_MODE,
-                                                defaultValue: true)
-                                            ? Colors.white
-                                            : Colors.black,
+                                                defaultValue: false)
+                                            ? AppColors.kTextWhite
+                                            : AppColors.kTextBlack,
                                         fontWeight: TextFontWeight.regular,
                                       ),
                                       children: [
@@ -228,9 +235,9 @@ class RegisterScreenState extends State<RegisterScreen> {
                               "By clicking the “CREATE ACCOUNT” button, you agree to our Terms of use and Privacy Policy",
                               style: GoogleFonts.roboto(
                                 color: getBoolAsync(IS_DARK_MODE,
-                                        defaultValue: true)
-                                    ? Colors.white
-                                    : Colors.black,
+                                        defaultValue: false)
+                                    ? AppColors.kTextWhite
+                                    : AppColors.kTextBlack,
                                 fontSize: 16.0,
                                 fontWeight: TextFontWeight.regular,
                               ),

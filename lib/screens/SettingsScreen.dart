@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mighty_notes/utils/Colors.dart';
+import 'package:habit_note/utils/colors.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({Key? key}) : super(key: key);

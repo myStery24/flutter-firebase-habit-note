@@ -1,22 +1,21 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:mighty_notes/components/DashboardDrawerWidget.dart';
-import 'package:mighty_notes/components/FilterNoteByColorDialogWidget.dart';
-import 'package:mighty_notes/components/LockNoteDialogWidget.dart';
-import 'package:mighty_notes/components/NoteLayoutDialogWidget.dart';
-import 'package:mighty_notes/components/SetMasterPasswordDialogWidget.dart';
-import 'package:mighty_notes/main.dart';
-import 'package:mighty_notes/model/notes_model.dart';
-import 'package:mighty_notes/utils/Colors.dart';
-import 'package:mighty_notes/utils/Common.dart';
-import 'package:mighty_notes/utils/Constants.dart';
-import 'package:mighty_notes/utils/StringConstant.dart';
+import 'package:habit_note/model/notes_model.dart';
+import 'package:habit_note/utils/colors.dart';
+import 'package:habit_note/utils/common.dart';
+import 'package:habit_note/utils/constants.dart';
+import 'package:habit_note/utils/string_constant.dart';
+import 'package:habit_note/components/DashboardDrawerWidget.dart';
+import 'package:habit_note/screens/notes/components/FilterNoteByColorDialogWidget.dart';
+import 'package:habit_note/screens/notes/components/LockNoteDialogWidget.dart';
+import 'package:habit_note/components/NoteLayoutDialogWidget.dart';
+import 'package:habit_note/components/SetMasterPasswordDialogWidget.dart';
 import 'package:nb_utils/nb_utils.dart';
 
+import '../../main.dart';
 import 'components/AddNotesScreen.dart';
 import 'components/AddToDoScreen.dart';
 
@@ -71,7 +70,7 @@ class NotesScreenState extends State<NotesScreen> {
           if (currentBackPressTime == null ||
               now.difference(currentBackPressTime!) > 2.seconds) {
             currentBackPressTime = now;
-            toast(press_again);
+            toast(AppStrings.pressAgain);
             return Future.value(false);
           }
           return Future.value(true);
@@ -376,6 +375,8 @@ class NotesScreenState extends State<NotesScreen> {
                   .center()
                   .paddingAll(8),
               Divider(height: 16),
+
+              /// Lock Note
               ListTile(
                 leading: Icon(
                     notesModel!.isLock!
@@ -400,19 +401,24 @@ class NotesScreenState extends State<NotesScreen> {
                   }
                 },
               ),
+
+              /// Delete Note
               ListTile(
-                leading: Icon(Icons.delete_rounded,
+                leading: Icon(Icons.delete_forever_outlined,
                     color: appStore.isDarkMode
                         ? AppColors.kHabitOrange
                         : AppColors.scaffoldSecondaryDark),
-                title: Text(delete_note, style: primaryTextStyle()),
+                title: Text(delete, style: primaryTextStyle()),
                 onTap: () async {
                   finish(context);
                   if (notesModel.collaborateWith!.first ==
                       getStringAsync(USER_EMAIL)) {
                     bool deleted = await showInDialog(
                       context,
-                      title: Text(delete_note, style: primaryTextStyle()),
+                      title: Text(delete_note,
+                          style: primaryTextStyle(
+                            weight: TextFontWeight.bold,
+                          )),
                       child: Text(confirm_to_delete_note,
                           style: primaryTextStyle()),
                       actions: [
@@ -425,14 +431,17 @@ class NotesScreenState extends State<NotesScreen> {
                             onPressed: () {
                               finish(context, true);
                             },
-                            child: Text(delete, style: primaryTextStyle())),
+                            child: Text(delete,
+                                style: primaryTextStyle(
+                                  color: AppColors.kHabitOrange,
+                                ))),
                       ],
                     );
                     if (deleted) {
                       notesService
                           .removeDocument(notesModel.noteId)
                           .then((value) {
-                        toast('note deleted');
+                        toast('Note deleted');
                       }).catchError((error) {
                         toast(error.toString());
                       });

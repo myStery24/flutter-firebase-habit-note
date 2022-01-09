@@ -1,6 +1,6 @@
-import 'package:mighty_notes/model/data_layer.dart';
-import 'package:mighty_notes/repositories/exceptions.dart';
-import 'package:mighty_notes/repositories/media_service.dart';
+import 'package:habit_note/model/data_layer.dart';
+import 'package:habit_note/repositories/media_service.dart';
+import 'package:habit_note/repositories/exceptions.dart';
 
 import 'base_model.dart';
 

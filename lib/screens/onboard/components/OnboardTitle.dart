@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mighty_notes/utils/Colors.dart';
-import 'package:mighty_notes/utils/Constants.dart';
+import 'package:habit_note/utils/colors.dart';
+import 'package:habit_note/utils/constants.dart';
 
 class OnboardTitle extends StatelessWidget {
   const OnboardTitle({Key? key}) : super(key: key);

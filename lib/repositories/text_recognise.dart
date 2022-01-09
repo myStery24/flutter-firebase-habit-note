@@ -1,5 +1,5 @@
 import 'package:google_ml_kit/google_ml_kit.dart';
-import 'package:mighty_notes/model/data_layer.dart';
+import 'package:habit_note/model/data_layer.dart';
 
 class MlService {
   Future<List<RecognizedText>> getText(String path) async {

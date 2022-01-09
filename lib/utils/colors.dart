@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 
-const appButtonColorDark = Color(0xFF282828);
-const grayColor = Color(0xFF757575);
-const blueButtonColor = Color(0xFF448AFF);
-
 class AppColors {
   static const kHabitOrange = Color(0xFFFFB347);
   // Orange to grey linear gradient
   static const kHabitLinearGradient = [Color(0x7ff1f1f1), Color(0xffffb347)];
   static const kHabitWhite = Color(0xffffffff);
-  static const kHabitDark = Color(0xFF232A35);
+  static const kHabitDark = Color(0xFF212227);
   static const kHabitDarkGrey = Color(0xFF242A38);
   static const kHabitBackgroundLightGrey = Color(0xFFF1F1F1);
   static const scaffoldSecondaryDark = Color(0xFF3E3E40);
+  static const grayColor = Color(0xFF757575);
+  static const blueButtonColor = Color(0xFF448AFF);
 
   // 39C16C
   // 15D2A7

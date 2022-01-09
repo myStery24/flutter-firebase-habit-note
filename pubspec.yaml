@@ -1,5 +1,4 @@
-# name: habit_note
-name: mighty_notes
+name: habit_note
 description: A notepad and image to text converter application.
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mighty_notes/providers/text_provider.dart';
+import 'package:habit_note/providers/text_provider.dart';
 
 class DisplayText extends StatelessWidget {
   final TextViewModel? textProvider;

@@ -2,15 +2,12 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:mighty_notes/screens/AboutScreen.dart';
-import 'package:mighty_notes/screens/HelpScreen.dart';
-import 'package:mighty_notes/screens/ocr/TextRecognitionScreen.dart';
-import 'package:mighty_notes/screens/password/ChangeMasterPasswordScreen.dart';
-import 'package:mighty_notes/screens/password/ForgotPasswordScreen.dart';
-import 'package:mighty_notes/utils/Colors.dart';
-import 'package:mighty_notes/utils/Common.dart';
-import 'package:mighty_notes/utils/Constants.dart';
-import 'package:mighty_notes/utils/StringConstant.dart';
+import 'package:habit_note/screens/password/NotesPasswordProtectionScreen.dart';
+import 'package:habit_note/screens/password/ForgotPasswordScreen.dart';
+import 'package:habit_note/utils/colors.dart';
+import 'package:habit_note/utils/common.dart';
+import 'package:habit_note/utils/constants.dart';
+import 'package:habit_note/utils/string_constant.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../main.dart';
@@ -130,7 +127,7 @@ class DashboardDrawerWidgetState extends State<DashboardDrawerWidget> {
                     children: [
                       Icon(Icons.lock_outline_rounded),
                       16.width,
-                      Text(change_master_pwd, style: primaryTextStyle(size: 14))
+                      Text(lock_notes_pwd, style: primaryTextStyle(size: 14))
                           .expand(),
                     ],
                   ).paddingAll(16).onTap(() {
@@ -138,6 +135,8 @@ class DashboardDrawerWidgetState extends State<DashboardDrawerWidget> {
                     ChangeMasterPasswordScreen().launch(context);
                   }),
                   const Divider(color: AppColors.kHabitOrange),
+
+                  /// Log Out
                   Row(
                     children: [
                       Icon(Icons.logout),

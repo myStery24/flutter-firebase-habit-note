@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:mighty_notes/utils/Colors.dart';
-import 'package:mighty_notes/utils/Constants.dart';
-
+import 'package:habit_note/utils/colors.dart';
+import 'package:habit_note/utils/constants.dart';
 
 List<Widget> buildPageIndicator(
-    int numPages,
-    int currentPage,
-    bool isPageIndicatorCircle,
-    ) {
+  int numPages,
+  int currentPage,
+  bool isPageIndicatorCircle,
+) {
   List<Widget> list = [];
 
   for (int i = 0; i < numPages; i++) {
@@ -33,14 +32,15 @@ Widget _currentPageIndicator(bool isActive, bool isPageIndicatorCircle) {
 Decoration _pageIndicatorBoxDecoration(isActive, isPageIndicatorCircle) {
   return BoxDecoration(
     color: isActive ? AppColors.kHabitOrange : AppColors.kHabitWhite,
-    boxShadow: [BoxShadow(
-      color: Colors.orange.withOpacity(0.2), // color of shadow
-      blurRadius: 2.0,
-      spreadRadius: 1.0,
-      offset: const Offset(0, 2), // Changes position of shadow
-      // First parameter of offset is left-right
-      // Second parameter is top to down
-    ) ,
+    boxShadow: [
+      BoxShadow(
+        color: Colors.orange.withOpacity(0.2), // color of shadow
+        blurRadius: 2.0,
+        spreadRadius: 1.0,
+        offset: const Offset(0, 2), // Changes position of shadow
+        // First parameter of offset is left-right
+        // Second parameter is top to down
+      ),
     ],
     borderRadius: BorderRadius.all(
       Radius.circular(

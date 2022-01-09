@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mighty_notes/utils/Colors.dart';
+import 'package:habit_note/utils/colors.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../main.dart';
-import '../utils/Constants.dart';
+import '../utils/constants.dart';
 
 class NoteLayoutDialogWidget extends StatefulWidget {
   static String tag = '/NoteLayoutDialogWidget';
@@ -37,8 +37,11 @@ class NoteLayoutDialogWidgetState extends State<NoteLayoutDialogWidget> {
       child: Column(
         children: [
           ListTile(
-            leading: Icon(Icons.grid_view, color: appStore.isDarkMode ? AppColors.kHabitOrange : AppColors.scaffoldSecondaryDark),
-            title: Text('GridView', style: primaryTextStyle()),
+            leading: Icon(Icons.grid_view,
+                color: appStore.isDarkMode
+                    ? AppColors.kHabitOrange
+                    : AppColors.scaffoldSecondaryDark),
+            title: Text('Grid View', style: primaryTextStyle()),
             onTap: () async {
               await setValue(SELECTED_LAYOUT_TYPE_DASHBOARD, GRID_VIEW);
               widget.onLayoutSelect!(1, 2);
@@ -46,8 +49,11 @@ class NoteLayoutDialogWidgetState extends State<NoteLayoutDialogWidget> {
             },
           ),
           ListTile(
-            leading: Icon(Icons.grid_on_rounded, color: appStore.isDarkMode ? AppColors.kHabitOrange : AppColors.scaffoldSecondaryDark),
-            title: Text('GridView', style: primaryTextStyle()),
+            leading: Icon(Icons.grid_on_rounded,
+                color: appStore.isDarkMode
+                    ? AppColors.kHabitOrange
+                    : AppColors.scaffoldSecondaryDark),
+            title: Text('Compact Grid View', style: primaryTextStyle()),
             onTap: () async {
               await setValue(SELECTED_LAYOUT_TYPE_DASHBOARD, GRID_VIEW_2);
               widget.onLayoutSelect!(1, 3);
@@ -55,8 +61,11 @@ class NoteLayoutDialogWidgetState extends State<NoteLayoutDialogWidget> {
             },
           ),
           ListTile(
-            leading: Icon(Icons.view_agenda_outlined, color: appStore.isDarkMode ? AppColors.kHabitOrange : AppColors.scaffoldSecondaryDark),
-            title: Text('ListView', style: primaryTextStyle()),
+            leading: Icon(Icons.view_agenda_outlined,
+                color: appStore.isDarkMode
+                    ? AppColors.kHabitOrange
+                    : AppColors.scaffoldSecondaryDark),
+            title: Text('List View', style: primaryTextStyle()),
             onTap: () async {
               await setValue(SELECTED_LAYOUT_TYPE_DASHBOARD, LIST_VIEW);
               widget.onLayoutSelect!(2, 2);

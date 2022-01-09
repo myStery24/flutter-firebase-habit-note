@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mighty_notes/utils/Common.dart';
-import 'package:mighty_notes/utils/StringConstant.dart';
+import 'package:habit_note/utils/common.dart';
+import 'package:habit_note/utils/string_constant.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class FilterNoteByColorDialogWidget extends StatefulWidget {

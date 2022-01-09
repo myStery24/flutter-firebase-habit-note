@@ -1,7 +1,5 @@
-import 'dart:io';
-
 import 'package:image_picker/image_picker.dart';
-import 'package:mighty_notes/model/data_layer.dart';
+import 'package:habit_note/model/data_layer.dart';
 
 import 'exceptions.dart';
 

@@ -1,13 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:habit_note/model/subscription_model.dart';
+import 'package:habit_note/utils/constants.dart';
+import 'package:habit_note/utils/string_constant.dart';
 import 'package:intl/intl.dart';
-import 'package:mighty_notes/model/subscription_model.dart';
-import 'package:mighty_notes/screens/reminder/AddSubscriptionReminderScreen.dart';
-import 'package:mighty_notes/screens/NotificationScreen.dart';
-import 'package:mighty_notes/utils/Constants.dart';
-import 'package:mighty_notes/utils/StringConstant.dart';
 import 'package:nb_utils/nb_utils.dart';
+
+import 'AddSubscriptionReminderScreen.dart';
+import 'NotificationScreen.dart';
 
 // ignore: must_be_immutable
 class SubscriptionDetailScreen extends StatefulWidget {

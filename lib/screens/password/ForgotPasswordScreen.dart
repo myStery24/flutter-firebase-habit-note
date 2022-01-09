@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mighty_notes/components/CustomButton.dart';
-import 'package:mighty_notes/utils/Colors.dart';
-import 'package:mighty_notes/utils/Common.dart';
-import 'package:mighty_notes/utils/StringConstant.dart';
+import 'package:habit_note/utils/colors.dart';
+import 'package:habit_note/utils/common.dart';
+import 'package:habit_note/utils/string_constant.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../main.dart';
@@ -49,9 +48,9 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Forgot your password?',
-                    style: boldTextStyle(size: 22)),
-                4.height,
+                15.height,
+                Text('Forgot your password ?', style: boldTextStyle(size: 22)),
+                15.height,
                 Text(
                     'Please enter your email address. We will send you an email to reset your password.',
                     style: primaryTextStyle(size: 14)),
@@ -60,22 +59,32 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   controller: forgotEmailController,
                   textFieldType: TextFieldType.EMAIL,
                   keyboardType: TextInputType.emailAddress,
-                  cursorColor:
-                      appStore.isDarkMode ? Colors.white : AppColors.kHabitDark,
-                  decoration: appTextFieldInputDeco(hint: 'Email'),
-                  errorInvalidEmail: 'Enter valid email',
+                  cursorColor: appStore.isDarkMode
+                      ? AppColors.kHabitOrange
+                      : AppColors.kHabitDark,
+                  decoration: appTextFieldInputDeco(hint: 'Email address'),
+                  errorInvalidEmail: AppStrings.kInvalidEmailError,
                   errorThisFieldRequired: errorThisFieldRequired,
                 ),
-                16.height,
-                CustomButton(
-                  text: reset_pwd,
-                  onPressed: () {
+                20.height,
+                AppButton(
+                  child: Text(reset_pwd,
+                      style: boldTextStyle(
+                          color: appStore.isDarkMode
+                              ? AppColors.kHabitDark
+                              : Colors.white)),
+                  color: appStore.isDarkMode
+                      ? AppColors.kHabitOrange
+                      : AppColors.kHabitOrange,
+                  width: context.width(),
+                  onTap: () {
                     if (_formKey.currentState!.validate()) {
                       service
                           .forgotPassword(
                               email: forgotEmailController.text.trim())
                           .then((value) {
-                        toast('Reset password link has been sent to your email');
+                        toast(
+                            'Reset password link has been sent to your email');
                         finish(context);
                       }).catchError((error) {
                         toast(error.toString());
@@ -83,28 +92,6 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     }
                   },
                 ),
-                // AppButton(
-                //   child: Text(reset_pwd,
-                //       style: boldTextStyle(
-                //           color: appStore.isDarkMode
-                //               ? scaffoldColorDark
-                //               : Colors.white)),
-                //   color: appStore.isDarkMode ? PrimaryColor : scaffoldColorDark,
-                //   width: context.width(),
-                //   onTap: () {
-                //     if (_formKey.currentState!.validate()) {
-                //       service
-                //           .forgotPassword(
-                //               email: forgotEmailController.text.trim())
-                //           .then((value) {
-                //         toast('Reset password link has sent your mail');
-                //         finish(context);
-                //       }).catchError((error) {
-                //         toast(error.toString());
-                //       });
-                //     }
-                //   },
-                // ),
               ],
             ),
           ).center(),

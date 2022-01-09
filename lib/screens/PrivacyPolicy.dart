@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mighty_notes/utils/Colors.dart';
+import 'package:habit_note/utils/colors.dart';
 
 class PrivacyPolicy extends StatelessWidget {
   const PrivacyPolicy({Key? key}) : super(key: key);

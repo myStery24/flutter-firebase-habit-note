@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:mighty_notes/utils/Colors.dart';
-import 'package:mighty_notes/utils/Common.dart';
-import 'package:mighty_notes/utils/Constants.dart';
-import 'package:mighty_notes/utils/StringConstant.dart';
+import 'package:habit_note/utils/colors.dart';
+import 'package:habit_note/utils/common.dart';
+import 'package:habit_note/utils/constants.dart';
+import 'package:habit_note/utils/string_constant.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import '../main.dart';
+import '../../../main.dart';
 
 class LockNoteDialogWidget extends StatefulWidget {
   static String tag = '/LockNoteDialogWidget';
@@ -52,7 +52,8 @@ class LockNoteDialogWidgetState extends State<LockNoteDialogWidget> {
             textFieldType: TextFieldType.PASSWORD,
             keyboardType: TextInputType.phone,
             errorThisFieldRequired: errorThisFieldRequired,
-            cursorColor: appStore.isDarkMode ? Colors.white : AppColors.kHabitDark,
+            cursorColor:
+                appStore.isDarkMode ? Colors.white : AppColors.kHabitDark,
             maxLines: 1,
             maxLength: 4,
             validator: (val) {
@@ -76,7 +77,8 @@ class LockNoteDialogWidgetState extends State<LockNoteDialogWidget> {
             TextButton(
               onPressed: () async {
                 if (_form.currentState!.validate()) {
-                  if (masterPwdController.text.trim() == getStringAsync(USER_MASTER_PWD)) {
+                  if (masterPwdController.text.trim() ==
+                      getStringAsync(USER_MASTER_PWD)) {
                     widget.onSubmit!(true);
                     await 2.seconds.delay;
                     masterPwdController.clear();
@@ -85,7 +87,10 @@ class LockNoteDialogWidgetState extends State<LockNoteDialogWidget> {
                   }
                 }
               },
-              child: Text(submit, style: primaryTextStyle()),
+              child: Text(submit,
+                  style: primaryTextStyle(
+                    color: AppColors.kHabitOrange,
+                  )),
             ),
           ],
         ),

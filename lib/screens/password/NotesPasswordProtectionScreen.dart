@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:mighty_notes/utils/Colors.dart';
-import 'package:mighty_notes/utils/Common.dart';
-import 'package:mighty_notes/utils/Constants.dart';
-import 'package:mighty_notes/utils/StringConstant.dart';
+import 'package:habit_note/utils/colors.dart';
+import 'package:habit_note/utils/common.dart';
+import 'package:habit_note/utils/constants.dart';
+import 'package:habit_note/utils/string_constant.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../main.dart';
 
+/// Lock Notes with Password
 class ChangeMasterPasswordScreen extends StatefulWidget {
   static String tag = '/ChangeMasterPasswordScreen';
 
   @override
-  ChangeMasterPasswordScreenState createState() => ChangeMasterPasswordScreenState();
+  ChangeMasterPasswordScreenState createState() =>
+      ChangeMasterPasswordScreenState();
 }
 
-class ChangeMasterPasswordScreenState extends State<ChangeMasterPasswordScreen> {
+class ChangeMasterPasswordScreenState
+    extends State<ChangeMasterPasswordScreen> {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   TextEditingController currentMasterPwdController = TextEditingController();
@@ -67,8 +70,11 @@ class ChangeMasterPasswordScreenState extends State<ChangeMasterPasswordScreen> 
                       keyboardType: TextInputType.text,
                       maxLength: 4,
                       isPassword: true,
-                      cursorColor: appStore.isDarkMode ? Colors.white : AppColors.kHabitDark,
-                      decoration: appTextFieldInputDeco(hint: 'Current password'),
+                      cursorColor: appStore.isDarkMode
+                          ? Colors.white
+                          : AppColors.kHabitDark,
+                      decoration:
+                          appTextFieldInputDeco(hint: 'Current password'),
                       errorThisFieldRequired: errorThisFieldRequired,
                       validator: (val) {
                         if (val != getStringAsync(USER_MASTER_PWD)) {
@@ -86,7 +92,9 @@ class ChangeMasterPasswordScreenState extends State<ChangeMasterPasswordScreen> 
                       keyboardType: TextInputType.text,
                       isPassword: true,
                       maxLength: 4,
-                      cursorColor: appStore.isDarkMode ? Colors.white : AppColors.kHabitDark,
+                      cursorColor: appStore.isDarkMode
+                          ? Colors.white
+                          : AppColors.kHabitDark,
                       decoration: appTextFieldInputDeco(hint: 'New password'),
                       validator: (val) {
                         if (val!.trim().isEmpty) {
@@ -105,14 +113,18 @@ class ChangeMasterPasswordScreenState extends State<ChangeMasterPasswordScreen> 
                       keyboardType: TextInputType.text,
                       isPassword: true,
                       maxLength: 4,
-                      cursorColor: appStore.isDarkMode ? Colors.white : AppColors.kHabitDark,
-                      decoration: appTextFieldInputDeco(hint: 'Confirm password'),
+                      cursorColor: appStore.isDarkMode
+                          ? Colors.white
+                          : AppColors.kHabitDark,
+                      decoration:
+                          appTextFieldInputDeco(hint: 'Confirm password'),
                       validator: (val) {
                         if (val!.trim().isEmpty) {
                           return errorThisFieldRequired;
                         } else if (val.length < 4) {
                           return pwd_length;
-                        } else if (newMasterPwdController.text.trim() != val.trim()) {
+                        } else if (newMasterPwdController.text.trim() !=
+                            val.trim()) {
                           return pwd_not_same;
                         }
                         return null;
@@ -123,8 +135,14 @@ class ChangeMasterPasswordScreenState extends State<ChangeMasterPasswordScreen> 
                     ),
                     16.height,
                     AppButton(
-                      child: Text(change_master_pwd, style: boldTextStyle(color: appStore.isDarkMode ? AppColors.kHabitDark : Colors.white)),
-                      color: appStore.isDarkMode ? AppColors.kHabitOrange : AppColors.kHabitDark,
+                      child: Text(change_master_pwd,
+                          style: boldTextStyle(
+                              color: appStore.isDarkMode
+                                  ? AppColors.kHabitDark
+                                  : Colors.white)),
+                      color: appStore.isDarkMode
+                          ? AppColors.kHabitOrange
+                          : AppColors.kHabitOrange,
                       width: context.width(),
                       onTap: () {
                         resetMasterPassword();
@@ -135,19 +153,26 @@ class ChangeMasterPasswordScreenState extends State<ChangeMasterPasswordScreen> 
               ).center(),
             ),
           ),
-          Observer(builder: (_) => Loader(color: appStore.isDarkMode ? AppColors.kHabitDark : AppColors.kHabitOrange).visible(appStore.isLoading)),
+          Observer(
+              builder: (_) => Loader(
+                      color: appStore.isDarkMode
+                          ? AppColors.kHabitDark
+                          : AppColors.kHabitOrange)
+                  .visible(appStore.isLoading)),
         ],
       ),
     );
   }
 
   void resetMasterPassword() {
-    appStore.setLoading(true);
     if (_formKey.currentState!.validate()) {
+      appStore.setLoading(true);
       Map<String, dynamic> req = {
         'masterPwd': newMasterPwdController.text.trim(),
       };
-      userService.updateDocument(req, getStringAsync(USER_ID)).then((value) async {
+      userService
+          .updateDocument(req, getStringAsync(USER_ID))
+          .then((value) async {
         await setValue(USER_MASTER_PWD, newMasterPwdController.text.trim());
 
         toast(pwd_reset_successfully);

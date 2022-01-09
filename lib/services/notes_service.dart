@@ -1,12 +1,12 @@
-import 'package:mighty_notes/main.dart';
-import 'package:mighty_notes/model/notes_model.dart';
-import 'package:mighty_notes/utils/Constants.dart';
+import 'package:habit_note/model/notes_model.dart';
+import 'package:habit_note/utils/constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import 'BaseService.dart';
+import '../main.dart';
+import 'base_service.dart';
 
-class NotesServices extends BaseService {
-  NotesServices({String? userID}) {
+class NotesService extends BaseService {
+  NotesService({String? userID}) {
     ref = db.collection('notes');
   }
 

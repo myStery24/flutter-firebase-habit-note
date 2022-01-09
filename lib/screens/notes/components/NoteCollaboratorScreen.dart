@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:habit_note/model/notes_model.dart';
+import 'package:habit_note/utils/colors.dart';
+import 'package:habit_note/utils/common.dart';
+import 'package:habit_note/utils/constants.dart';
+import 'package:habit_note/utils/string_constant.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
-import 'package:mighty_notes/main.dart';
-import 'package:mighty_notes/model/notes_model.dart';
-import 'package:mighty_notes/utils/Colors.dart';
-import 'package:mighty_notes/utils/Common.dart';
-import 'package:mighty_notes/utils/Constants.dart';
-import 'package:mighty_notes/utils/StringConstant.dart';
 import 'package:nb_utils/nb_utils.dart';
+
+import '../../../main.dart';
 
 class NoteCollaboratorScreen extends StatefulWidget {
   static String tag = '/NoteCollaboratorScreen';
@@ -41,7 +42,8 @@ class NoteCollaboratorScreenState extends State<NoteCollaboratorScreen> {
   Future<void> init() async {
     setStatusBarColor(
       appStore.isDarkMode ? AppColors.kHabitDark : Colors.white,
-      statusBarIconBrightness: appStore.isDarkMode ? Brightness.light : Brightness.dark,
+      statusBarIconBrightness:
+          appStore.isDarkMode ? Brightness.light : Brightness.dark,
       delayInMilliSeconds: 100,
     );
 
@@ -59,7 +61,8 @@ class NoteCollaboratorScreenState extends State<NoteCollaboratorScreen> {
 
   @override
   void dispose() {
-    setStatusBarColor(Colors.transparent, statusBarIconBrightness: Brightness.dark, delayInMilliSeconds: 100);
+    setStatusBarColor(Colors.transparent,
+        statusBarIconBrightness: Brightness.dark, delayInMilliSeconds: 100);
     super.dispose();
   }
 
@@ -92,9 +95,15 @@ class NoteCollaboratorScreenState extends State<NoteCollaboratorScreen> {
                 children: [
                   Row(
                     children: [
-                      commonCacheImageWidget(getStringAsync(USER_PHOTO_URL).validate(), imageRadius, fit: BoxFit.cover).cornerRadiusWithClipRRect(60),
+                      commonCacheImageWidget(
+                              getStringAsync(USER_PHOTO_URL).validate(),
+                              imageRadius,
+                              fit: BoxFit.cover)
+                          .cornerRadiusWithClipRRect(60),
                       16.width,
-                      Text(userMail.validate(), style: primaryTextStyle(size: 18), overflow: TextOverflow.ellipsis),
+                      Text(userMail.validate(),
+                          style: primaryTextStyle(size: 18),
+                          overflow: TextOverflow.ellipsis),
                     ],
                   ).paddingAll(16),
                   Divider(),
@@ -110,12 +119,18 @@ class NoteCollaboratorScreenState extends State<NoteCollaboratorScreen> {
                               child: Row(
                                 children: [
                                   CircleAvatar(
-                                    child: Text(collaData![0].validate(), style: boldTextStyle(size: 14, color: white)),
+                                    child: Text(collaData![0].validate(),
+                                        style: boldTextStyle(
+                                            size: 14, color: white)),
                                     radius: 20,
-                                    backgroundColor: appStore.isDarkMode ? AppColors.kHabitOrange : AppColors.kHabitDark,
+                                    backgroundColor: appStore.isDarkMode
+                                        ? AppColors.kHabitOrange
+                                        : AppColors.kHabitDark,
                                   ),
                                   16.width,
-                                  Text(collaData.validate(), style: primaryTextStyle()).expand(),
+                                  Text(collaData.validate(),
+                                          style: primaryTextStyle())
+                                      .expand(),
                                   IconButton(
                                     icon: Icon(Icons.close),
                                     onPressed: () {
@@ -135,7 +150,12 @@ class NoteCollaboratorScreenState extends State<NoteCollaboratorScreen> {
               ),
             ),
           ),
-          Observer(builder: (_) => Loader(color: appStore.isDarkMode ? AppColors.kHabitDark : AppColors.kHabitOrange).visible(appStore.isLoading)),
+          Observer(
+              builder: (_) => Loader(
+                      color: appStore.isDarkMode
+                          ? AppColors.kHabitDark
+                          : AppColors.kHabitOrange)
+                  .visible(appStore.isLoading)),
         ],
       ),
     );
@@ -148,8 +168,12 @@ class NoteCollaboratorScreenState extends State<NoteCollaboratorScreen> {
         Icon(Icons.person_add).paddingOnly(left: 8, right: 16),
         AppTextField(
           controller: userEmailController,
-          cursorColor: appStore.isDarkMode ? Colors.white : AppColors.kHabitDark,
-          decoration: InputDecoration(border: InputBorder.none, hintText: 'Enter email to share with', hintStyle: primaryTextStyle(color: Colors.grey)),
+          cursorColor:
+              appStore.isDarkMode ? Colors.white : AppColors.kHabitDark,
+          decoration: InputDecoration(
+              border: InputBorder.none,
+              hintText: 'Enter email to share with',
+              hintStyle: primaryTextStyle(color: Colors.grey)),
           keyboardType: TextInputType.emailAddress,
           textFieldType: TextFieldType.EMAIL,
           textInputAction: TextInputAction.done,
@@ -159,8 +183,11 @@ class NoteCollaboratorScreenState extends State<NoteCollaboratorScreen> {
           onFieldSubmitted: (val) {
             if (_formKey.currentState!.validate()) {
               if (userEmailController.text.trim() != userMail.validate()) {
-                if (!collaborateWithList!.any((element) => element == userEmailController.text.trim())) {
-                  userDBService.getUserByEmail(userEmailController.text.trim()).then((value) {
+                if (!collaborateWithList!.any(
+                    (element) => element == userEmailController.text.trim())) {
+                  userDBService
+                      .getUserByEmail(userEmailController.text.trim())
+                      .then((value) {
                     collaborateWithList!.add(value.email);
 
                     userEmailController.clear();
@@ -189,7 +216,8 @@ class NoteCollaboratorScreenState extends State<NoteCollaboratorScreen> {
     }
     String? password = await showInDialog(
       context,
-      title: Text('Enter your email\'s password for send email to your friend', style: primaryTextStyle()),
+      title: Text('Enter your email\'s password for send email to your friend',
+          style: primaryTextStyle()),
       child: AppTextField(
         controller: passwordController,
         textFieldType: TextFieldType.PASSWORD,

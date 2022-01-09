@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:mighty_notes/model/user_model.dart';
-import 'package:mighty_notes/screens/onboard/OnboardScreen.dart';
-import 'package:mighty_notes/utils/Constants.dart';
+import 'package:habit_note/model/user_model.dart';
+import 'package:habit_note/screens/onboard/OnboardScreen.dart';
+import 'package:habit_note/utils/constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:the_apple_sign_in/the_apple_sign_in.dart';
 
@@ -15,6 +15,7 @@ class AuthService {
   static FirebaseAuth _auth = FirebaseAuth.instance;
   static GoogleSignIn googleSignIn = GoogleSignIn();
 
+  /// Google Sign In
   Future<UserModel> signInWithGoogle() async {
     try {
       AuthCredential credential = await getGoogleAuthCredential();
@@ -22,7 +23,7 @@ class AuthService {
 
       final User? user = authResult.user;
 
-      //await googleSignIn!.signOut();
+      // await googleSignIn!.signOut();
       await googleSignIn.signOut();
 
       return await loginFromFirebaseUser(user!, LoginTypeGoogle);
@@ -32,10 +33,12 @@ class AuthService {
     }
   }
 
+  /// Google Sign In Authentication
   Future<AuthCredential> getGoogleAuthCredential() async {
     // GoogleSignInAccount? googleAccount = await googleSignIn!.signIn();
     GoogleSignInAccount? googleAccount = await googleSignIn.signIn();
-    GoogleSignInAuthentication googleAuthentication = await googleAccount!.authentication;
+    GoogleSignInAuthentication googleAuthentication =
+        await googleAccount!.authentication;
     AuthCredential credential = GoogleAuthProvider.credential(
       idToken: googleAuthentication.idToken,
       accessToken: googleAuthentication.accessToken,
@@ -43,6 +46,7 @@ class AuthService {
     return credential;
   }
 
+  /// Delete User
   Future deleteUser() async {
     AuthCredential credential = await getGoogleAuthCredential();
     UserCredential authResult = await _auth.signInWithCredential(credential);
@@ -50,18 +54,36 @@ class AuthService {
     await firebaseUser.delete();
   }
 
-  Future<void> signUpWithEmailPassword({required String email, required String password, String? displayName, String? photoUrl}) async {
-    await _auth.createUserWithEmailAndPassword(email: email, password: password).then((value) async {
-      await signInWithEmailPassword(email: value.user!.email!, password: password, displayName: displayName, photoUrl: photoUrl);
+  Future<void> signUpWithEmailPassword(
+      {required String email,
+      required String password,
+      String? displayName,
+      String? photoUrl}) async {
+    await _auth
+        .createUserWithEmailAndPassword(email: email, password: password)
+        .then((value) async {
+      await signInWithEmailPassword(
+          email: value.user!.email!,
+          password: password,
+          displayName: displayName,
+          photoUrl: photoUrl);
     }).catchError((error) {
       throw 'Email already exists';
     });
   }
 
-  Future<void> signInWithEmailPassword({required String email, required String password, String? displayName, String? photoUrl}) async {
-    await _auth.signInWithEmailAndPassword(email: email, password: password).then((value) async {
+  /// Sign In with Email Address and Password
+  Future<void> signInWithEmailPassword(
+      {required String email,
+      required String password,
+      String? displayName,
+      String? photoUrl}) async {
+    await _auth
+        .signInWithEmailAndPassword(email: email, password: password)
+        .then((value) async {
       final User user = value.user!;
 
+      /// Create user
       UserModel userModel = UserModel();
 
       userModel.email = user.email;
@@ -73,9 +95,11 @@ class AuthService {
       userModel.masterPwd = '';
 
       if (!(await userDBService.isUserExists(user.email))) {
-        log('User not exits');
+        log('User does not exist');
 
-        await userDBService.addDocumentWithCustomId(user.uid, userModel.toJson()).then((value) {
+        await userDBService
+            .addDocumentWithCustomId(user.uid, userModel.toJson())
+            .then((value) {
           //
         }).catchError((e) {
           throw e;
@@ -91,7 +115,8 @@ class AuthService {
         await setValue(LOGIN_TYPE, user.loginType.validate());
         await setValue(IS_LOGGED_IN, true);
 
-        await userDBService.updateDocument({'updatedAt': DateTime.now()}, user.uid);
+        await userDBService
+            .updateDocument({'updatedAt': DateTime.now()}, user.uid);
       }).catchError((e) {
         throw e;
       });
@@ -100,10 +125,11 @@ class AuthService {
         throw 'Please check network connection';
       }
       log(error.toString());
-      throw 'Enter valid email and password';
+      throw 'The password is invalid or the user does not have a password';
     });
   }
 
+  /// Sign Out
   Future<void> signOutFromEmailPassword(BuildContext context) async {
     await removeKey(USER_DISPLAY_NAME);
     await removeKey(USER_EMAIL);
@@ -123,7 +149,7 @@ class AuthService {
     // LoginScreen().launch(context, isNewTask: true);
   }
 
-  /// Sign-In with Apple.
+  /// Sign In with Apple
   Future<void> appleLogIn() async {
     if (await TheAppleSignIn.isAvailable()) {
       AuthorizationResult result = await TheAppleSignIn.performRequests([
@@ -135,7 +161,8 @@ class AuthService {
           final oAuthProvider = OAuthProvider('apple.com');
           final credential = oAuthProvider.credential(
             idToken: String.fromCharCodes(appleIdCredential.identityToken!),
-            accessToken: String.fromCharCodes(appleIdCredential.authorizationCode!),
+            accessToken:
+                String.fromCharCodes(appleIdCredential.authorizationCode!),
           );
           final authResult = await _auth.signInWithCredential(credential);
           final user = authResult.user!;
@@ -147,7 +174,8 @@ class AuthService {
           await loginFromFirebaseUser(
             user,
             LoginTypeApple,
-            fullName: '${getStringAsync('appleGivenName')} ${getStringAsync('appleFamilyName')}',
+            fullName:
+                '${getStringAsync('appleGivenName')} ${getStringAsync('appleFamilyName')}',
           );
           break;
         case AuthorizationStatus.error:
@@ -161,7 +189,7 @@ class AuthService {
     }
   }
 
-  /// UserData provided only 1st time..
+  /// UserData provided only 1st time
   Future<void> saveAppleData(AuthorizationResult result) async {
     await setValue('appleEmail', result.credential!.email);
     await setValue('appleGivenName', result.credential!.fullName!.givenName);
@@ -179,7 +207,8 @@ class AuthService {
     appStore.setLoggedIn(true);
   }
 
-  Future<UserModel> loginFromFirebaseUser(User currentUser, String loginType, {String? fullName}) async {
+  Future<UserModel> loginFromFirebaseUser(User currentUser, String loginType,
+      {String? fullName}) async {
     UserModel userModel = UserModel();
 
     if (await userService.isUserExist(currentUser.email, loginType)) {
@@ -199,7 +228,9 @@ class AuthService {
       userModel.updatedAt = DateTime.now();
       userModel.createdAt = DateTime.now();
 
-      await userService.addDocumentWithCustomId(currentUser.uid, userModel.toJson()).then((value) {
+      await userService
+          .addDocumentWithCustomId(currentUser.uid, userModel.toJson())
+          .then((value) {
         //
       }).catchError((e) {
         throw e;
@@ -220,6 +251,7 @@ class AuthService {
     });
   }
 
+  /// Request for Reset Password
   Future<void> resetPassword({required String newPassword}) async {
     await _auth.currentUser!.updatePassword(newPassword).then((value) {
       //

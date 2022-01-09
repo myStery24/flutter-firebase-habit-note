@@ -1,13 +1,11 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:mighty_notes/model/notes_model.dart';
-import 'package:mighty_notes/screens/DashboardScreen.dart';
-import 'package:mighty_notes/screens/notes/components/NoteCollaboratorScreen.dart';
-import 'package:mighty_notes/utils/Colors.dart';
-import 'package:mighty_notes/utils/Common.dart';
-import 'package:mighty_notes/utils/Constants.dart';
-import 'package:mighty_notes/utils/StringConstant.dart';
+import 'package:habit_note/model/notes_model.dart';
+import 'package:habit_note/screens/DashboardScreen.dart';
+import 'package:habit_note/screens/notes/components/NoteCollaboratorScreen.dart';
+import 'package:habit_note/utils/colors.dart';
+import 'package:habit_note/utils/common.dart';
+import 'package:habit_note/utils/constants.dart';
+import 'package:habit_note/utils/string_constant.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../../../main.dart';
@@ -43,8 +41,9 @@ class AddNotesScreenState extends State<AddNotesScreen> {
   }
 
   Future<void> init() async {
-    log(adShowCount);
-    setStatusBarColor(Colors.transparent, statusBarIconBrightness: Brightness.dark, delayInMilliSeconds: 100);
+    // log(adShowCount);
+    setStatusBarColor(Colors.transparent,
+        statusBarIconBrightness: Brightness.dark, delayInMilliSeconds: 100);
 
     _mIsUpdateNote = widget.notesModel != null;
 
@@ -108,7 +107,8 @@ class AddNotesScreenState extends State<AddNotesScreen> {
 
   @override
   void dispose() {
-    setStatusBarColor(appStore.isDarkMode ? AppColors.kHabitDark : Colors.white, delayInMilliSeconds: 100);
+    setStatusBarColor(appStore.isDarkMode ? AppColors.kHabitDark : Colors.white,
+        delayInMilliSeconds: 100);
     addNotes();
     // showInterstitialAd();
     super.dispose();
@@ -144,12 +144,20 @@ class AddNotesScreenState extends State<AddNotesScreen> {
           height: double.infinity,
           child: Column(
             children: [
-              _mIsUpdateNote && widget.notesModel!.collaborateWith!.first != getStringAsync(USER_EMAIL)
+              _mIsUpdateNote &&
+                      widget.notesModel!.collaborateWith!.first !=
+                          getStringAsync(USER_EMAIL)
                   ? Row(
                       children: [
-                        Text('$shared_by :', style: boldTextStyle(color: Colors.black, size: 18)),
+                        Text('$shared_by :',
+                            style:
+                                boldTextStyle(color: Colors.black, size: 18)),
                         4.width,
-                        Text(widget.notesModel!.collaborateWith!.first.validate(), style: boldTextStyle(color: Colors.black, size: 18)),
+                        Text(
+                            widget.notesModel!.collaborateWith!.first
+                                .validate(),
+                            style:
+                                boldTextStyle(color: Colors.black, size: 18)),
                       ],
                     )
                   : SizedBox(),
@@ -157,7 +165,8 @@ class AddNotesScreenState extends State<AddNotesScreen> {
                 autofocus: _mIsUpdateNote ? false : true,
                 controller: titleController,
                 cursorColor: Colors.black,
-                decoration: InputDecoration(border: InputBorder.none, hintText: 'Title'),
+                decoration: InputDecoration(
+                    border: InputBorder.none, hintText: 'Title'),
                 style: boldTextStyle(size: 20, color: Colors.black),
                 textCapitalization: TextCapitalization.sentences,
                 textInputAction: TextInputAction.next,
@@ -172,7 +181,9 @@ class AddNotesScreenState extends State<AddNotesScreen> {
                   controller: notesController,
                   focusNode: noteNode,
                   cursorColor: Colors.black,
-                  decoration: InputDecoration(border: InputBorder.none, hintText: 'Type something awesome here'),
+                  decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'Type something awesome here'),
                   style: primaryTextStyle(color: Colors.black),
                   textInputAction: TextInputAction.newline,
                   textCapitalization: TextCapitalization.sentences,
@@ -188,7 +199,8 @@ class AddNotesScreenState extends State<AddNotesScreen> {
   }
 
   void addNotes() {
-    if (titleController.text.trim().isNotEmpty || notesController.text.trim().isNotEmpty) {
+    if (titleController.text.trim().isNotEmpty ||
+        notesController.text.trim().isNotEmpty) {
       NotesModel notesData = NotesModel();
 
       notesData.userId = getStringAsync(USER_ID);
@@ -206,10 +218,14 @@ class AddNotesScreenState extends State<AddNotesScreen> {
         notesData.createdAt = widget.notesModel!.createdAt;
         notesData.updatedAt = DateTime.now();
         notesData.checkListModel = widget.notesModel!.checkListModel.validate();
-        notesData.collaborateWith = widget.notesModel!.collaborateWith.validate();
+        notesData.collaborateWith =
+            widget.notesModel!.collaborateWith.validate();
         notesData.isLock = widget.notesModel!.isLock;
 
-        notesService.updateDocument(notesData.toJson(), notesData.noteId).then((value) {}).catchError((error) {
+        notesService
+            .updateDocument(notesData.toJson(), notesData.noteId)
+            .then((value) {})
+            .catchError((error) {
           log(error.toString());
         });
       } else {
@@ -218,13 +234,17 @@ class AddNotesScreenState extends State<AddNotesScreen> {
         notesData.collaborateWith = collaborateList.validate();
         notesData.checkListModel = [];
 
-        notesService.addDocument(notesData.toJson()).then((value) {}).catchError((error) {
+        notesService
+            .addDocument(notesData.toJson())
+            .then((value) {})
+            .catchError((error) {
           toast(error.toString());
         });
       }
     }
   }
 
+  /// Notes Options: Delete + Colour
   noteColorPicker() {
     return showModalBottomSheet(
       context: context,
@@ -238,11 +258,19 @@ class AddNotesScreenState extends State<AddNotesScreen> {
               IgnorePointer(
                 ignoring: _mIsUpdateNote ? false : true,
                 child: ListTile(
-                  leading: Icon(Icons.delete_rounded, color: appStore.isDarkMode ? AppColors.kHabitOrange : AppColors.scaffoldSecondaryDark),
+                  leading: Icon(Icons.delete_forever_outlined,
+                      color: appStore.isDarkMode
+                          ? AppColors.kHabitOrange
+                          : AppColors.scaffoldSecondaryDark),
                   title: Text(delete_note, style: primaryTextStyle()),
                   onTap: () {
-                    if (widget.notesModel == null || widget.notesModel!.collaborateWith!.first == getStringAsync(USER_EMAIL)) {
-                      notesService.removeDocument(widget.notesModel!.noteId).then((value) {
+                    if (widget.notesModel == null ||
+                        widget.notesModel!.collaborateWith!.first ==
+                            getStringAsync(USER_EMAIL)) {
+                      notesService
+                          .removeDocument(widget.notesModel!.noteId)
+                          .then((value) {
+                        toast('Note deleted');
                         finish(context);
                         DashboardScreen().launch(context, isNewTask: true);
                       }).catchError((error) {
@@ -254,27 +282,36 @@ class AddNotesScreenState extends State<AddNotesScreen> {
                   },
                 ),
               ),
-              ListTile(
-                leading: Icon(Icons.person_add_alt_1_rounded, color: appStore.isDarkMode ? AppColors.kHabitOrange : AppColors.scaffoldSecondaryDark),
-                title: Text(collaborator, style: primaryTextStyle()),
-                onTap: () async {
-                  finish(context);
-                  if (widget.notesModel == null || widget.notesModel!.collaborateWith!.first == getStringAsync(USER_EMAIL)) {
-                    List<String>? list = await NoteCollaboratorScreen(notesModel: widget.notesModel).launch(context);
-                    if (list != null) {
-                      collaborateList.addAll(list);
-                    }
-                  } else {
-                    toast(share_note_change_not_allow);
-                  }
-                },
-              ),
+              // TODO: Collaborator Feature
+              // ListTile(
+              //   leading: Icon(Icons.person_add_alt_1_rounded,
+              //       color: appStore.isDarkMode
+              //           ? AppColors.kHabitOrange
+              //           : AppColors.scaffoldSecondaryDark),
+              //   title: Text(collaborator, style: primaryTextStyle()),
+              //   onTap: () async {
+              //     finish(context);
+              //     if (widget.notesModel == null ||
+              //         widget.notesModel!.collaborateWith!.first ==
+              //             getStringAsync(USER_EMAIL)) {
+              //       List<String>? list = await NoteCollaboratorScreen(
+              //               notesModel: widget.notesModel)
+              //           .launch(context);
+              //       if (list != null) {
+              //         collaborateList.addAll(list);
+              //       }
+              //     } else {
+              //       toast(share_note_change_not_allow);
+              //     }
+              //   },
+              // ),
               Divider(thickness: 1),
-              Text(select_color, style: boldTextStyle()),
+              Text(select_colour, style: boldTextStyle()),
               20.height,
               SelectNoteColor(onTap: (color) {
                 setState(() {
-                  setStatusBarColor(Colors.transparent, delayInMilliSeconds: 100);
+                  setStatusBarColor(Colors.transparent,
+                      delayInMilliSeconds: 100);
                   _mSelectColor = color;
                 });
               }),

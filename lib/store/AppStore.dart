@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mighty_notes/utils/Colors.dart';
-import 'package:mighty_notes/utils/Constants.dart';
+import 'package:habit_note/utils/colors.dart';
+import 'package:habit_note/utils/constants.dart';
 import 'package:mobx/mobx.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 part 'AppStore.g.dart';
 
-class HaBITNoteApp = _AppStore with _$AppStore;
+class AppStore = _AppStore with _$AppStore;
 
 abstract class _AppStore with Store {
   @observable
@@ -42,7 +42,8 @@ abstract class _AppStore with Store {
       textSecondaryColorGlobal = textSecondaryColor;
 
       defaultLoaderBgColorGlobal = AppColors.scaffoldSecondaryDark;
-      appButtonBackgroundColorGlobal = appButtonColorDark;
+      // appButtonBackgroundColorGlobal = appButtonColorDark;
+      appButtonBackgroundColorGlobal = AppColors.kHabitOrange;
       shadowColorGlobal = Colors.white12;
 
       setStatusBarColor(AppColors.kHabitDark, statusBarIconBrightness: Brightness.light);

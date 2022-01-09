@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:mighty_notes/model/subscription_model.dart';
-import 'package:mighty_notes/screens/reminder/AddSubscriptionReminderScreen.dart';
-import 'package:mighty_notes/screens/reminder/SubscriptionDetailScreen.dart';
-import 'package:mighty_notes/utils/Colors.dart';
-import 'package:mighty_notes/utils/Common.dart';
-import 'package:mighty_notes/utils/StringConstant.dart';
+import 'package:habit_note/model/subscription_model.dart';
+import 'package:habit_note/utils/colors.dart';
+import 'package:habit_note/utils/common.dart';
+import 'package:habit_note/utils/string_constant.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../main.dart';
+import 'AddSubscriptionReminderScreen.dart';
+import 'SubscriptionDetailScreen.dart';
 
 class SubscriptionReminderListScreen extends StatefulWidget {
   @override
@@ -78,7 +78,7 @@ class SubscriptionReminderListScreenState extends State<SubscriptionReminderList
                   child: Container(
                     decoration: BoxDecoration(
                       color: getColorFromHex(data.color!),
-                      border: Border.all(color: grayColor.withOpacity(0.3)),
+                      border: Border.all(color: AppColors.grayColor.withOpacity(0.3)),
                       borderRadius: BorderRadius.circular(defaultRadius),
                     ),
                     child: Stack(

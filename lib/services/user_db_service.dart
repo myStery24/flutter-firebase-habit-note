@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:mighty_notes/model/user_model.dart';
-import 'package:mighty_notes/services/BaseService.dart';
+import 'package:habit_note/model/user_model.dart';
 
 import '../main.dart';
+import 'base_service.dart';
 
 class UserDBService extends BaseService {
   UserDBService() {

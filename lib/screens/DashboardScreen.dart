@@ -2,16 +2,17 @@ import 'dart:async';
 
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:mighty_notes/components/DashboardDrawerWidget.dart';
-import 'package:mighty_notes/screens/HelpScreen.dart';
-import 'package:mighty_notes/screens/SettingsScreen.dart';
-import 'package:mighty_notes/utils/Colors.dart';
-import 'package:mighty_notes/utils/Constants.dart';
-import 'package:mighty_notes/utils/StringConstant.dart';
+import 'package:habit_note/components/DashboardDrawerWidget.dart';
+import 'package:habit_note/screens/ocr/TextRecognitionScreen.dart';
 import 'package:nb_utils/nb_utils.dart';
 
+import 'HelpScreen.dart';
+import 'SettingsScreen.dart';
 import 'notes/NotesScreen.dart';
 import 'ocr/OCRScreen.dart';
+import '../utils/colors.dart';
+import '../utils/constants.dart';
+import '../utils/string_constant.dart';
 
 class DashboardScreen extends StatefulWidget {
   static String tag = '/DashboardScreen';
@@ -67,7 +68,7 @@ class DashboardScreenState extends State<DashboardScreen> {
           if (currentBackPressTime == null ||
               now.difference(currentBackPressTime!) > 2.seconds) {
             currentBackPressTime = now;
-            toast(press_again);
+            toast(AppStrings.pressAgain);
             return Future.value(false);
           }
           return Future.value(true);
@@ -78,7 +79,6 @@ class DashboardScreenState extends State<DashboardScreen> {
           body: buildBody(),
 
           /// Custom Bottom Navigation Bar
-          // TODO: Screen navigation
           bottomNavigationBar: buildBottomNavBar(),
         ),
       ),
@@ -90,6 +90,7 @@ class DashboardScreenState extends State<DashboardScreen> {
       case 1:
         // TODO: OCR
         return OCRScreen();
+        // return TextRecognitionScreen();
       case 2:
         // TODO: HELP
         return HelpScreen();
@@ -105,7 +106,7 @@ class DashboardScreenState extends State<DashboardScreen> {
   Widget buildBottomNavBar() {
     final inactiveColor = Colors.grey;
     return BottomNavyBar(
-      backgroundColor: AppColors.kHabitDarkGrey,
+      backgroundColor: AppColors.kPrimaryVariantColorDark,
       containerHeight: 70.0,
       itemCornerRadius: 12,
       selectedIndex: index,

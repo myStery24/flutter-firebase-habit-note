@@ -1,5 +1,5 @@
-import 'package:mighty_notes/model/data_layer.dart';
-import 'package:mighty_notes/repositories/text_recognise.dart';
+import 'package:habit_note/model/data_layer.dart';
+import 'package:habit_note/repositories/text_recognise.dart';
 
 import 'base_model.dart';
 import 'image_provider.dart';

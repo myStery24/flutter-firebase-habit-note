@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:habit_note/model/subscription_model.dart';
+import 'package:habit_note/utils/colors.dart';
+import 'package:habit_note/utils/constants.dart';
+import 'package:habit_note/utils/string_constant.dart';
 import 'package:intl/intl.dart';
-import 'package:mighty_notes/main.dart';
-import 'package:mighty_notes/model/subscription_model.dart';
-import 'package:mighty_notes/utils/Colors.dart';
-import 'package:mighty_notes/utils/Common.dart';
-import 'package:mighty_notes/utils/Constants.dart';
-import 'package:mighty_notes/utils/StringConstant.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import '../../utils/Common.dart';
+import '../../../main.dart';
+import '../../../utils/common.dart';
 
 class AddSubscriptionReminderScreen extends StatefulWidget {
   final SubscriptionModel? subscriptionModel;
@@ -17,10 +16,12 @@ class AddSubscriptionReminderScreen extends StatefulWidget {
   AddSubscriptionReminderScreen({this.subscriptionModel});
 
   @override
-  AddSubscriptionReminderScreenState createState() => AddSubscriptionReminderScreenState();
+  AddSubscriptionReminderScreenState createState() =>
+      AddSubscriptionReminderScreenState();
 }
 
-class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderScreen> {
+class AddSubscriptionReminderScreenState
+    extends State<AddSubscriptionReminderScreen> {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   TextEditingController amountController = TextEditingController();
@@ -60,10 +61,12 @@ class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderSc
 
       if (widget.subscriptionModel!.dueDate != null) {
         mRecurring = false;
-        expiryDateController.text = DateFormat(date_format).format(widget.subscriptionModel!.dueDate!);
+        expiryDateController.text =
+            DateFormat(date_format).format(widget.subscriptionModel!.dueDate!);
       } else {
         mRecurring = true;
-        firstPaymentController.text = DateFormat(date_format).format(widget.subscriptionModel!.firstPayDate!);
+        firstPaymentController.text = DateFormat(date_format)
+            .format(widget.subscriptionModel!.firstPayDate!);
         durationController.text = widget.subscriptionModel!.duration.toString();
         durationUnit = widget.subscriptionModel!.durationUnit;
       }
@@ -130,7 +133,9 @@ class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderSc
           mIsUpdate
               ? TextButton(
                   onPressed: () {
-                    subscriptionService.removeDocument(widget.subscriptionModel!.id).then((value) {
+                    subscriptionService
+                        .removeDocument(widget.subscriptionModel!.id)
+                        .then((value) {
                       finish(context);
                       finish(context);
                     }).catchError((error) {
@@ -157,7 +162,10 @@ class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderSc
                       Container(
                         height: 180,
                         width: context.width(),
-                        decoration: BoxDecoration(color: reminderColor, border: Border.all(color: Colors.grey.shade300), borderRadius: BorderRadius.circular(defaultRadius)),
+                        decoration: BoxDecoration(
+                            color: reminderColor,
+                            border: Border.all(color: Colors.grey.shade300),
+                            borderRadius: BorderRadius.circular(defaultRadius)),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -169,7 +177,11 @@ class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderSc
                               nextFocus: nameFocus,
                               cursorColor: Colors.blueAccent,
                               controller: amountController,
-                              textStyle: primaryTextStyle(size: 40, color: reminderColor!.isDark() ? Colors.white.withOpacity(0.85) : Colors.black),
+                              textStyle: primaryTextStyle(
+                                  size: 40,
+                                  color: reminderColor!.isDark()
+                                      ? Colors.white.withOpacity(0.85)
+                                      : Colors.black),
                               textAlign: TextAlign.center,
                               errorThisFieldRequired: errorThisFieldRequired,
                               decoration: InputDecoration(
@@ -179,7 +191,12 @@ class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderSc
                                 border: InputBorder.none,
                               ),
                             ).center(),
-                            Text(INR, style: boldTextStyle(size: 30, color: reminderColor!.isDark() ? Colors.white.withOpacity(0.85) : Colors.black)),
+                            Text(INR,
+                                style: boldTextStyle(
+                                    size: 30,
+                                    color: reminderColor!.isDark()
+                                        ? Colors.white.withOpacity(0.85)
+                                        : Colors.black)),
                           ],
                         ),
                       ),
@@ -192,7 +209,8 @@ class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderSc
                         controller: nameController,
                         cursorColor: Colors.blueAccent,
                         textFieldType: TextFieldType.NAME,
-                        decoration: subscriptionInputDecoration(name: 'e.g. Netflix'),
+                        decoration:
+                            subscriptionInputDecoration(name: 'e.g. Netflix'),
                       ).cornerRadiusWithClipRRect(defaultRadius),
                       8.height,
                       Text(description, style: boldTextStyle()),
@@ -202,7 +220,8 @@ class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderSc
                         controller: descriptionController,
                         cursorColor: Colors.blueAccent,
                         textFieldType: TextFieldType.NAME,
-                        decoration: subscriptionInputDecoration(name: 'e.g. Premium plan'),
+                        decoration: subscriptionInputDecoration(
+                            name: 'e.g. Premium plan'),
                         isValidationRequired: false,
                       ).cornerRadiusWithClipRRect(defaultRadius),
                     ],
@@ -253,21 +272,30 @@ class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderSc
                                 Text(billing_period, style: boldTextStyle()),
                                 8.height,
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text('Every', style: primaryTextStyle()),
                                     16.width,
                                     AppTextField(
                                       controller: durationController,
-                                      cursorColor: blueButtonColor,
+                                      cursorColor: AppColors.blueButtonColor,
                                       textStyle: primaryTextStyle(),
                                       textFieldType: TextFieldType.PHONE,
-                                      decoration: subscriptionInputDecoration(name: '1'),
-                                    ).cornerRadiusWithClipRRect(defaultRadius).expand(),
+                                      decoration: subscriptionInputDecoration(
+                                          name: '1'),
+                                    )
+                                        .cornerRadiusWithClipRRect(
+                                            defaultRadius)
+                                        .expand(),
                                     16.width,
                                     Container(
-                                      padding: EdgeInsets.only(left: 8, right: 8),
-                                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: Colors.grey.withOpacity(0.2)),
+                                      padding:
+                                          EdgeInsets.only(left: 8, right: 8),
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          color: Colors.grey.withOpacity(0.2)),
                                       child: DropdownButton<String>(
                                         value: durationUnit,
                                         isExpanded: true,
@@ -279,10 +307,13 @@ class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderSc
                                             durationUnit = newValue;
                                           });
                                         },
-                                        items: <String>[DAY, WEEK, MONTH, YEAR].map<DropdownMenuItem<String>>((String value) {
+                                        items: <String>[DAY, WEEK, MONTH, YEAR]
+                                            .map<DropdownMenuItem<String>>(
+                                                (String value) {
                                           return DropdownMenuItem<String>(
                                             value: value,
-                                            child: Text(value, style: primaryTextStyle()),
+                                            child: Text(value,
+                                                style: primaryTextStyle()),
                                           );
                                         }).toList(),
                                       ),
@@ -297,9 +328,10 @@ class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderSc
                                     showDateFrom();
                                   },
                                   controller: firstPaymentController,
-                                  cursorColor: blueButtonColor,
+                                  cursorColor: AppColors.blueButtonColor,
                                   textFieldType: TextFieldType.NAME,
-                                  decoration: subscriptionInputDecoration(name: 'e.g. $date_format'),
+                                  decoration: subscriptionInputDecoration(
+                                      name: 'e.g. $date_format'),
                                 ).cornerRadiusWithClipRRect(defaultRadius),
                               ],
                             ).paddingOnly(left: 16, right: 16, bottom: 16)
@@ -313,9 +345,10 @@ class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderSc
                                     showDateFrom();
                                   },
                                   controller: expiryDateController,
-                                  cursorColor: blueButtonColor,
+                                  cursorColor: AppColors.blueButtonColor,
                                   textFieldType: TextFieldType.NAME,
-                                  decoration: subscriptionInputDecoration(name: 'e.g. $date_format'),
+                                  decoration: subscriptionInputDecoration(
+                                      name: 'e.g. $date_format'),
                                 ).cornerRadiusWithClipRRect(defaultRadius),
                               ],
                             ).paddingOnly(left: 16, right: 16, bottom: 16),
@@ -328,9 +361,10 @@ class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderSc
                           8.height,
                           AppTextField(
                             controller: paymentMethodController,
-                            cursorColor: blueButtonColor,
+                            cursorColor: AppColors.blueButtonColor,
                             textFieldType: TextFieldType.NAME,
-                            decoration: subscriptionInputDecoration(name: 'e.g. Credit Card'),
+                            decoration: subscriptionInputDecoration(
+                                name: 'e.g. Credit Card'),
                             isValidationRequired: false,
                           ).cornerRadiusWithClipRRect(defaultRadius),
                           16.height,
@@ -338,14 +372,25 @@ class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderSc
                           Container(
                             width: context.width(),
                             padding: EdgeInsets.all(16),
-                            decoration: BoxDecoration(color: reminderColor, border: Border.all(color: Colors.grey.shade300), borderRadius: BorderRadius.circular(defaultRadius)),
-                            child: Text(select_color, style: primaryTextStyle(color: reminderColor!.isDark() ? Colors.white.withOpacity(0.85) : Colors.black), textAlign: TextAlign.center),
+                            decoration: BoxDecoration(
+                                color: reminderColor,
+                                border: Border.all(color: Colors.grey.shade300),
+                                borderRadius:
+                                    BorderRadius.circular(defaultRadius)),
+                            child: Text(select_colour,
+                                style: primaryTextStyle(
+                                    color: reminderColor!.isDark()
+                                        ? Colors.white.withOpacity(0.85)
+                                        : Colors.black),
+                                textAlign: TextAlign.center),
                           ).onTap(() {
                             selectColorDialog();
                           }),
                           16.height,
                           AppButton(
-                            color: appStore.isDarkMode ? AppColors.kHabitOrange : AppColors.kHabitDark,
+                            color: appStore.isDarkMode
+                                ? AppColors.kHabitOrange
+                                : AppColors.kHabitDark,
                             width: context.width(),
                             onTap: () {
                               addSubscriptionReminder().then((value) {
@@ -355,7 +400,11 @@ class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderSc
                                 toast(error.toString());
                               });
                             },
-                            child: Text(mIsUpdate ? update : save, style: boldTextStyle(color: appStore.isDarkMode ? AppColors.kHabitDark : Colors.white)),
+                            child: Text(mIsUpdate ? update : save,
+                                style: boldTextStyle(
+                                    color: appStore.isDarkMode
+                                        ? AppColors.kHabitDark
+                                        : Colors.white)),
                           ),
                         ],
                       ).paddingOnly(left: 16, right: 16, bottom: 16),
@@ -365,7 +414,13 @@ class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderSc
               ),
             ),
           ),
-          Observer(builder: (_) => Loader(color: appStore.isDarkMode ? AppColors.kHabitDark : AppColors.kHabitOrange).center().visible(appStore.isLoading))
+          Observer(
+              builder: (_) => Loader(
+                      color: appStore.isDarkMode
+                          ? AppColors.kHabitDark
+                          : AppColors.kHabitOrange)
+                  .center()
+                  .visible(appStore.isLoading))
         ],
       ),
     );
@@ -387,23 +442,29 @@ class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderSc
       }
 
       if (mRecurring) {
-        var firstDate = DateTime.parse(firstPaymentController.text.trim().validate());
+        var firstDate =
+            DateTime.parse(firstPaymentController.text.trim().validate());
 
         model.firstPayDate = firstDate;
-        model.duration = durationController.text.toInt(defaultValue: 1).validate();
+        model.duration =
+            durationController.text.toInt(defaultValue: 1).validate();
         model.durationUnit = durationUnit.validate();
 
         if (model.durationUnit == DAY) {
           model.nextPayDate = firstDate.add(Duration(days: model.duration!));
         } else if (model.durationUnit == WEEK) {
-          model.nextPayDate = firstDate.add(Duration(days: 7 * model.duration!));
+          model.nextPayDate =
+              firstDate.add(Duration(days: 7 * model.duration!));
         } else if (model.durationUnit == MONTH) {
-          model.nextPayDate = firstDate.add(Duration(days: 30 * model.duration!));
+          model.nextPayDate =
+              firstDate.add(Duration(days: 30 * model.duration!));
         } else if (model.durationUnit == YEAR) {
-          model.nextPayDate = firstDate.add(Duration(days: 365 * model.duration!));
+          model.nextPayDate =
+              firstDate.add(Duration(days: 365 * model.duration!));
         }
       } else {
-        model.dueDate = DateTime.parse(expiryDateController.text.trim().validate());
+        model.dueDate =
+            DateTime.parse(expiryDateController.text.trim().validate());
       }
 
       model.paymentMethod = paymentMethodController.text.validate();
@@ -412,7 +473,9 @@ class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderSc
       if (mIsUpdate) {
         model.id = widget.subscriptionModel!.id;
 
-        subscriptionService.updateDocument(model.toJson(), model.id).then((value) {
+        subscriptionService
+            .updateDocument(model.toJson(), model.id)
+            .then((value) {
           finish(context, model);
 
           appStore.setLoading(false);
@@ -438,7 +501,7 @@ class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderSc
   selectColorDialog() {
     return showInDialog(
       context,
-      title: Text(select_color),
+      title: Text(select_colour),
       contentPadding: EdgeInsets.zero,
       child: SelectNoteColor(onTap: (color) {
         setState(() {

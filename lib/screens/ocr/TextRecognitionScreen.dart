@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:mighty_notes/providers/base_model.dart';
-import 'package:mighty_notes/providers/image_provider.dart';
-import 'package:mighty_notes/providers/text_provider.dart';
-import 'package:mighty_notes/screens/ocr/components/upload_image_button.dart';
+import 'package:habit_note/providers/base_model.dart';
+import 'package:habit_note/providers/image_provider.dart';
+import 'package:habit_note/providers/text_provider.dart';
+import 'package:habit_note/screens/ocr/components/UploadImageButton.dart';
 import 'package:provider/provider.dart';
 
-import 'components/display_image.dart';
-import 'components/result_page.dart';
+import 'components/DisplayImage.dart';
+import 'components/ResultPage.dart';
 
 /// TODO: Fix Error
 class TextRecognitionScreen extends StatelessWidget {
