@@ -85,3 +85,5 @@ flutter:
    - assets/images/
    - assets/icons/
    - assets/google_fonts/
+   - assets/terms_of_use.md
+   - assets/privacy_policy.md
