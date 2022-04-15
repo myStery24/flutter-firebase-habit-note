@@ -68,59 +68,59 @@ class _OnboardScreenState extends State<OnboardScreen> {
       },
 
       /// Onboard Screen Main Contents
-      child: Scaffold(
-        backgroundColor: appStore.isDarkMode
-            ? AppColors.kHabitDarkGrey
-            : AppColors.kHabitBackgroundLightGrey,
+      child: SafeArea(
+        child: Scaffold(
+          backgroundColor: appStore.isDarkMode
+              ? AppColors.kHabitDarkGrey
+              : AppColors.kHabitBackgroundLightGrey,
 
-        /// A sidebar navigation drawer widget
-        drawer: const OnboardDrawerWidget(),
-        appBar: AppBar(
-          iconTheme: const IconThemeData(color: AppColors.kHabitOrange),
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-        ),
-        body: SingleChildScrollView(
-          child: AnnotatedRegion<SystemUiOverlayStyle>(
-            value: SystemUiOverlayStyle.light,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                /// A welcome title text with app name
-                const OnboardTitle(),
+          /// A sidebar navigation drawer widget
+          drawer: const OnboardDrawerWidget(),
+          appBar: AppBar(
+            iconTheme: const IconThemeData(color: AppColors.kHabitOrange),
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+          ),
+          body: SingleChildScrollView(
+            child: AnnotatedRegion<SystemUiOverlayStyle>(
+              value: SystemUiOverlayStyle.light,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  /// A welcome title text with app name
+                  const OnboardTitle(),
 
-                /// A scrollable widget with image, header and body text
-                OnboardContent(),
+                  /// A scrollable widget with image, header and body text
+                  OnboardContent(),
 
-                /// Arrange the buttons
-                ButtonBar(
-                  children: <Widget>[
-                    /// Create account button
-                    CustomButton(
-                      text: AppStrings.createAccount,
-                      /// Open create account (register) screen
-                      onPressed: () {
-                        Navigator.push(context, AppRoutes().createAccountScreen);
-                      },
-                    ),
-                     // const SizedBox(height: 30.0),
-                    Container(
-                      height: size.height * 0.035,
-                    ),
+                  /// Arrange the buttons
+                  ButtonBar(
+                    children: <Widget>[
+                      /// Create account button
+                      CustomButton(
+                        text: AppStrings.createAccount,
+                        /// Open create account (register) screen
+                        onPressed: () {
+                          Navigator.push(context, AppRoutes().createAccountScreen);
+                        },
+                      ),
+                      32.height,
 
-                    /// Login button
-                    CustomButton(
-                      text: AppStrings.login,
-                      textColor: AppColors.kHabitOrange,
-                      color: AppColors.kTextWhite,
-                      /// Open login screen
-                      onPressed: () {
-                        Navigator.push(context, AppRoutes().loginScreen);
-                      },
-                    ),
-                  ],
-                ),
-              ],
+                      /// Login button
+                      CustomButton(
+                        text: AppStrings.login,
+                        textColor: AppColors.kHabitOrange,
+                        color: AppColors.kTextWhite,
+                        /// Open login screen
+                        onPressed: () {
+                          Navigator.push(context, AppRoutes().loginScreen);
+                        },
+                      ),
+                      16.height,
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
