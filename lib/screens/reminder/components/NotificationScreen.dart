@@ -3,7 +3,7 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:habit_note/model/subscription_model.dart';
-import 'package:habit_note/utils/colors.dart';
+import 'package:habit_note/utils/colours.dart';
 import 'package:habit_note/utils/common.dart';
 import 'package:habit_note/utils/string_constant.dart';
 import 'package:intl/intl.dart';

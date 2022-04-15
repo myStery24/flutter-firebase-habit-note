@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:habit_note/model/subscription_model.dart';
@@ -21,7 +20,6 @@ class SubscriptionDetailScreen extends StatefulWidget {
 }
 
 class SubscriptionDetailScreenState extends State<SubscriptionDetailScreen> {
-  BannerAd? myBanner;
 
   @override
   void initState() {
@@ -30,7 +28,6 @@ class SubscriptionDetailScreenState extends State<SubscriptionDetailScreen> {
   }
 
   Future<void> init() async {
-    myBanner = buildBannerAd()..load();
   }
 
   BannerAd buildBannerAd() {
@@ -51,7 +48,6 @@ class SubscriptionDetailScreenState extends State<SubscriptionDetailScreen> {
 
   @override
   void dispose() {
-    myBanner!.dispose();
     super.dispose();
   }
 
@@ -67,7 +63,6 @@ class SubscriptionDetailScreenState extends State<SubscriptionDetailScreen> {
         child: Stack(
           children: [
             SingleChildScrollView(
-              padding: EdgeInsets.only(bottom: myBanner!.size.height.toDouble()),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -208,13 +203,6 @@ class SubscriptionDetailScreenState extends State<SubscriptionDetailScreen> {
                 ],
               ).paddingOnly(left: 16, right: 16, top: 16),
             ),
-            if (myBanner != null && !disabled_ads)
-              Positioned(
-                child: AdWidget(ad: myBanner!),
-                bottom: 0,
-                height: AdSize.banner.height.toDouble(),
-                width: context.width(),
-              ),
           ],
         ),
       ),
