@@ -92,17 +92,20 @@ class DashboardScreenState extends State<DashboardScreen> {
         return OCRScreen();
         // return TextRecognitionScreen();
       case 2:
+        /// FAQ
         // TODO: HELP
         return HelpScreen();
       case 3:
-        // TODO: SETTINGS/ME
-        return SettingsScreen();
+        /// Settings
+        return MeScreen();
       case 0:
       default:
+        /// Main
         return NotesScreen();
     }
   }
 
+  /// Custom navigation bar
   Widget buildBottomNavBar() {
     final inactiveColor = Colors.grey;
     return BottomNavyBar(
