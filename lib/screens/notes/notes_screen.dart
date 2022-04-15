@@ -12,7 +12,7 @@ import 'package:habit_note/components/dashboard_drawer_widget.dart';
 import 'package:habit_note/screens/notes/components/filter_note_by_colour_dialog_widget.dart';
 import 'package:habit_note/screens/notes/components/lock_note_dialog_widget.dart';
 import 'package:habit_note/screens/notes/components/note_layout_dialog_widget.dart';
-import 'package:habit_note/screens/notes/components/set_master_password_dialog_widget.dart';
+import 'package:habit_note/screens/password/set_master_password_dialog_widget.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../main.dart';
