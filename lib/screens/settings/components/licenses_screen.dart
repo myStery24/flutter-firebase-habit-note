@@ -31,7 +31,7 @@ class _LicensesScreenState extends State<LicensesScreen> {
           child: Image.asset(AppImages.logoLight,
               width: size.width * 0.15, height: size.height * 0.15),
         ),
-        applicationVersion: AppStrings.appVersion,
+        applicationVersion: AppStrings.appVersionText,
         applicationLegalese: AppStrings.appCopyright,
       ),
     );
