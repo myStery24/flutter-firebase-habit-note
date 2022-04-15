@@ -5,11 +5,11 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:habit_note/model/subscription_model.dart';
 import 'package:habit_note/utils/colours.dart';
 import 'package:habit_note/utils/common.dart';
-import 'package:habit_note/utils/string_constant.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import '../../main.dart';
+import '../../../main.dart';
+import '../../../utils/constants.dart';
 
 class NotificationScreen extends StatefulWidget {
   final SubscriptionModel? subscriptionModel;
@@ -57,9 +57,12 @@ class NotificationScreenState extends State<NotificationScreen> {
           return Theme(
             data: ThemeData.light().copyWith(
               colorScheme: ColorScheme.fromSwatch(
-                primarySwatch: Colors.teal,
-                primaryColorDark: Colors.teal,
-                accentColor: Colors.teal,
+                primarySwatch: Colors.orange,
+                primaryColorDark: Colors.orange,
+                accentColor: Colors.orange,
+                // primarySwatch: Colors.teal,
+                // primaryColorDark: Colors.teal,
+                // accentColor: Colors.teal,
               ),
               dialogBackgroundColor: Colors.white,
             ),
