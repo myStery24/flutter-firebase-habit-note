@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import 'colors.dart';
+import 'colours.dart';
 
 class AppTheme {
   AppTheme._();
@@ -25,7 +25,7 @@ class AppTheme {
     appBarTheme: AppBarTheme(
       iconTheme: IconThemeData(color: AppColors.kHabitDarkGrey),
       backgroundColor: AppColors.kHabitWhite,
-      systemOverlayStyle: SystemUiOverlayStyle.light,
+      systemOverlayStyle: SystemUiOverlayStyle.dark,
     ),
     scrollbarTheme: ScrollbarThemeData(
         thumbColor: MaterialStateProperty.all(AppColors.kHabitDark),
@@ -43,19 +43,19 @@ class AppTheme {
 
   static final ThemeData darkTheme = ThemeData(
     primarySwatch: createMaterialColor(AppColors.kHabitOrange),
-    primaryColor: AppColors.kHabitDark,
+    primaryColor: AppColors.kHabitOrange,
     scaffoldBackgroundColor: AppColors.kHabitDarkGrey,
     // fontFamily: GoogleFonts.poppins().fontFamily,
-    fontFamily: GoogleFonts.roboto().fontFamily,
+    fontFamily: GoogleFonts.lato().fontFamily,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(backgroundColor: AppColors.kHabitDarkGrey),
     bottomSheetTheme: BottomSheetThemeData(backgroundColor: AppColors.kHabitDarkGrey),
     iconTheme: IconThemeData(color: AppColors.kHabitOrange),
-    textTheme: TextTheme(headline6: TextStyle(color: AppColors.kHabitOrange)),
+    textTheme: TextTheme(headline6: TextStyle(color: AppColors.kHabitDark)),
     floatingActionButtonTheme: FloatingActionButtonThemeData(backgroundColor: AppColors.kHabitDarkGrey),
     dialogBackgroundColor: AppColors.kHabitDarkGrey,
     unselectedWidgetColor: Colors.white60,
     dividerColor: Colors.white12,
-    cardColor: AppColors.kHabitDarkGrey,
+    cardColor: AppColors.kPrimaryVariantColorDark,
     canvasColor: AppColors.kHabitDarkGrey,
     scrollbarTheme: ScrollbarThemeData(
         thumbColor: MaterialStateProperty.all(AppColors.kHabitOrange),
@@ -64,7 +64,7 @@ class AppTheme {
       titleTextStyle: TextStyle(color: Colors.white, fontSize: 22),
       backgroundColor: AppColors.kHabitDarkGrey,
       iconTheme: IconThemeData(color: AppColors.kHabitOrange),
-      systemOverlayStyle: SystemUiOverlayStyle.dark,
+      systemOverlayStyle: SystemUiOverlayStyle.light,
     ),
     dialogTheme: DialogTheme(shape: dialogShape()),
   ).copyWith(
