@@ -8,6 +8,7 @@ import 'package:nb_utils/nb_utils.dart';
 
 import '../../../../main.dart';
 import '../../dashboard_screen.dart';
+import 'note_collaborator_screen.dart';
 
 class AddToDoScreen extends StatefulWidget {
   static String tag = '/AddToDoScreen';
@@ -22,8 +23,6 @@ class AddToDoScreen extends StatefulWidget {
 
 class AddToDoScreenState extends State<AddToDoScreen> {
   List<String> collaborateList = [];
-
-  // InterstitialAd? myInterstitial;
 
   TextEditingController todoController = TextEditingController();
   TextEditingController? textController;
@@ -108,22 +107,19 @@ class AddToDoScreenState extends State<AddToDoScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              _kIsUpdateTodo &&
-                      widget.notesModel!.collaborateWith!.first !=
-                          getStringAsync(USER_EMAIL)
+              _kIsUpdateTodo && widget.notesModel!.collaborateWith!.first != getStringAsync(USER_EMAIL)
                   ? Row(
-                      children: [
-                        Text('$shared_by :',
-                            style:
-                                boldTextStyle(color: Colors.black, size: 18)),
-                        4.width,
-                        Text(
-                            widget.notesModel!.collaborateWith!.first
-                                .validate(),
-                            style:
-                                boldTextStyle(color: Colors.black, size: 18)),
-                      ],
-                    ).paddingLeft(16)
+                children: [
+                  Text('$shared_by :',
+                      style:
+                      boldTextStyle(color: Colors.black, size: 18)),
+                  4.width,
+                  Text(
+                      widget.notesModel!.collaborateWith!.first.validate(),
+                      style:
+                      boldTextStyle(color: Colors.black, size: 18)),
+                ],
+              ).paddingLeft(16)
                   : SizedBox(),
               addCheckListItemWidget(),
               Divider(indent: 16),
@@ -144,7 +140,7 @@ class AddToDoScreenState extends State<AddToDoScreen> {
                           onChanged: (val) {
                             setState(() {
                               checkListData.isCompleted =
-                                  !checkListData.isCompleted!;
+                              !checkListData.isCompleted!;
 
                               if (checkListData.isCompleted!) {
                                 _checkList.insert(
@@ -266,7 +262,7 @@ class AddToDoScreenState extends State<AddToDoScreen> {
     }
   }
 
-  /// To-do Options: Delete + Colour
+  /// To-do Options: Delete + Colour + Collaborator
   toDoColorPicker() {
     return showModalBottomSheet(
       context: context,
@@ -304,13 +300,13 @@ class AddToDoScreenState extends State<AddToDoScreen> {
                   },
                 ),
               ),
-              // TODO: Collaborator Feature
+              /// Collaborator
               // ListTile(
               //   leading: Icon(Icons.person_add_alt_1_rounded,
               //       color: appStore.isDarkMode
               //           ? AppColors.kHabitOrange
               //           : AppColors.scaffoldSecondaryDark),
-              //   title: Text(collaborator, style: primaryTextStyle()),
+              //   title: Text(collaborators, style: primaryTextStyle()),
               //   onTap: () async {
               //     finish(context);
               //     if (widget.notesModel == null ||
