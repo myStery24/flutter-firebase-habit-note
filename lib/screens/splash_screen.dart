@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:habit_note/utils/colours.dart';
 import 'package:habit_note/utils/common.dart';
 import 'package:habit_note/utils/constants.dart';
-import 'package:habit_note/utils/string_constant.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../main.dart';
@@ -60,9 +59,9 @@ class SplashScreenState extends State<SplashScreen> {
               // padding: const EdgeInsets.all(8.0),
               padding: const EdgeInsets.only(top: 120.0),
               child: commonCacheImageWidget(
-                  getBoolAsync(IS_DARK_MODE, defaultValue: false)
-                      ? dark_mode_image
-                      : light_mode_image,
+                  getBoolAsync(IS_DARK_MODE)
+                      ? AppImages.logoNight
+                      : AppImages.logoLight,
                   150,
                   fit: BoxFit.cover),
             ),
