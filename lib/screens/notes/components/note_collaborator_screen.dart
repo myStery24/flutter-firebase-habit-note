@@ -10,6 +10,7 @@ import '../../../utils/colours.dart';
 import '../../../utils/common.dart';
 import '../../../utils/constants.dart';
 
+// TODO: Collaborator
 class NoteCollaboratorScreen extends StatefulWidget {
   static String tag = '/NoteCollaboratorScreen';
   final NotesModel? notesModel;
@@ -68,7 +69,7 @@ class NoteCollaboratorScreenState extends State<NoteCollaboratorScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text(collaborators, style: boldTextStyle()),
+        title: Text(collaborators),
         actions: [
           TextButton(
             onPressed: () async {
@@ -78,7 +79,13 @@ class NoteCollaboratorScreenState extends State<NoteCollaboratorScreen> {
                 toast(error.toString());
               });
             },
-            child: Text(save, style: primaryTextStyle()),
+            child: Text(save,
+              style: TextStyle(
+                color: getBoolAsync(IS_DARK_MODE)
+                    ? AppColors.kHabitOrange
+                    : AppColors.kTextBlack,
+              ),
+            ),
           ),
         ],
       ),
@@ -154,7 +161,7 @@ class NoteCollaboratorScreenState extends State<NoteCollaboratorScreen> {
           textFieldType: TextFieldType.EMAIL,
           textInputAction: TextInputAction.done,
           maxLines: 1,
-          errorInvalidEmail: 'Enter a valid email',
+          errorInvalidEmail: AppStrings.kInvalidEmailError,
           errorThisFieldRequired: errorThisFieldRequired,
           onFieldSubmitted: (val) {
             if (_formKey.currentState!.validate()) {
