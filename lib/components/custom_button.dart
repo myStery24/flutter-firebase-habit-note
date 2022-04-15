@@ -27,10 +27,10 @@ class CustomButton extends StatelessWidget {
     this.width = 150.0,
     this.height = 50.0,
     this.elevation = 8.0,
-    this.borderRadius = 20.0,
+    this.borderRadius = 30.0,
     this.color = AppColors.kHabitOrange,
     this.fontSize = 18.0,
-    this.fontWeight = TextFontWeight.regular,
+    this.fontWeight = TextFontWeight.bold,
     this.textColor = AppColors.kTextWhite,
   }) : super(key: key);
 
