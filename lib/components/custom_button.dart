@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:habit_note/utils/colors.dart';
+import 'package:habit_note/utils/colours.dart';
 import 'package:habit_note/utils/constants.dart';
 
 class CustomButton extends StatelessWidget {
@@ -48,7 +48,7 @@ class CustomButton extends StatelessWidget {
       child: Text(
         text,
         textAlign: TextAlign.center,
-        style: GoogleFonts.roboto(
+        style: GoogleFonts.lato(
             fontSize: fontSize, fontWeight: fontWeight, color: textColor),
       ),
     );
