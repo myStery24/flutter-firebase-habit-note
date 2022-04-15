@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:habit_note/utils/colours.dart';
 import 'package:habit_note/utils/constants.dart';
-import 'package:habit_note/utils/string_constant.dart';
-import 'package:habit_note/components/CustomButton.dart';
-import 'package:habit_note/components/OnboardDrawerWidget.dart';
+import 'package:habit_note/components/custom_button.dart';
+import 'package:habit_note/components/onboard_drawer_widget.dart';
+import 'package:habit_note/utils/routes.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../main.dart';
