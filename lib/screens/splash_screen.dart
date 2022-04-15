@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:habit_note/utils/colors.dart';
+import 'package:habit_note/utils/colours.dart';
 import 'package:habit_note/utils/common.dart';
 import 'package:habit_note/utils/constants.dart';
 import 'package:habit_note/utils/string_constant.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../main.dart';
-import 'DashboardScreen.dart';
-import 'onboard/OnboardScreen.dart';
+import 'dashboard_screen.dart';
+import 'onboard/onboard_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   static String tag = '/SplashScreen';
@@ -26,9 +26,8 @@ class SplashScreenState extends State<SplashScreen> {
 
   Future<void> init() async {
     setStatusBarColor(
-      appStore.isDarkMode ? AppColors.kHabitDark : Colors.transparent,
-      statusBarIconBrightness:
-          appStore.isDarkMode ? Brightness.light : Brightness.dark,
+      AppColors.kHabitOrange,
+      statusBarIconBrightness: appStore.isDarkMode ? Brightness.light : Brightness.dark,
       delayInMilliSeconds: 100,
     );
     await Future.delayed(Duration(seconds: 1));
@@ -37,13 +36,6 @@ class SplashScreenState extends State<SplashScreen> {
     } else {
       OnboardScreen().launch(context, isNewTask: true);
     }
-    // if (getBoolAsync(IS_FIRST_TIME, defaultValue: true)) {
-    //   WalkThroughScreen().launch(context, isNewTask: true);
-    // } else if (appStore.isLoggedIn.validate()) {
-    //   DashboardScreen().launch(context, isNewTask: true);
-    // } else {
-    //   LoginScreen().launch(context, isNewTask: true);
-    // }
   }
 
   @override
@@ -53,12 +45,6 @@ class SplashScreenState extends State<SplashScreen> {
 
   @override
   void dispose() {
-    setStatusBarColor(
-      appStore.isDarkMode ? AppColors.kHabitDark : Colors.transparent,
-      statusBarIconBrightness:
-          appStore.isDarkMode ? Brightness.light : Brightness.dark,
-      delayInMilliSeconds: 100,
-    );
     super.dispose();
   }
 
@@ -94,7 +80,7 @@ class SplashScreenState extends State<SplashScreen> {
               padding: const EdgeInsets.only(top: 250.0),
               child: Text(
                 AppStrings.appCopyright,
-                style: GoogleFonts.roboto(
+                style: GoogleFonts.lato(
                   fontSize: 14.0,
                   color: AppColors.kTextBlack,
                 ),
