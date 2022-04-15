@@ -6,18 +6,23 @@ class NotesModel {
   String? noteTitle;
   String? note;
   String? color;
+  String? noteImage;
+  List<String?>? label;
   DateTime? createdAt;
   DateTime? updatedAt;
   List<CheckListModel>? checkListModel;
   List<String?>? collaborateWith;
   bool? isLock;
 
+  /// Instantiates a [NoteModel]
   NotesModel({
     this.noteId,
     this.userId,
     this.noteTitle,
     this.note,
     this.color,
+    this.noteImage,
+    this.label,
     this.createdAt,
     this.updatedAt,
     this.checkListModel,
@@ -32,6 +37,8 @@ class NotesModel {
       noteTitle: json['noteTitle'],
       note: json['note'],
       color: json['color'],
+      noteImage: json['noteImage'],
+      label: json['label'] !=null ? (json['label'] as List).map<String>((e) => e).toList() : null,
       createdAt: json['createdAt'] != null ? (json['createdAt'] as Timestamp).toDate() : null,
       updatedAt: json['updatedAt'] != null ? (json['updatedAt'] as Timestamp).toDate() : null,
       checkListModel: json['checkList'] != null ? (json['checkList'] as List).map<CheckListModel>((e) => CheckListModel.fromJson(e)).toList() : null,
@@ -40,6 +47,7 @@ class NotesModel {
     );
   }
 
+  /// Send data to Firebase
   Map<String, dynamic> toJson() {
     Map<String, dynamic> data = Map<String, dynamic>();
     data['id'] = this.noteId;
@@ -47,10 +55,12 @@ class NotesModel {
     data['noteTitle'] = this.noteTitle;
     data['note'] = this.note;
     data['color'] = this.color;
+    data['noteImage'] = this.noteImage;
     data['createdAt'] = this.createdAt;
     data['updatedAt'] = this.updatedAt;
 
-    /// check is null or not
+    /// Check is null or not
+    data['label'] = this.label!.map((e) => e).toList();
     data['checkList'] = this.checkListModel!.map((e) => e.toJson()).toList();
     data['collaborateWith'] = this.collaborateWith!.map((e) => e).toList();
 
@@ -62,13 +72,15 @@ class NotesModel {
 
 class CheckListModel {
   String? todo;
+  List<String>? label;
   bool? isCompleted;
 
-  CheckListModel({this.todo, this.isCompleted});
+  CheckListModel({this.todo, this.isCompleted, this.label});
 
   factory CheckListModel.fromJson(Map<String, dynamic> json) {
     return CheckListModel(
       todo: json['todo'],
+      label: json['label'],
       isCompleted: json['isCompleted'],
     );
   }
@@ -77,6 +89,7 @@ class CheckListModel {
     Map<String, dynamic> data = Map<String, dynamic>();
 
     data['todo'] = this.todo;
+    data['label'] = this.label;
     data['isCompleted'] = this.isCompleted;
 
     return data;
