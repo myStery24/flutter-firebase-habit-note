@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:habit_note/model/user_model.dart';
-import 'package:habit_note/screens/onboard/OnboardScreen.dart';
+import 'package:habit_note/screens/onboard/onboard_screen.dart';
 import 'package:habit_note/utils/constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:the_apple_sign_in/the_apple_sign_in.dart';

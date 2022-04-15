@@ -5,11 +5,13 @@ import '../main.dart';
 import 'base_service.dart';
 
 class UserDBService extends BaseService {
+  /// Reference to 'users' collection
   UserDBService() {
     ref = db.collection('users');
   }
 
   Future<UserModel> getUserById(String id) {
+    // Get a snapshot of user id, limit to 1 only
     return ref.where('id', isEqualTo: id).limit(1).get().then((res) {
       if (res.docs.isNotEmpty) {
         return UserModel.fromJson(res.docs.first.data() as Map<String, dynamic>);

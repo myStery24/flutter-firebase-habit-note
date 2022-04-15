@@ -11,6 +11,7 @@ class SubscriptionService extends BaseService {
   }
 
   Future<List<SubscriptionModel>> getSubscription() {
+    // Get a snapshot of document by user id
     return ref.where('userId', isEqualTo: getStringAsync(USER_ID)).get().then((value) {
       return value.docs.map((e) => SubscriptionModel.fromJson(e.data() as Map<String, dynamic>)).toList();
     });

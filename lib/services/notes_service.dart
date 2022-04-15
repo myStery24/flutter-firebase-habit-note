@@ -11,9 +11,11 @@ class NotesService extends BaseService {
   }
 
   Stream<List<NotesModel>> fetchNotes({String color = ''}) {
+    // Get the snapshot of the document from Firebase and map to a list
     return color.isEmpty
         ? ref.where('collaborateWith', arrayContains: getStringAsync(USER_EMAIL)).orderBy('updatedAt', descending: true).snapshots().map(
             (event) {
+              /// Transforms the Firestore query [snapshot] into a list of [NotesModel] instances
               return event.docs.map((e) => NotesModel.fromJson(e.data() as Map<String, dynamic>)).toList();
             },
           )
