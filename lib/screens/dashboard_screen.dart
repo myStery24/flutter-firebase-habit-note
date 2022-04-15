@@ -2,17 +2,15 @@ import 'dart:async';
 
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:habit_note/components/DashboardDrawerWidget.dart';
-import 'package:habit_note/screens/ocr/TextRecognitionScreen.dart';
+import 'package:habit_note/components/dashboard_drawer_widget.dart';
+import 'package:habit_note/screens/ocr/ocr_screen.dart';
+import 'package:habit_note/screens/settings/me_screen.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import 'HelpScreen.dart';
-import 'SettingsScreen.dart';
-import 'notes/NotesScreen.dart';
-import 'ocr/OCRScreen.dart';
-import '../utils/colors.dart';
+import 'help_screen.dart';
+import 'notes/notes_screen.dart';
+import '../utils/colours.dart';
 import '../utils/constants.dart';
-import '../utils/string_constant.dart';
 
 class DashboardScreen extends StatefulWidget {
   static String tag = '/DashboardScreen';
@@ -88,9 +86,8 @@ class DashboardScreenState extends State<DashboardScreen> {
   Widget buildBody() {
     switch (index) {
       case 1:
-        // TODO: OCR
+        /// OCR
         return OCRScreen();
-        // return TextRecognitionScreen();
       case 2:
         /// FAQ
         // TODO: HELP
