@@ -2,15 +2,14 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:habit_note/screens/password/NotesPasswordProtectionScreen.dart';
-import 'package:habit_note/screens/password/ForgotPasswordScreen.dart';
-import 'package:habit_note/utils/colors.dart';
-import 'package:habit_note/utils/common.dart';
+import 'package:habit_note/screens/reminder/SubscriptionReminderListScreen.dart';
+import 'package:habit_note/utils/colours.dart';
 import 'package:habit_note/utils/constants.dart';
 import 'package:habit_note/utils/string_constant.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../main.dart';
+import '../utils/common.dart';
 
 class DashboardDrawerWidget extends StatefulWidget {
   static String tag = '/DashboardDrawerWidget';
@@ -123,17 +122,17 @@ class DashboardDrawerWidgetState extends State<DashboardDrawerWidget> {
                   }).visible(getStringAsync(LOGIN_TYPE) == LoginTypeApp),
 
                   /// Lock Notes with Password
-                  Row(
-                    children: [
-                      Icon(Icons.lock_outline_rounded),
-                      16.width,
-                      Text(lock_notes_pwd, style: primaryTextStyle(size: 14))
-                          .expand(),
-                    ],
-                  ).paddingAll(16).onTap(() {
-                    finish(context);
-                    ChangeMasterPasswordScreen().launch(context);
-                  }),
+                  // Row(
+                  //   children: [
+                  //     Icon(Icons.lock_outline_rounded),
+                  //     16.width,
+                  //     Text(lock_notes_pwd, style: primaryTextStyle(size: 14))
+                  //         .expand(),
+                  //   ],
+                  // ).paddingAll(16).onTap(() {
+                  //   finish(context);
+                  //   ChangeMasterPasswordScreen().launch(context);
+                  // }),
                   const Divider(color: AppColors.kHabitOrange),
 
                   /// Log Out
@@ -147,7 +146,7 @@ class DashboardDrawerWidgetState extends State<DashboardDrawerWidget> {
                     bool? res = await showConfirmDialog(context, log_out_text,
                         positiveText: log_out,
                         buttonColor: AppColors.kHabitOrange);
-
+                    // ?? is the 'if null operator'
                     if (res ?? false) {
                       service.signOutFromEmailPassword(context);
                     }
