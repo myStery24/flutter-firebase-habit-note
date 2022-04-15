@@ -116,7 +116,7 @@ class _AboutAppScreenState extends State<AboutAppScreen> {
 
       /// Normal appbar
       appBar: AppBar(
-        title: Text('About'),
+        title: Text('About Us'),
         actions: [
           /// Software licenses
           IconButton(
