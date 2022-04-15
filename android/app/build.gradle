@@ -40,6 +40,11 @@ android {
         versionCode 4
         versionName "1.0.0"
         multiDexEnabled true
+
+        //ndk {
+            // Don't package arm64-v8a or x86_64
+          //  abiFilters 'armeabi-v7a', 'x86'
+        //}
     }
 
     buildTypes {
@@ -63,6 +68,14 @@ dependencies {
 
     implementation 'androidx.multidex:multidex:2.0.1'
 
+    // ML Kit dependencies
     // ML Kit Text Recognition
-    implementation 'com.google.android.gms:play-services-mlkit-text-recognition:17.0.1'
+    // implementation 'com.google.android.gms:play-services-mlkit-text-recognition:18.0.0'
+
+    // ML Kit Text Recognition V2
+    // To recognize Latin script
+    implementation 'com.google.mlkit:text-recognition:16.0.0-beta3'
+
+    // To recognize Chinese script
+    implementation 'com.google.mlkit:text-recognition-chinese:16.0.0-beta3'
 }
