@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:habit_note/model/notes_model.dart';
 import 'package:habit_note/screens/dashboard_screen.dart';
 import 'package:habit_note/utils/colours.dart';
 import 'package:habit_note/utils/common.dart';
 import 'package:habit_note/utils/constants.dart';
-import 'package:habit_note/utils/string_constant.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../../../main.dart';
@@ -30,7 +30,7 @@ class AddNotesScreenState extends State<AddNotesScreen> {
 
   Color? _kSelectColor;
 
-  bool _mIsUpdateNote = false;
+  bool _kIsUpdateNote = false;
 
   @override
   void initState() {
@@ -47,14 +47,14 @@ class AddNotesScreenState extends State<AddNotesScreen> {
 
     _kIsUpdateNote = widget.notesModel != null;
 
-    if (!_mIsUpdateNote) {
+    if (!_kIsUpdateNote) {
       collaborateList.add(getStringAsync(USER_EMAIL));
     }
 
-    if (_mIsUpdateNote) {
+    if (_kIsUpdateNote) {
       titleController.text = widget.notesModel!.noteTitle!;
       notesController.text = widget.notesModel!.note!;
-      _mSelectColor = getColorFromHex(widget.notesModel!.color!);
+      _kSelectColor = getColorFromHex(widget.notesModel!.color!);
     }
 
   }
@@ -78,10 +78,20 @@ class AddNotesScreenState extends State<AddNotesScreen> {
       resizeToAvoidBottomInset: true,
       appBar: appBarWidget(
         add_note,
-        color: _mSelectColor ?? AppColors.kHabitWhite,
+        color: _kSelectColor ?? AppColors.kHabitWhite,
         textColor: AppColors.kHabitDark,
-        brightness: Brightness.light,
+        systemUiOverlayStyle: SystemUiOverlayStyle.dark,
+        // brightness: Brightness.light,
         actions: [
+          IconButton(
+            icon: Icon(Icons.check),
+            color: AppColors.kHabitDark,
+            onPressed: () async {
+              hideKeyboard(context);
+
+              finish(context);
+            },
+          ),
           IconButton(
             icon: Icon(Icons.more_vert_rounded),
             color: AppColors.kHabitDark,
@@ -95,16 +105,14 @@ class AddNotesScreenState extends State<AddNotesScreen> {
         elevation: 0,
       ),
       body: Container(
-        color: _mSelectColor ?? Colors.white,
+        color: _kSelectColor ?? Colors.white,
         height: double.infinity,
         padding: EdgeInsets.all(16),
         child: Container(
           height: double.infinity,
           child: Column(
             children: [
-              _mIsUpdateNote &&
-                      widget.notesModel!.collaborateWith!.first !=
-                          getStringAsync(USER_EMAIL)
+              _kIsUpdateNote && widget.notesModel!.collaborateWith!.first != getStringAsync(USER_EMAIL)
                   ? Row(
                       children: [
                         Text('$shared_by :',
@@ -117,7 +125,7 @@ class AddNotesScreenState extends State<AddNotesScreen> {
                     )
                   : SizedBox(),
               TextField(
-                autofocus: _mIsUpdateNote ? false : true,
+                autofocus: _kIsUpdateNote ? false : true,
                 controller: titleController,
                 cursorColor: Colors.black,
                 decoration: InputDecoration(
@@ -163,20 +171,19 @@ class AddNotesScreenState extends State<AddNotesScreen> {
       notesData.noteTitle = titleController.text.trim();
       notesData.note = notesController.text.trim();
 
-      if (_mSelectColor != null) {
-        notesData.color = _mSelectColor!.toHex().toString();
+      if (_kSelectColor != null) {
+        notesData.color = _kSelectColor!.toHex().toString();
       } else {
         notesData.color = Colors.white.toHex();
       }
 
-      if (_mIsUpdateNote) {
+      if (_kIsUpdateNote) {
         notesData.noteId = widget.notesModel!.noteId;
         notesData.label = widget.notesModel!.label;
         notesData.createdAt = widget.notesModel!.createdAt;
         notesData.updatedAt = DateTime.now();
         notesData.checkListModel = widget.notesModel!.checkListModel.validate();
-        notesData.collaborateWith =
-            widget.notesModel!.collaborateWith.validate();
+        notesData.collaborateWith = widget.notesModel!.collaborateWith.validate();
         notesData.isLock = widget.notesModel!.isLock;
 
         notesService
@@ -214,7 +221,7 @@ class AddNotesScreenState extends State<AddNotesScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               IgnorePointer(
-                ignoring: _mIsUpdateNote ? false : true,
+                ignoring: _kIsUpdateNote ? false : true,
                 child: ListTile(
                   leading: Icon(Icons.delete_forever_outlined,
                       color: appStore.isDarkMode
@@ -270,7 +277,7 @@ class AddNotesScreenState extends State<AddNotesScreen> {
                 setState(() {
                   setStatusBarColor(Colors.transparent,
                       delayInMilliSeconds: 100);
-                  _mSelectColor = color;
+                  _kSelectColor = color;
                 });
               }),
             ],
