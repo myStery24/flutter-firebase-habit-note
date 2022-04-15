@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:habit_note/model/notes_model.dart';
 import 'package:habit_note/utils/colours.dart';
 import 'package:habit_note/utils/common.dart';
 import 'package:habit_note/utils/constants.dart';
-import 'package:habit_note/utils/string_constant.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../../../main.dart';
@@ -32,7 +32,7 @@ class AddToDoScreenState extends State<AddToDoScreen> {
 
   List<CheckListModel> _checkList = [];
 
-  bool _mIsUpdateTodo = false;
+  bool _kIsUpdateTodo = false;
 
   @override
   void initState() {
@@ -44,13 +44,13 @@ class AddToDoScreenState extends State<AddToDoScreen> {
     setStatusBarColor(Colors.transparent,
         statusBarIconBrightness: Brightness.light, delayInMilliSeconds: 100);
 
-    _mIsUpdateTodo = widget.notesModel != null;
+    _kIsUpdateTodo = widget.notesModel != null;
 
-    if (!_mIsUpdateTodo) {
+    if (!_kIsUpdateTodo) {
       collaborateList.add(getStringAsync(USER_EMAIL));
     }
 
-    if (_mIsUpdateTodo) {
+    if (_kIsUpdateTodo) {
       _kSelectColor = getColorFromHex(widget.notesModel!.color!);
       _checkList.addAll(widget.notesModel!.checkListModel!);
     }
@@ -78,8 +78,18 @@ class AddToDoScreenState extends State<AddToDoScreen> {
         add_todo,
         color: _kSelectColor ?? AppColors.kHabitWhite,
         textColor: AppColors.kHabitDark,
-        brightness: Brightness.light,
+        systemUiOverlayStyle: SystemUiOverlayStyle.dark,
+        // brightness: Brightness.light,
         actions: [
+          IconButton(
+            icon: Icon(Icons.check),
+            color: AppColors.kHabitDark,
+            onPressed: () async {
+              hideKeyboard(context);
+
+              finish(context);
+            },
+          ),
           IconButton(
             icon: Icon(Icons.more_vert_rounded),
             color: AppColors.kHabitDark,
@@ -98,7 +108,7 @@ class AddToDoScreenState extends State<AddToDoScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              _mIsUpdateTodo &&
+              _kIsUpdateTodo &&
                       widget.notesModel!.collaborateWith!.first !=
                           getStringAsync(USER_EMAIL)
                   ? Row(
@@ -191,7 +201,7 @@ class AddToDoScreenState extends State<AddToDoScreen> {
       children: [
         IconButton(icon: Icon(Icons.add), onPressed: null),
         TextField(
-          autofocus: _mIsUpdateTodo ? false : true,
+          autofocus: _kIsUpdateTodo ? false : true,
           controller: todoController,
           cursorColor: Colors.black,
           decoration: InputDecoration(
@@ -232,11 +242,10 @@ class AddToDoScreenState extends State<AddToDoScreen> {
         notesData.color = Colors.white.toHex();
       }
 
-      if (_mIsUpdateTodo) {
+      if (_kIsUpdateTodo) {
         notesData.createdAt = widget.notesModel!.createdAt;
         notesData.noteId = widget.notesModel!.noteId;
-        notesData.collaborateWith =
-            widget.notesModel!.collaborateWith.validate();
+        notesData.collaborateWith = widget.notesModel!.collaborateWith.validate();
         notesData.isLock = widget.notesModel!.isLock;
 
         notesService
@@ -269,7 +278,7 @@ class AddToDoScreenState extends State<AddToDoScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               IgnorePointer(
-                ignoring: _mIsUpdateTodo ? false : true,
+                ignoring: _kIsUpdateTodo ? false : true,
                 child: ListTile(
                   leading: Icon(Icons.delete_forever_outlined,
                       color: appStore.isDarkMode
