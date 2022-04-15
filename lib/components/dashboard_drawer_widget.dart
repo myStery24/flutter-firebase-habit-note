@@ -5,7 +5,6 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:habit_note/screens/reminder/SubscriptionReminderListScreen.dart';
 import 'package:habit_note/utils/colours.dart';
 import 'package:habit_note/utils/constants.dart';
-import 'package:habit_note/utils/string_constant.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../main.dart';
@@ -97,29 +96,19 @@ class DashboardDrawerWidgetState extends State<DashboardDrawerWidget> {
                       await setValue(IS_DARK_MODE, true);
                     }
                   }),
-                  // Row(
-                  //   children: [
-                  //     Icon(Icons.notifications_active_outlined),
-                  //     16.width,
-                  //     Text(sub_reminder, style: primaryTextStyle(size: 14)).expand(),
-                  //   ],
-                  // ).paddingAll(16).onTap(() {
-                  //   finish(context);
-                  //   SubscriptionReminderListScreen().launch(context);
-                  // }),
-                  /// Reset Password
+
+                  /// Subscription Reminder with Notifications
                   Row(
                     children: [
-                      Icon(Icons.lock_outline_rounded),
+                      Icon(Icons.notifications_active_outlined),
                       16.width,
-                      Text(reset_acc_pwd, style: primaryTextStyle(size: 14))
+                      Text(sub_reminder, style: primaryTextStyle(size: 14))
                           .expand(),
                     ],
                   ).paddingAll(16).onTap(() {
                     finish(context);
-                    ForgotPasswordScreen().launch(context);
-                    // ChangeAppPasswordScreen().launch(context);
-                  }).visible(getStringAsync(LOGIN_TYPE) == LoginTypeApp),
+                    SubscriptionReminderListScreen().launch(context);
+                  }),
 
                   /// Lock Notes with Password
                   // Row(
