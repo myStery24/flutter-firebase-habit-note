@@ -33,7 +33,8 @@ class NotificationManager {
     var androidDetails = AndroidNotificationDetails(
       'channel_id',
       'Channel Name',
-      'Channel Description',
+      //'Channel Description',
+      // TODO: Find the logo in mighty notes
       icon: 'app_logo2',
     );
     var iOSDetails = IOSNotificationDetails();
