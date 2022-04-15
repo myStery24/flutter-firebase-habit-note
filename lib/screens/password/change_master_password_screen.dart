@@ -5,7 +5,7 @@ import 'package:habit_note/utils/common.dart';
 import 'package:habit_note/utils/constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import '../../../main.dart';
+import '../../main.dart';
 
 /// Reset the password (4 digit pin) that is used to lock notes
 class ChangeMasterPasswordScreen extends StatefulWidget {
@@ -57,11 +57,16 @@ class ChangeMasterPasswordScreenState
               showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
-                  title: Text('Support Email'),
+                  title: Text('Support Email',
+                    style: TextStyle(
+                      color: getBoolAsync(IS_DARK_MODE)
+                          ? AppColors.kHabitOrange
+                          : AppColors.kTextBlack),
+                  ),
                   content: Text(
                     'Contact us at ai190244bim@gmail.com to reset your master password.',
                     style: TextStyle(
-                        color: appStore.isDarkMode
+                        color: getBoolAsync(IS_DARK_MODE)
                             ? AppColors.kTextWhite
                             : AppColors.kTextBlack),
                   ),
