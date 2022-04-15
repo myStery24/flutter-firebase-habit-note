@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:habit_note/utils/constants.dart';
 
-import 'OnboardScreenData.dart';
-import 'PageIndicator.dart';
+import 'onboard_screen_data.dart';
+import 'page_indicator.dart';
 
 class OnboardContent extends StatefulWidget {
   // Number of onboarding pages
@@ -63,17 +63,23 @@ class _OnboardContentState extends State<OnboardContent> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    var onBoardPage =
+        MediaQuery.of(context).orientation == Orientation.landscape;
+
     return SafeArea(
       child: SizedBox(
         // Center images in the column
-        width: double.infinity,
+        width: getProportionateScreenWidth(size.width * 1.0),
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 40.0),
+          padding: const EdgeInsets.symmetric(vertical: 50.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               SizedBox(
-                height: getProportionateScreenHeight(400),
+                height: onBoardPage
+                    ? getProportionateScreenHeight(500)
+                    : getProportionateScreenHeight(400),
                 child: PageView(
                   physics: const ClampingScrollPhysics(),
                   controller: _pageController,
@@ -86,7 +92,7 @@ class _OnboardContentState extends State<OnboardContent> {
 
                   /// Onboard screen data
                   children:
-                  onboardScreenData(widget.numOfPages, widget.onboardData),
+                      onboardScreenData(widget.numOfPages, widget.onboardData),
                 ),
               ),
               Row(

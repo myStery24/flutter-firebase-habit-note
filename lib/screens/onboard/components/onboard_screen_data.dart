@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:habit_note/utils/colors.dart';
+import 'package:habit_note/utils/colours.dart';
 import 'package:habit_note/utils/constants.dart';
+
+import '../../../main.dart';
 
 List<Widget> onboardScreenData(int numOfPages, screenContent) {
   List<Widget> list = [];
@@ -35,8 +37,8 @@ Widget _getScreenData(Map<String, String> screenContent, i) {
         const SizedBox(height: 8.0),
         Text(
           screenContent["scr ${i + 1} heading"].toString(),
-          style: GoogleFonts.roboto(
-            color: AppColors.kTextBlack,
+          style: GoogleFonts.lato(
+            color: appStore.isDarkMode ? AppColors.kTextWhite : AppColors.kTextBlack,
             fontSize: 24.0,
             fontWeight: TextFontWeight.medium,
             height: 1.2,
@@ -45,8 +47,8 @@ Widget _getScreenData(Map<String, String> screenContent, i) {
         const SizedBox(height: 1.0),
         Text(
           screenContent["scr ${i + 1} body text"].toString(),
-          style: GoogleFonts.roboto(
-            color: AppColors.kTextBlack,
+          style: GoogleFonts.lato(
+            color: appStore.isDarkMode ? AppColors.kTextWhite : AppColors.kTextBlack,
             fontSize: 18.0,
             fontWeight: TextFontWeight.regular,
             height: 1.0,

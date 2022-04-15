@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:habit_note/utils/colors.dart';
+import 'package:habit_note/utils/colours.dart';
 import 'package:habit_note/utils/constants.dart';
 
 List<Widget> buildPageIndicator(
@@ -36,8 +36,8 @@ Decoration _pageIndicatorBoxDecoration(isActive, isPageIndicatorCircle) {
       BoxShadow(
         color: Colors.orange.withOpacity(0.2), // color of shadow
         blurRadius: 2.0,
-        spreadRadius: 1.0,
-        offset: const Offset(0, 2), // Changes position of shadow
+        spreadRadius: 2.5,
+        offset: const Offset(3, 2), // Changes position of shadow
         // First parameter of offset is left-right
         // Second parameter is top to down
       ),

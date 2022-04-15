@@ -1,19 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:habit_note/utils/colors.dart';
+import 'package:habit_note/utils/colours.dart';
 import 'package:habit_note/utils/constants.dart';
 import 'package:habit_note/utils/string_constant.dart';
 import 'package:habit_note/components/CustomButton.dart';
 import 'package:habit_note/components/OnboardDrawerWidget.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:page_transition/page_transition.dart';
 
 import '../../main.dart';
-import '../auth/LoginScreen.dart';
-import '../auth/RegisterScreen.dart';
-import 'components/OnboardContent.dart';
-import 'components/OnboardTitle.dart';
+import 'components/onboard_content.dart';
+import 'components/onboard_title.dart';
 
 class OnboardScreen extends StatefulWidget {
   static String tag = '/OnboardScreen';
@@ -28,16 +24,42 @@ class _OnboardScreenState extends State<OnboardScreen> {
   DateTime? currentBackPressTime;
 
   @override
+  void initState() {
+    super.initState();
+    init();
+  }
+
+  Future<void> init() async {
+    setStatusBarColor(
+      appStore.isDarkMode ? AppColors.kHabitDarkGrey : AppColors.kHabitBackgroundLightGrey,
+      statusBarIconBrightness: appStore.isDarkMode ? Brightness.light : Brightness.dark,
+      delayInMilliSeconds: 100,
+    );
+
+    setState(() {});
+  }
+
+  @override
+  void setState(fn) {
+    if (mounted) super.setState(fn);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     /// Call it on starting screen only
     SizeConfig().init(context);
+    Size size = MediaQuery.of(context).size;
 
     /// Control the back button
     return WillPopScope(
       onWillPop: () async {
         DateTime now = DateTime.now();
-        if (currentBackPressTime == null ||
-            now.difference(currentBackPressTime!) > 2.seconds) {
+        if (currentBackPressTime == null || now.difference(currentBackPressTime!) > 2.seconds) {
           currentBackPressTime = now;
           toast(AppStrings.pressAgain);
           return Future.value(false);
@@ -48,7 +70,7 @@ class _OnboardScreenState extends State<OnboardScreen> {
       /// Onboard Screen Main Contents
       child: Scaffold(
         backgroundColor: appStore.isDarkMode
-            ? AppColors.kHabitBackgroundLightGrey
+            ? AppColors.kHabitDarkGrey
             : AppColors.kHabitBackgroundLightGrey,
 
         /// A sidebar navigation drawer widget
@@ -69,7 +91,6 @@ class _OnboardScreenState extends State<OnboardScreen> {
 
                 /// A scrollable widget with image, header and body text
                 OnboardContent(),
-                const SizedBox(height: 30.0),
 
                 /// Arrange the buttons
                 ButtonBar(
@@ -79,35 +100,22 @@ class _OnboardScreenState extends State<OnboardScreen> {
                       text: AppStrings.createAccount,
                       /// Open create account (register) screen
                       onPressed: () {
-                        // Navigator.pushNamed(
-                        //     context, RegisterScreen.routeName);
-                        Navigator.of(context).push(
-                          PageTransition(
-                            child: RegisterScreen(),
-                            type: PageTransitionType.rightToLeftWithFade,
-                            duration: const Duration(milliseconds: 600),
-                            reverseDuration: const Duration(milliseconds: 600),
-                          ),
-                        );
+                        Navigator.push(context, AppRoutes().createAccountScreen);
                       },
                     ),
-                    const SizedBox(height: 30.0),
+                     // const SizedBox(height: 30.0),
+                    Container(
+                      height: size.height * 0.035,
+                    ),
 
                     /// Login button
                     CustomButton(
                       text: AppStrings.login,
                       textColor: AppColors.kHabitOrange,
                       color: AppColors.kTextWhite,
-                      // Open login screen
+                      /// Open login screen
                       onPressed: () {
-                        Navigator.of(context).push(
-                          PageTransition(
-                            child: LoginScreen(),
-                            type: PageTransitionType.rightToLeftWithFade,
-                            duration: const Duration(milliseconds: 600),
-                            reverseDuration: const Duration(milliseconds: 600),
-                          ),
-                        );
+                        Navigator.push(context, AppRoutes().loginScreen);
                       },
                     ),
                   ],

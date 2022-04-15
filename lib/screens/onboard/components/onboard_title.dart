@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:habit_note/utils/colors.dart';
+import 'package:habit_note/utils/colours.dart';
 import 'package:habit_note/utils/constants.dart';
+
+import '../../../main.dart';
 
 class OnboardTitle extends StatelessWidget {
   const OnboardTitle({Key? key}) : super(key: key);
@@ -16,16 +18,16 @@ class OnboardTitle extends StatelessWidget {
             children: <TextSpan>[
               TextSpan(
                 text: "WELCOME TO\n",
-                style: GoogleFonts.roboto(
+                style: GoogleFonts.lato(
                   fontSize: 18.0,
-                  color: AppColors.kTextBlack,
+                  color: appStore.isDarkMode ? AppColors.kTextWhite : AppColors.kTextBlack,
                   fontWeight: TextFontWeight.light,
                 ),
               ),
               TextSpan(
                 text: "HaBIT Note",
                 style: GoogleFonts.fugazOne(
-                  color: AppColors.kTextBlack,
+                  color: appStore.isDarkMode ? AppColors.kHabitOrange : AppColors.kTextBlack,
                   fontSize: 18.0,
                   fontWeight: TextFontWeight.regular,
                 ),
