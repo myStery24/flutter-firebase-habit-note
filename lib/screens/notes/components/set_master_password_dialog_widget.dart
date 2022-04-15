@@ -3,7 +3,6 @@ import 'package:habit_note/model/notes_model.dart';
 import 'package:habit_note/utils/colours.dart';
 import 'package:habit_note/utils/common.dart';
 import 'package:habit_note/utils/constants.dart';
-import 'package:habit_note/utils/string_constant.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../../main.dart';
@@ -21,8 +20,7 @@ class SetMasterPasswordDialogWidget extends StatefulWidget {
       SetMasterPasswordDialogWidgetState();
 }
 
-class SetMasterPasswordDialogWidgetState
-    extends State<SetMasterPasswordDialogWidget> {
+class SetMasterPasswordDialogWidgetState extends State<SetMasterPasswordDialogWidget> {
   GlobalKey<FormState> _form = GlobalKey<FormState>();
 
   TextEditingController pwdController = TextEditingController();
