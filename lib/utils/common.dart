@@ -6,7 +6,6 @@ import 'package:nb_utils/nb_utils.dart';
 import '../main.dart';
 import 'colours.dart';
 import 'constants.dart';
-import 'string_constant.dart';
 
 /// Notes Colour Palette
 List<Color> getNoteColors() {
@@ -137,6 +136,7 @@ appTextFieldInputDeco({String? hint, double? counterSize}) {
   );
 }
 
+/// Empty Note Screen Placeholder
 Widget noDataWidget(BuildContext context) {
   return Observer(
     builder: (_) => Column(
@@ -154,4 +154,87 @@ Widget noDataWidget(BuildContext context) {
       ],
     ).center(),
   );
+}
+
+/// Empty Reminder Screen Placeholder
+Widget noReminderDataWidget(BuildContext context) {
+  return Observer(
+    builder: (_) => Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Image.asset(AppImages.empty),
+        // Image.asset(AppImages.empty, height: 80, fit: BoxFit.fitHeight),
+        8.height,
+        Text(reminder_empty_note,
+                style: boldTextStyle(
+                    color: appStore.isDarkMode
+                        ? Colors.white
+                        : AppColors.kHabitDark))
+            .center(),
+      ],
+    ).center(),
+  );
+}
+
+Widget cachedImage(String? url,
+    {double? height,
+    double? width,
+    BoxFit? fit,
+    AlignmentGeometry? alignment,
+    bool usePlaceholderIfUrlEmpty = true,
+    double? radius}) {
+  if (url.validate().isEmpty) {
+    return placeHolderWidget(
+        height: height,
+        width: width,
+        fit: fit,
+        alignment: alignment,
+        radius: radius);
+  } else if (url.validate().startsWith('http')) {
+    return CachedNetworkImage(
+      imageUrl: url!,
+      height: height,
+      width: width,
+      fit: fit,
+      alignment: alignment as Alignment? ?? Alignment.center,
+      errorWidget: (_, s, d) {
+        return placeHolderWidget(
+            height: height,
+            width: width,
+            fit: fit,
+            alignment: alignment,
+            radius: radius);
+      },
+      placeholder: (_, s) {
+        if (!usePlaceholderIfUrlEmpty) return SizedBox();
+        return placeHolderWidget(
+            height: height,
+            width: width,
+            fit: fit,
+            alignment: alignment,
+            radius: radius);
+      },
+    );
+  } else {
+    return Image.asset(url!,
+            height: height,
+            width: width,
+            fit: fit,
+            alignment: alignment ?? Alignment.center)
+        .cornerRadiusWithClipRRect(radius ?? defaultRadius);
+  }
+}
+
+Widget placeHolderWidget(
+    {double? height,
+    double? width,
+    BoxFit? fit,
+    AlignmentGeometry? alignment,
+    double? radius}) {
+  return Image.asset(AppImages.placeholder,
+          height: height,
+          width: width,
+          fit: fit ?? BoxFit.cover,
+          alignment: alignment ?? Alignment.center)
+      .cornerRadiusWithClipRRect(radius ?? defaultRadius);
 }
