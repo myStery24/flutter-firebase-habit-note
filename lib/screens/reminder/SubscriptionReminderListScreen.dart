@@ -3,19 +3,21 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:habit_note/model/subscription_model.dart';
 import 'package:habit_note/utils/colours.dart';
 import 'package:habit_note/utils/common.dart';
-import 'package:habit_note/utils/string_constant.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../main.dart';
-import 'AddSubscriptionReminderScreen.dart';
-import 'SubscriptionDetailScreen.dart';
+import '../../utils/constants.dart';
+import 'components/AddSubscriptionReminderScreen.dart';
+import 'components/SubscriptionDetailScreen.dart';
 
 class SubscriptionReminderListScreen extends StatefulWidget {
   @override
-  SubscriptionReminderListScreenState createState() => SubscriptionReminderListScreenState();
+  SubscriptionReminderListScreenState createState() =>
+      SubscriptionReminderListScreenState();
 }
 
-class SubscriptionReminderListScreenState extends State<SubscriptionReminderListScreen> {
+class SubscriptionReminderListScreenState
+    extends State<SubscriptionReminderListScreen> {
   @override
   void initState() {
     super.initState();
@@ -23,7 +25,8 @@ class SubscriptionReminderListScreenState extends State<SubscriptionReminderList
   }
 
   Future<void> init() async {
-    setStatusBarColor(appStore.isDarkMode ? AppColors.kHabitDark : Colors.white, statusBarIconBrightness: Brightness.light, delayInMilliSeconds: 100);
+    setStatusBarColor(appStore.isDarkMode ? AppColors.kHabitDarkGrey : Colors.white,
+        statusBarIconBrightness: Brightness.light, delayInMilliSeconds: 100);
   }
 
   @override
@@ -33,7 +36,8 @@ class SubscriptionReminderListScreenState extends State<SubscriptionReminderList
 
   @override
   void dispose() {
-    setStatusBarColor(appStore.isDarkMode ? AppColors.kHabitDark : Colors.white, delayInMilliSeconds: 100);
+    setStatusBarColor(appStore.isDarkMode ? AppColors.kHabitDarkGrey : Colors.white,
+        delayInMilliSeconds: 100);
     super.dispose();
   }
 
@@ -47,10 +51,15 @@ class SubscriptionReminderListScreenState extends State<SubscriptionReminderList
       floatingActionButton: Observer(
         builder: (_) => FloatingActionButton(
           onPressed: () {
-            AddSubscriptionReminderScreen().launch(context);
+            AddSubscriptionReminderScreen().launch(context,
+                pageRouteAnimation: PageRouteAnimation.SlideBottomTop,
+                duration: 500.microseconds);
           },
-          backgroundColor: appStore.isDarkMode ? AppColors.kHabitOrange : AppColors.kHabitDark,
-          child: Icon(Icons.add, color: appStore.isDarkMode ? AppColors.kHabitDark : Colors.white),
+          backgroundColor: appStore.isDarkMode
+              ? AppColors.kHabitOrange
+              : AppColors.kHabitDark,
+          child: Icon(Icons.add,
+              color: appStore.isDarkMode ? AppColors.kHabitDark : Colors.white),
         ),
       ),
       body: StreamBuilder<List<SubscriptionModel>>(
@@ -58,7 +67,7 @@ class SubscriptionReminderListScreenState extends State<SubscriptionReminderList
         builder: (_, snapshot) {
           if (snapshot.hasData) {
             if (snapshot.data!.length == 0) {
-              return noDataWidget(context).center();
+              return noReminderDataWidget(context).center();
             }
 
             return ListView.builder(
@@ -73,12 +82,14 @@ class SubscriptionReminderListScreenState extends State<SubscriptionReminderList
                 return InkWell(
                   borderRadius: BorderRadius.circular(defaultRadius),
                   onTap: () {
-                    SubscriptionDetailScreen(model: snapshot.data![index]).launch(context);
+                    SubscriptionDetailScreen(model: snapshot.data![index])
+                        .launch(context);
                   },
                   child: Container(
                     decoration: BoxDecoration(
                       color: getColorFromHex(data.color!),
-                      border: Border.all(color: AppColors.grayColor.withOpacity(0.3)),
+                      border: Border.all(
+                          color: AppColors.grayColor.withOpacity(0.3)),
                       borderRadius: BorderRadius.circular(defaultRadius),
                     ),
                     child: Stack(
@@ -92,22 +103,48 @@ class SubscriptionReminderListScreenState extends State<SubscriptionReminderList
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(data.name.validate(),
-                                    style: boldTextStyle(size: 20, color: getColorFromHex(data.color!).isDark() ? Colors.white.withOpacity(0.85) : Colors.black), maxLines: 1, overflow: TextOverflow.ellipsis),
+                                    style: boldTextStyle(
+                                        size: 20,
+                                        color: getColorFromHex(data.color!)
+                                                .isDark()
+                                            ? Colors.white.withOpacity(0.85)
+                                            : Colors.black),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis),
                                 16.width,
                                 Text(data.description.validate(),
-                                    style: primaryTextStyle(color: getColorFromHex(data.color!).isDark() ? Colors.white.withOpacity(0.85) : Colors.black), maxLines: 1, overflow: TextOverflow.ellipsis),
+                                    style: primaryTextStyle(
+                                        color: getColorFromHex(data.color!)
+                                                .isDark()
+                                            ? Colors.white.withOpacity(0.85)
+                                            : Colors.black),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis),
                               ],
                             ).expand(),
                             Text('$ringgit_icon ${data.amount.validate()}',
-                                style: boldTextStyle(size: 20, color: getColorFromHex(data.color!).isDark() ? Colors.white.withOpacity(0.85) : Colors.black), maxLines: 1, overflow: TextOverflow.ellipsis),
+                                style: boldTextStyle(
+                                    size: 20,
+                                    color: getColorFromHex(data.color!).isDark()
+                                        ? Colors.white.withOpacity(0.85)
+                                        : Colors.black),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis),
                           ],
                         ).paddingOnly(left: 16, top: 8, right: 16, bottom: 8),
-                        data.firstPayDate == null && data.dueDate!.isBefore(DateTime.now())
+                        data.firstPayDate == null &&
+                                data.dueDate!.isBefore(DateTime.now())
                             ? Container(
                                 width: context.width(),
                                 color: AppColors.kHabitDark.withOpacity(0.7),
-                                child: Text(expired, style: boldTextStyle(color: Colors.white)).paddingAll(24).center(),
-                              ).cornerRadiusWithClipRRect(defaultRadius).center()
+                                child: Text(expired,
+                                        style:
+                                            boldTextStyle(color: Colors.white))
+                                    .paddingAll(24)
+                                    .center(),
+                              )
+                                .cornerRadiusWithClipRRect(defaultRadius)
+                                .center()
                             : SizedBox(),
                       ],
                     ),
@@ -123,23 +160,30 @@ class SubscriptionReminderListScreenState extends State<SubscriptionReminderList
     );
   }
 
-  Future<void> checkRecurringSubDate({required SubscriptionModel subModel}) async {
-    if (subModel.nextPayDate != null && subModel.nextPayDate!.isBefore(DateTime.now())) {
+  Future<void> checkRecurringSubDate(
+      {required SubscriptionModel subModel}) async {
+    if (subModel.nextPayDate != null &&
+        subModel.nextPayDate!.isBefore(DateTime.now())) {
       if (subModel.durationUnit == DAY) {
-        subModel.nextPayDate = subModel.nextPayDate!.add(Duration(days: subModel.duration!));
+        subModel.nextPayDate =
+            subModel.nextPayDate!.add(Duration(days: subModel.duration!));
       } else if (subModel.durationUnit == WEEK) {
-        subModel.nextPayDate = subModel.nextPayDate!.add(Duration(days: 7 * subModel.duration!));
+        subModel.nextPayDate =
+            subModel.nextPayDate!.add(Duration(days: 7 * subModel.duration!));
       } else if (subModel.durationUnit == MONTH) {
-        subModel.nextPayDate = subModel.nextPayDate!.add(Duration(days: 30 * subModel.duration!));
+        subModel.nextPayDate =
+            subModel.nextPayDate!.add(Duration(days: 30 * subModel.duration!));
       } else if (subModel.durationUnit == YEAR) {
-        subModel.nextPayDate = subModel.nextPayDate!.add(Duration(days: 365 * subModel.duration!));
+        subModel.nextPayDate =
+            subModel.nextPayDate!.add(Duration(days: 365 * subModel.duration!));
       }
     }
 
-    await subscriptionService.updateDocument({'nextPayDate': subModel.nextPayDate}, subModel.id).then((value) {
+    await subscriptionService.updateDocument(
+        {'nextPayDate': subModel.nextPayDate}, subModel.id).then((value) {
       //
     }).catchError((error) {
-      toast(error.toString());
+      toast('New error data${error.toString()}');
     });
   }
 }

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:habit_note/model/subscription_model.dart';
-import 'package:habit_note/utils/constants.dart';
-import 'package:habit_note/utils/string_constant.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
 
+import '../../../model/subscription_model.dart';
+import '../../../utils/constants.dart';
 import 'AddSubscriptionReminderScreen.dart';
 import 'NotificationScreen.dart';
 
@@ -30,17 +28,6 @@ class SubscriptionDetailScreenState extends State<SubscriptionDetailScreen> {
   Future<void> init() async {
   }
 
-  BannerAd buildBannerAd() {
-    return BannerAd(
-      adUnitId: kReleaseMode ? mAdMobBannerId : BannerAd.testAdUnitId,
-      size: AdSize.fullBanner,
-      listener: BannerAdListener(onAdLoaded: (ad) {
-        //
-      }),
-      request: AdRequest(keywords: testDevices),
-    );
-  }
-
   @override
   void setState(fn) {
     if (mounted) super.setState(fn);
@@ -56,7 +43,7 @@ class SubscriptionDetailScreenState extends State<SubscriptionDetailScreen> {
     return Scaffold(
       appBar: AppBar(
         titleSpacing: 0,
-        title: Text(subscription_detail),
+        title: Text(subscription_detail, style: boldTextStyle()),
       ),
       body: Container(
         height: context.height(),
@@ -84,7 +71,8 @@ class SubscriptionDetailScreenState extends State<SubscriptionDetailScreen> {
                             PopupMenuButton(
                               onSelected: (dynamic value) async {
                                 if (value == 1) {
-                                  SubscriptionModel? res = await AddSubscriptionReminderScreen(subscriptionModel: widget.model).launch(context);
+                                  SubscriptionModel? res = await AddSubscriptionReminderScreen(subscriptionModel: widget.model)
+                                      .launch(context, pageRouteAnimation: PageRouteAnimation.SlideBottomTop, duration: 500.microseconds);
                                   setState(() {
                                     widget.model = res ?? widget.model;
                                   });
@@ -92,7 +80,7 @@ class SubscriptionDetailScreenState extends State<SubscriptionDetailScreen> {
                                   if (widget.model!.firstPayDate == null && widget.model!.dueDate!.isBefore(DateTime.now())) {
                                     toastLong(subscription_exp);
                                   } else {
-                                    NotificationScreen(subscriptionModel: widget.model).launch(context);
+                                    NotificationScreen(subscriptionModel: widget.model).launch(context, pageRouteAnimation: PageRouteAnimation.SlideBottomTop, duration: 500.microseconds);
                                   }
                                 }
                               },
@@ -135,14 +123,14 @@ class SubscriptionDetailScreenState extends State<SubscriptionDetailScreen> {
                         4.height,
                         widget.model!.description!.isNotEmpty
                             ? Text(
-                                widget.model!.description.validate(),
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: primaryTextStyle(
-                                  size: 16,
-                                  color: getColorFromHex(widget.model!.color!).isDark() ? Colors.white.withOpacity(0.85) : Colors.black,
-                                ),
-                              )
+                          widget.model!.description.validate(),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: primaryTextStyle(
+                            size: 16,
+                            color: getColorFromHex(widget.model!.color!).isDark() ? Colors.white.withOpacity(0.85) : Colors.black,
+                          ),
+                        )
                             : SizedBox(),
                         4.height,
                         Text(
@@ -158,25 +146,25 @@ class SubscriptionDetailScreenState extends State<SubscriptionDetailScreen> {
                   16.height,
                   widget.model!.duration != null
                       ? Column(
-                          children: [
-                            Text(billing_period, style: primaryTextStyle()),
-                            2.height,
-                            Text('every ${widget.model!.duration.validate()}  ${widget.model!.durationUnit.validate()}', style: secondaryTextStyle()),
-                          ],
-                        )
+                    children: [
+                      Text(billing_period, style: primaryTextStyle()),
+                      2.height,
+                      Text('every ${widget.model!.duration.validate()}  ${widget.model!.durationUnit.validate()}', style: secondaryTextStyle()),
+                    ],
+                  )
                       : SizedBox(),
                   widget.model!.duration != null ? Divider(thickness: 1) : SizedBox(),
                   8.height,
                   widget.model!.firstPayDate != null
                       ? Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(next_payment, style: primaryTextStyle()),
-                            2.height,
-                            Text(DateFormat(date_format).format(widget.model!.nextPayDate!).toString().validate(), style: secondaryTextStyle()),
-                            Divider(thickness: 1),
-                          ],
-                        )
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(next_payment, style: primaryTextStyle()),
+                      2.height,
+                      Text(DateFormat(date_format).format(widget.model!.nextPayDate!).toString().validate(), style: secondaryTextStyle()),
+                      Divider(thickness: 1),
+                    ],
+                  )
                       : SizedBox(),
                   8.height,
                   Text(widget.model!.firstPayDate != null ? first_payment : exp_date, style: primaryTextStyle()),
@@ -193,12 +181,12 @@ class SubscriptionDetailScreenState extends State<SubscriptionDetailScreen> {
                   Text(notification, style: primaryTextStyle()),
                   widget.model!.notificationId != null
                       ? Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text('${DateFormat(datetime_format).format(widget.model!.notificationDate!)}', style: secondaryTextStyle()),
-                            Text('$ringgit_icon ${widget.model!.amount}', style: secondaryTextStyle()),
-                          ],
-                        )
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('${DateFormat(datetime_format).format(widget.model!.notificationDate!)}', style: secondaryTextStyle()),
+                      Text('$ringgit_icon ${widget.model!.amount}', style: secondaryTextStyle()),
+                    ],
+                  )
                       : Text('No $notification', style: secondaryTextStyle()),
                 ],
               ).paddingOnly(left: 16, right: 16, top: 16),
