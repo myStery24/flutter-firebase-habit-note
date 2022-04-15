@@ -1,12 +1,10 @@
 import 'dart:io';
 
-import 'package:camera/camera.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
-import 'package:habit_note/screens/ocr/components/text_detector_painter_widget.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nb_utils/nb_utils.dart';
 
@@ -292,7 +290,6 @@ class _OCRScreenState extends State<OCRScreen> {
                 title: Text(from_camera, style: primaryTextStyle()),
                 onTap: () async {
                   finish(context);
-                  await availableCameras();
 
                   /// Take a photo
                   await getImage(ImageSource.camera);
@@ -304,8 +301,6 @@ class _OCRScreenState extends State<OCRScreen> {
                         ? AppColors.kHabitOrange
                         : AppColors.scaffoldSecondaryDark),
                 title: Text(from_gallery, style: primaryTextStyle()),
-                // todo
-                /// not asking permission
                 onTap: () async {
                   finish(context);
 
@@ -360,24 +355,10 @@ class _OCRScreenState extends State<OCRScreen> {
     /// Call the method to perform text recognition
     RecognisedText recognisedText = await textDetectorV2.processImage(
         inputImage,
-        script: TextRecognitionOptions
-            .CHINESE); // RecognisedText recognisedText = await textDetector.processImage(inputImage);
+        script: TextRecognitionOptions.DEFAULT); // RecognisedText recognisedText = await textDetector.processImage(inputImage);
 
     /// Close the detector
     await textDetectorV2.close();
-
-    // Todo
-    /// Draw boxes around detected text
-    // if (inputImage.inputImageData?.size != null &&
-    //     inputImage.inputImageData?.imageRotation != null) {
-    //   final painter = TextDetectorPainter(
-    //       recognisedText,
-    //       inputImage.inputImageData!.size,
-    //       inputImage.inputImageData!.imageRotation);
-    //   customPaint = CustomPaint(painter: painter);
-    // } else {
-    //   customPaint = null;
-    // }
 
     /// Extract text
     scannedText = "";
