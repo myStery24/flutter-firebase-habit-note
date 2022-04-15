@@ -9,6 +9,7 @@ import 'package:nb_utils/nb_utils.dart';
 
 import '../../../../main.dart';
 import '../../../utils/constants.dart';
+import 'note_collaborator_screen.dart';
 
 class AddNotesScreen extends StatefulWidget {
   static String tag = '/AddNotesScreen';
@@ -179,7 +180,7 @@ class AddNotesScreenState extends State<AddNotesScreen> {
 
       if (_kIsUpdateNote) {
         notesData.noteId = widget.notesModel!.noteId;
-        notesData.label = widget.notesModel!.label;
+        // notesData.label = widget.notesModel!.label;
         notesData.createdAt = widget.notesModel!.createdAt;
         notesData.updatedAt = DateTime.now();
         notesData.checkListModel = widget.notesModel!.checkListModel.validate();
@@ -195,7 +196,7 @@ class AddNotesScreenState extends State<AddNotesScreen> {
       } else {
         notesData.createdAt = DateTime.now();
         notesData.updatedAt = DateTime.now();
-        notesData.label = [];
+        // notesData.label = [];
         notesData.collaborateWith = collaborateList.validate();
         notesData.checkListModel = [];
 
@@ -247,7 +248,7 @@ class AddNotesScreenState extends State<AddNotesScreen> {
                   },
                 ),
               ),
-              // TODO: Collaborator Feature
+              /// Collaborator
               // ListTile(
               //   leading: Icon(Icons.person_add_alt_1_rounded,
               //       color: appStore.isDarkMode
