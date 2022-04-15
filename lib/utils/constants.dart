@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'colors.dart';
+import 'colours.dart';
 
 const imageRadius = 40.0;
 
@@ -30,29 +30,6 @@ const USER_PHOTO_URL = 'USER_PHOTO_URL';
 const USER_MASTER_PWD = 'USER_MASTER_PWD';
 const IS_DARK_MODE = 'IS_DARK_MODE';
 const LOGIN_TYPE = 'LOGIN_TYPE';
-
-// enable disable Ads
-// default is false = will have ads
-const disabled_ads = true;
-
-const FIT_COUNT = 'FIT_COUNT';
-const CROSS_COUNT = 'CROSS_COUNT';
-const SELECTED_LAYOUT_TYPE_DASHBOARD = 'SELECTED_LAYOUT_TYPE_DASHBOARD';
-
-const dark_mode_image = 'assets/images/logo_night_mode.png';
-const light_mode_image = 'assets/images/logo_light_mode.png';
-
-/// HaBIT Note
-const kAnimationDuration = Duration(milliseconds: 200);
-
-class TextFontWeight {
-  static const thin = FontWeight.w100;
-  static const light = FontWeight.w300;
-  static const regular = FontWeight.w400;
-  static const medium = FontWeight.w500;
-  static const bold = FontWeight.w700;
-  static const black = FontWeight.w900;
-}
 
 class AppImages {
   // Images route (directory)
