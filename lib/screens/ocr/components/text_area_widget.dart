@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:habit_note/main.dart';
-import 'package:habit_note/utils/colors.dart';
+import 'package:habit_note/utils/colours.dart';
 
 class RecognisedTextAreaWidget extends StatelessWidget {
   final String text;
