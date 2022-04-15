@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:habit_note/screens/password/change_acccount_password_screen.dart';
 import 'package:habit_note/screens/settings/components/about_screen.dart';
 import 'package:nb_utils/nb_utils.dart';
 
@@ -159,7 +160,7 @@ class _SettingsCategoryState extends State<SettingsCategory> {
                 : AppColors.kPrimaryVariantColorDark,
           ),
           title: Text(
-            'Reset Master Password',
+            settings_change_master_pwd,
             style: GoogleFonts.lato(
               color: getBoolAsync(IS_DARK_MODE)
                   ? AppColors.kTextWhite
@@ -193,7 +194,7 @@ class _SettingsCategoryState extends State<SettingsCategory> {
                 : AppColors.kPrimaryVariantColorDark,
           ),
           title: Text(
-            'Reset Account Password',
+            settings_change_pwd,
             style: GoogleFonts.lato(
               color: getBoolAsync(IS_DARK_MODE)
                   ? AppColors.kTextWhite
@@ -209,7 +210,8 @@ class _SettingsCategoryState extends State<SettingsCategory> {
           ),
           onTap: () {
             finish(context);
-            ForgotPasswordScreen().launch(context);
+            ChangeAppPasswordScreen().launch(context);
+            // ForgotPasswordScreen().launch(context);
           },
         ),
         Divider(
@@ -224,14 +226,14 @@ class _SettingsCategoryState extends State<SettingsCategory> {
         ListTile(
           leading: Icon(
             Icons.info_outline,
-            semanticLabel: 'about',
+            semanticLabel: 'about us',
             size: 30,
             color: getBoolAsync(IS_DARK_MODE)
                 ? AppColors.kHabitOrange
                 : AppColors.kPrimaryVariantColorDark,
           ),
           title: Text(
-            'About',
+            settings_info_about_us,
             style: GoogleFonts.lato(
               color: getBoolAsync(IS_DARK_MODE)
                   ? AppColors.kTextWhite
@@ -265,7 +267,7 @@ class _SettingsCategoryState extends State<SettingsCategory> {
                 : AppColors.kPrimaryVariantColorDark,
           ),
           title: Text(
-            'Privacy Policy',
+            settings_info_pp,
             style: GoogleFonts.lato(
               color: getBoolAsync(IS_DARK_MODE)
                   ? AppColors.kTextWhite
@@ -299,7 +301,7 @@ class _SettingsCategoryState extends State<SettingsCategory> {
                 : AppColors.kPrimaryVariantColorDark,
           ),
           title: Text(
-            'Terms of Use',
+            settings_info_tou,
             style: GoogleFonts.lato(
               color: getBoolAsync(IS_DARK_MODE)
                   ? AppColors.kTextWhite
@@ -338,8 +340,7 @@ class _SettingsCategoryState extends State<SettingsCategory> {
                     ),
                   ),
                   TextSpan(
-                    // text: AppStrings.appVersion,
-                    text: 'Version 0.0.3',
+                     text: AppStrings.appVersionText2,
                     semanticsLabel: 'version code',
                     style: GoogleFonts.lato(
                       color: getBoolAsync(IS_DARK_MODE)
