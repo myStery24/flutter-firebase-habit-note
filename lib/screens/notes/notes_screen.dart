@@ -432,9 +432,12 @@ class NotesScreenState extends State<NotesScreen> {
                     bool deleted = await showInDialog(
                       context,
                       title: Text(delete_note,
-                          style: primaryTextStyle(
-                            weight: TextFontWeight.bold,
-                          )),
+                          style: TextStyle(
+                          color: getBoolAsync(IS_DARK_MODE)
+                          ? AppColors.kHabitOrange
+                          : AppColors.kTextBlack
+                    ),
+                  ),
                       child: Text(confirm_to_delete_note,
                           style: primaryTextStyle()),
                       actions: [

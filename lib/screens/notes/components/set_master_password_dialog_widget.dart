@@ -50,7 +50,13 @@ class SetMasterPasswordDialogWidgetState extends State<SetMasterPasswordDialogWi
         child: Column(
           children: [
             AlertDialog(
-              title: Text(create_lock_note_pwd),
+              title: Text(create_lock_note_pwd,
+                style: TextStyle(
+                  color: getBoolAsync(IS_DARK_MODE)
+                      ? AppColors.kHabitOrange
+                      : AppColors.kTextBlack
+              ),
+              ),
               content: Column(
                 children: [
                   AppTextField(

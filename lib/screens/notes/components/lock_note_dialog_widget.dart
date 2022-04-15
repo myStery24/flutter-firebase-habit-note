@@ -44,7 +44,13 @@ class LockNoteDialogWidgetState extends State<LockNoteDialogWidget> {
         key: _form,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         child: AlertDialog(
-          title: Text('Lock & Unlock note'),
+          title: Text(lock_unlock_note,
+            style: TextStyle(
+                color: getBoolAsync(IS_DARK_MODE)
+                    ? AppColors.kHabitOrange
+                    : AppColors.kTextBlack
+            ),
+          ),
           content: AppTextField(
             autoFocus: true,
             controller: masterPwdController,
