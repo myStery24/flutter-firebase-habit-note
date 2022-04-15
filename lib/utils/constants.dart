@@ -1,13 +1,48 @@
 import 'package:flutter/material.dart';
 import 'colours.dart';
 
-const imageRadius = 40.0;
+/// Text
+class TextFontWeight {
+  static const thin = FontWeight.w100;
+  static const light = FontWeight.w300;
+  static const regular = FontWeight.w400;
+  static const medium = FontWeight.w500;
+  static const bold = FontWeight.w700;
+  static const black = FontWeight.w900;
+}
 
-const mAdMobAppId = 'ca-app-pub-1399327544318575~9252792385';
-const mAdMobBannerId = 'ca-app-pub-1399327544318575/4738832302';
-const mAdMobInterstitialId = 'ca-app-pub-1399327544318575/8573796227';
+/// Common
+class AppStrings {
+  // App name
+  static const String appName = 'HaBIT Note';
+  // App version
+  static const String appVersion = 'V0.0.3';
+  // App copyright
+  static const String appCopyright = '© Copyright HABIT 2021. All rights reserved';
 
-List<String> testDevices = ['551597FF6B95q52FEBB440722967BCB6F'];
+  // Texts
+  static const String createAccount = 'CREATE ACCOUNT';
+  static const String login = 'LOG IN';
+  static const String logout = 'LOG OUT';
+  static const String back = 'Back to Dashboard';
+  static const String exit = 'Exit';
+  static const String optionNo = 'No';
+  static const String ocrScreen = 'Image to Text';
+  static const String helpScreen = 'Help';
+  static const String meScreen = 'Me';
+
+  // Handle form error
+  final RegExp emailValidatorRegex = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+  static const String kNameNullError = 'Username is required';
+  static const String kEmailNullError = 'Email is required';
+  static const String kInvalidEmailError = 'Enter in the format: name@example.com';
+  static const String kPassNullError = 'Cannot be blank';
+  static const String kShortPassError = 'At least 6 characters';
+  static const String kMatchPassError = 'Passwords do not match';
+
+  // Handle Return/Back Button
+  static const String pressAgain = 'Press back again to exit app';
+}
 
 // Login Type
 const LoginTypeApp = 'app';
@@ -36,15 +71,23 @@ class AppImages {
   static const String imageDir = 'assets/images';
 
   // Images
+  static const launcherIcon = '$imageDir/icon.png';
+  static const logoLight = '$imageDir/logo_light_mode.png';
+  static const logoNight = '$imageDir/logo_night_mode.png';
+  static const notificationLogo = '$imageDir/logo-square.png';
   static const empty = '$imageDir/empty.png';
-  static const logo = '$imageDir/logo.png';
   static const user = '$imageDir/user.png';
   static const placeholder = '$imageDir/placeholder.png';
+  static const appleLogo = '$imageDir/ic_apple.png';
 
   static const onboard = '$imageDir/onboard.png';
   static const onboard1 = '$imageDir/onboard1.png';
   static const onboard2 = '$imageDir/onboard2.png';
+  static const success = '$imageDir/success.svg';
 }
+
+const kAnimationDuration = Duration(milliseconds: 200);
+const imageRadius = 40.0;
 
 class SizeConfig {
   static late MediaQueryData _mediaQueryData;
@@ -81,3 +124,97 @@ OutlineInputBorder outlineInputBorder() {
     borderSide: const BorderSide(color: AppColors.kHintTextLightGrey),
   );
 }
+
+const FIT_COUNT = 'FIT_COUNT';
+const CROSS_COUNT = 'CROSS_COUNT';
+const SELECTED_LAYOUT_TYPE_DASHBOARD = 'SELECTED_LAYOUT_TYPE_DASHBOARD';
+
+// duration
+const DAY = 'Day';
+const WEEK = 'Week';
+const MONTH = 'Month';
+const YEAR = 'Year';
+
+const ringgit_icon = 'RM';
+const date_format = 'yyyy-MM-dd';
+const datetime_format = 'yyyy-MM-dd HH:mm a';
+
+const about = 'About';
+const dark_mode = 'Dark Mode';
+const help = 'Help';
+const ocr = 'OCR';
+const home_empty_note = 'Create your first note !';
+const add_note = 'Note';
+const add_todo = 'To-do';
+const add_todo_image = 'Add Image';
+const from_camera = 'Take photo';
+const from_gallery = 'Choose photo';
+const clear = 'Cleared';
+const no_image = 'Error, please upload an image';
+const delete_note = 'Delete note';
+const delete_todo = 'Delete to-do';
+const select_colour = 'Select colour';
+const reminder_empty_note = 'Create your first reminder !';
+const sub_reminder = 'Subscription Reminder';
+const reset_acc_pwd = 'Reset Account Password';
+const lock_notes_pwd = 'Password';
+const change_master_pwd = 'CHANGE MASTER PASSWORD';
+const enter_master_pwd = 'Enter master password';
+const log_out = 'Log Out';
+const log_out_text = 'Are you sure you want to log out ?';
+const share_note_change_not_allow = 'This is shared note, changes are not allow';
+const invalid_pwd = 'Invalid/ wrong password';
+const pwd_length = 'Password length must be 4';
+const pwd_not_same = 'Password not same';
+const confirm_pwd = 'Confirm password';
+const add_subscription = 'Add Subscription';
+const delete = 'Delete';
+const update = 'Update';
+const save = 'Save';
+const password = 'Password';
+const cancel = 'Cancel';
+const submit = 'Submit';
+const edit = 'Edit';
+const reset_filter_text = 'Reset';
+const MYR = 'MYR';
+const name = 'Name';
+const expired = 'Expired';
+const description = 'Description';
+const recurring = 'Recurring';
+const one_time = 'One time';
+const billing_period = 'Billing period';
+const first_payment = 'First payment';
+const exp_date = 'Expiry Date';
+const pay_method = 'Payment method';
+const collaborator = 'Collaborator';
+const collaborators = 'Collaborators';
+const shared_by = 'Shared By';
+const type_something_here = 'Type something awesome here';
+const type_something_here2 = "What's your to-do ?";
+const reset_pwd = 'RESET PASSWORD';
+const reset_master_pwd = 'Reset Master Password';
+const current_pwd_invalid = 'Current password is invalid';
+const new_pwd = 'New password';
+const change_pwd = 'Change password';
+const pwd_change_successfully = 'Password change successfully';
+const pwd_reset_successfully = 'Password reset successfully';
+const confirm_to_delete_note = 'Confirm to delete note ?';
+const select_option = 'Select option';
+const unlock_note = 'Unlock note';
+const lock_note = 'Lock note';
+const create_lock_note_pwd = 'Create a master password';
+const select_layout = 'Select layout';
+const forgot_pwd = 'Forgot Password';
+const email_already_exits = 'This email is already exists';
+const notification = 'Notification';
+const on_same_day = 'On the Same day';
+const with_social_media = 'with social media';
+const continue_with_google = 'Continue with Google';
+const continue_with_apple = 'Continue with apple';
+const next_payment = 'Next payment';
+const subscription_exp = 'Subscription expired. No notification available';
+const subscription_detail = 'Subscription Detail';
+
+/// Testing devices
+List<String> testDevices = [''];
+// List<String> testDevices = ['551597FF6B95q52FEBB440722967BCB6F'];
