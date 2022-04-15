@@ -48,7 +48,7 @@ class ChangeMasterPasswordScreenState
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        title: Text(reset_master_pwd),
+        title: Text(change_master_pwd),
         actions: [
           IconButton(
             icon: Icon(Icons.contact_support_outlined),
@@ -57,11 +57,13 @@ class ChangeMasterPasswordScreenState
               showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
-                  title: Text('Support Email',
+                  title: Text(
+                    support_email,
                     style: TextStyle(
-                      color: getBoolAsync(IS_DARK_MODE)
-                          ? AppColors.kHabitOrange
-                          : AppColors.kTextBlack),
+                        color: getBoolAsync(IS_DARK_MODE)
+                            ? AppColors.kHabitOrange
+                            : AppColors.kTextBlack,
+                        fontWeight: TextFontWeight.bold),
                   ),
                   content: Text(
                     'Contact us at ai190244bim@gmail.com to reset your master password.',
@@ -99,12 +101,12 @@ class ChangeMasterPasswordScreenState
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    15.height,
-                    Text('Forgot your master password ?',
-                        style: boldTextStyle(size: 22)),
+                    // 15.height,
+                    // Text('Forgot your master password ?',
+                    //     style: boldTextStyle(size: 22)),
                     15.height,
                     Text(
-                        'Please fill up the following fields to reset your password. \nWrite to our support email if you forgot your current password.',
+                        "You can change your lock + unlock notes' password here. Please fill up the following fields to change your password. \nWrite to our support email if you forgot your current password.",
                         style: primaryTextStyle(size: 14)),
                     20.height,
                     AppTextField(
@@ -118,8 +120,7 @@ class ChangeMasterPasswordScreenState
                       cursorColor: appStore.isDarkMode
                           ? Colors.white
                           : AppColors.kHabitDark,
-                      decoration:
-                          appTextFieldInputDeco(hint: 'Current password'),
+                      decoration: appTextFieldInputDeco(hint: current_pwd),
                       errorThisFieldRequired: errorThisFieldRequired,
                       validator: (val) {
                         if (val != getStringAsync(USER_MASTER_PWD)) {
@@ -140,7 +141,7 @@ class ChangeMasterPasswordScreenState
                       cursorColor: appStore.isDarkMode
                           ? Colors.white
                           : AppColors.kHabitDark,
-                      decoration: appTextFieldInputDeco(hint: 'New password'),
+                      decoration: appTextFieldInputDeco(hint: new_pwd),
                       validator: (val) {
                         if (val!.trim().isEmpty) {
                           return errorThisFieldRequired;
@@ -161,8 +162,7 @@ class ChangeMasterPasswordScreenState
                       cursorColor: appStore.isDarkMode
                           ? Colors.white
                           : AppColors.kHabitDark,
-                      decoration:
-                          appTextFieldInputDeco(hint: 'Confirm password'),
+                      decoration: appTextFieldInputDeco(hint: confirm_new_pwd),
                       validator: (val) {
                         if (val!.trim().isEmpty) {
                           return errorThisFieldRequired;
@@ -180,14 +180,12 @@ class ChangeMasterPasswordScreenState
                     ),
                     16.height,
                     AppButton(
-                      child: Text(change_master_pwd,
+                      child: Text(change_master_pwd2,
                           style: boldTextStyle(
                               color: appStore.isDarkMode
                                   ? AppColors.kHabitDark
                                   : Colors.white)),
-                      color: appStore.isDarkMode
-                          ? AppColors.kHabitOrange
-                          : AppColors.kHabitOrange,
+                      color: AppColors.kHabitOrange,
                       width: context.width(),
                       onTap: () {
                         resetMasterPassword();
