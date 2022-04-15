@@ -14,13 +14,11 @@ import 'services/user_db_service.dart';
 import 'store/app_store.dart';
 import 'utils/theme.dart';
 import 'utils/constants.dart';
-import 'utils/string_constant.dart';
 
+/// Initialize services
 AppStore appStore = AppStore();
 
 FirebaseFirestore db = FirebaseFirestore.instance;
-
-// int adShowCount = 0;
 
 AuthService service = AuthService();
 UserDBService userDBService = UserDBService();
@@ -39,7 +37,6 @@ Future<void> main() async {
 
   /// Initialize Firebase
   await Firebase.initializeApp().then((value) {
-    // .instance.initialize();
   });
   tz.initializeTimeZones();
 
