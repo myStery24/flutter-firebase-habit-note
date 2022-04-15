@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:confetti/confetti.dart';
 import 'package:habit_note/components/custom_button.dart';
-import 'package:habit_note/screens/DashboardScreen.dart';
-import 'package:habit_note/utils/colors.dart';
+import 'package:habit_note/screens/dashboard_screen.dart';
+import 'package:habit_note/utils/colours.dart';
 import 'dart:math';
 
 import 'package:habit_note/utils/constants.dart';
@@ -59,10 +59,8 @@ class _SuccessScreenState extends State<SuccessScreen> {
               maxBlastForce: 3, // set a lower max blast force
               minBlastForce: 2,
               emissionFrequency: 0.3,
-              minimumSize: const Size(10,
-                  10), // set the minimum potential size for the confetti (width, height)
-              maximumSize: const Size(20,
-                  20), // set the maximum potential size for the confetti (width, height)
+              minimumSize: const Size(10, 10), // set the minimum potential size for the confetti (width, height)
+              maximumSize: const Size(20, 20), // set the maximum potential size for the confetti (width, height)
               numberOfParticles: 1,
               gravity: 1,
             ),
@@ -70,7 +68,7 @@ class _SuccessScreenState extends State<SuccessScreen> {
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: Text(
-              'Awesome!',
+              'Awesome !',
               style: TextStyle(
                   color: AppColors.kTextWhite,
                   fontWeight: FontWeight.w600,
