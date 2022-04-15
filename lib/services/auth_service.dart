@@ -23,7 +23,6 @@ class AuthService {
 
       final User? user = authResult.user;
 
-      // await googleSignIn!.signOut();
       await googleSignIn.signOut();
 
       return await loginFromFirebaseUser(user!, LoginTypeGoogle);
@@ -35,7 +34,6 @@ class AuthService {
 
   /// Google Sign In Authentication
   Future<AuthCredential> getGoogleAuthCredential() async {
-    // GoogleSignInAccount? googleAccount = await googleSignIn!.signIn();
     GoogleSignInAccount? googleAccount = await googleSignIn.signIn();
     GoogleSignInAuthentication googleAuthentication =
         await googleAccount!.authentication;
@@ -54,11 +52,7 @@ class AuthService {
     await firebaseUser.delete();
   }
 
-  Future<void> signUpWithEmailPassword(
-      {required String email,
-      required String password,
-      String? displayName,
-      String? photoUrl}) async {
+  Future<void> signUpWithEmailPassword({required String email, required String password, String? displayName, String? photoUrl}) async {
     await _auth
         .createUserWithEmailAndPassword(email: email, password: password)
         .then((value) async {
@@ -73,11 +67,7 @@ class AuthService {
   }
 
   /// Sign In with Email Address and Password
-  Future<void> signInWithEmailPassword(
-      {required String email,
-      required String password,
-      String? displayName,
-      String? photoUrl}) async {
+  Future<void> signInWithEmailPassword({required String email, required String password, String? displayName, String? photoUrl}) async {
     await _auth
         .signInWithEmailAndPassword(email: email, password: password)
         .then((value) async {
@@ -207,8 +197,7 @@ class AuthService {
     appStore.setLoggedIn(true);
   }
 
-  Future<UserModel> loginFromFirebaseUser(User currentUser, String loginType,
-      {String? fullName}) async {
+  Future<UserModel> loginFromFirebaseUser(User currentUser, String loginType, {String? fullName}) async {
     UserModel userModel = UserModel();
 
     if (await userService.isUserExist(currentUser.email, loginType)) {
