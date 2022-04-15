@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:habit_note/components/CustomButton.dart';
-import 'package:habit_note/utils/colors.dart';
+import 'package:habit_note/components/user_agreement_widget.dart';
+import 'package:habit_note/components/custom_button.dart';
+import 'package:habit_note/utils/colours.dart';
 import 'package:habit_note/utils/common.dart';
 import 'package:habit_note/utils/constants.dart';
 import 'package:habit_note/utils/string_constant.dart';
@@ -10,8 +11,8 @@ import 'package:nb_utils/nb_utils.dart';
 import 'package:the_apple_sign_in/the_apple_sign_in.dart';
 
 import '../../main.dart';
-import '../DashboardScreen.dart';
-import 'LoginScreen.dart';
+import '../../utils/routes.dart';
+import '../dashboard_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
   static String tag = '/RegisterScreen';
@@ -41,13 +42,13 @@ class RegisterScreenState extends State<RegisterScreen> {
 
   Future<void> init() async {
     setStatusBarColor(
-      appStore.isDarkMode ? AppColors.kHabitDark : Colors.transparent,
+      appStore.isDarkMode ? AppColors.kHabitDarkGrey : AppColors.kHabitBackgroundLightGrey,
       statusBarIconBrightness:
           appStore.isDarkMode ? Brightness.light : Brightness.dark,
       delayInMilliSeconds: 100,
     );
 
-    if (isIos) {
+    if (isIOS) {
       TheAppleSignIn.onCredentialRevoked!.listen((_) {
         log("Credentials revoked");
       });
@@ -61,7 +62,13 @@ class RegisterScreenState extends State<RegisterScreen> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
     return SafeArea(
@@ -79,9 +86,12 @@ class RegisterScreenState extends State<RegisterScreen> {
               SizedBox(height: screenHeight * .02),
               Text(
                 'Create Account,',
-                style: GoogleFonts.roboto(
-                  color: getBoolAsync(IS_DARK_MODE, defaultValue: false)
+                style: GoogleFonts.lato(
+                  /// Check the state of whether dark mode button is toggled on
+                  color: getBoolAsync(IS_DARK_MODE)
+                  // is on
                       ? AppColors.kTextWhite
+                  // if off
                       : AppColors.kTextBlack,
                   fontSize: 28.0,
                   fontWeight: TextFontWeight.bold,
@@ -90,8 +100,8 @@ class RegisterScreenState extends State<RegisterScreen> {
               SizedBox(height: screenHeight * .01),
               Text(
                 "Let's get to know you !",
-                style: GoogleFonts.roboto(
-                  color: getBoolAsync(IS_DARK_MODE, defaultValue: false)
+                style: GoogleFonts.lato(
+                  color: getBoolAsync(IS_DARK_MODE)
                       ? AppColors.kTextWhite
                       : AppColors.kTextBlack,
                   fontSize: 28.0,
@@ -101,8 +111,8 @@ class RegisterScreenState extends State<RegisterScreen> {
               SizedBox(height: screenHeight * .01),
               Text(
                 'Enter your details to continue',
-                style: GoogleFonts.roboto(
-                  color: getBoolAsync(IS_DARK_MODE, defaultValue: false)
+                style: GoogleFonts.lato(
+                  color: getBoolAsync(IS_DARK_MODE)
                       ? AppColors.kTextWhite
                       : AppColors.kTextBlack,
                   fontSize: 14.0,
@@ -134,8 +144,7 @@ class RegisterScreenState extends State<RegisterScreen> {
                               cursorColor: appStore.isDarkMode
                                   ? AppColors.kHabitOrange
                                   : AppColors.kHabitDark,
-                              decoration:
-                                  appTextFieldInputDeco(hint: 'Display Name'),
+                              decoration: appTextFieldInputDeco(hint: 'Display name'),
                               errorInvalidUsername: AppStrings.kNameNullError,
                               errorThisFieldRequired: errorThisFieldRequired,
                             ),
@@ -152,7 +161,7 @@ class RegisterScreenState extends State<RegisterScreen> {
                                   ? AppColors.kHabitOrange
                                   : AppColors.kHabitDark,
                               decoration:
-                                  appTextFieldInputDeco(hint: 'Email Address'),
+                                  appTextFieldInputDeco(hint: 'Email address'),
                               errorInvalidEmail: AppStrings.kInvalidEmailError,
                               errorThisFieldRequired: errorThisFieldRequired,
                             ),
@@ -180,7 +189,7 @@ class RegisterScreenState extends State<RegisterScreen> {
                                   ? AppColors.kHabitWhite
                                   : AppColors.kHabitOrange,
                               decoration: appTextFieldInputDeco(
-                                  hint: 'Confirm Password'),
+                                  hint: 'Confirm password'),
                               errorThisFieldRequired: errorThisFieldRequired,
                               onFieldSubmitted: (s) {
                                 createAccount();
@@ -199,19 +208,17 @@ class RegisterScreenState extends State<RegisterScreen> {
 
                             /// Navigate to Login Screen
                             InkWell(
-                              onTap: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => LoginScreen())),
+                              onTap: () {
+                                Navigator.push(context, AppRoutes().loginScreen);
+                              },
                               child: SizedBox(
-                                width: 600,
+                                width: screenWidth,
                                 child: Container(
                                   child: RichText(
                                     text: TextSpan(
                                       text: "Already have an account ? ",
                                       style: TextStyle(
-                                        color: getBoolAsync(IS_DARK_MODE,
-                                                defaultValue: false)
+                                        color: getBoolAsync(IS_DARK_MODE)
                                             ? AppColors.kTextWhite
                                             : AppColors.kTextBlack,
                                         fontWeight: TextFontWeight.regular,
@@ -230,18 +237,9 @@ class RegisterScreenState extends State<RegisterScreen> {
                               ),
                             ),
                             32.height,
-                            // TODO: Add link to ToU and Privacy Policy
-                            Text(
-                              "By clicking the “CREATE ACCOUNT” button, you agree to our Terms of use and Privacy Policy",
-                              style: GoogleFonts.roboto(
-                                color: getBoolAsync(IS_DARK_MODE,
-                                        defaultValue: false)
-                                    ? AppColors.kTextWhite
-                                    : AppColors.kTextBlack,
-                                fontSize: 16.0,
-                                fontWeight: TextFontWeight.regular,
-                              ),
-                            ),
+
+                            /// Terms of Use and Privacy Policy
+                            AgreementWidget(),
                             16.height,
                             CustomButton(
                               text: AppStrings.createAccount,
@@ -249,24 +247,10 @@ class RegisterScreenState extends State<RegisterScreen> {
                                 createAccount();
                               },
                             ),
-                            // AppButton(
-                            //   width: context.width(),
-                            //   color: PrimaryColor,
-                            //   text: 'Sign Up',
-                            //   onTap: () {
-                            //     createAccount();
-                            //   },
-                            // ),
                           ],
                         ),
                       ),
                     ).center(),
-                    // IconButton(
-                    //   icon: Icon(Icons.arrow_back),
-                    //   onPressed: () {
-                    //     finish(context);
-                    //   },
-                    // ),
                     Observer(
                         builder: (_) => Loader(
                                 color: appStore.isDarkMode
