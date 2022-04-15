@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:habit_note/model/notes_model.dart';
-import 'package:habit_note/utils/colors.dart';
+import 'package:habit_note/utils/colours.dart';
 import 'package:habit_note/utils/common.dart';
 import 'package:habit_note/utils/constants.dart';
 import 'package:habit_note/utils/string_constant.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../../../main.dart';
-import '../../DashboardScreen.dart';
-import 'NoteCollaboratorScreen.dart';
+import '../../dashboard_screen.dart';
 
 class AddToDoScreen extends StatefulWidget {
   static String tag = '/AddToDoScreen';
@@ -42,8 +41,6 @@ class AddToDoScreenState extends State<AddToDoScreen> {
   }
 
   Future<void> init() async {
-    // log(adShowCount);
-
     setStatusBarColor(Colors.transparent,
         statusBarIconBrightness: Brightness.light, delayInMilliSeconds: 100);
 
@@ -58,53 +55,7 @@ class AddToDoScreenState extends State<AddToDoScreen> {
       _checkList.addAll(widget.notesModel!.checkListModel!);
     }
 
-    // if (!disabled_ads) {
-    //   if (adShowCount < 5) {
-    //     adShowCount++;
-    //   } else {
-    //     adShowCount = 0;
-    //     buildInterstitialAd();
-    //   }
-    // }
   }
-
-  // void buildInterstitialAd() {
-  //   InterstitialAd.load(
-  //     adUnitId:
-  //         kReleaseMode ? mAdMobInterstitialId : InterstitialAd.testAdUnitId,
-  //     request: AdRequest(keywords: testDevices),
-  //     adLoadCallback: InterstitialAdLoadCallback(
-  //       onAdLoaded: (InterstitialAd ads) {
-  //         this.myInterstitial = ads;
-  //       },
-  //       onAdFailedToLoad: (LoadAdError error) {
-  //         print('InterstitialAd failed to load: $error');
-  //       },
-  //     ),
-  //   );
-  // }
-
-  // void showInterstitialAd() {
-  //   if (myInterstitial == null) {
-  //     print('Warning: attempt to show interstitial before loaded.');
-  //     return;
-  //   }
-  //   myInterstitial!.fullScreenContentCallback = FullScreenContentCallback(
-  //     onAdShowedFullScreenContent: (InterstitialAd ad) =>
-  //         print('ad onAdShowedFullScreenContent.'),
-  //     onAdDismissedFullScreenContent: (InterstitialAd ad) {
-  //       print('$ad onAdDismissedFullScreenContent.');
-  //       ad.dispose();
-  //       buildInterstitialAd();
-  //     },
-  //     onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
-  //       print('$ad onAdFailedToShowFullScreenContent: $error');
-  //       ad.dispose();
-  //       buildInterstitialAd();
-  //     },
-  //   );
-  //   myInterstitial!.show();
-  // }
 
   @override
   void setState(fn) {
@@ -113,10 +64,9 @@ class AddToDoScreenState extends State<AddToDoScreen> {
 
   @override
   void dispose() {
-    setStatusBarColor(appStore.isDarkMode ? AppColors.kHabitDark : Colors.white,
+    setStatusBarColor(appStore.isDarkMode ? AppColors.kHabitDarkGrey : Colors.white,
         delayInMilliSeconds: 100);
     addToDoList();
-    // showInterstitialAd();
     super.dispose();
   }
 

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:habit_note/model/notes_model.dart';
-import 'package:habit_note/screens/DashboardScreen.dart';
-import 'package:habit_note/screens/notes/components/NoteCollaboratorScreen.dart';
-import 'package:habit_note/utils/colors.dart';
+import 'package:habit_note/screens/dashboard_screen.dart';
+import 'package:habit_note/utils/colours.dart';
 import 'package:habit_note/utils/common.dart';
 import 'package:habit_note/utils/constants.dart';
 import 'package:habit_note/utils/string_constant.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../../../main.dart';
+import '../../../utils/constants.dart';
 
 class AddNotesScreen extends StatefulWidget {
   static String tag = '/AddNotesScreen';
@@ -23,14 +23,12 @@ class AddNotesScreen extends StatefulWidget {
 class AddNotesScreenState extends State<AddNotesScreen> {
   List<String> collaborateList = [];
 
-  // InterstitialAd? myInterstitial;
-
   TextEditingController titleController = TextEditingController();
   TextEditingController notesController = TextEditingController();
 
   FocusNode noteNode = FocusNode();
 
-  Color? _mSelectColor;
+  Color? _kSelectColor;
 
   bool _mIsUpdateNote = false;
 
@@ -41,11 +39,13 @@ class AddNotesScreenState extends State<AddNotesScreen> {
   }
 
   Future<void> init() async {
-    // log(adShowCount);
-    setStatusBarColor(Colors.transparent,
-        statusBarIconBrightness: Brightness.dark, delayInMilliSeconds: 100);
+    setStatusBarColor(
+      appStore.isDarkMode ? AppColors.kHabitDarkGrey : Colors.transparent,
+      statusBarIconBrightness: appStore.isDarkMode ? Brightness.light : Brightness.dark,
+      delayInMilliSeconds: 100,
+    );
 
-    _mIsUpdateNote = widget.notesModel != null;
+    _kIsUpdateNote = widget.notesModel != null;
 
     if (!_mIsUpdateNote) {
       collaborateList.add(getStringAsync(USER_EMAIL));
@@ -57,60 +57,18 @@ class AddNotesScreenState extends State<AddNotesScreen> {
       _mSelectColor = getColorFromHex(widget.notesModel!.color!);
     }
 
-    // if (!disabled_ads) {
-    //   if (adShowCount < 5) {
-    //     adShowCount++;
-    //   } else {
-    //     adShowCount = 0;
-    //     buildInterstitialAd();
-    //   }
-    // }
   }
 
-  // void buildInterstitialAd() {
-  //   InterstitialAd.load(
-  //     adUnitId: kReleaseMode ? mAdMobInterstitialId : InterstitialAd.testAdUnitId,
-  //     request: AdRequest(keywords: testDevices),
-  //     adLoadCallback: InterstitialAdLoadCallback(onAdLoaded: (InterstitialAd ads) {
-  //       this.myInterstitial = ads;
-  //     }, onAdFailedToLoad: (LoadAdError error) {
-  //       print('InterstitialAd failed to load: $error');
-  //     }),
-  //   );
-  // }
 
   @override
   void setState(fn) {
     if (mounted) super.setState(fn);
   }
 
-  // void showInterstitialAd() {
-  //   if (myInterstitial == null) {
-  //     print('Warning: attempt to show interstitial before loaded.');
-  //     return;
-  //   }
-  //   myInterstitial!.fullScreenContentCallback = FullScreenContentCallback(
-  //     onAdShowedFullScreenContent: (InterstitialAd ad) => print('ad onAdShowedFullScreenContent.'),
-  //     onAdDismissedFullScreenContent: (InterstitialAd ad) {
-  //       print('$ad onAdDismissedFullScreenContent.');
-  //       ad.dispose();
-  //       buildInterstitialAd();
-  //     },
-  //     onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
-  //       print('$ad onAdFailedToShowFullScreenContent: $error');
-  //       ad.dispose();
-  //       buildInterstitialAd();
-  //     },
-  //   );
-  //   myInterstitial!.show();
-  // }
-
   @override
   void dispose() {
-    setStatusBarColor(appStore.isDarkMode ? AppColors.kHabitDark : Colors.white,
-        delayInMilliSeconds: 100);
+    setStatusBarColor(appStore.isDarkMode ? AppColors.kHabitDarkGrey : AppColors.kHabitWhite, delayInMilliSeconds: 100);
     addNotes();
-    // showInterstitialAd();
     super.dispose();
   }
 
@@ -150,14 +108,11 @@ class AddNotesScreenState extends State<AddNotesScreen> {
                   ? Row(
                       children: [
                         Text('$shared_by :',
-                            style:
-                                boldTextStyle(color: Colors.black, size: 18)),
+                            style: boldTextStyle(color: Colors.black, size: 18)),
                         4.width,
                         Text(
-                            widget.notesModel!.collaborateWith!.first
-                                .validate(),
-                            style:
-                                boldTextStyle(color: Colors.black, size: 18)),
+                            widget.notesModel!.collaborateWith!.first.validate(),
+                            style: boldTextStyle(color: Colors.black, size: 18)),
                       ],
                     )
                   : SizedBox(),
@@ -198,6 +153,7 @@ class AddNotesScreenState extends State<AddNotesScreen> {
     );
   }
 
+  /// Add a [Note] to the note list
   void addNotes() {
     if (titleController.text.trim().isNotEmpty ||
         notesController.text.trim().isNotEmpty) {
@@ -215,6 +171,7 @@ class AddNotesScreenState extends State<AddNotesScreen> {
 
       if (_mIsUpdateNote) {
         notesData.noteId = widget.notesModel!.noteId;
+        notesData.label = widget.notesModel!.label;
         notesData.createdAt = widget.notesModel!.createdAt;
         notesData.updatedAt = DateTime.now();
         notesData.checkListModel = widget.notesModel!.checkListModel.validate();
@@ -231,6 +188,7 @@ class AddNotesScreenState extends State<AddNotesScreen> {
       } else {
         notesData.createdAt = DateTime.now();
         notesData.updatedAt = DateTime.now();
+        notesData.label = [];
         notesData.collaborateWith = collaborateList.validate();
         notesData.checkListModel = [];
 

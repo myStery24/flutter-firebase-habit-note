@@ -3,21 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:habit_note/model/notes_model.dart';
-import 'package:habit_note/utils/colors.dart';
+import 'package:habit_note/utils/colours.dart';
 import 'package:habit_note/utils/common.dart';
 import 'package:habit_note/utils/constants.dart';
-import 'package:habit_note/utils/string_constant.dart';
-import 'package:habit_note/components/DashboardDrawerWidget.dart';
-import 'package:habit_note/screens/notes/components/FilterNoteByColorDialogWidget.dart';
-import 'package:habit_note/screens/notes/components/LockNoteDialogWidget.dart';
-import 'package:habit_note/components/NoteLayoutDialogWidget.dart';
-import 'package:habit_note/components/SetMasterPasswordDialogWidget.dart';
+import 'package:habit_note/components/dashboard_drawer_widget.dart';
+import 'package:habit_note/screens/notes/components/filter_note_by_colour_dialog_widget.dart';
+import 'package:habit_note/screens/notes/components/lock_note_dialog_widget.dart';
+import 'package:habit_note/screens/notes/components/note_layout_dialog_widget.dart';
+import 'package:habit_note/screens/notes/components/set_master_password_dialog_widget.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../main.dart';
-import 'components/AddNotesScreen.dart';
-import 'components/AddToDoScreen.dart';
+import 'components/add_notes_screen.dart';
+import 'components/add_todo_screen.dart';
 
 class NotesScreen extends StatefulWidget {
   static String tag = '/DashboardScreen';
@@ -47,6 +47,15 @@ class NotesScreenState extends State<NotesScreen> {
   }
 
   Future<void> init() async {
+    setStatusBarColor(
+      appStore.isDarkMode ? AppColors.kHabitDarkGrey : AppColors.kHabitWhite,
+      statusBarIconBrightness:
+          appStore.isDarkMode ? Brightness.light : Brightness.dark,
+      delayInMilliSeconds: 100,
+    );
+
+    setState(() {});
+
     fitWithCount = getIntAsync(FIT_COUNT, defaultValue: 1);
     crossAxisCount = getIntAsync(CROSS_COUNT, defaultValue: 2);
   }
@@ -78,16 +87,21 @@ class NotesScreenState extends State<NotesScreen> {
         child: Scaffold(
           key: _scaffoldState,
           appBar: AppBar(
-            title: Text(AppStrings.appName.validate()),
+            title: Text(
+              AppStrings.appName.validate(),
+              style: GoogleFonts.fugazOne(),
+            ),
             actions: [
               IconButton(
                 icon: Icon(Icons.color_lens_outlined),
+                tooltip: 'Filter by colour',
                 onPressed: () {
                   filterByColor();
                 },
               ),
               IconButton(
                 icon: getLayoutTypeIcon(),
+                tooltip: 'Change view',
                 onPressed: () async {
                   noteLayoutDialog();
                 },
@@ -109,18 +123,19 @@ class NotesScreenState extends State<NotesScreen> {
                 if (snapshot.data!.length == 0) {
                   return noDataWidget(context).center();
                 } else {
-                  return Scrollbar(
-                    child: StaggeredGridView.countBuilder(
-                      staggeredTileBuilder: (int index) =>
-                          StaggeredTile.fit(fitWithCount),
-                      mainAxisSpacing: 8,
-                      crossAxisCount: crossAxisCount,
-                      crossAxisSpacing: 8,
-                      addAutomaticKeepAlives: false,
-                      padding: EdgeInsets.only(left: 8, top: 8, right: 8),
-                      itemCount: snapshot.data!.length,
-                      itemBuilder: (context, index) {
-                        NotesModel notes = snapshot.data![index];
+                  return SingleChildScrollView(
+                    padding: EdgeInsets.only(
+                        left: 8.0, top: 16.0, right: 8, bottom: 90),
+                    child: StaggeredGrid.count(
+                      crossAxisCount:
+                          getStringAsync(SELECTED_LAYOUT_TYPE_DASHBOARD) ==
+                                  LIST_VIEW
+                              ? 1
+                              : crossAxisCount,
+                      mainAxisSpacing: 4,
+                      crossAxisSpacing: 4,
+                      children: snapshot.data!.map((e) {
+                        NotesModel notes = e;
 
                         if (notes.checkListModel.validate().isNotEmpty) {
                           return GestureDetector(
@@ -139,7 +154,7 @@ class NotesScreenState extends State<NotesScreen> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  notes.isLock!
+                                  notes.isLock.validate()
                                       ? Container(
                                               child: Icon(Icons.lock,
                                                   color: AppColors.kHabitDark))
@@ -226,7 +241,7 @@ class NotesScreenState extends State<NotesScreen> {
                                 ],
                               ),
                             ).onTap(() {
-                              if (notes.isLock!) {
+                              if (notes.isLock.validate()) {
                                 showDialog(
                                   context: context,
                                   builder: (_) => LockNoteDialogWidget(
@@ -261,7 +276,7 @@ class NotesScreenState extends State<NotesScreen> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  notes.isLock!
+                                  notes.isLock.validate()
                                       ? Container(
                                               child: Icon(Icons.lock,
                                                   color: AppColors.kHabitDark))
@@ -313,8 +328,8 @@ class NotesScreenState extends State<NotesScreen> {
                                         )
                                       : SizedBox()
                                 ],
-                              ).onTap(() {
-                                if (notes.isLock!) {
+                              ).paddingAll(16).onTap(() {
+                                if (notes.isLock.validate()) {
                                   showDialog(
                                     context: context,
                                     builder: (_) => LockNoteDialogWidget(
@@ -332,7 +347,7 @@ class NotesScreenState extends State<NotesScreen> {
                             ),
                           );
                         }
-                      },
+                      }).toList(),
                     ),
                   );
                 }
@@ -358,6 +373,7 @@ class NotesScreenState extends State<NotesScreen> {
               },
             ),
           ),
+          floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         ),
       ),
     );
@@ -408,7 +424,7 @@ class NotesScreenState extends State<NotesScreen> {
                     color: appStore.isDarkMode
                         ? AppColors.kHabitOrange
                         : AppColors.scaffoldSecondaryDark),
-                title: Text(delete, style: primaryTextStyle()),
+                title: Text(delete_note, style: primaryTextStyle()),
                 onTap: () async {
                   finish(context);
                   if (notesModel.collaborateWith!.first ==
@@ -466,7 +482,7 @@ class NotesScreenState extends State<NotesScreen> {
           child: Wrap(
             crossAxisAlignment: WrapCrossAlignment.start,
             children: [
-              Text('New', style: secondaryTextStyle(size: 18))
+              Text('Create new', style: secondaryTextStyle(size: 18))
                   .center()
                   .paddingAll(8),
               Divider(height: 16),
@@ -505,8 +521,8 @@ class NotesScreenState extends State<NotesScreen> {
       contentPadding: EdgeInsets.zero,
       titleTextStyle: primaryTextStyle(size: 20),
       title: Text(select_layout).paddingBottom(16),
-      child:
-          NoteLayoutDialogWidget(onLayoutSelect: (fitCount, crossCount) async {
+      builder: (_) => new NoteLayoutDialogWidget(
+          onLayoutSelect: (fitCount, crossCount) async {
         await setValue(FIT_COUNT, fitCount);
         await setValue(CROSS_COUNT, crossCount);
         setState(() {
@@ -559,7 +575,7 @@ class NotesScreenState extends State<NotesScreen> {
       title: Text('Filter by colour'),
       titleTextStyle: primaryTextStyle(size: 22),
       contentPadding: EdgeInsets.all(16),
-      child: FilterNoteByColorDialogWidget(onColorTap: (color) {
+      builder: (_) => new FilterNoteByColorDialogWidget(onColorTap: (color) {
         setState(() {
           colorFilter = color;
         });

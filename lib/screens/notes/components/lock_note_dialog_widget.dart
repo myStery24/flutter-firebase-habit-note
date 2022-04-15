@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:habit_note/utils/colors.dart';
+import 'package:habit_note/utils/colours.dart';
 import 'package:habit_note/utils/common.dart';
 import 'package:habit_note/utils/constants.dart';
 import 'package:habit_note/utils/string_constant.dart';
@@ -45,15 +45,14 @@ class LockNoteDialogWidgetState extends State<LockNoteDialogWidget> {
         key: _form,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         child: AlertDialog(
-          title: Text(enter_master_pwd),
+          title: Text('Lock & Unlock note'),
           content: AppTextField(
             autoFocus: true,
             controller: masterPwdController,
             textFieldType: TextFieldType.PASSWORD,
             keyboardType: TextInputType.phone,
             errorThisFieldRequired: errorThisFieldRequired,
-            cursorColor:
-                appStore.isDarkMode ? Colors.white : AppColors.kHabitDark,
+            cursorColor: appStore.isDarkMode ? Colors.white : AppColors.kHabitDark,
             maxLines: 1,
             maxLength: 4,
             validator: (val) {
@@ -64,7 +63,7 @@ class LockNoteDialogWidgetState extends State<LockNoteDialogWidget> {
               }
               return null;
             },
-            decoration: appTextFieldInputDeco(hint: password),
+            decoration: appTextFieldInputDeco(hint: enter_master_pwd),
           ),
           actions: [
             TextButton(
@@ -77,8 +76,7 @@ class LockNoteDialogWidgetState extends State<LockNoteDialogWidget> {
             TextButton(
               onPressed: () async {
                 if (_form.currentState!.validate()) {
-                  if (masterPwdController.text.trim() ==
-                      getStringAsync(USER_MASTER_PWD)) {
+                  if (masterPwdController.text.trim() == getStringAsync(USER_MASTER_PWD)) {
                     widget.onSubmit!(true);
                     await 2.seconds.delay;
                     masterPwdController.clear();
@@ -90,7 +88,8 @@ class LockNoteDialogWidgetState extends State<LockNoteDialogWidget> {
               child: Text(submit,
                   style: primaryTextStyle(
                     color: AppColors.kHabitOrange,
-                  )),
+                  ),
+              ),
             ),
           ],
         ),

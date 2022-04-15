@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:habit_note/utils/colors.dart';
+import 'package:habit_note/utils/colours.dart';
 import 'package:habit_note/utils/common.dart';
 import 'package:habit_note/utils/constants.dart';
 import 'package:habit_note/utils/string_constant.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import '../../main.dart';
+import '../../../main.dart';
 
-/// Lock Notes with Password
+/// Reset the password (4 digit pin) that is used to lock notes
 class ChangeMasterPasswordScreen extends StatefulWidget {
   static String tag = '/ChangeMasterPasswordScreen';
 
@@ -50,6 +50,39 @@ class ChangeMasterPasswordScreenState
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
         title: Text(reset_master_pwd),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.contact_support_outlined),
+            tooltip: 'Support email',
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: Text('Support Email'),
+                  content: Text(
+                    'Contact us at ai190244bim@gmail.com to reset your master password.',
+                    style: TextStyle(
+                        color: appStore.isDarkMode
+                            ? AppColors.kTextWhite
+                            : AppColors.kTextBlack),
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: Text(
+                        'Got it !',
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          color: AppColors.kHabitOrange,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              );
+            },
+          ),
+        ],
       ),
       body: Stack(
         children: [
@@ -62,6 +95,14 @@ class ChangeMasterPasswordScreenState
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    15.height,
+                    Text('Forgot your master password ?',
+                        style: boldTextStyle(size: 22)),
+                    15.height,
+                    Text(
+                        'Please fill up the following fields to reset your password. \nWrite to our support email if you forgot your current password.',
+                        style: primaryTextStyle(size: 14)),
+                    20.height,
                     AppTextField(
                       controller: currentMasterPwdController,
                       focus: currentMasterPwdNode,

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:habit_note/utils/colors.dart';
+import 'package:habit_note/utils/colours.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import '../main.dart';
-import '../utils/constants.dart';
+import '../../../main.dart';
+import '../../../utils/constants.dart';
 
 class NoteLayoutDialogWidget extends StatefulWidget {
   static String tag = '/NoteLayoutDialogWidget';
@@ -41,7 +41,7 @@ class NoteLayoutDialogWidgetState extends State<NoteLayoutDialogWidget> {
                 color: appStore.isDarkMode
                     ? AppColors.kHabitOrange
                     : AppColors.scaffoldSecondaryDark),
-            title: Text('Grid View', style: primaryTextStyle()),
+            title: Text('Grid view', style: primaryTextStyle()),
             onTap: () async {
               await setValue(SELECTED_LAYOUT_TYPE_DASHBOARD, GRID_VIEW);
               widget.onLayoutSelect!(1, 2);
@@ -53,7 +53,7 @@ class NoteLayoutDialogWidgetState extends State<NoteLayoutDialogWidget> {
                 color: appStore.isDarkMode
                     ? AppColors.kHabitOrange
                     : AppColors.scaffoldSecondaryDark),
-            title: Text('Compact Grid View', style: primaryTextStyle()),
+            title: Text('Compact grid view', style: primaryTextStyle()),
             onTap: () async {
               await setValue(SELECTED_LAYOUT_TYPE_DASHBOARD, GRID_VIEW_2);
               widget.onLayoutSelect!(1, 3);
@@ -65,7 +65,7 @@ class NoteLayoutDialogWidgetState extends State<NoteLayoutDialogWidget> {
                 color: appStore.isDarkMode
                     ? AppColors.kHabitOrange
                     : AppColors.scaffoldSecondaryDark),
-            title: Text('List View', style: primaryTextStyle()),
+            title: Text('List view', style: primaryTextStyle()),
             onTap: () async {
               await setValue(SELECTED_LAYOUT_TYPE_DASHBOARD, LIST_VIEW);
               widget.onLayoutSelect!(2, 2);

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:habit_note/model/notes_model.dart';
-import 'package:habit_note/utils/colors.dart';
+import 'package:habit_note/utils/colours.dart';
 import 'package:habit_note/utils/common.dart';
 import 'package:habit_note/utils/constants.dart';
 import 'package:habit_note/utils/string_constant.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import '../main.dart';
+import '../../../main.dart';
 
+/// Create a 4-digit password for locking notes
 class SetMasterPasswordDialogWidget extends StatefulWidget {
   static String tag = '/SetMasterPasswordScreen';
   final String? userId;
@@ -51,7 +52,7 @@ class SetMasterPasswordDialogWidgetState
         child: Column(
           children: [
             AlertDialog(
-              title: Text(enter_master_pwd),
+              title: Text(create_lock_note_pwd),
               content: Column(
                 children: [
                   AppTextField(
@@ -88,7 +89,7 @@ class SetMasterPasswordDialogWidgetState
                         return errorThisFieldRequired;
                       } else if (val.length < 4) {
                         return pwd_length;
-                      } else if (confPwdController.text.trim() != val.trim()) {
+                      } else if (pwdController.text.trim() != val.trim()) {
                         return pwd_not_same;
                       }
                       return null;
