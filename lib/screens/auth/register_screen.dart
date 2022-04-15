@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -41,7 +42,9 @@ class RegisterScreenState extends State<RegisterScreen> {
 
   Future<void> init() async {
     setStatusBarColor(
-      appStore.isDarkMode ? AppColors.kHabitDarkGrey : AppColors.kHabitBackgroundLightGrey,
+      appStore.isDarkMode
+          ? AppColors.kHabitDarkGrey
+          : AppColors.kHabitBackgroundLightGrey,
       statusBarIconBrightness:
           appStore.isDarkMode ? Brightness.light : Brightness.dark,
       delayInMilliSeconds: 100,
@@ -78,188 +81,198 @@ class RegisterScreenState extends State<RegisterScreen> {
           backgroundColor: Colors.transparent,
           elevation: 0,
         ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: ListView(
-            children: [
-              SizedBox(height: screenHeight * .02),
-              Text(
-                'Create Account,',
-                style: GoogleFonts.lato(
-                  /// Check the state of whether dark mode button is toggled on
-                  color: getBoolAsync(IS_DARK_MODE)
-                  // is on
-                      ? AppColors.kTextWhite
-                  // if off
-                      : AppColors.kTextBlack,
-                  fontSize: 28.0,
-                  fontWeight: TextFontWeight.bold,
+        body: GestureDetector(
+          // Dismiss the keyboard when the tap is outside events
+          onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: ListView(
+              children: [
+                SizedBox(height: screenHeight * .02),
+                Text(
+                  'Create Account,',
+                  style: GoogleFonts.lato(
+                    /// Check the state of whether dark mode button is toggled on
+                    color: getBoolAsync(IS_DARK_MODE)
+                        // is on
+                        ? AppColors.kTextWhite
+                        // if off
+                        : AppColors.kTextBlack,
+                    fontSize: 28.0,
+                    fontWeight: TextFontWeight.bold,
+                  ),
                 ),
-              ),
-              SizedBox(height: screenHeight * .01),
-              Text(
-                "Let's get to know you !",
-                style: GoogleFonts.lato(
-                  color: getBoolAsync(IS_DARK_MODE)
-                      ? AppColors.kTextWhite
-                      : AppColors.kTextBlack,
-                  fontSize: 28.0,
-                  fontWeight: TextFontWeight.bold,
+                SizedBox(height: screenHeight * .01),
+                Text(
+                  "Let's get to know you !",
+                  style: GoogleFonts.lato(
+                    color: getBoolAsync(IS_DARK_MODE)
+                        ? AppColors.kTextWhite
+                        : AppColors.kTextBlack,
+                    fontSize: 28.0,
+                    fontWeight: TextFontWeight.bold,
+                  ),
                 ),
-              ),
-              SizedBox(height: screenHeight * .01),
-              Text(
-                'Enter your details to continue',
-                style: GoogleFonts.lato(
-                  color: getBoolAsync(IS_DARK_MODE)
-                      ? AppColors.kTextWhite
-                      : AppColors.kTextBlack,
-                  fontSize: 14.0,
-                  fontWeight: TextFontWeight.regular,
+                SizedBox(height: screenHeight * .01),
+                Text(
+                  'Enter your details to continue',
+                  style: GoogleFonts.lato(
+                    color: getBoolAsync(IS_DARK_MODE)
+                        ? AppColors.kTextWhite
+                        : AppColors.kTextBlack,
+                    fontSize: 14.0,
+                    fontWeight: TextFontWeight.regular,
+                  ),
                 ),
-              ),
-              SizedBox(height: screenHeight * .05),
+                SizedBox(height: screenHeight * .05),
 
-              /// Form
-              Container(
-                child: Stack(
-                  children: [
-                    Form(
-                      key: formState,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      child: SingleChildScrollView(
-                        // padding: EdgeInsets.all(16),
-                        child: Column(
-                          children: [
-                            AppTextField(
-                              autoFocus: false,
-                              controller: usernameController,
-                              focus: usernameNode,
-                              nextFocus: emailNode,
-                              textFieldType: TextFieldType.NAME,
-                              textCapitalization: TextCapitalization.none,
-                              textStyle: primaryTextStyle(),
-                              keyboardType: TextInputType.text,
-                              cursorColor: appStore.isDarkMode
-                                  ? AppColors.kHabitOrange
-                                  : AppColors.kHabitDark,
-                              decoration: appTextFieldInputDeco(hint: 'Display name'),
-                              errorInvalidUsername: AppStrings.kNameNullError,
-                              errorThisFieldRequired: errorThisFieldRequired,
-                            ),
-                            16.height,
-                            AppTextField(
-                              controller: emailController,
-                              focus: emailNode,
-                              nextFocus: passNode,
-                              textFieldType: TextFieldType.EMAIL,
-                              textCapitalization: TextCapitalization.none,
-                              textStyle: primaryTextStyle(),
-                              keyboardType: TextInputType.emailAddress,
-                              cursorColor: appStore.isDarkMode
-                                  ? AppColors.kHabitOrange
-                                  : AppColors.kHabitDark,
-                              decoration:
-                                  appTextFieldInputDeco(hint: 'Email address'),
-                              errorInvalidEmail: AppStrings.kInvalidEmailError,
-                              errorThisFieldRequired: errorThisFieldRequired,
-                            ),
-                            16.height,
-                            AppTextField(
-                              controller: passController,
-                              focus: passNode,
-                              nextFocus: confPassNode,
-                              textFieldType: TextFieldType.PASSWORD,
-                              textStyle: primaryTextStyle(),
-                              cursorColor: appStore.isDarkMode
-                                  ? AppColors.kHabitWhite
-                                  : AppColors.kHabitOrange,
-                              decoration:
-                                  appTextFieldInputDeco(hint: 'Password'),
-                              errorThisFieldRequired: errorThisFieldRequired,
-                            ),
-                            16.height,
-                            AppTextField(
-                              controller: confirmController,
-                              focus: confPassNode,
-                              textFieldType: TextFieldType.PASSWORD,
-                              textStyle: primaryTextStyle(),
-                              cursorColor: appStore.isDarkMode
-                                  ? AppColors.kHabitWhite
-                                  : AppColors.kHabitOrange,
-                              decoration: appTextFieldInputDeco(
-                                  hint: 'Confirm password'),
-                              errorThisFieldRequired: errorThisFieldRequired,
-                              onFieldSubmitted: (s) {
-                                createAccount();
-                              },
-                              validator: (value) {
-                                if (value!.trim().isEmpty)
-                                  return errorThisFieldRequired;
-                                if (value.trim().length < passwordLengthGlobal)
-                                  return 'Minimum password length should be $passwordLengthGlobal';
-                                return passController.text == value.trim()
-                                    ? null
-                                    : AppStrings.kMatchPassError;
-                              },
-                            ),
-                            32.height,
+                /// Form
+                Container(
+                  child: Stack(
+                    children: [
+                      Form(
+                        key: formState,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        child: SingleChildScrollView(
+                          // padding: EdgeInsets.all(16),
+                          child: Column(
+                            children: [
+                              AppTextField(
+                                autoFocus: false,
+                                controller: usernameController,
+                                focus: usernameNode,
+                                nextFocus: emailNode,
+                                textFieldType: TextFieldType.NAME,
+                                textCapitalization: TextCapitalization.none,
+                                textStyle: primaryTextStyle(),
+                                keyboardType: TextInputType.text,
+                                cursorColor: appStore.isDarkMode
+                                    ? AppColors.kHabitOrange
+                                    : AppColors.kHabitDark,
+                                decoration:
+                                    appTextFieldInputDeco(hint: 'Display name'),
+                                errorInvalidUsername: AppStrings.kNameNullError,
+                                errorThisFieldRequired: errorThisFieldRequired,
+                              ),
+                              16.height,
+                              AppTextField(
+                                controller: emailController,
+                                focus: emailNode,
+                                nextFocus: passNode,
+                                textFieldType: TextFieldType.EMAIL,
+                                textCapitalization: TextCapitalization.none,
+                                textStyle: primaryTextStyle(),
+                                keyboardType: TextInputType.emailAddress,
+                                cursorColor: appStore.isDarkMode
+                                    ? AppColors.kHabitOrange
+                                    : AppColors.kHabitDark,
+                                decoration: appTextFieldInputDeco(
+                                    hint: 'Email address'),
+                                errorInvalidEmail:
+                                    AppStrings.kInvalidEmailError,
+                                errorThisFieldRequired: errorThisFieldRequired,
+                              ),
+                              16.height,
+                              AppTextField(
+                                controller: passController,
+                                focus: passNode,
+                                nextFocus: confPassNode,
+                                textFieldType: TextFieldType.PASSWORD,
+                                textStyle: primaryTextStyle(),
+                                cursorColor: appStore.isDarkMode
+                                    ? AppColors.kHabitWhite
+                                    : AppColors.kHabitOrange,
+                                decoration:
+                                    appTextFieldInputDeco(hint: password),
+                                errorThisFieldRequired: errorThisFieldRequired,
+                              ),
+                              16.height,
+                              AppTextField(
+                                controller: confirmController,
+                                focus: confPassNode,
+                                textFieldType: TextFieldType.PASSWORD,
+                                textStyle: primaryTextStyle(),
+                                cursorColor: appStore.isDarkMode
+                                    ? AppColors.kHabitWhite
+                                    : AppColors.kHabitOrange,
+                                decoration:
+                                    appTextFieldInputDeco(hint: confirm_pwd),
+                                errorThisFieldRequired: errorThisFieldRequired,
+                                onFieldSubmitted: (s) {
+                                  createAccount();
+                                },
+                                validator: (value) {
+                                  if (value!.trim().isEmpty)
+                                    return errorThisFieldRequired;
+                                  if (value.trim().length <
+                                      passwordLengthGlobal)
+                                    return 'Minimum password length should be $passwordLengthGlobal';
+                                  return passController.text == value.trim()
+                                      ? null
+                                      : AppStrings.kMatchPassError;
+                                },
+                              ),
+                              32.height,
 
-                            /// Navigate to Login Screen
-                            InkWell(
-                              onTap: () {
-                                Navigator.push(context, AppRoutes().loginScreen);
-                              },
-                              child: SizedBox(
+                              /// Navigate to Login Screen
+                              SizedBox(
                                 width: screenWidth,
                                 child: Container(
-                                  child: RichText(
-                                    text: TextSpan(
-                                      text: "Already have an account ? ",
-                                      style: TextStyle(
-                                        color: getBoolAsync(IS_DARK_MODE)
-                                            ? AppColors.kTextWhite
-                                            : AppColors.kTextBlack,
-                                        fontWeight: TextFontWeight.regular,
-                                      ),
-                                      children: [
-                                        TextSpan(
+                                  child: Container(
+                                    child: RichText(
+                                      text: TextSpan(
+                                        text: "Already have an account ? ",
+                                        style: TextStyle(
+                                          color: getBoolAsync(IS_DARK_MODE)
+                                              ? AppColors.kTextWhite
+                                              : AppColors.kTextBlack,
+                                          fontWeight: TextFontWeight.regular,
+                                        ),
+                                        children: [
+                                          TextSpan(
                                             text: "Login here",
                                             style: TextStyle(
                                               color: AppColors.kHabitOrange,
                                               fontWeight: TextFontWeight.bold,
-                                            )),
-                                      ],
+                                            ),
+                                            recognizer: TapGestureRecognizer()
+                                              ..onTap = () {
+                                                Navigator.push(context,
+                                                    AppRoutes().loginScreen);
+                                              },
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                            32.height,
+                              32.height,
 
-                            /// Terms of Use and Privacy Policy
-                            AgreementWidget(),
-                            16.height,
-                            CustomButton(
-                              text: AppStrings.createAccount,
-                              onPressed: () {
-                                createAccount();
-                              },
-                            ),
-                          ],
+                              /// Terms of Use and Privacy Policy
+                              AgreementWidget(),
+                              16.height,
+                              CustomButton(
+                                text: AppStrings.createAccount,
+                                onPressed: () {
+                                  createAccount();
+                                },
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ).center(),
-                    Observer(
-                        builder: (_) => Loader(
-                                color: appStore.isDarkMode
-                                    ? AppColors.kHabitDark
-                                    : AppColors.kHabitOrange)
-                            .visible(appStore.isLoading)),
-                  ],
+                      ).center(),
+                      Observer(
+                          builder: (_) => Loader(
+                                  color: appStore.isDarkMode
+                                      ? AppColors.kHabitDark
+                                      : AppColors.kHabitOrange)
+                              .visible(appStore.isLoading)),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
