@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:habit_note/utils/common.dart';
-import 'package:habit_note/utils/string_constant.dart';
 import 'package:nb_utils/nb_utils.dart';
+
+import '../../../utils/constants.dart';
 
 class FilterNoteByColorDialogWidget extends StatefulWidget {
   final Function(String)? onColorTap;
