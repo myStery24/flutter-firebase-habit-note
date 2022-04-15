@@ -9,7 +9,7 @@ import '../../../main.dart';
 import '../../../utils/colours.dart';
 import '../../../utils/common.dart';
 import '../../../utils/constants.dart';
-import '../../notes/components/change_master_password_screen.dart';
+import '../../password/change_master_password_screen.dart';
 import '../../password/forgot_password_screen.dart';
 
 class SettingsCategory extends StatefulWidget {
