@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -74,235 +75,240 @@ class LoginScreenState extends State<LoginScreen> {
           backgroundColor: Colors.transparent,
           elevation: 0,
         ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: ListView(
-            children: [
-              SizedBox(height: screenHeight * .02),
-              Text(
-                'Log In,',
-                style: GoogleFonts.lato(
-                  /// If in light mode, display text in black colour
-                  color: getBoolAsync(IS_DARK_MODE)
-                      ? AppColors.kTextWhite
-                      : AppColors.kTextBlack,
-                  fontSize: 28.0,
-                  fontWeight: TextFontWeight.bold,
+        body: GestureDetector(
+          // Dismiss the keyboard when the tap is outside events
+          onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: ListView(
+              children: [
+                SizedBox(height: screenHeight * .02),
+                Text(
+                  'Log In,',
+                  style: GoogleFonts.lato(
+                    /// If in light mode, display text in black colour
+                    color: getBoolAsync(IS_DARK_MODE)
+                        ? AppColors.kTextWhite
+                        : AppColors.kTextBlack,
+                    fontSize: 28.0,
+                    fontWeight: TextFontWeight.bold,
+                  ),
                 ),
-              ),
-              SizedBox(height: screenHeight * .01),
-              Text(
-                "Welcome back !",
-                style: GoogleFonts.lato(
-                  color: getBoolAsync(IS_DARK_MODE)
-                      ? AppColors.kTextWhite
-                      : AppColors.kTextBlack,
-                  fontSize: 28.0,
-                  fontWeight: TextFontWeight.bold,
+                SizedBox(height: screenHeight * .01),
+                Text(
+                  "Welcome back !",
+                  style: GoogleFonts.lato(
+                    color: getBoolAsync(IS_DARK_MODE)
+                        ? AppColors.kTextWhite
+                        : AppColors.kTextBlack,
+                    fontSize: 28.0,
+                    fontWeight: TextFontWeight.bold,
+                  ),
                 ),
-              ),
-              SizedBox(height: screenHeight * .01),
-              Text(
-                "Please login with your credentials",
-                style: GoogleFonts.lato(
-                  color: getBoolAsync(IS_DARK_MODE)
-                      ? AppColors.kTextWhite
-                      : AppColors.kTextBlack,
-                  fontSize: 14.0,
-                  fontWeight: TextFontWeight.regular,
+                SizedBox(height: screenHeight * .01),
+                Text(
+                  "Please login with your credentials",
+                  style: GoogleFonts.lato(
+                    color: getBoolAsync(IS_DARK_MODE)
+                        ? AppColors.kTextWhite
+                        : AppColors.kTextBlack,
+                    fontSize: 14.0,
+                    fontWeight: TextFontWeight.regular,
+                  ),
                 ),
-              ),
-              SizedBox(height: screenHeight * .05),
+                SizedBox(height: screenHeight * .05),
 
-              /// Form
-              Container(
-                padding: EdgeInsets.only(top: 32),
-                child: Stack(
-                  children: [
-                    Form(
-                      key: formKey,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      child: SingleChildScrollView(
-                        // padding: EdgeInsets.all(16),
-                        child: AutofillGroup(
-                          child: Column(
-                            children: [
-                              AppTextField(
-                                controller: emailController,
-                                focus: emailNode,
-                                nextFocus: passwordNode,
-                                textStyle: primaryTextStyle(),
-                                textFieldType: TextFieldType.EMAIL,
-                                keyboardType: TextInputType.emailAddress,
-                                cursorColor: appStore.isDarkMode
-                                    ? AppColors.kHabitOrange
-                                    : AppColors.kHabitDark,
-                                decoration: appTextFieldInputDeco(hint: 'Email address'),
-                                autoFillHints: [AutofillHints.email],
-                                errorInvalidEmail: AppStrings.kInvalidEmailError,
-                                errorThisFieldRequired: errorThisFieldRequired,
-                              ).paddingBottom(16),
-                              AppTextField(
-                                controller: passController,
-                                focus: passwordNode,
-                                textStyle: primaryTextStyle(),
-                                textFieldType: TextFieldType.PASSWORD,
-                                cursorColor: appStore.isDarkMode
-                                    ? AppColors.kHabitOrange
-                                    : AppColors.kHabitDark,
-                                decoration: appTextFieldInputDeco(hint: 'Password'),
-                                autoFillHints: [AutofillHints.password],
-                                errorThisFieldRequired: errorThisFieldRequired,
-                                onFieldSubmitted: (s) {
-                                  signIn();
-                                },
-                              ),
-                              16.height,
-                              Align(
-                                alignment: Alignment.centerRight,
-                                child: Text('Forgot password ?',
-                                        style: primaryTextStyle(),
-                                        textAlign: TextAlign.end)
-                                    .paddingSymmetric(vertical: 8, horizontal: 4)
-                                    .onTap(() {
-                                  ForgotPasswordScreen().launch(context);
-                                }),
-                              ),
-                              40.height,
+                /// Form
+                Container(
+                  padding: EdgeInsets.only(top: 32),
+                  child: Stack(
+                    children: [
+                      Form(
+                        key: formKey,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        child: SingleChildScrollView(
+                          // padding: EdgeInsets.all(16),
+                          child: AutofillGroup(
+                            child: Column(
+                              children: [
+                                AppTextField(
+                                  controller: emailController,
+                                  focus: emailNode,
+                                  nextFocus: passwordNode,
+                                  textStyle: primaryTextStyle(),
+                                  textFieldType: TextFieldType.EMAIL,
+                                  keyboardType: TextInputType.emailAddress,
+                                  cursorColor: appStore.isDarkMode
+                                      ? AppColors.kHabitOrange
+                                      : AppColors.kHabitDark,
+                                  decoration: appTextFieldInputDeco(hint: 'Email address'),
+                                  autoFillHints: [AutofillHints.email],
+                                  errorInvalidEmail: AppStrings.kInvalidEmailError,
+                                  errorThisFieldRequired: errorThisFieldRequired,
+                                ).paddingBottom(16),
+                                AppTextField(
+                                  controller: passController,
+                                  focus: passwordNode,
+                                  textStyle: primaryTextStyle(),
+                                  textFieldType: TextFieldType.PASSWORD,
+                                  cursorColor: appStore.isDarkMode
+                                      ? AppColors.kHabitOrange
+                                      : AppColors.kHabitDark,
+                                  decoration: appTextFieldInputDeco(hint: 'Password'),
+                                  autoFillHints: [AutofillHints.password],
+                                  errorThisFieldRequired: errorThisFieldRequired,
+                                  onFieldSubmitted: (s) {
+                                    signIn();
+                                  },
+                                ),
+                                16.height,
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Text('Forgot password ?',
+                                          style: primaryTextStyle(),
+                                          textAlign: TextAlign.end)
+                                      .paddingSymmetric(vertical: 8, horizontal: 4)
+                                      .onTap(() {
+                                    ForgotPasswordScreen().launch(context);
+                                  }),
+                                ),
+                                40.height,
 
-                              /// Navigate to Create Account Screen
-                              InkWell(
-                                onTap: () {
-                                  Navigator.push(context, AppRoutes().createAccountScreen);
-                                },
-                                child: SizedBox(
+                                /// Navigate to Create Account Screen
+                                SizedBox(
                                   width: screenWidth,
                                   child: Container(
-                                    child: RichText(
-                                      text: TextSpan(
-                                        text: "Don't have an account yet ? ",
-                                        style: TextStyle(
-                                          color: getBoolAsync(IS_DARK_MODE)
-                                              ? AppColors.kTextWhite
-                                              : AppColors.kTextBlack,
-                                          fontWeight: TextFontWeight.regular,
-                                        ),
-                                        children: [
-                                          TextSpan(
-                                            text: "\nCreate an account here",
-                                            style: TextStyle(
-                                              color: AppColors.kHabitOrange,
-                                              fontWeight: TextFontWeight.bold,
-                                            ),
+                                    child: Container(
+                                      child: RichText(
+                                        text: TextSpan(
+                                          text: "Don't have an account yet ? ",
+                                          style: TextStyle(
+                                            color: getBoolAsync(IS_DARK_MODE)
+                                                ? AppColors.kTextWhite
+                                                : AppColors.kTextBlack,
+                                            fontWeight: TextFontWeight.regular,
                                           ),
-                                        ],
+                                          children: [
+                                            TextSpan(
+                                              text: "\nCreate an account here",
+                                              style: TextStyle(
+                                                color: AppColors.kHabitOrange,
+                                                fontWeight: TextFontWeight.bold,
+                                              ),
+                                              recognizer: TapGestureRecognizer()
+                                                ..onTap = () {
+                                                  Navigator.push(context, AppRoutes().createAccountScreen);
+                                                },
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              40.height,
+                                40.height,
 
-                              /// Log In Button
-                              CustomButton(
-                                text: AppStrings.login,
-                                onPressed: () {
-                                  signIn();
-                                },
-                              ),
-                              16.height,
-                              Row(
-                                children: [
-                                  Divider(thickness: 1, endIndent: 10, indent: 10)
-                                      .expand(),
-                                  Text(with_social_media,
-                                      style: primaryTextStyle(size: 12)),
-                                  Divider(thickness: 1, endIndent: 10, indent: 10)
-                                      .expand(),
-                                ],
-                              ),
-                              16.height,
-
-                              /// Google Button
-                              AppButton(
-                                width: context.width(),
-                                color: AppColors.kHabitWhite,
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
+                                /// Log In Button
+                                CustomButton(
+                                  text: AppStrings.login,
+                                  onPressed: () {
+                                    signIn();
+                                  },
+                                ),
+                                16.height,
+                                Row(
                                   children: [
-                                    GoogleLogoWidget(),
-                                    16.width,
-                                    Text(
-                                      continue_with_google,
-                                      style: primaryTextStyle(
-                                          color: AppColors.kTextBlack,
-                                          size: 18,
-                                          weight: TextFontWeight.bold),
-                                    ),
+                                    Divider(thickness: 1, endIndent: 10, indent: 10)
+                                        .expand(),
+                                    Text(with_social_media,
+                                        style: primaryTextStyle(size: 12)),
+                                    Divider(thickness: 1, endIndent: 10, indent: 10)
+                                        .expand(),
                                   ],
                                 ),
-                                onTap: () {
-                                  appStore.setLoading(true);
-                                  service.signInWithGoogle().then((value) async {
-                                    await addNotification();
+                                16.height,
 
-                                    appStore.setLoading(false);
+                                /// Google Button
+                                AppButton(
+                                  width: context.width(),
+                                  color: AppColors.kHabitWhite,
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      GoogleLogoWidget(),
+                                      16.width,
+                                      Text(
+                                        continue_with_google,
+                                        style: primaryTextStyle(
+                                            color: AppColors.kTextBlack,
+                                            size: 18,
+                                            weight: TextFontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                  onTap: () {
+                                    appStore.setLoading(true);
+                                    service.signInWithGoogle().then((value) async {
+                                      await addNotification();
+
+                                      appStore.setLoading(false);
+                                      DashboardScreen()
+                                          .launch(context, isNewTask: true);
+                                    }).catchError((error) {
+                                      appStore.setLoading(false);
+
+                                      toast(error.toString());
+                                    });
+                                  },
+                                ),
+                                16.height,
+                                Container(
+                                  padding: EdgeInsets.all(16),
+                                  decoration: boxDecorationRoundedWithShadow(30,
+                                      backgroundColor: appStore.isDarkMode
+                                          ? AppColors.kHabitDark
+                                          : Colors.white),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset('assets/images/ic_apple.png',
+                                          width: 23,
+                                          height: 23,
+                                          color:
+                                              appStore.isDarkMode ? white : black),
+                                      16.width,
+                                      Text(continue_with_apple,
+                                          style: primaryTextStyle(size: 18)),
+                                    ],
+                                  ).center(),
+                                ).onTap(() async {
+                                  hideKeyboard(context);
+
+                                  appStore.setLoading(true);
+                                  await service.appleLogIn().then((value) {
                                     DashboardScreen()
                                         .launch(context, isNewTask: true);
-                                  }).catchError((error) {
-                                    appStore.setLoading(false);
-
-                                    toast(error.toString());
+                                  }).catchError((e) {
+                                    toast(e.toString());
                                   });
-                                },
-                              ),
-                              16.height,
-                              Container(
-                                padding: EdgeInsets.all(16),
-                                decoration: boxDecorationRoundedWithShadow(30,
-                                    backgroundColor: appStore.isDarkMode
-                                        ? AppColors.kHabitDark
-                                        : Colors.white),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset('assets/images/ic_apple.png',
-                                        width: 23,
-                                        height: 23,
-                                        color:
-                                            appStore.isDarkMode ? white : black),
-                                    16.width,
-                                    Text(continue_with_apple,
-                                        style: primaryTextStyle(size: 18)),
-                                  ],
-                                ).center(),
-                              ).onTap(() async {
-                                hideKeyboard(context);
-
-                                appStore.setLoading(true);
-                                await service.appleLogIn().then((value) {
-                                  DashboardScreen()
-                                      .launch(context, isNewTask: true);
-                                }).catchError((e) {
-                                  toast(e.toString());
-                                });
-                                appStore.setLoading(false);
-                              }).visible(isIOS),
-                            ],
+                                  appStore.setLoading(false);
+                                }).visible(isIOS),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    ).center(),
-                    Observer(
-                        builder: (_) => Loader(
-                                color: appStore.isDarkMode
-                                    ? AppColors.kHabitDark
-                                    : AppColors.kHabitOrange)
-                            .visible(appStore.isLoading)),
-                  ],
+                      ).center(),
+                      Observer(
+                          builder: (_) => Loader(
+                                  color: appStore.isDarkMode
+                                      ? AppColors.kHabitDark
+                                      : AppColors.kHabitOrange)
+                              .visible(appStore.isLoading)),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
