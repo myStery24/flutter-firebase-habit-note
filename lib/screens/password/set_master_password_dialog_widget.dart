@@ -5,7 +5,7 @@ import 'package:habit_note/utils/common.dart';
 import 'package:habit_note/utils/constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import '../../../main.dart';
+import '../../main.dart';
 
 /// Create a 4-digit password for locking notes
 class SetMasterPasswordDialogWidget extends StatefulWidget {
