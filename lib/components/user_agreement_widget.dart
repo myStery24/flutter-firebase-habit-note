@@ -33,7 +33,7 @@ class AgreementWidget extends StatelessWidget {
                     ? AppColors.kHabitOrange
                     : AppColors.kTextBlack,
                 fontSize: 16.0,
-                fontWeight: TextFontWeight.medium,
+                fontWeight: TextFontWeight.bold,
               ),
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
@@ -48,7 +48,7 @@ class AgreementWidget extends StatelessWidget {
                       ? AppColors.kHabitOrange
                       : AppColors.kTextBlack,
                   fontSize: 16.0,
-                  fontWeight: TextFontWeight.medium,
+                  fontWeight: TextFontWeight.bold,
                 ),
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
