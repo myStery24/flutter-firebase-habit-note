@@ -83,8 +83,8 @@ flutter:
   uses-material-design: true
   assets:
    - assets/images/
-   - assets/icons/
-   - assets/google_fonts/
+   - assets/google_fonts/Lato/
+   - assets/google_fonts/Fugaz_One/
    - assets/terms_of_use.md
    - assets/privacy_policy.md
    - assets/about_app.md
