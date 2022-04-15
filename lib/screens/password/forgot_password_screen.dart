@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:habit_note/utils/colors.dart';
+import 'package:habit_note/utils/colours.dart';
 import 'package:habit_note/utils/common.dart';
 import 'package:habit_note/utils/string_constant.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -68,11 +68,14 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 ),
                 20.height,
                 AppButton(
-                  child: Text(reset_pwd,
-                      style: boldTextStyle(
-                          color: appStore.isDarkMode
-                              ? AppColors.kHabitDark
-                              : Colors.white)),
+                  child: Text(
+                    reset_pwd,
+                    style: boldTextStyle(
+                        color: appStore.isDarkMode
+                            ? AppColors.kTextBlack
+                            : AppColors.kTextWhite,
+                        weight: TextFontWeight.bold),
+                  ),
                   color: appStore.isDarkMode
                       ? AppColors.kHabitOrange
                       : AppColors.kHabitOrange,

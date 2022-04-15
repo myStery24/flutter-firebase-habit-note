@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:habit_note/utils/colors.dart';
 import 'package:habit_note/utils/common.dart';
 import 'package:habit_note/utils/constants.dart';
-import 'package:habit_note/utils/string_constant.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../main.dart';
+import '../../utils/colours.dart';
 
+/// For account loginType = app
 class ChangeAppPasswordScreen extends StatefulWidget {
   static String tag = '/ChangeAppPasswordScreen';
 
@@ -70,7 +70,7 @@ class ChangeAppPasswordScreenState extends State<ChangeAppPasswordScreen> {
                             ? Colors.white
                             : AppColors.kHabitDark,
                         decoration:
-                            appTextFieldInputDeco(hint: 'Current password'),
+                        appTextFieldInputDeco(hint: 'Current password'),
                         errorThisFieldRequired: errorThisFieldRequired,
                         validator: (val) {
                           if (val!.trim() != getStringAsync(PASSWORD)) {
@@ -139,9 +139,9 @@ class ChangeAppPasswordScreenState extends State<ChangeAppPasswordScreen> {
           ),
           Observer(
               builder: (_) => Loader(
-                      color: appStore.isDarkMode
-                          ? AppColors.kHabitOrange
-                          : AppColors.kHabitDark)
+                  color: appStore.isDarkMode
+                      ? AppColors.kHabitOrange
+                      : AppColors.kHabitDark)
                   .visible(appStore.isLoading)),
         ],
       ),
@@ -157,7 +157,7 @@ class ChangeAppPasswordScreenState extends State<ChangeAppPasswordScreen> {
           .then((value) async {
         appStore.setLoading(false);
 
-        await setValue(PASSWORD, newPwdController.text.trim());
+        await setValue(PASSWORD, confirmPwdController.text.trim());
 
         finish(context);
         toast(pwd_change_successfully);
