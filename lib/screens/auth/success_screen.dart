@@ -92,7 +92,7 @@ class _SuccessScreenState extends State<SuccessScreen> {
           16.height,
           ButtonBar(
             children: <Widget>[
-              /// Create account button
+              /// Back to Dashboard button
               CustomButton(
                 color: AppColors.kHabitWhite,
                 textColor: AppColors.kHabitOrange,
