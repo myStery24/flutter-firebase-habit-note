@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:habit_note/screens/password/ForgotPasswordScreen.dart';
-import 'package:habit_note/screens/PrivacyPolicy.dart';
-import 'package:habit_note/utils/colors.dart';
+import 'package:habit_note/screens/password/forgot_password_screen.dart';
+import 'package:habit_note/components/privacy_policy_screen.dart';
+import 'package:habit_note/utils/colours.dart';
 import 'package:habit_note/utils/constants.dart';
 
-import '../screens/TermsOfUse.dart';
+import 'terms_of_use_screen.dart';
 
 class OnboardDrawerWidget extends StatelessWidget {
   final padding = const EdgeInsets.symmetric(horizontal: 20.0);
@@ -48,11 +48,11 @@ class OnboardDrawerWidget extends StatelessWidget {
                   onPressed: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => const PrivacyPolicy(),
+                        builder: (context) => const PrivacyPolicyScreen(),
                       ),
                     );
                   },
-                  child: const Text('Privacy Policy'),
+                  child: const Text('Privacy Policy', style: TextStyle(fontSize: 16.0),),
                 ),
                 const CircleAvatar(
                   backgroundColor: AppColors.kHabitDarkGrey,
@@ -66,11 +66,11 @@ class OnboardDrawerWidget extends StatelessWidget {
                   onPressed: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => const Terms(),
+                        builder: (context) => const TermsOfUseScreen(),
                       ),
                     );
                   },
-                  child: const Text('Terms of Use'),
+                  child: const Text('Terms of Use', style: TextStyle(fontSize: 16.0),),
                 ),
               ],
             ),
@@ -96,8 +96,8 @@ class OnboardDrawerWidget extends StatelessWidget {
                   ),
                 ),
                 TextSpan(
-                  text: "V0.0.1",
-                  style: GoogleFonts.roboto(
+                  text: AppStrings.appVersion,
+                  style: GoogleFonts.lato(
                     color: Colors.black,
                     fontSize: 14.0,
                     fontWeight: TextFontWeight.regular,
@@ -117,12 +117,13 @@ class OnboardDrawerWidget extends StatelessWidget {
   }) {
     const color = Colors.black;
     const hoverColor = Colors.black45;
+    const fontSize = 16.0;
 
     return ListTile(
       leading: Icon(icon, color: color),
       title: Text(
         text,
-        style: const TextStyle(color: color),
+        style: const TextStyle(color: color, fontSize: fontSize),
       ),
       hoverColor: hoverColor,
       // Navigate to another screen
