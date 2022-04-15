@@ -48,7 +48,8 @@ class LockNoteDialogWidgetState extends State<LockNoteDialogWidget> {
             style: TextStyle(
                 color: getBoolAsync(IS_DARK_MODE)
                     ? AppColors.kHabitOrange
-                    : AppColors.kTextBlack
+                    : AppColors.kTextBlack,
+              fontWeight: TextFontWeight.bold,
             ),
           ),
           content: AppTextField(
