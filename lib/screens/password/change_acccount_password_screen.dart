@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:habit_note/components/reset_account_password_widget.dart';
 import 'package:habit_note/utils/common.dart';
 import 'package:habit_note/utils/constants.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -7,9 +9,9 @@ import 'package:nb_utils/nb_utils.dart';
 import '../../main.dart';
 import '../../utils/colours.dart';
 
-/// For account loginType = app
+/// Only works for account loginType = app
 class ChangeAppPasswordScreen extends StatefulWidget {
-  static String tag = '/ChangeAppPasswordScreen';
+  static String tag = '/ChangeAccPasswordScreen';
 
   @override
   ChangeAppPasswordScreenState createState() => ChangeAppPasswordScreenState();
@@ -46,7 +48,7 @@ class ChangeAppPasswordScreenState extends State<ChangeAppPasswordScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        title: Text(reset_pwd),
+        title: Text(change_acc_pwd),
       ),
       body: Stack(
         children: [
@@ -59,6 +61,17 @@ class ChangeAppPasswordScreenState extends State<ChangeAppPasswordScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // 15.height,
+                    // Text('Forgot your account password ?',
+                    //     style: boldTextStyle(size: 22)),
+                    15.height,
+                    Text(
+                        'Please fill up the following fields to change your account password.',
+                        style: primaryTextStyle(size: 14)),
+
+                    /// Reset through email
+                    ResetAccountPasswordWidget(),
+                    20.height,
                     AppTextField(
                         controller: currentPwdController,
                         focus: currentNode,
@@ -69,8 +82,7 @@ class ChangeAppPasswordScreenState extends State<ChangeAppPasswordScreen> {
                         cursorColor: appStore.isDarkMode
                             ? Colors.white
                             : AppColors.kHabitDark,
-                        decoration:
-                        appTextFieldInputDeco(hint: 'Current password'),
+                        decoration: appTextFieldInputDeco(hint: current_pwd),
                         errorThisFieldRequired: errorThisFieldRequired,
                         validator: (val) {
                           if (val!.trim() != getStringAsync(PASSWORD)) {
@@ -92,6 +104,27 @@ class ChangeAppPasswordScreenState extends State<ChangeAppPasswordScreen> {
                       decoration: appTextFieldInputDeco(hint: new_pwd),
                       errorThisFieldRequired: errorThisFieldRequired,
                     ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        IconButton(
+                            icon: Icon(
+                              Icons.info_outline,
+                              color: getBoolAsync(IS_DARK_MODE)
+                                  ? AppColors.kHabitOrange
+                                  : AppColors.kHabitDark,
+                            ),
+                            onPressed: null),
+                        Text(
+                          'Your password must have at least 6 characters.',
+                          style: TextStyle(
+                            color: getBoolAsync(IS_DARK_MODE)
+                                ? AppColors.kTextWhite
+                                : AppColors.kTextBlack,
+                          ),
+                        ),
+                      ],
+                    ),
                     16.height,
                     AppTextField(
                       controller: confirmPwdController,
@@ -102,7 +135,7 @@ class ChangeAppPasswordScreenState extends State<ChangeAppPasswordScreen> {
                       cursorColor: appStore.isDarkMode
                           ? Colors.white
                           : AppColors.kHabitDark,
-                      decoration: appTextFieldInputDeco(hint: confirm_pwd),
+                      decoration: appTextFieldInputDeco(hint: confirm_new_pwd),
                       errorThisFieldRequired: errorThisFieldRequired,
                       validator: (value) {
                         if (value!.trim().isEmpty)
@@ -119,30 +152,34 @@ class ChangeAppPasswordScreenState extends State<ChangeAppPasswordScreen> {
                     ),
                     16.height,
                     AppButton(
-                      child: Text(change_pwd,
+                      child: Text(change_acc_pwd2,
                           style: boldTextStyle(
                               color: appStore.isDarkMode
                                   ? AppColors.kHabitDark
                                   : Colors.white)),
-                      color: appStore.isDarkMode
-                          ? AppColors.kHabitOrange
-                          : AppColors.kHabitDark,
+                      color: AppColors.kHabitOrange,
                       width: context.width(),
                       onTap: () {
                         resetPassword();
                       },
                     ),
+                    16.height,
+                    Divider(
+                      thickness: 2,
+                    ),
+                    infoWidget(),
                   ],
                 ),
               ).center(),
             ),
           ),
           Observer(
-              builder: (_) => Loader(
-                  color: appStore.isDarkMode
-                      ? AppColors.kHabitOrange
-                      : AppColors.kHabitDark)
-                  .visible(appStore.isLoading)),
+            builder: (_) => Loader(
+                    color: appStore.isDarkMode
+                        ? AppColors.kHabitOrange
+                        : AppColors.kHabitDark)
+                .visible(appStore.isLoading),
+          ),
         ],
       ),
     );
@@ -151,7 +188,6 @@ class ChangeAppPasswordScreenState extends State<ChangeAppPasswordScreen> {
   void resetPassword() {
     if (_formKey.currentState!.validate()) {
       appStore.setLoading(true);
-
       service
           .resetPassword(newPassword: newPwdController.text.trim())
           .then((value) async {
@@ -160,12 +196,48 @@ class ChangeAppPasswordScreenState extends State<ChangeAppPasswordScreen> {
         await setValue(PASSWORD, confirmPwdController.text.trim());
 
         finish(context);
-        toast(pwd_change_successfully);
+        toast(pwd_changed_successfully);
       }).catchError((error) {
         appStore.setLoading(false);
         log(error.toString());
         toast(errorSomethingWentWrong);
       });
     }
+  }
+
+  Widget infoWidget() {
+    Size size = MediaQuery.of(context).size;
+    return SafeArea(
+      child: Container(
+        child: Column(
+          children: [
+            Container(
+              width: size.width,
+              child: Row(
+                children: [
+                  /// Info for account login through third-parties
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Note: ',
+                          textAlign: TextAlign.left,
+                          style: GoogleFonts.lato(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                            'This section does not apply to accounts created through Google services/ third-party login.'),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
