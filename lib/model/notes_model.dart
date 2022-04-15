@@ -7,7 +7,7 @@ class NotesModel {
   String? note;
   String? color;
   String? noteImage;
-  List<String?>? label;
+  // List<String?>? label;
   DateTime? createdAt;
   DateTime? updatedAt;
   List<CheckListModel>? checkListModel;
@@ -22,7 +22,7 @@ class NotesModel {
     this.note,
     this.color,
     this.noteImage,
-    this.label,
+    // this.label,
     this.createdAt,
     this.updatedAt,
     this.checkListModel,
@@ -38,7 +38,7 @@ class NotesModel {
       note: json['note'],
       color: json['color'],
       noteImage: json['noteImage'],
-      label: json['label'] !=null ? (json['label'] as List).map<String>((e) => e).toList() : null,
+      // label: json['label'] !=null ? (json['label'] as List).map<String>((e) => e).toList() : null,
       createdAt: json['createdAt'] != null ? (json['createdAt'] as Timestamp).toDate() : null,
       updatedAt: json['updatedAt'] != null ? (json['updatedAt'] as Timestamp).toDate() : null,
       checkListModel: json['checkList'] != null ? (json['checkList'] as List).map<CheckListModel>((e) => CheckListModel.fromJson(e)).toList() : null,
@@ -60,7 +60,7 @@ class NotesModel {
     data['updatedAt'] = this.updatedAt;
 
     /// Check is null or not
-    data['label'] = this.label!.map((e) => e).toList();
+    // data['label'] = this.label!.map((e) => e).toList();
     data['checkList'] = this.checkListModel!.map((e) => e.toJson()).toList();
     data['collaborateWith'] = this.collaborateWith!.map((e) => e).toList();
 
@@ -72,15 +72,15 @@ class NotesModel {
 
 class CheckListModel {
   String? todo;
-  List<String>? label;
+  // List<String?>? label;
   bool? isCompleted;
 
-  CheckListModel({this.todo, this.isCompleted, this.label});
+  CheckListModel({this.todo, this.isCompleted});
 
   factory CheckListModel.fromJson(Map<String, dynamic> json) {
     return CheckListModel(
       todo: json['todo'],
-      label: json['label'],
+      // label: json['label'],
       isCompleted: json['isCompleted'],
     );
   }
@@ -89,7 +89,7 @@ class CheckListModel {
     Map<String, dynamic> data = Map<String, dynamic>();
 
     data['todo'] = this.todo;
-    data['label'] = this.label;
+    // data['label'] = this.label;
     data['isCompleted'] = this.isCompleted;
 
     return data;
