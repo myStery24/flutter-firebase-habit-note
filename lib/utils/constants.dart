@@ -202,6 +202,7 @@ const confirm_to_delete_note = 'Confirm to delete note ?';
 const select_option = 'Select option';
 const unlock_note = 'Unlock note';
 const lock_note = 'Lock note';
+const lock_unlock_note = 'Lock & Unlock Note';
 const create_lock_note_pwd = 'Create a master password';
 const select_layout = 'Select layout';
 const forgot_pwd = 'Forgot Password';
