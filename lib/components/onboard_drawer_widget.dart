@@ -96,7 +96,7 @@ class OnboardDrawerWidget extends StatelessWidget {
                   ),
                 ),
                 TextSpan(
-                  text: AppStrings.appVersion,
+                  text: AppStrings.appVersionText,
                   style: GoogleFonts.lato(
                     color: Colors.black,
                     fontSize: 14.0,
