@@ -3,12 +3,11 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:habit_note/model/subscription_model.dart';
 import 'package:habit_note/utils/colours.dart';
 import 'package:habit_note/utils/constants.dart';
-import 'package:habit_note/utils/string_constant.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import '../../../main.dart';
-import '../../../utils/common.dart';
+import '../../../../main.dart';
+import '../../../../utils/common.dart';
 
 class AddSubscriptionReminderScreen extends StatefulWidget {
   final SubscriptionModel? subscriptionModel;
@@ -20,8 +19,7 @@ class AddSubscriptionReminderScreen extends StatefulWidget {
       AddSubscriptionReminderScreenState();
 }
 
-class AddSubscriptionReminderScreenState
-    extends State<AddSubscriptionReminderScreen> {
+class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderScreen> {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   TextEditingController amountController = TextEditingController();
@@ -94,7 +92,8 @@ class AddSubscriptionReminderScreenState
             : Theme(
                 data: ThemeData.light().copyWith(
                   colorScheme: ColorScheme.fromSwatch(
-                    primarySwatch: Colors.teal,
+                    primarySwatch: Colors.orange,
+                    // primarySwatch: Colors.teal,
                   ),
                   dialogBackgroundColor: Colors.white,
                 ),
@@ -175,7 +174,7 @@ class AddSubscriptionReminderScreenState
                               textFieldType: TextFieldType.PHONE,
                               focus: amountFocus,
                               nextFocus: nameFocus,
-                              cursorColor: Colors.blueAccent,
+                              cursorColor: Colors.orangeAccent,
                               controller: amountController,
                               textStyle: primaryTextStyle(
                                   size: 40,
@@ -191,7 +190,7 @@ class AddSubscriptionReminderScreenState
                                 border: InputBorder.none,
                               ),
                             ).center(),
-                            Text(INR,
+                            Text(MYR,
                                 style: boldTextStyle(
                                     size: 30,
                                     color: reminderColor!.isDark()
