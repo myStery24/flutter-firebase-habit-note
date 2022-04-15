@@ -431,13 +431,15 @@ class NotesScreenState extends State<NotesScreen> {
                       getStringAsync(USER_EMAIL)) {
                     bool deleted = await showInDialog(
                       context,
-                      title: Text(delete_note,
-                          style: TextStyle(
+                      title: Text(
+                        delete_note,
+                        style: TextStyle(
                           color: getBoolAsync(IS_DARK_MODE)
-                          ? AppColors.kHabitOrange
-                          : AppColors.kTextBlack
-                    ),
-                  ),
+                              ? AppColors.kHabitOrange
+                              : AppColors.kTextBlack,
+                          fontWeight: TextFontWeight.bold,
+                        ),
+                      ),
                       child: Text(confirm_to_delete_note,
                           style: primaryTextStyle()),
                       actions: [
@@ -447,13 +449,16 @@ class NotesScreenState extends State<NotesScreen> {
                             },
                             child: Text(cancel, style: primaryTextStyle())),
                         TextButton(
-                            onPressed: () {
-                              finish(context, true);
-                            },
-                            child: Text(delete,
-                                style: primaryTextStyle(
-                                  color: AppColors.kHabitOrange,
-                                ))),
+                          onPressed: () {
+                            finish(context, true);
+                          },
+                          child: Text(
+                            delete,
+                            style: primaryTextStyle(
+                              color: AppColors.kHabitOrange,
+                            ),
+                          ),
+                        ),
                       ],
                     );
                     if (deleted) {
