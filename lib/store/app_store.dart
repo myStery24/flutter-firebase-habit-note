@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:habit_note/utils/colors.dart';
+import 'package:habit_note/utils/colours.dart';
 import 'package:habit_note/utils/constants.dart';
 import 'package:mobx/mobx.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-part 'AppStore.g.dart';
+part 'app_store.g.dart';
 
 class AppStore = _AppStore with _$AppStore;
 
@@ -42,11 +42,10 @@ abstract class _AppStore with Store {
       textSecondaryColorGlobal = textSecondaryColor;
 
       defaultLoaderBgColorGlobal = AppColors.scaffoldSecondaryDark;
-      // appButtonBackgroundColorGlobal = appButtonColorDark;
       appButtonBackgroundColorGlobal = AppColors.kHabitOrange;
       shadowColorGlobal = Colors.white12;
 
-      setStatusBarColor(AppColors.kHabitDark, statusBarIconBrightness: Brightness.light);
+      setStatusBarColor(AppColors.kHabitDarkGrey, statusBarIconBrightness: Brightness.light);
     } else {
       textPrimaryColorGlobal = textPrimaryColor;
       textSecondaryColorGlobal = textSecondaryColor;

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'AppStore.dart';
+part of 'app_store.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -80,7 +80,8 @@ mixin _$AppStore on _AppStore, Store {
 
   @override
   void setPrimaryColor(Color color) {
-    final _$actionInfo = _$_AppStoreActionController.startAction(name: '_AppStore.setPrimaryColor');
+    final _$actionInfo = _$_AppStoreActionController.startAction(
+        name: '_AppStore.setPrimaryColor');
     try {
       return super.setPrimaryColor(color);
     } finally {
@@ -90,7 +91,8 @@ mixin _$AppStore on _AppStore, Store {
 
   @override
   void setLoading(bool val) {
-    final _$actionInfo = _$_AppStoreActionController.startAction(name: '_AppStore.setLoading');
+    final _$actionInfo =
+        _$_AppStoreActionController.startAction(name: '_AppStore.setLoading');
     try {
       return super.setLoading(val);
     } finally {
@@ -104,7 +106,7 @@ mixin _$AppStore on _AppStore, Store {
 primaryColor: ${primaryColor},
 isLoggedIn: ${isLoggedIn},
 isLoading: ${isLoading},
-isDarkMode: ${isDarkMode},
+isDarkMode: ${isDarkMode}
     ''';
   }
 }
