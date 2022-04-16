@@ -195,6 +195,7 @@ class LoginScreenState extends State<LoginScreen> {
                                               style: TextStyle(
                                                 color: AppColors.kHabitOrange,
                                                 fontWeight: TextFontWeight.bold,
+                                                decoration: TextDecoration.underline,
                                               ),
                                               recognizer: TapGestureRecognizer()
                                                 ..onTap = () {
