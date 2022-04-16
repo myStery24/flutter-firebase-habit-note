@@ -234,6 +234,7 @@ class RegisterScreenState extends State<RegisterScreen> {
                                             style: TextStyle(
                                               color: AppColors.kHabitOrange,
                                               fontWeight: TextFontWeight.bold,
+                                              decoration: TextDecoration.underline,
                                             ),
                                             recognizer: TapGestureRecognizer()
                                               ..onTap = () {
