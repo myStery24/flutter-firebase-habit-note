@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import '../../../model/subscription_model.dart';
-import '../../../utils/constants.dart';
+import '../../../configs/constants.dart';
+import '../../../models/subscription_model.dart';
 import 'AddSubscriptionReminderScreen.dart';
 import 'NotificationScreen.dart';
 

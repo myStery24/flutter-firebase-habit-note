@@ -1,15 +1,13 @@
-import 'dart:core';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:habit_note/model/subscription_model.dart';
-import 'package:habit_note/utils/colours.dart';
-import 'package:habit_note/utils/common.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
 
+import '../../../configs/colors.dart';
+import '../../../configs/common.dart';
+import '../../../configs/constants.dart';
 import '../../../main.dart';
-import '../../../utils/constants.dart';
+import '../../../models/subscription_model.dart';
 
 class NotificationScreen extends StatefulWidget {
   final SubscriptionModel? subscriptionModel;
@@ -95,7 +93,7 @@ class NotificationScreenState extends State<NotificationScreen> {
             Row(
               children: [
                 Radio(
-                  activeColor: AppColors.blueButtonColor,
+                  activeColor: AppColors.kHabitOrange,
                   value: 0,
                   groupValue: radioValue,
                   onChanged: (dynamic val) {
@@ -112,7 +110,7 @@ class NotificationScreenState extends State<NotificationScreen> {
             Row(
               children: [
                 Radio(
-                  activeColor: AppColors.blueButtonColor,
+                  activeColor: AppColors.kHabitOrange,
                   value: 1,
                   groupValue: radioValue,
                   onChanged: (dynamic val) {
@@ -123,7 +121,7 @@ class NotificationScreenState extends State<NotificationScreen> {
                 ),
                 AppTextField(
                   controller: notificationUnitController,
-                  cursorColor: AppColors.blueButtonColor,
+                  cursorColor: AppColors.kHabitOrange,
                   textStyle: primaryTextStyle(),
                   textFieldType: TextFieldType.PHONE,
                   decoration: subscriptionInputDecoration(name: '1'),
@@ -167,7 +165,7 @@ class NotificationScreenState extends State<NotificationScreen> {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
-                  color: AppColors.grayColor.withOpacity(0.2),
+                  color: AppColors.kGrayColor.withOpacity(0.2),
                 ),
                 padding: EdgeInsets.all(8),
                 child: Text(

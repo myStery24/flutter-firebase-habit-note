@@ -3,12 +3,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:habit_note/screens/reminder/SubscriptionReminderListScreen.dart';
-import 'package:habit_note/utils/colours.dart';
-import 'package:habit_note/utils/constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
+import '../configs/colors.dart';
+import '../configs/common.dart';
+import '../configs/constants.dart';
 import '../main.dart';
-import '../utils/common.dart';
 
 class DashboardDrawerWidget extends StatefulWidget {
   static String tag = '/DashboardDrawerWidget';
@@ -74,11 +74,12 @@ class DashboardDrawerWidgetState extends State<DashboardDrawerWidget> {
                       16.width,
                       Text(dark_mode, style: primaryTextStyle(size: 14))
                           .expand(),
-                      Switch(
+                      Switch.adaptive(
                         value: appStore.isDarkMode,
-                        activeTrackColor: AppColors.scaffoldSecondaryDark,
+                        activeColor: AppColors.kHabitOrange,
+                        activeTrackColor: AppColors.kScaffoldSecondaryDark,
                         inactiveThumbColor: AppColors.kHabitDark,
-                        inactiveTrackColor: AppColors.scaffoldSecondaryDark,
+                        inactiveTrackColor: AppColors.kScaffoldSecondaryDark,
                         onChanged: (val) async {
                           appStore.setDarkMode(val);
                           await setValue(IS_DARK_MODE, val);

@@ -5,15 +5,15 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:timezone/data/latest.dart' as tz;
 
-import 'screens/splash_screen.dart';
+import 'screens/splash/splash_screen.dart';
 import 'services/auth_service.dart';
 import 'services/notes_service.dart';
 import 'services/notification_manager.dart';
 import 'services/subscription_service.dart';
 import 'services/user_db_service.dart';
 import 'store/app_store.dart';
-import 'utils/theme.dart';
-import 'utils/constants.dart';
+import 'configs/theme.dart';
+import 'configs/constants.dart';
 
 /// Initialize services
 AppStore appStore = AppStore();

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:habit_note/utils/colours.dart';
-import 'package:habit_note/utils/constants.dart';
-import 'package:habit_note/components/custom_button.dart';
-import 'package:habit_note/components/onboard_drawer_widget.dart';
-import 'package:habit_note/utils/routes.dart';
 import 'package:nb_utils/nb_utils.dart';
 
+import '../../configs/colors.dart';
+import '../../configs/constants.dart';
+import '../../configs/routes.dart';
 import '../../main.dart';
+import '../../widgets/custom_button.dart';
+import '../../widgets/onboard_drawer_widget.dart';
 import 'components/onboard_content.dart';
 import 'components/onboard_title.dart';
 
@@ -31,8 +31,8 @@ class _OnboardScreenState extends State<OnboardScreen> {
 
   Future<void> init() async {
     setStatusBarColor(
-      appStore.isDarkMode ? AppColors.kHabitDarkGrey : AppColors.kHabitBackgroundLightGrey,
-      statusBarIconBrightness: appStore.isDarkMode ? Brightness.light : Brightness.dark,
+      appStore.isDarkMode ? AppColors.kPrimaryVariantColorDark : AppColors.kPrimaryVariantColor,
+      statusBarIconBrightness: appStore.isDarkMode ? Brightness.dark : Brightness.light,
       delayInMilliSeconds: 100,
     );
 
@@ -71,8 +71,8 @@ class _OnboardScreenState extends State<OnboardScreen> {
       child: SafeArea(
         child: Scaffold(
           backgroundColor: appStore.isDarkMode
-              ? AppColors.kHabitDarkGrey
-              : AppColors.kHabitBackgroundLightGrey,
+              ? AppColors.kScaffoldColorDark
+              : AppColors.kScaffoldColor,
 
           /// A sidebar navigation drawer widget
           drawer: const OnboardDrawerWidget(),

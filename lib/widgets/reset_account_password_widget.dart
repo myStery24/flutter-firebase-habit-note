@@ -4,8 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:habit_note/screens/password/forgot_password_screen.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import '../utils/colours.dart';
-import '../utils/constants.dart';
+import '../configs/colors.dart';
+import '../configs/constants.dart';
 
 class ResetAccountPasswordWidget extends StatelessWidget {
   const ResetAccountPasswordWidget({Key? key}) : super(key: key);

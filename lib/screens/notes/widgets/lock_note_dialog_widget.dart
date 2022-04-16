@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:habit_note/utils/colours.dart';
-import 'package:habit_note/utils/common.dart';
-import 'package:habit_note/utils/constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
+import '../../../configs/colors.dart';
+import '../../../configs/common.dart';
+import '../../../configs/constants.dart';
 import '../../../main.dart';
 
 class LockNoteDialogWidget extends StatefulWidget {
@@ -58,7 +58,7 @@ class LockNoteDialogWidgetState extends State<LockNoteDialogWidget> {
             textFieldType: TextFieldType.PASSWORD,
             keyboardType: TextInputType.phone,
             errorThisFieldRequired: errorThisFieldRequired,
-            cursorColor: appStore.isDarkMode ? Colors.white : AppColors.kHabitDark,
+            cursorColor: appStore.isDarkMode ? AppColors.kHabitOrange : AppColors.kHabitDark,
             maxLines: 1,
             maxLength: 4,
             validator: (val) {

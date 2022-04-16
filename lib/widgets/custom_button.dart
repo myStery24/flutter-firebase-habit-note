@@ -1,9 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:habit_note/utils/colours.dart';
-import 'package:habit_note/utils/constants.dart';
+
+import '../configs/colors.dart';
+import '../configs/constants.dart';
 
 class CustomButton extends StatelessWidget {
+  const CustomButton({
+    Key? key,
+    required this.text,
+    required this.onPressed,
+    this.width = 150.0,
+    this.height = 50.0,
+    this.elevation = 8.0,
+    this.borderRadius = 30.0,
+    this.color = AppColors.kHabitOrange,
+    this.fontSize = 18.0,
+    this.fontWeight = TextFontWeight.bold,
+    this.textColor = AppColors.kTextWhite,
+  }) : super(key: key);
+
   /// Button
   final String text;
   final VoidCallback onPressed;
@@ -19,20 +34,6 @@ class CustomButton extends StatelessWidget {
   final double fontSize;
   final FontWeight fontWeight;
   final Color textColor;
-
-  const CustomButton({
-    Key? key,
-    required this.text,
-    required this.onPressed,
-    this.width = 150.0,
-    this.height = 50.0,
-    this.elevation = 8.0,
-    this.borderRadius = 30.0,
-    this.color = AppColors.kHabitOrange,
-    this.fontSize = 18.0,
-    this.fontWeight = TextFontWeight.bold,
-    this.textColor = AppColors.kTextWhite,
-  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

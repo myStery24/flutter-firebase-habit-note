@@ -56,11 +56,11 @@ class NotesModel {
     data['note'] = this.note;
     data['color'] = this.color;
     data['noteImage'] = this.noteImage;
+    // data['label'] = this.label;
     data['createdAt'] = this.createdAt;
     data['updatedAt'] = this.updatedAt;
 
     /// Check is null or not
-    // data['label'] = this.label!.map((e) => e).toList();
     data['checkList'] = this.checkListModel!.map((e) => e.toJson()).toList();
     data['collaborateWith'] = this.collaborateWith!.map((e) => e).toList();
 

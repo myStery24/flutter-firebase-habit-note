@@ -1,8 +1,8 @@
-import 'package:habit_note/model/subscription_model.dart';
-import 'package:habit_note/utils/constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
+import '../configs/constants.dart';
 import '../main.dart';
+import '../models/subscription_model.dart';
 import 'base_service.dart';
 
 class SubscriptionService extends BaseService {

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:habit_note/model/subscription_model.dart';
-import 'package:habit_note/utils/colours.dart';
-import 'package:habit_note/utils/constants.dart';
+
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../../../main.dart';
-import '../../../../utils/common.dart';
+import '../../../configs/colors.dart';
+import '../../../configs/common.dart';
+import '../../../configs/constants.dart';
+import '../../../models/subscription_model.dart';
 
 class AddSubscriptionReminderScreen extends StatefulWidget {
   final SubscriptionModel? subscriptionModel;
@@ -174,7 +175,7 @@ class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderSc
                               textFieldType: TextFieldType.PHONE,
                               focus: amountFocus,
                               nextFocus: nameFocus,
-                              cursorColor: Colors.orangeAccent,
+                              cursorColor: AppColors.kHabitOrange,
                               controller: amountController,
                               textStyle: primaryTextStyle(
                                   size: 40,
@@ -278,7 +279,7 @@ class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderSc
                                     16.width,
                                     AppTextField(
                                       controller: durationController,
-                                      cursorColor: AppColors.blueButtonColor,
+                                      cursorColor: AppColors.kHabitOrange,
                                       textStyle: primaryTextStyle(),
                                       textFieldType: TextFieldType.PHONE,
                                       decoration: subscriptionInputDecoration(
@@ -327,7 +328,7 @@ class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderSc
                                     showDateFrom();
                                   },
                                   controller: firstPaymentController,
-                                  cursorColor: AppColors.blueButtonColor,
+                                  cursorColor: AppColors.kHabitOrange,
                                   textFieldType: TextFieldType.NAME,
                                   decoration: subscriptionInputDecoration(
                                       name: 'e.g. $date_format'),
@@ -344,7 +345,7 @@ class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderSc
                                     showDateFrom();
                                   },
                                   controller: expiryDateController,
-                                  cursorColor: AppColors.blueButtonColor,
+                                  cursorColor: AppColors.kHabitOrange,
                                   textFieldType: TextFieldType.NAME,
                                   decoration: subscriptionInputDecoration(
                                       name: 'e.g. $date_format'),
@@ -360,7 +361,7 @@ class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderSc
                           8.height,
                           AppTextField(
                             controller: paymentMethodController,
-                            cursorColor: AppColors.blueButtonColor,
+                            cursorColor: AppColors.kHabitOrange,
                             textFieldType: TextFieldType.NAME,
                             decoration: subscriptionInputDecoration(
                                 name: 'e.g. Credit Card'),

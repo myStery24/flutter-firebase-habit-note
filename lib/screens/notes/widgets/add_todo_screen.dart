@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:habit_note/model/notes_model.dart';
-import 'package:habit_note/utils/colours.dart';
-import 'package:habit_note/utils/common.dart';
-import 'package:habit_note/utils/constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../../../main.dart';
-import '../../dashboard_screen.dart';
+import '../../../configs/colors.dart';
+import '../../../configs/common.dart';
+import '../../../configs/constants.dart';
+import '../../../models/notes_model.dart';
+import '../../dashboard/dashboard_screen.dart';
 import 'note_collaborator_screen.dart';
 
 class AddToDoScreen extends StatefulWidget {
@@ -63,7 +63,7 @@ class AddToDoScreenState extends State<AddToDoScreen> {
 
   @override
   void dispose() {
-    setStatusBarColor(appStore.isDarkMode ? AppColors.kHabitDarkGrey : Colors.white,
+    setStatusBarColor(appStore.isDarkMode ? AppColors.kPrimaryVariantColorDark : Colors.white,
         delayInMilliSeconds: 100);
     addToDoList();
     super.dispose();
@@ -75,9 +75,9 @@ class AddToDoScreenState extends State<AddToDoScreen> {
       resizeToAvoidBottomInset: true,
       appBar: appBarWidget(
         add_todo,
-        color: _kSelectColor ?? AppColors.kHabitWhite,
+        color: _kSelectColor ?? Colors.white,
         textColor: AppColors.kHabitDark,
-        systemUiOverlayStyle: SystemUiOverlayStyle.dark,
+        systemUiOverlayStyle: SystemUiOverlayStyle.light,
         // brightness: Brightness.light,
         actions: [
           IconButton(
@@ -279,7 +279,7 @@ class AddToDoScreenState extends State<AddToDoScreen> {
                   leading: Icon(Icons.delete_forever_outlined,
                       color: appStore.isDarkMode
                           ? AppColors.kHabitOrange
-                          : AppColors.scaffoldSecondaryDark),
+                          : AppColors.kScaffoldSecondaryDark),
                   title: Text(delete_todo, style: primaryTextStyle()),
                   onTap: () {
                     if (widget.notesModel == null ||

@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import '../utils/colours.dart';
-import '../utils/constants.dart';
-import '../utils/routes.dart';
+import '../configs/colors.dart';
+import '../configs/constants.dart';
+import '../configs/routes.dart';
 
-class AgreementWidget extends StatelessWidget {
-  const AgreementWidget({Key? key}) : super(key: key);
+class UserAgreementWidget extends StatelessWidget {
+  const UserAgreementWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

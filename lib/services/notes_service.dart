@@ -1,12 +1,12 @@
 import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:habit_note/model/notes_model.dart';
-import 'package:habit_note/utils/constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:path/path.dart';
 
+import '../configs/constants.dart';
 import '../main.dart';
+import '../models/notes_model.dart';
 import 'base_service.dart';
 
 class NotesService extends BaseService {

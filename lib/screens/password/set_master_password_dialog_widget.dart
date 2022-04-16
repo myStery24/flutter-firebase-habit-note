@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:habit_note/model/notes_model.dart';
-import 'package:habit_note/utils/colours.dart';
-import 'package:habit_note/utils/common.dart';
-import 'package:habit_note/utils/constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
+import '../../configs/colors.dart';
+import '../../configs/common.dart';
+import '../../configs/constants.dart';
 import '../../main.dart';
+import '../../models/notes_model.dart';
 
 /// Create a 4-digit password for locking notes
 class SetMasterPasswordDialogWidget extends StatefulWidget {
@@ -65,7 +65,7 @@ class SetMasterPasswordDialogWidgetState extends State<SetMasterPasswordDialogWi
                     keyboardType: TextInputType.phone,
                     errorThisFieldRequired: errorThisFieldRequired,
                     cursorColor: appStore.isDarkMode
-                        ? Colors.white
+                        ? AppColors.kHabitOrange
                         : AppColors.kHabitDark,
                     maxLines: 1,
                     maxLength: 4,
@@ -84,7 +84,7 @@ class SetMasterPasswordDialogWidgetState extends State<SetMasterPasswordDialogWi
                     textFieldType: TextFieldType.PASSWORD,
                     keyboardType: TextInputType.phone,
                     cursorColor: appStore.isDarkMode
-                        ? Colors.white
+                        ? AppColors.kHabitOrange
                         : AppColors.kHabitDark,
                     maxLines: 1,
                     maxLength: 4,

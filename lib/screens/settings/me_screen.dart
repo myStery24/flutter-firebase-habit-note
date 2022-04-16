@@ -1,13 +1,12 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habit_note/screens/settings/components/settings_category_widget.dart';
 import 'package:nb_utils/nb_utils.dart';
 
+import '../../configs/colors.dart';
+import '../../configs/constants.dart';
 import '../../main.dart';
-import '../../utils/colours.dart';
-import '../../utils/constants.dart';
 
 class MeScreen extends StatefulWidget {
   static String tag = '/MeScreen';
@@ -34,8 +33,8 @@ class _MeScreenState extends State<MeScreen> {
     return Observer(
       builder: (_) => Scaffold(
         backgroundColor: appStore.isDarkMode
-            ? AppColors.kHabitDarkGrey
-            : AppColors.kScaffoldColor,
+            ? AppColors.kPrimaryVariantColorDark
+            : Theme.of(context).scaffoldBackgroundColor,
         appBar: AppBar(
           title: Text(AppStrings.meScreen,
             style: GoogleFonts.fugazOne(),

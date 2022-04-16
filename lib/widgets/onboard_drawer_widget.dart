@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habit_note/screens/password/forgot_password_screen.dart';
-import 'package:habit_note/components/privacy_policy_screen.dart';
-import 'package:habit_note/utils/colours.dart';
-import 'package:habit_note/utils/constants.dart';
+import 'package:habit_note/screens/policies/privacy_policy_screen.dart';
 
-import 'terms_of_use_screen.dart';
+import '../configs/colors.dart';
+import '../configs/constants.dart';
+import '../screens/policies/terms_of_use_screen.dart';
 
 class OnboardDrawerWidget extends StatelessWidget {
   final padding = const EdgeInsets.symmetric(horizontal: 20.0);
@@ -35,7 +35,7 @@ class OnboardDrawerWidget extends StatelessWidget {
               onClicked: () => _selectedItem(context, 0),
             ),
             const SizedBox(height: 24.0),
-            const Divider(color: AppColors.kHabitDarkGrey),
+            const Divider(color: AppColors.kPrimaryVariantColorDark),
             const SizedBox(height: 24.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -55,7 +55,7 @@ class OnboardDrawerWidget extends StatelessWidget {
                   child: const Text('Privacy Policy', style: TextStyle(fontSize: 16.0),),
                 ),
                 const CircleAvatar(
-                  backgroundColor: AppColors.kHabitDarkGrey,
+                  backgroundColor: AppColors.kPrimaryVariantColorDark,
                   radius: 3,
                 ),
                 TextButton(

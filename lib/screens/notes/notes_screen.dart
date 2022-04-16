@@ -1,23 +1,22 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:habit_note/model/notes_model.dart';
-import 'package:habit_note/utils/colours.dart';
-import 'package:habit_note/utils/common.dart';
-import 'package:habit_note/utils/constants.dart';
-import 'package:habit_note/components/dashboard_drawer_widget.dart';
-import 'package:habit_note/screens/notes/components/filter_note_by_colour_dialog_widget.dart';
-import 'package:habit_note/screens/notes/components/lock_note_dialog_widget.dart';
-import 'package:habit_note/screens/notes/components/note_layout_dialog_widget.dart';
-import 'package:habit_note/screens/password/set_master_password_dialog_widget.dart';
 import 'package:nb_utils/nb_utils.dart';
 
+import '../../configs/colors.dart';
+import '../../configs/common.dart';
+import '../../configs/constants.dart';
 import '../../main.dart';
-import 'components/add_notes_screen.dart';
-import 'components/add_todo_screen.dart';
+import '../../models/notes_model.dart';
+import '../../widgets/dashboard_drawer_widget.dart';
+import '../password/set_master_password_dialog_widget.dart';
+import 'widgets/add_notes_screen.dart';
+import 'widgets/add_todo_screen.dart';
+import 'widgets/filter_note_by_colour_dialog_widget.dart';
+import 'widgets/lock_note_dialog_widget.dart';
+import 'widgets/note_layout_dialog_widget.dart';
 
 class NotesScreen extends StatefulWidget {
   static String tag = '/DashboardScreen';
@@ -48,9 +47,9 @@ class NotesScreenState extends State<NotesScreen> {
 
   Future<void> init() async {
     setStatusBarColor(
-      appStore.isDarkMode ? AppColors.kHabitDarkGrey : AppColors.kHabitWhite,
+      appStore.isDarkMode ? AppColors.kPrimaryVariantColorDark : AppColors.kAppBarColor,
       statusBarIconBrightness:
-          appStore.isDarkMode ? Brightness.light : Brightness.dark,
+          appStore.isDarkMode ? Brightness.dark : Brightness.light,
       delayInMilliSeconds: 100,
     );
 
@@ -400,7 +399,7 @@ class NotesScreenState extends State<NotesScreen> {
                         : Icons.lock_outline_rounded,
                     color: appStore.isDarkMode
                         ? AppColors.kHabitOrange
-                        : AppColors.scaffoldSecondaryDark),
+                        : AppColors.kScaffoldSecondaryDark),
                 title: Text(notesModel.isLock! ? unlock_note : lock_note,
                     style: primaryTextStyle()),
                 onTap: () {
@@ -423,7 +422,7 @@ class NotesScreenState extends State<NotesScreen> {
                 leading: Icon(Icons.delete_forever_outlined,
                     color: appStore.isDarkMode
                         ? AppColors.kHabitOrange
-                        : AppColors.scaffoldSecondaryDark),
+                        : AppColors.kScaffoldSecondaryDark),
                 title: Text(delete_note, style: primaryTextStyle()),
                 onTap: () async {
                   finish(context);
@@ -498,7 +497,7 @@ class NotesScreenState extends State<NotesScreen> {
                 leading: Icon(Icons.keyboard_outlined,
                     color: appStore.isDarkMode
                         ? AppColors.kHabitOrange
-                        : AppColors.scaffoldSecondaryDark),
+                        : AppColors.kScaffoldSecondaryDark),
                 title: Text(add_note, style: primaryTextStyle()),
                 onTap: () {
                   finish(context);
@@ -509,7 +508,7 @@ class NotesScreenState extends State<NotesScreen> {
                 leading: Icon(Icons.check_box_outlined,
                     color: appStore.isDarkMode
                         ? AppColors.kHabitOrange
-                        : AppColors.scaffoldSecondaryDark),
+                        : AppColors.kScaffoldSecondaryDark),
                 title: Text(add_todo, style: primaryTextStyle()),
                 onTap: () {
                   finish(context);

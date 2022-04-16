@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:habit_note/utils/colours.dart';
+import 'package:nb_utils/nb_utils.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../../configs/colors.dart';
+import '../../configs/constants.dart';
+import '../../main.dart';
 
 class TermsOfUseScreen extends StatefulWidget {
   static String tag = '/TermsOfUseScreen';
@@ -20,7 +24,9 @@ class _TermsOfUseScreenState extends State<TermsOfUseScreen> {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: AppColors.kHabitBackgroundLightGrey,
+      backgroundColor: appStore.isDarkMode
+          ? AppColors.kScaffoldColorDark
+          : AppColors.kScaffoldColor,
       appBar: AppBar(
         title: Text('Terms of Use'),
       ),
@@ -52,7 +58,9 @@ class _TermsOfUseScreenState extends State<TermsOfUseScreen> {
                             style: GoogleFonts.lato(
                               fontSize: size.height * 0.025,
                               fontWeight: FontWeight.bold,
-                              color: AppColors.kTextBlack.withOpacity(0.85),
+                              color: getBoolAsync(IS_DARK_MODE)
+                                  ? AppColors.kTextWhite.withOpacity(0.85)
+                                  : AppColors.kTextBlack.withOpacity(0.85),
                             ),
                           ),
                           Text(
@@ -61,7 +69,9 @@ class _TermsOfUseScreenState extends State<TermsOfUseScreen> {
                             style: GoogleFonts.lato(
                               fontSize: size.height * 0.017,
                               fontWeight: FontWeight.bold,
-                              color: AppColors.kTextBlack.withOpacity(0.65),
+                              color: getBoolAsync(IS_DARK_MODE)
+                                  ? AppColors.kTextWhite.withOpacity(0.65)
+                                  : AppColors.kTextBlack.withOpacity(0.65),
                             ),
                           ),
                         ],

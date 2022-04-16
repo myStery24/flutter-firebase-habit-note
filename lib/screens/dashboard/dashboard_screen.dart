@@ -2,15 +2,15 @@ import 'dart:async';
 
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:habit_note/components/dashboard_drawer_widget.dart';
 import 'package:habit_note/screens/ocr/ocr_screen.dart';
 import 'package:habit_note/screens/settings/me_screen.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import 'help_screen.dart';
-import 'notes/notes_screen.dart';
-import '../utils/colours.dart';
-import '../utils/constants.dart';
+import '../../configs/colors.dart';
+import '../../configs/constants.dart';
+import '../../widgets/dashboard_drawer_widget.dart';
+import '../help/help_screen.dart';
+import '../notes/notes_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   static String tag = '/DashboardScreen';
@@ -25,27 +25,27 @@ class DashboardScreenState extends State<DashboardScreen> {
   int index = 0;
   int activeTab = 0;
 
-  String colorFilter = '';
-
-  String? name;
-  String? userEmail;
-  String? imageUrl;
+  // String colorFilter = '';
+  //
+  // String? name;
+  // String? userEmail;
+  // String? imageUrl;
 
   DateTime? currentBackPressTime;
 
-  late int crossAxisCount;
-  late int fitWithCount;
+  // late int crossAxisCount;
+  // late int fitWithCount;
 
   @override
   void initState() {
     super.initState();
-    init();
+    // init();
   }
 
-  Future<void> init() async {
-    fitWithCount = getIntAsync(FIT_COUNT, defaultValue: 1);
-    crossAxisCount = getIntAsync(CROSS_COUNT, defaultValue: 2);
-  }
+  // Future<void> init() async {
+  //   fitWithCount = getIntAsync(FIT_COUNT, defaultValue: 1);
+  //   crossAxisCount = getIntAsync(CROSS_COUNT, defaultValue: 2);
+  // }
 
   @override
   void setState(fn) {
@@ -97,7 +97,7 @@ class DashboardScreenState extends State<DashboardScreen> {
         return MeScreen();
       case 0:
       default:
-        /// Main
+        /// Home
         return NotesScreen();
     }
   }
@@ -106,7 +106,7 @@ class DashboardScreenState extends State<DashboardScreen> {
   Widget buildBottomNavBar() {
     final inactiveColor = Colors.grey;
     return BottomNavyBar(
-      backgroundColor: AppColors.kPrimaryVariantColorDark,
+      backgroundColor: AppColors.kHabitDark,
       containerHeight: 70.0,
       itemCornerRadius: 12,
       selectedIndex: index,

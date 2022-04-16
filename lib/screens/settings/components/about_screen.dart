@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:habit_note/screens/settings/components/licenses_screen.dart';
-import 'package:habit_note/utils/colours.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../utils/constants.dart';
+import '../../../configs/colors.dart';
+import '../../../configs/constants.dart';
+import '../../../main.dart';
+import 'licenses_screen.dart';
 
 class AboutAppScreen extends StatefulWidget {
   static String tag = '/AboutAppScreen';
@@ -24,7 +25,9 @@ class _AboutAppScreenState extends State<AboutAppScreen> {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: AppColors.kHabitBackgroundLightGrey,
+      backgroundColor: appStore.isDarkMode
+          ? AppColors.kScaffoldColorDark
+          : AppColors.kScaffoldColor,
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return <Widget>[
@@ -98,7 +101,9 @@ class _AboutAppScreenState extends State<AboutAppScreen> {
                               style: GoogleFonts.lato(
                                 fontSize: size.height * 0.017,
                                 fontWeight: FontWeight.bold,
-                                color: AppColors.kTextBlack.withOpacity(0.65),
+                                color: getBoolAsync(IS_DARK_MODE)
+                                ? AppColors.kTextWhite.withOpacity(0.65)
+                                : AppColors.kTextBlack.withOpacity(0.65),
                               ),
                             ),
                           ],

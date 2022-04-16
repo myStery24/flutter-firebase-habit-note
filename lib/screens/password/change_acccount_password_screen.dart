@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:habit_note/components/reset_account_password_widget.dart';
-import 'package:habit_note/utils/common.dart';
-import 'package:habit_note/utils/constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
+import '../../configs/colors.dart';
+import '../../configs/common.dart';
+import '../../configs/constants.dart';
 import '../../main.dart';
-import '../../utils/colours.dart';
+import '../../widgets/reset_account_password_widget.dart';
 
 /// Only works for account loginType = app
 class ChangeAppPasswordScreen extends StatefulWidget {
@@ -80,7 +80,7 @@ class ChangeAppPasswordScreenState extends State<ChangeAppPasswordScreen> {
                         keyboardType: TextInputType.text,
                         isPassword: true,
                         cursorColor: appStore.isDarkMode
-                            ? Colors.white
+                            ? AppColors.kHabitOrange
                             : AppColors.kHabitDark,
                         decoration: appTextFieldInputDeco(hint: current_pwd),
                         errorThisFieldRequired: errorThisFieldRequired,
@@ -99,7 +99,7 @@ class ChangeAppPasswordScreenState extends State<ChangeAppPasswordScreen> {
                       keyboardType: TextInputType.text,
                       isPassword: true,
                       cursorColor: appStore.isDarkMode
-                          ? Colors.white
+                          ? AppColors.kHabitOrange
                           : AppColors.kHabitDark,
                       decoration: appTextFieldInputDeco(hint: new_pwd),
                       errorThisFieldRequired: errorThisFieldRequired,
@@ -133,7 +133,7 @@ class ChangeAppPasswordScreenState extends State<ChangeAppPasswordScreen> {
                       keyboardType: TextInputType.text,
                       isPassword: true,
                       cursorColor: appStore.isDarkMode
-                          ? Colors.white
+                          ? AppColors.kHabitOrange
                           : AppColors.kHabitDark,
                       decoration: appTextFieldInputDeco(hint: confirm_new_pwd),
                       errorThisFieldRequired: errorThisFieldRequired,

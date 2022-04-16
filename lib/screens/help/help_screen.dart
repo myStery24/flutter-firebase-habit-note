@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:habit_note/utils/colours.dart';
-import 'package:habit_note/utils/constants.dart';
+
+import '../../configs/colors.dart';
+import '../../configs/constants.dart';
+import '../../main.dart';
 
 class HelpScreen extends StatelessWidget {
   const HelpScreen({Key? key}) : super(key: key);
@@ -9,7 +11,9 @@ class HelpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.kHabitBackgroundLightGrey,
+      backgroundColor: appStore.isDarkMode
+          ? AppColors.kScaffoldColorDark
+          : AppColors.kScaffoldColor,
       appBar: AppBar(
         title: Text(AppStrings.helpScreen,
           style: GoogleFonts.fugazOne(),

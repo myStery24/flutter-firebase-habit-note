@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:habit_note/utils/colours.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import '../../../utils/constants.dart';
+import '../../../configs/colors.dart';
+import '../../../configs/constants.dart';
 
 class LicensesScreen extends StatefulWidget {
   static String tag = '/LicensesScreen';

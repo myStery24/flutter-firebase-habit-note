@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:habit_note/screens/password/change_acccount_password_screen.dart';
-import 'package:habit_note/screens/settings/components/about_screen.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import '../../../components/privacy_policy_screen.dart';
-import '../../../components/terms_of_use_screen.dart';
+import '../../../configs/colors.dart';
+import '../../../configs/common.dart';
+import '../../../configs/constants.dart';
 import '../../../main.dart';
-import '../../../utils/colours.dart';
-import '../../../utils/common.dart';
-import '../../../utils/constants.dart';
+import '../../password/change_acccount_password_screen.dart';
 import '../../password/change_master_password_screen.dart';
-import '../../password/forgot_password_screen.dart';
+import '../../policies/privacy_policy_screen.dart';
+import '../../policies/terms_of_use_screen.dart';
+import 'about_screen.dart';
 
 class SettingsCategory extends StatefulWidget {
   const SettingsCategory({Key? key}) : super(key: key);
@@ -56,7 +55,7 @@ class _SettingsCategoryState extends State<SettingsCategory> {
           ),
           shadowColor: getBoolAsync(IS_DARK_MODE)
               ? AppColors.kHabitOrange
-              : AppColors.kPrimaryVariantColorDark,
+              : AppColors.kHabitDark,
           elevation: 5,
           clipBehavior: Clip.antiAlias,
           child: Padding(
@@ -95,7 +94,7 @@ class _SettingsCategoryState extends State<SettingsCategory> {
                           fontSize: 14.0,
                           color: getBoolAsync(IS_DARK_MODE)
                               ? AppColors.kHintTextLightGrey
-                              : AppColors.grayColor,
+                              : AppColors.kGrayColor,
                           fontWeight: TextFontWeight.light,
                         ),
                         overflow: TextOverflow.ellipsis),
@@ -123,11 +122,13 @@ class _SettingsCategoryState extends State<SettingsCategory> {
                 ? AppColors.kHabitOrange
                 : AppColors.kPrimaryVariantColorDark,
           ),
-          title: Switch(
+          // adaptive = both Android and iOS
+          title: Switch.adaptive(
             value: appStore.isDarkMode,
-            activeTrackColor: AppColors.scaffoldSecondaryDark,
+            activeColor: AppColors.kHabitOrange,
+            activeTrackColor: AppColors.kScaffoldSecondaryDark,
             inactiveThumbColor: AppColors.kHabitDark,
-            inactiveTrackColor: AppColors.scaffoldSecondaryDark,
+            inactiveTrackColor: AppColors.kScaffoldSecondaryDark,
             onChanged: (val) async {
               appStore.setDarkMode(val);
               await setValue(IS_DARK_MODE, val);

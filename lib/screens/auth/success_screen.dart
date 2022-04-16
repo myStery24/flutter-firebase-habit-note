@@ -1,15 +1,15 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:confetti/confetti.dart';
-import 'package:habit_note/components/custom_button.dart';
-import 'package:habit_note/screens/dashboard_screen.dart';
-import 'package:habit_note/utils/colours.dart';
-import 'dart:math';
-
-import 'package:habit_note/utils/constants.dart';
+import 'package:habit_note/screens/dashboard/dashboard_screen.dart';
 import 'package:nb_utils/nb_utils.dart';
 
+import '../../configs/colors.dart';
+import '../../configs/constants.dart';
 import '../../main.dart';
+import '../../widgets/custom_button.dart';
 
 /// Display when login is successful
 class SuccessScreen extends StatefulWidget {
@@ -23,12 +23,15 @@ class _SuccessScreenState extends State<SuccessScreen> {
   @override
   void initState() {
     ConfettiController(duration: const Duration(seconds: 5));
-    _controllerBottomCenter = ConfettiController(duration: const Duration(seconds: 10));
-    WidgetsBinding.instance?.addPostFrameCallback((_) => _controllerBottomCenter.play());
+    _controllerBottomCenter =
+        ConfettiController(duration: const Duration(seconds: 10));
+    WidgetsBinding.instance
+        ?.addPostFrameCallback((_) => _controllerBottomCenter.play());
 
     setStatusBarColor(
       AppColors.kHabitOrange,
-      statusBarIconBrightness: appStore.isDarkMode ? Brightness.light: Brightness.dark,
+      statusBarIconBrightness:
+          appStore.isDarkMode ? Brightness.dark : Brightness.light,
       delayInMilliSeconds: 100,
     );
 
@@ -59,8 +62,10 @@ class _SuccessScreenState extends State<SuccessScreen> {
               maxBlastForce: 3, // set a lower max blast force
               minBlastForce: 2,
               emissionFrequency: 0.3,
-              minimumSize: const Size(10, 10), // set the minimum potential size for the confetti (width, height)
-              maximumSize: const Size(20, 20), // set the maximum potential size for the confetti (width, height)
+              minimumSize: const Size(10,
+                  10), // set the minimum potential size for the confetti (width, height)
+              maximumSize: const Size(20,
+                  20), // set the maximum potential size for the confetti (width, height)
               numberOfParticles: 1,
               gravity: 1,
             ),
@@ -94,7 +99,7 @@ class _SuccessScreenState extends State<SuccessScreen> {
             children: <Widget>[
               /// Back to Dashboard button
               CustomButton(
-                color: AppColors.kHabitWhite,
+                color: AppColors.kPrimaryVariantColor,
                 textColor: AppColors.kHabitOrange,
                 text: AppStrings.back,
                 onPressed: () {

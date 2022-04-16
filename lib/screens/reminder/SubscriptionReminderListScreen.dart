@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:habit_note/model/subscription_model.dart';
-import 'package:habit_note/utils/colours.dart';
-import 'package:habit_note/utils/common.dart';
 import 'package:nb_utils/nb_utils.dart';
 
+import '../../configs/colors.dart';
+import '../../configs/common.dart';
+import '../../configs/constants.dart';
 import '../../main.dart';
-import '../../utils/constants.dart';
+
+import '../../models/subscription_model.dart';
 import 'components/AddSubscriptionReminderScreen.dart';
 import 'components/SubscriptionDetailScreen.dart';
 
@@ -25,7 +26,7 @@ class SubscriptionReminderListScreenState
   }
 
   Future<void> init() async {
-    setStatusBarColor(appStore.isDarkMode ? AppColors.kHabitDarkGrey : Colors.white,
+    setStatusBarColor(appStore.isDarkMode ? AppColors.kPrimaryVariantColorDark : Colors.white,
         statusBarIconBrightness: Brightness.light, delayInMilliSeconds: 100);
   }
 
@@ -36,7 +37,7 @@ class SubscriptionReminderListScreenState
 
   @override
   void dispose() {
-    setStatusBarColor(appStore.isDarkMode ? AppColors.kHabitDarkGrey : Colors.white,
+    setStatusBarColor(appStore.isDarkMode ? AppColors.kPrimaryVariantColorDark : Colors.white,
         delayInMilliSeconds: 100);
     super.dispose();
   }
@@ -89,7 +90,7 @@ class SubscriptionReminderListScreenState
                     decoration: BoxDecoration(
                       color: getColorFromHex(data.color!),
                       border: Border.all(
-                          color: AppColors.grayColor.withOpacity(0.3)),
+                          color: AppColors.kGrayColor.withOpacity(0.3)),
                       borderRadius: BorderRadius.circular(defaultRadius),
                     ),
                     child: Stack(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'colours.dart';
+import 'colors.dart';
 
 /// Text
 class TextFontWeight {
@@ -185,7 +185,7 @@ const pwd_reset_successfully = 'Password reset successfully';
 const add_subscription = 'Add Subscription';
 const delete = 'Delete';
 const update = 'Update';
-const save = 'Save';
+const save = 'SAVE';
 const password = 'Password';
 const cancel = 'Cancel';
 const submit = 'Submit';

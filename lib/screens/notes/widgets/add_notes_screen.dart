@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:habit_note/model/notes_model.dart';
-import 'package:habit_note/screens/dashboard_screen.dart';
-import 'package:habit_note/utils/colours.dart';
-import 'package:habit_note/utils/common.dart';
-import 'package:habit_note/utils/constants.dart';
+import 'package:habit_note/screens/dashboard/dashboard_screen.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../../../main.dart';
-import '../../../utils/constants.dart';
+import '../../../configs/colors.dart';
+import '../../../configs/common.dart';
+import '../../../configs/constants.dart';
+import '../../../models/notes_model.dart';
 import 'note_collaborator_screen.dart';
 
 class AddNotesScreen extends StatefulWidget {
@@ -40,11 +39,8 @@ class AddNotesScreenState extends State<AddNotesScreen> {
   }
 
   Future<void> init() async {
-    setStatusBarColor(
-      appStore.isDarkMode ? AppColors.kHabitDarkGrey : Colors.transparent,
-      statusBarIconBrightness: appStore.isDarkMode ? Brightness.light : Brightness.dark,
-      delayInMilliSeconds: 100,
-    );
+    setStatusBarColor(Colors.transparent,
+        statusBarIconBrightness: Brightness.light, delayInMilliSeconds: 100);
 
     _kIsUpdateNote = widget.notesModel != null;
 
@@ -68,7 +64,7 @@ class AddNotesScreenState extends State<AddNotesScreen> {
 
   @override
   void dispose() {
-    setStatusBarColor(appStore.isDarkMode ? AppColors.kHabitDarkGrey : AppColors.kHabitWhite, delayInMilliSeconds: 100);
+    setStatusBarColor(appStore.isDarkMode ? AppColors.kPrimaryVariantColorDark : AppColors.kAppBarColor, delayInMilliSeconds: 100);
     addNotes();
     super.dispose();
   }
@@ -79,9 +75,9 @@ class AddNotesScreenState extends State<AddNotesScreen> {
       resizeToAvoidBottomInset: true,
       appBar: appBarWidget(
         add_note,
-        color: _kSelectColor ?? AppColors.kHabitWhite,
+        color: _kSelectColor ?? Colors.white,
         textColor: AppColors.kHabitDark,
-        systemUiOverlayStyle: SystemUiOverlayStyle.dark,
+        systemUiOverlayStyle: SystemUiOverlayStyle.light,
         // brightness: Brightness.light,
         actions: [
           IconButton(
@@ -227,7 +223,7 @@ class AddNotesScreenState extends State<AddNotesScreen> {
                   leading: Icon(Icons.delete_forever_outlined,
                       color: appStore.isDarkMode
                           ? AppColors.kHabitOrange
-                          : AppColors.scaffoldSecondaryDark),
+                          : AppColors.kScaffoldSecondaryDark),
                   title: Text(delete_note, style: primaryTextStyle()),
                   onTap: () {
                     if (widget.notesModel == null ||

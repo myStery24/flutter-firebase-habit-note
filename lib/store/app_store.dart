@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:habit_note/utils/colours.dart';
-import 'package:habit_note/utils/constants.dart';
 import 'package:mobx/mobx.dart';
 import 'package:nb_utils/nb_utils.dart';
+
+import '../configs/colors.dart';
+import '../configs/constants.dart';
 
 part 'app_store.g.dart';
 
@@ -11,7 +12,7 @@ class AppStore = _AppStore with _$AppStore;
 
 abstract class _AppStore with Store {
   @observable
-  Color primaryColor = Colors.blue;
+  Color primaryColor = Color(0xFFFFB347);
 
   @observable
   bool isLoggedIn = false;
@@ -41,11 +42,11 @@ abstract class _AppStore with Store {
       textPrimaryColorGlobal = Colors.white;
       textSecondaryColorGlobal = textSecondaryColor;
 
-      defaultLoaderBgColorGlobal = AppColors.scaffoldSecondaryDark;
+      defaultLoaderBgColorGlobal = AppColors.kScaffoldSecondaryDark;
       appButtonBackgroundColorGlobal = AppColors.kHabitOrange;
       shadowColorGlobal = Colors.white12;
 
-      setStatusBarColor(AppColors.kHabitDarkGrey, statusBarIconBrightness: Brightness.light);
+      setStatusBarColor(AppColors.kPrimaryVariantColorDark, statusBarIconBrightness: Brightness.light);
     } else {
       textPrimaryColorGlobal = textPrimaryColor;
       textSecondaryColorGlobal = textSecondaryColor;

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:habit_note/utils/colours.dart';
-import 'package:habit_note/utils/common.dart';
-import 'package:habit_note/utils/constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
+import '../../configs/colors.dart';
+import '../../configs/common.dart';
+import '../../configs/constants.dart';
 import '../../main.dart';
 
 /// Reset the password (4 digit pin) that is used to lock notes
@@ -118,7 +118,7 @@ class ChangeMasterPasswordScreenState
                       maxLength: 4,
                       isPassword: true,
                       cursorColor: appStore.isDarkMode
-                          ? Colors.white
+                          ? AppColors.kHabitOrange
                           : AppColors.kHabitDark,
                       decoration: appTextFieldInputDeco(hint: current_pwd),
                       errorThisFieldRequired: errorThisFieldRequired,
@@ -139,7 +139,7 @@ class ChangeMasterPasswordScreenState
                       isPassword: true,
                       maxLength: 4,
                       cursorColor: appStore.isDarkMode
-                          ? Colors.white
+                          ? AppColors.kHabitOrange
                           : AppColors.kHabitDark,
                       decoration: appTextFieldInputDeco(hint: new_pwd),
                       validator: (val) {
@@ -160,7 +160,7 @@ class ChangeMasterPasswordScreenState
                       isPassword: true,
                       maxLength: 4,
                       cursorColor: appStore.isDarkMode
-                          ? Colors.white
+                          ? AppColors.kHabitOrange
                           : AppColors.kHabitDark,
                       decoration: appTextFieldInputDeco(hint: confirm_new_pwd),
                       validator: (val) {

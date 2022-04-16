@@ -2,18 +2,19 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:habit_note/components/custom_button.dart';
 import 'package:habit_note/screens/auth/success_screen.dart';
 import 'package:habit_note/screens/password/forgot_password_screen.dart';
-import 'package:habit_note/utils/colours.dart';
-import 'package:habit_note/utils/common.dart';
-import 'package:habit_note/utils/constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:the_apple_sign_in/the_apple_sign_in.dart';
 
+import '../../configs/colors.dart';
+import '../../configs/common.dart';
+import '../../configs/constants.dart';
+import '../../configs/routes.dart';
 import '../../main.dart';
-import '../../utils/routes.dart';
-import '../dashboard_screen.dart';
+
+import '../../widgets/custom_button.dart';
+import '../dashboard/dashboard_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   static String tag = '/LoginScreen';
@@ -39,8 +40,8 @@ class LoginScreenState extends State<LoginScreen> {
 
   Future<void> init() async {
     setStatusBarColor(
-      appStore.isDarkMode ? AppColors.kHabitDarkGrey : AppColors.kHabitBackgroundLightGrey,
-      statusBarIconBrightness: appStore.isDarkMode ? Brightness.light : Brightness.dark,
+      appStore.isDarkMode ? AppColors.kPrimaryVariantColorDark : AppColors.kPrimaryVariantColor,
+      statusBarIconBrightness: appStore.isDarkMode ? Brightness.dark : Brightness.light,
       delayInMilliSeconds: 100,
     );
 
@@ -218,11 +219,11 @@ class LoginScreenState extends State<LoginScreen> {
                                 16.height,
                                 Row(
                                   children: [
-                                    Divider(thickness: 1, endIndent: 10, indent: 10)
+                                    Divider(thickness: 2, endIndent: 10, indent: 10)
                                         .expand(),
                                     Text(with_social_media,
                                         style: primaryTextStyle(size: 12)),
-                                    Divider(thickness: 1, endIndent: 10, indent: 10)
+                                    Divider(thickness: 2, endIndent: 10, indent: 10)
                                         .expand(),
                                   ],
                                 ),
@@ -231,7 +232,7 @@ class LoginScreenState extends State<LoginScreen> {
                                 /// Google Button
                                 AppButton(
                                   width: context.width(),
-                                  color: AppColors.kHabitWhite,
+                                  color: Colors.white,
                                   child: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [

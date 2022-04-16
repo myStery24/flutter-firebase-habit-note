@@ -4,11 +4,11 @@ import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server/gmail.dart';
 import 'package:nb_utils/nb_utils.dart';
 
+import '../../../configs/colors.dart';
+import '../../../configs/common.dart';
+import '../../../configs/constants.dart';
 import '../../../main.dart';
-import '../../../model/notes_model.dart';
-import '../../../utils/colours.dart';
-import '../../../utils/common.dart';
-import '../../../utils/constants.dart';
+import '../../../models/notes_model.dart';
 
 // TODO: Collaborator
 class NoteCollaboratorScreen extends StatefulWidget {
@@ -40,11 +40,8 @@ class NoteCollaboratorScreenState extends State<NoteCollaboratorScreen> {
   }
 
   Future<void> init() async {
-    setStatusBarColor(
-      appStore.isDarkMode ? AppColors.kHabitDarkGrey : Colors.transparent,
-      statusBarIconBrightness: appStore.isDarkMode ? Brightness.light : Brightness.dark,
-      delayInMilliSeconds: 100,
-    );
+    setStatusBarColor(Colors.transparent,
+        statusBarIconBrightness: Brightness.light, delayInMilliSeconds: 100);
 
     userMail = getStringAsync(USER_EMAIL);
     mIsUpdate = widget.notesModel != null;
@@ -155,7 +152,7 @@ class NoteCollaboratorScreenState extends State<NoteCollaboratorScreen> {
         Icon(Icons.person_add).paddingOnly(left: 8, right: 16),
         AppTextField(
           controller: userEmailController,
-          cursorColor: appStore.isDarkMode ? Colors.white : AppColors.kHabitDark,
+          cursorColor: appStore.isDarkMode ? AppColors.kHabitOrange : AppColors.kHabitDark,
           decoration: InputDecoration(border: InputBorder.none, hintText: 'Enter an email to share with', hintStyle: primaryTextStyle(color: Colors.grey)),
           keyboardType: TextInputType.emailAddress,
           textFieldType: TextFieldType.EMAIL,

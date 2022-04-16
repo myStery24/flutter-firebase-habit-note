@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:habit_note/utils/colours.dart';
-import 'package:habit_note/utils/constants.dart';
 
+import '../../../configs/colors.dart';
+import '../../../configs/constants.dart';
 import '../../../main.dart';
 
 List<Widget> onboardScreenData(int numOfPages, screenContent) {

@@ -3,28 +3,31 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import 'colours.dart';
+import 'colors.dart';
 
 class AppTheme {
   AppTheme._();
 
   static final ThemeData lightTheme = ThemeData(
-    primarySwatch: createMaterialColor(AppColors.kHabitWhite),
-    primaryColor: AppColors.kHabitWhite,
-    scaffoldBackgroundColor: AppColors.kHabitBackgroundLightGrey,
+    brightness: Brightness.light, // basic config for light theme
+    primaryColor: AppColors.kPrimaryVariantColor, // app bar
+    primarySwatch: createMaterialColor(AppColors.kPrimaryVariantColor), // buttons
+    scaffoldBackgroundColor: AppColors.kPrimaryVariantColor,
     fontFamily: GoogleFonts.lato().fontFamily,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(backgroundColor: Colors.white),
     iconTheme: IconThemeData(color: AppColors.kHabitDark),
-    textTheme: TextTheme(headline6: TextStyle(color: AppColors.kHabitDark)),
+    textTheme: TextTheme(headline6: TextStyle(color: AppColors.kTextBlack)),
+    textSelectionTheme: TextSelectionThemeData(cursorColor: AppColors.kHabitDark),
     dialogBackgroundColor: Colors.white,
     unselectedWidgetColor: Colors.black,
     dividerColor: viewLineColor,
-    cardColor: AppColors.kHabitWhite,
-    canvasColor: AppColors.kHabitWhite,
+    cardColor: Colors.white,
+    canvasColor: Colors.white,
+    floatingActionButtonTheme: FloatingActionButtonThemeData(backgroundColor: AppColors.kHabitOrange),
     appBarTheme: AppBarTheme(
-      iconTheme: IconThemeData(color: AppColors.kHabitDarkGrey),
-      backgroundColor: AppColors.kHabitWhite,
-      systemOverlayStyle: SystemUiOverlayStyle.dark,
+      iconTheme: IconThemeData(color: AppColors.kPrimaryVariantColorDark),
+      backgroundColor: Colors.white,
+      systemOverlayStyle: SystemUiOverlayStyle.light,
     ),
     scrollbarTheme: ScrollbarThemeData(
         thumbColor: MaterialStateProperty.all(AppColors.kHabitDark),
@@ -41,30 +44,30 @@ class AppTheme {
   );
 
   static final ThemeData darkTheme = ThemeData(
-    primarySwatch: createMaterialColor(AppColors.kHabitOrange),
-    primaryColor: AppColors.kHabitOrange,
-    scaffoldBackgroundColor: AppColors.kHabitDarkGrey,
-    // fontFamily: GoogleFonts.poppins().fontFamily,
+    brightness: Brightness.dark,
+    primaryColor: AppColors.kPrimaryVariantColorDark,
+    primarySwatch: createMaterialColor(AppColors.kPrimaryVariantColorDark),
+    scaffoldBackgroundColor: AppColors.kPrimaryVariantColorDark,
     fontFamily: GoogleFonts.lato().fontFamily,
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(backgroundColor: AppColors.kHabitDarkGrey),
-    bottomSheetTheme: BottomSheetThemeData(backgroundColor: AppColors.kHabitDarkGrey),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(backgroundColor: AppColors.kHabitDark),
+    bottomSheetTheme: BottomSheetThemeData(backgroundColor: AppColors.kPrimaryVariantColorDark),
     iconTheme: IconThemeData(color: AppColors.kHabitOrange),
-    textTheme: TextTheme(headline6: TextStyle(color: AppColors.kHabitDark)),
-    floatingActionButtonTheme: FloatingActionButtonThemeData(backgroundColor: AppColors.kHabitDarkGrey),
-    dialogBackgroundColor: AppColors.kHabitDarkGrey,
+    textTheme: TextTheme(headline6: TextStyle(color: AppColors.kTextWhite)),
+    dialogBackgroundColor: AppColors.kPrimaryVariantColorDark,
     unselectedWidgetColor: Colors.white60,
     dividerColor: Colors.white12,
     cardColor: AppColors.kPrimaryVariantColorDark,
-    canvasColor: AppColors.kHabitDarkGrey,
+    canvasColor: AppColors.kPrimaryVariantColorDark,
+    floatingActionButtonTheme: FloatingActionButtonThemeData(backgroundColor: AppColors.kHabitOrange),
+    appBarTheme: AppBarTheme(
+      titleTextStyle: TextStyle(color: Colors.white, fontSize: 22),
+      backgroundColor: AppColors.kPrimaryVariantColorDark,
+      iconTheme: IconThemeData(color: AppColors.kHabitOrange),
+      systemOverlayStyle: SystemUiOverlayStyle.dark,
+    ),
     scrollbarTheme: ScrollbarThemeData(
         thumbColor: MaterialStateProperty.all(AppColors.kHabitOrange),
         radius: Radius.circular(8)),
-    appBarTheme: AppBarTheme(
-      titleTextStyle: TextStyle(color: Colors.white, fontSize: 22),
-      backgroundColor: AppColors.kHabitDarkGrey,
-      iconTheme: IconThemeData(color: AppColors.kHabitOrange),
-      systemOverlayStyle: SystemUiOverlayStyle.light,
-    ),
     dialogTheme: DialogTheme(shape: dialogShape()),
   ).copyWith(
     pageTransitionsTheme: PageTransitionsTheme(

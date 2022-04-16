@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:habit_note/utils/constants.dart';
 
+import '../../../configs/constants.dart';
 import 'onboard_screen_data.dart';
 import 'page_indicator.dart';
 

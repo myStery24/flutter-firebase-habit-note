@@ -2,17 +2,17 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:habit_note/components/user_agreement_widget.dart';
-import 'package:habit_note/components/custom_button.dart';
-import 'package:habit_note/utils/colours.dart';
-import 'package:habit_note/utils/common.dart';
-import 'package:habit_note/utils/constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:the_apple_sign_in/the_apple_sign_in.dart';
 
+import '../../configs/colors.dart';
+import '../../configs/common.dart';
+import '../../configs/constants.dart';
+import '../../configs/routes.dart';
 import '../../main.dart';
-import '../../utils/routes.dart';
-import '../dashboard_screen.dart';
+import '../../widgets/custom_button.dart';
+import '../../widgets/user_agreement_widget.dart';
+import '../dashboard/dashboard_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
   static String tag = '/RegisterScreen';
@@ -43,10 +43,10 @@ class RegisterScreenState extends State<RegisterScreen> {
   Future<void> init() async {
     setStatusBarColor(
       appStore.isDarkMode
-          ? AppColors.kHabitDarkGrey
-          : AppColors.kHabitBackgroundLightGrey,
+          ? AppColors.kPrimaryVariantColorDark
+          : AppColors.kPrimaryVariantColor,
       statusBarIconBrightness:
-          appStore.isDarkMode ? Brightness.light : Brightness.dark,
+          appStore.isDarkMode ? Brightness.dark : Brightness.light,
       delayInMilliSeconds: 100,
     );
 
@@ -180,8 +180,8 @@ class RegisterScreenState extends State<RegisterScreen> {
                                 textFieldType: TextFieldType.PASSWORD,
                                 textStyle: primaryTextStyle(),
                                 cursorColor: appStore.isDarkMode
-                                    ? AppColors.kHabitWhite
-                                    : AppColors.kHabitOrange,
+                                    ? AppColors.kHabitOrange
+                                    : AppColors.kHabitDark,
                                 decoration:
                                     appTextFieldInputDeco(hint: password),
                                 errorThisFieldRequired: errorThisFieldRequired,
@@ -193,8 +193,8 @@ class RegisterScreenState extends State<RegisterScreen> {
                                 textFieldType: TextFieldType.PASSWORD,
                                 textStyle: primaryTextStyle(),
                                 cursorColor: appStore.isDarkMode
-                                    ? AppColors.kHabitWhite
-                                    : AppColors.kHabitOrange,
+                                    ? AppColors.kHabitOrange
+                                    : AppColors.kHabitDark,
                                 decoration:
                                     appTextFieldInputDeco(hint: confirm_pwd),
                                 errorThisFieldRequired: errorThisFieldRequired,
@@ -250,7 +250,7 @@ class RegisterScreenState extends State<RegisterScreen> {
                               32.height,
 
                               /// Terms of Use and Privacy Policy
-                              AgreementWidget(),
+                              UserAgreementWidget(),
                               16.height,
                               CustomButton(
                                 text: AppStrings.createAccount,

@@ -1,10 +1,10 @@
 import 'package:flutter/widgets.dart';
-import 'package:habit_note/components/privacy_policy_screen.dart';
+import 'package:habit_note/screens/policies/privacy_policy_screen.dart';
 import 'package:habit_note/screens/auth/login_screen.dart';
 import 'package:habit_note/screens/auth/register_screen.dart';
 import 'package:page_transition/page_transition.dart';
 
-import '../components/terms_of_use_screen.dart';
+import '../screens/policies/terms_of_use_screen.dart';
 
 /// Name route for app screen
 /// All our routes will be available here

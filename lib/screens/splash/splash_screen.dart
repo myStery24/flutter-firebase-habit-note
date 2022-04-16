@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:habit_note/utils/colours.dart';
-import 'package:habit_note/utils/common.dart';
-import 'package:habit_note/utils/constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import '../main.dart';
-import 'dashboard_screen.dart';
-import 'onboard/onboard_screen.dart';
+import '../../configs/colors.dart';
+import '../../configs/common.dart';
+import '../../configs/constants.dart';
+import '../../main.dart';
+import '../dashboard/dashboard_screen.dart';
+import '../onboard/onboard_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   static String tag = '/SplashScreen';
@@ -26,7 +26,7 @@ class SplashScreenState extends State<SplashScreen> {
   Future<void> init() async {
     setStatusBarColor(
       AppColors.kHabitOrange,
-      statusBarIconBrightness: appStore.isDarkMode ? Brightness.light : Brightness.dark,
+      statusBarIconBrightness: appStore.isDarkMode ? Brightness.dark : Brightness.light,
       delayInMilliSeconds: 100,
     );
     await Future.delayed(Duration(seconds: 1));
@@ -51,6 +51,7 @@ class SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: appStore.isDarkMode ? AppColors.kHabitOrange : AppColors.kHabitOrange,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,

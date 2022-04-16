@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:habit_note/utils/colours.dart';
-import 'package:habit_note/utils/constants.dart';
+
+import '../../../configs/colors.dart';
+import '../../../configs/constants.dart';
 
 List<Widget> buildPageIndicator(
   int numPages,
@@ -31,7 +32,7 @@ Widget _currentPageIndicator(bool isActive, bool isPageIndicatorCircle) {
 /// Circle (dot) page indicator
 Decoration _pageIndicatorBoxDecoration(isActive, isPageIndicatorCircle) {
   return BoxDecoration(
-    color: isActive ? AppColors.kHabitOrange : AppColors.kHabitWhite,
+    color: isActive ? AppColors.kHabitOrange : Colors.white,
     boxShadow: [
       BoxShadow(
         color: Colors.orange.withOpacity(0.2), // color of shadow
