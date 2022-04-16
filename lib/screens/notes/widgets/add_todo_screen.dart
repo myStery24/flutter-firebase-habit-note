@@ -195,13 +195,14 @@ class AddToDoScreenState extends State<AddToDoScreen> {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        IconButton(icon: Icon(Icons.add), onPressed: null),
+        IconButton(icon: Icon(Icons.add, color: AppColors.kHintTextLightGrey), onPressed: null),
         TextField(
           autofocus: _kIsUpdateTodo ? false : true,
           controller: todoController,
           cursorColor: Colors.black,
           decoration: InputDecoration(
-              border: InputBorder.none, hintText: "What's on your mind ?"),
+              border: InputBorder.none, hintText: "What's on your mind ?",
+              hintStyle: TextStyle(color: AppColors.kHintTextLightGrey)),
           style: primaryTextStyle(color: Colors.black),
           textCapitalization: TextCapitalization.sentences,
           textInputAction: TextInputAction.done,
