@@ -53,9 +53,7 @@ class AddNotesScreenState extends State<AddNotesScreen> {
       notesController.text = widget.notesModel!.note!;
       _kSelectColor = getColorFromHex(widget.notesModel!.color!);
     }
-
   }
-
 
   @override
   void setState(fn) {
@@ -64,7 +62,11 @@ class AddNotesScreenState extends State<AddNotesScreen> {
 
   @override
   void dispose() {
-    setStatusBarColor(appStore.isDarkMode ? AppColors.kPrimaryVariantColorDark : AppColors.kAppBarColor, delayInMilliSeconds: 100);
+    setStatusBarColor(
+        appStore.isDarkMode
+            ? AppColors.kPrimaryVariantColorDark
+            : AppColors.kAppBarColor,
+        delayInMilliSeconds: 100);
     addNotes();
     super.dispose();
   }
@@ -109,15 +111,20 @@ class AddNotesScreenState extends State<AddNotesScreen> {
           height: double.infinity,
           child: Column(
             children: [
-              _kIsUpdateNote && widget.notesModel!.collaborateWith!.first != getStringAsync(USER_EMAIL)
+              _kIsUpdateNote &&
+                      widget.notesModel!.collaborateWith!.first !=
+                          getStringAsync(USER_EMAIL)
                   ? Row(
                       children: [
                         Text('$shared_by :',
-                            style: boldTextStyle(color: Colors.black, size: 18)),
+                            style:
+                                boldTextStyle(color: Colors.black, size: 18)),
                         4.width,
                         Text(
-                            widget.notesModel!.collaborateWith!.first.validate(),
-                            style: boldTextStyle(color: Colors.black, size: 18)),
+                            widget.notesModel!.collaborateWith!.first
+                                .validate(),
+                            style:
+                                boldTextStyle(color: Colors.black, size: 18)),
                       ],
                     )
                   : SizedBox(),
@@ -126,7 +133,9 @@ class AddNotesScreenState extends State<AddNotesScreen> {
                 controller: titleController,
                 cursorColor: Colors.black,
                 decoration: InputDecoration(
-                    border: InputBorder.none, hintText: 'Title'),
+                    border: InputBorder.none,
+                    hintText: 'Title',
+                    hintStyle: TextStyle(color: AppColors.kHintTextLightGrey)),
                 style: boldTextStyle(size: 20, color: Colors.black),
                 textCapitalization: TextCapitalization.sentences,
                 textInputAction: TextInputAction.next,
@@ -143,7 +152,8 @@ class AddNotesScreenState extends State<AddNotesScreen> {
                   cursorColor: Colors.black,
                   decoration: InputDecoration(
                       border: InputBorder.none,
-                      hintText: 'Type something awesome here'),
+                      hintText: 'Type something awesome here',
+                      hintStyle: TextStyle(color: AppColors.kHintTextLightGrey)),
                   style: primaryTextStyle(color: Colors.black),
                   textInputAction: TextInputAction.newline,
                   textCapitalization: TextCapitalization.sentences,
@@ -180,7 +190,8 @@ class AddNotesScreenState extends State<AddNotesScreen> {
         notesData.createdAt = widget.notesModel!.createdAt;
         notesData.updatedAt = DateTime.now();
         notesData.checkListModel = widget.notesModel!.checkListModel.validate();
-        notesData.collaborateWith = widget.notesModel!.collaborateWith.validate();
+        notesData.collaborateWith =
+            widget.notesModel!.collaborateWith.validate();
         notesData.isLock = widget.notesModel!.isLock;
 
         notesService
@@ -244,6 +255,7 @@ class AddNotesScreenState extends State<AddNotesScreen> {
                   },
                 ),
               ),
+
               /// Collaborator
               // ListTile(
               //   leading: Icon(Icons.person_add_alt_1_rounded,
