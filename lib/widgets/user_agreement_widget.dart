@@ -34,6 +34,7 @@ class UserAgreementWidget extends StatelessWidget {
                     : AppColors.kTextBlack,
                 fontSize: 16.0,
                 fontWeight: TextFontWeight.bold,
+                decoration: TextDecoration.underline,
               ),
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
@@ -49,6 +50,7 @@ class UserAgreementWidget extends StatelessWidget {
                       : AppColors.kTextBlack,
                   fontSize: 16.0,
                   fontWeight: TextFontWeight.bold,
+                  decoration: TextDecoration.underline,
                 ),
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
