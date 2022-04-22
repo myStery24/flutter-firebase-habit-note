@@ -230,7 +230,7 @@ class LoginScreenState extends State<LoginScreen> {
                                 ),
                                 16.height,
 
-                                /// Google Button
+                                /// Google login
                                 AppButton(
                                   width: context.width(),
                                   color: Colors.white,
@@ -264,6 +264,8 @@ class LoginScreenState extends State<LoginScreen> {
                                   },
                                 ),
                                 16.height,
+
+                                /// Apple login, not tested
                                 Container(
                                   padding: EdgeInsets.all(16),
                                   decoration: boxDecorationRoundedWithShadow(30,
@@ -276,8 +278,7 @@ class LoginScreenState extends State<LoginScreen> {
                                       Image.asset('assets/images/ic_apple.png',
                                           width: 23,
                                           height: 23,
-                                          color:
-                                              appStore.isDarkMode ? white : black),
+                                          color: appStore.isDarkMode ? white : black),
                                       16.width,
                                       Text(continue_with_apple,
                                           style: primaryTextStyle(size: 18)),
