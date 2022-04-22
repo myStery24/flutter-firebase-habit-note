@@ -8,7 +8,6 @@ import '../../../configs/colors.dart';
 import '../../../configs/common.dart';
 import '../../../configs/constants.dart';
 import '../../../models/notes_model.dart';
-import 'note_collaborator_screen.dart';
 
 class AddNotesScreen extends StatefulWidget {
   static String tag = '/AddNotesScreen';
@@ -111,20 +110,15 @@ class AddNotesScreenState extends State<AddNotesScreen> {
           height: double.infinity,
           child: Column(
             children: [
-              _kIsUpdateNote &&
-                      widget.notesModel!.collaborateWith!.first !=
-                          getStringAsync(USER_EMAIL)
+              _kIsUpdateNote && widget.notesModel!.collaborateWith!.first != getStringAsync(USER_EMAIL)
                   ? Row(
                       children: [
                         Text('$shared_by :',
-                            style:
-                                boldTextStyle(color: Colors.black, size: 18)),
+                            style: boldTextStyle(color: Colors.black, size: 18)),
                         4.width,
                         Text(
-                            widget.notesModel!.collaborateWith!.first
-                                .validate(),
-                            style:
-                                boldTextStyle(color: Colors.black, size: 18)),
+                            widget.notesModel!.collaborateWith!.first.validate(),
+                            style: boldTextStyle(color: Colors.black, size: 18)),
                       ],
                     )
                   : SizedBox(),
@@ -190,8 +184,7 @@ class AddNotesScreenState extends State<AddNotesScreen> {
         notesData.createdAt = widget.notesModel!.createdAt;
         notesData.updatedAt = DateTime.now();
         notesData.checkListModel = widget.notesModel!.checkListModel.validate();
-        notesData.collaborateWith =
-            widget.notesModel!.collaborateWith.validate();
+        notesData.collaborateWith = widget.notesModel!.collaborateWith.validate();
         notesData.isLock = widget.notesModel!.isLock;
 
         notesService
@@ -238,8 +231,7 @@ class AddNotesScreenState extends State<AddNotesScreen> {
                   title: Text(delete_note, style: primaryTextStyle()),
                   onTap: () {
                     if (widget.notesModel == null ||
-                        widget.notesModel!.collaborateWith!.first ==
-                            getStringAsync(USER_EMAIL)) {
+                        widget.notesModel!.collaborateWith!.first == getStringAsync(USER_EMAIL)) {
                       notesService
                           .removeDocument(widget.notesModel!.noteId)
                           .then((value) {
