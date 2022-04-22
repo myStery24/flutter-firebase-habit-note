@@ -240,8 +240,8 @@ class AddToDoScreenState extends State<AddToDoScreen> {
       }
 
       if (_kIsUpdateTodo) {
-        notesData.createdAt = widget.notesModel!.createdAt;
         notesData.noteId = widget.notesModel!.noteId;
+        notesData.createdAt = widget.notesModel!.createdAt;
         notesData.collaborateWith = widget.notesModel!.collaborateWith.validate();
         notesData.isLock = widget.notesModel!.isLock;
 
