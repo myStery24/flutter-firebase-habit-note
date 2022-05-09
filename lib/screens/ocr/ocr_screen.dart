@@ -68,13 +68,13 @@ class _OCRScreenState extends State<OCRScreen> {
               style: GoogleFonts.fugazOne(),
             ),
             centerTitle: false,
-            leading: IconButton(
-              icon: Icon(Icons.menu_rounded),
-              color: AppColors.kHabitOrange,
-              onPressed: () {
-                _scaffoldState.currentState!.openDrawer();
-              },
-            ),
+            // leading: IconButton(
+            //   icon: Icon(Icons.menu_rounded),
+            //   color: AppColors.kHabitOrange,
+            //   onPressed: () {
+            //     _scaffoldState.currentState!.openDrawer();
+            //   },
+            // ),
             actions: [
               IconButton(
                 icon:
@@ -112,7 +112,7 @@ class _OCRScreenState extends State<OCRScreen> {
           floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
 
           /// Sidebar Drawer
-          drawer: DashboardDrawerWidget(),
+          // drawer: DashboardDrawerWidget(),
           body: SingleChildScrollView(
             child: Container(
               margin: const EdgeInsets.all(18),
