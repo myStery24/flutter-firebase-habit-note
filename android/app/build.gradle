@@ -37,18 +37,22 @@ android {
         applicationId "com.habit.habit_note"
         minSdkVersion 23
         targetSdkVersion 31
-        versionCode 4
-        versionName "1.0.0"
+        versionCode 1
+        versionName "0.0.4"
         multiDexEnabled true
 
-        //ndk {
+
+       // ndk {
             // Don't package arm64-v8a or x86_64
-          //  abiFilters 'armeabi-v7a', 'x86'
+            //abiFilters 'armeabi-v7a', 'x86'
         //}
+
     }
 
     buildTypes {
         release {
+            minifyEnabled true  // Remove unused resources
+            shrinkResources true  // Remove unused resources
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.debug
@@ -62,20 +66,19 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    // implementation platform('com.google.firebase:firebase-bom:26.8.0')
-    implementation platform('com.google.firebase:firebase-bom:29.0.3')
+    implementation platform('com.google.firebase:firebase-bom:29.3.0')
     implementation 'com.google.firebase:firebase-analytics-ktx'
 
     implementation 'androidx.multidex:multidex:2.0.1'
 
     // ML Kit dependencies
     // ML Kit Text Recognition
-    // implementation 'com.google.android.gms:play-services-mlkit-text-recognition:18.0.0'
+    implementation 'com.google.android.gms:play-services-mlkit-text-recognition:18.0.0'
 
     // ML Kit Text Recognition V2
     // To recognize Latin script
-    implementation 'com.google.mlkit:text-recognition:16.0.0-beta3'
+    implementation 'com.google.mlkit:text-recognition:16.0.0-beta4'
 
     // To recognize Chinese script
-    implementation 'com.google.mlkit:text-recognition-chinese:16.0.0-beta3'
+    implementation 'com.google.mlkit:text-recognition-chinese:16.0.0-beta4'
 }
