@@ -106,7 +106,7 @@ class ChangeMasterPasswordScreenState
                     //     style: boldTextStyle(size: 22)),
                     15.height,
                     Text(
-                        "You can change your lock + unlock notes' password here. Please fill up the following fields to change your password. \nWrite to our support email if you forgot your current password.",
+                        "You can change your lock & unlock notes' password here. Please fill up the following fields to change your password. \nWrite to our support email if you forgot your current password.",
                         style: primaryTextStyle(size: 14)),
                     20.height,
                     AppTextField(
