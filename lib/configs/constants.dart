@@ -19,7 +19,7 @@ class AppStrings {
   static const String appVersionText = 'V0.0.4';
   static const String appVersionText2 = 'Version 0.0.4';
   // App copyright
-  static const String appCopyright = '© Copyright HABIT 2021. All rights reserved';
+  static const String appCopyright = '© Copyright HABIT 2022. All rights reserved';
 
   // Texts
   static const String createAccount = 'CREATE ACCOUNT';
@@ -140,6 +140,7 @@ const ringgit_icon = 'RM';
 const date_format = 'yyyy-MM-dd';
 const datetime_format = 'yyyy-MM-dd HH:mm a';
 
+const delete_account = 'Are you sure you want to delete your account? By deleting your account, it will become inaccessible, unrecoverable, and permanently closed.';
 const about = 'About';
 const dark_mode = 'Dark Mode';
 const help = 'Help';
