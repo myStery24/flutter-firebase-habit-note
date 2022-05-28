@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:habit_note/models/labels_model.dart';
 import 'package:habit_note/screens/dashboard/dashboard_screen.dart';
+import 'package:material_tag_editor/tag_editor.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../../../main.dart';
@@ -8,12 +11,16 @@ import '../../../configs/colors.dart';
 import '../../../configs/common.dart';
 import '../../../configs/constants.dart';
 import '../../../models/notes_model.dart';
+import '../../../widgets/custom_chips.dart';
 
+/// TODO : Add labels to note, save to Firestore, map to the note
+/// ISSUE: The label does not save once exited the note editor
 class AddNotesScreen extends StatefulWidget {
   static String tag = '/AddNotesScreen';
   final NotesModel? notesModel;
+  final LabelsModel? labelsModel;
 
-  AddNotesScreen({this.notesModel});
+  AddNotesScreen({this.notesModel, this.labelsModel});
 
   @override
   AddNotesScreenState createState() => AddNotesScreenState();
@@ -25,10 +32,10 @@ class AddNotesScreenState extends State<AddNotesScreen> {
 
   TextEditingController titleController = TextEditingController();
   TextEditingController notesController = TextEditingController();
-  TextEditingController newLabelController = new TextEditingController();
+  TextEditingController _newLabelController = new TextEditingController();
 
   FocusNode noteNode = FocusNode();
-  FocusNode labelNode = FocusNode();
+  FocusNode _labelNode = FocusNode();
 
   Color? _kSelectColor;
 
@@ -52,6 +59,7 @@ class AddNotesScreenState extends State<AddNotesScreen> {
     if (_kIsUpdateNote) {
       titleController.text = widget.notesModel!.noteTitle!;
       notesController.text = widget.notesModel!.note!;
+      //_newLabelController.text = widget.notesModel!.noteLabel!;
       _kSelectColor = getColorFromHex(widget.notesModel!.color!);
     }
   }
@@ -69,6 +77,7 @@ class AddNotesScreenState extends State<AddNotesScreen> {
             : AppColors.kAppBarColor,
         delayInMilliSeconds: 100);
     addNotes();
+    // saveLabel();
     super.dispose();
   }
 
@@ -88,7 +97,6 @@ class AddNotesScreenState extends State<AddNotesScreen> {
             color: AppColors.kHabitDark,
             onPressed: () async {
               hideKeyboard(context);
-
               finish(context);
             },
           ),
@@ -124,6 +132,7 @@ class AddNotesScreenState extends State<AddNotesScreen> {
                       ],
                     )
                   : SizedBox(),
+              /// Title
               TextField(
                 autofocus: _kIsUpdateNote ? false : true,
                 controller: titleController,
@@ -140,6 +149,7 @@ class AddNotesScreenState extends State<AddNotesScreen> {
                 },
                 maxLines: 1,
               ),
+              /// Content
               SingleChildScrollView(
                 physics: BouncingScrollPhysics(),
                 child: TextField(
@@ -157,8 +167,43 @@ class AddNotesScreenState extends State<AddNotesScreen> {
                   maxLines: null,
                 ),
               ).expand(),
+              /// Labels
               Divider(),
-              // TODO: Add labels
+              TagEditor(
+                // autofocus: _kIsUpdateNote ? false : true,
+                controller: _newLabelController,
+                length: _selectedLabels.length,
+                focusNode: _labelNode,
+                delimiters: [',', ' '],
+                hasAddButton: true,
+                resetTextOnSubmitted: true,
+                textStyle: const TextStyle(color: AppColors.kTextBlack), // Text color of the label
+                onSubmitted: (outstandingValue) {
+                  setState(() {
+                    _selectedLabels.add(outstandingValue);
+
+                  });
+                },
+                inputDecoration: const InputDecoration(
+                  hintMaxLines: 2,
+                  border: InputBorder.none,
+                  hintText: 'Sorry, adding labels is not working in current version...',
+                ),
+                onTagChanged: (newValue) {
+                  setState(() {
+                    _selectedLabels.add(newValue);
+                  });
+                },
+                tagBuilder: (context, index) => CustomChips(
+                  index: index,
+                  label: _selectedLabels[index],
+                  onDeleted: _onDelete,
+                ),
+                // InputFormatters example, this disallow \ and /
+                inputFormatters: [
+                  FilteringTextInputFormatter.deny(RegExp(r'[/\\]'))
+                ],
+              ),
             ],
           ),
         ),
@@ -200,7 +245,6 @@ class AddNotesScreenState extends State<AddNotesScreen> {
       } else {
         notesData.createdAt = DateTime.now();
         notesData.updatedAt = DateTime.now();
-        notesData.noteLabel = null;
         notesData.collaborateWith = collaborateList.validate();
         notesData.checkListModel = [];
 
@@ -292,6 +336,29 @@ class AddNotesScreenState extends State<AddNotesScreen> {
     );
   }
 
+  /// Save label to Firestore labels collection
+  void saveLabel() async {
+    if (_newLabelController.text.trim().isNotEmpty) {
+      LabelsModel labelsData = LabelsModel();
+
+      labelsData.labelName = _newLabelController.text.trim();
+
+      await FirebaseFirestore.instance.collection('labels').add({
+        "noteLabel": _newLabelController.text,
+      },
+      );
+      setState(() {
+        notesService
+            .addDocument(labelsData.toJson())
+            .then((value) {})
+            .catchError((error) {
+          toast(error.toString());
+        });
+      });
+    }
+  }
+
+  /// Delete the labels by pressing x
   void _onDelete(index) {
     setState(() {
       _selectedLabels.removeAt(index);
