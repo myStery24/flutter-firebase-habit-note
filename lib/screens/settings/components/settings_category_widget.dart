@@ -324,6 +324,29 @@ class _SettingsCategoryState extends State<SettingsCategory> {
         Divider(
           thickness: 2,
         ),
+
+        /// Delete user account
+        // Container(
+        //   alignment: Alignment.center,
+        //   padding: EdgeInsets.all(8.0),
+        //   child: OutlinedButton(
+        //     style: OutlinedButton.styleFrom(
+        //       minimumSize: Size(size.width, 50),
+        //       textStyle: TextStyle(fontSize: 18.0),
+        //       primary: Colors.red, // foreground
+        //       side: BorderSide(width: 3.0, color: Colors.red),
+        //     ),
+        //     onPressed: () async {
+        //       bool? res = await showConfirmDialog(
+        //           context, delete_account,
+        //           positiveText: delete, buttonColor: Colors.red);
+        //       if (res ?? false) {
+        //         // delete user method
+        //       }
+        //     },
+        //     child: Text('Delete My Account'),
+        //   ),
+        // ),
         SizedBox(height: size.height * .03),
         Container(
           margin: EdgeInsets.all(8.0),
@@ -341,7 +364,7 @@ class _SettingsCategoryState extends State<SettingsCategory> {
                     ),
                   ),
                   TextSpan(
-                     text: AppStrings.appVersionText2,
+                    text: AppStrings.appVersionText2,
                     semanticsLabel: 'version code',
                     style: GoogleFonts.lato(
                       color: getBoolAsync(IS_DARK_MODE)
