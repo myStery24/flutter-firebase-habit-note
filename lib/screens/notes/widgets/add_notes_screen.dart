@@ -21,11 +21,14 @@ class AddNotesScreen extends StatefulWidget {
 
 class AddNotesScreenState extends State<AddNotesScreen> {
   List<String> collaborateList = [];
+  List<String> _selectedLabels = [];
 
   TextEditingController titleController = TextEditingController();
   TextEditingController notesController = TextEditingController();
+  TextEditingController newLabelController = new TextEditingController();
 
   FocusNode noteNode = FocusNode();
+  FocusNode labelNode = FocusNode();
 
   Color? _kSelectColor;
 
@@ -38,8 +41,7 @@ class AddNotesScreenState extends State<AddNotesScreen> {
   }
 
   Future<void> init() async {
-    setStatusBarColor(Colors.transparent,
-        statusBarIconBrightness: Brightness.light, delayInMilliSeconds: 100);
+    setStatusBarColor(Colors.transparent, statusBarIconBrightness: Brightness.light, delayInMilliSeconds: 100);
 
     _kIsUpdateNote = widget.notesModel != null;
 
@@ -155,6 +157,8 @@ class AddNotesScreenState extends State<AddNotesScreen> {
                   maxLines: null,
                 ),
               ).expand(),
+              Divider(),
+              // TODO: Add labels
             ],
           ),
         ),
@@ -180,7 +184,7 @@ class AddNotesScreenState extends State<AddNotesScreen> {
 
       if (_kIsUpdateNote) {
         notesData.noteId = widget.notesModel!.noteId;
-        // notesData.label = widget.notesModel!.label;
+        notesData.noteLabel = widget.notesModel!.noteLabel;
         notesData.createdAt = widget.notesModel!.createdAt;
         notesData.updatedAt = DateTime.now();
         notesData.checkListModel = widget.notesModel!.checkListModel.validate();
@@ -196,7 +200,7 @@ class AddNotesScreenState extends State<AddNotesScreen> {
       } else {
         notesData.createdAt = DateTime.now();
         notesData.updatedAt = DateTime.now();
-        // notesData.label = [];
+        notesData.noteLabel = null;
         notesData.collaborateWith = collaborateList.validate();
         notesData.checkListModel = [];
 
@@ -286,5 +290,11 @@ class AddNotesScreenState extends State<AddNotesScreen> {
         );
       },
     );
+  }
+
+  void _onDelete(index) {
+    setState(() {
+      _selectedLabels.removeAt(index);
+    });
   }
 }
