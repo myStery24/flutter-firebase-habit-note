@@ -47,12 +47,15 @@ class NotesScreenState extends State<NotesScreen> {
 
   Future<void> init() async {
     setStatusBarColor(
-      appStore.isDarkMode ? AppColors.kPrimaryVariantColorDark : AppColors.kAppBarColor,
-      statusBarIconBrightness:
-          appStore.isDarkMode ? Brightness.dark : Brightness.light,
+      appStore.isDarkMode
+          ? AppColors.kPrimaryVariantColorDark
+          : AppColors.kAppBarColor,
+      statusBarIconBrightness: appStore.isDarkMode ? Brightness.dark : Brightness.light,
       delayInMilliSeconds: 100,
     );
 
+    /// In Flutter's reactive style framework, calling setState() triggers a call to the build() method for the State object
+    /// resulting in an update to the UI
     setState(() {});
 
     fitWithCount = getIntAsync(FIT_COUNT, defaultValue: 1);
@@ -72,11 +75,11 @@ class NotesScreenState extends State<NotesScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+      // Detect the back button
       child: WillPopScope(
         onWillPop: () async {
           DateTime now = DateTime.now();
-          if (currentBackPressTime == null ||
-              now.difference(currentBackPressTime!) > 2.seconds) {
+          if (currentBackPressTime == null || now.difference(currentBackPressTime!) > 2.seconds) {
             currentBackPressTime = now;
             toast(AppStrings.pressAgain);
             return Future.value(false);
@@ -123,25 +126,27 @@ class NotesScreenState extends State<NotesScreen> {
                   return noDataWidget(context).center();
                 } else {
                   return SingleChildScrollView(
+                    // padding surrounded all notes (outside)
                     padding: EdgeInsets.only(
                         left: 8.0, top: 16.0, right: 8, bottom: 90),
                     child: StaggeredGrid.count(
-                      crossAxisCount:
-                          getStringAsync(SELECTED_LAYOUT_TYPE_DASHBOARD) ==
-                                  LIST_VIEW
-                              ? 1
-                              : crossAxisCount,
+                      crossAxisCount: getStringAsync(SELECTED_LAYOUT_TYPE_DASHBOARD) == LIST_VIEW
+                          ? 1
+                          : crossAxisCount,
                       mainAxisSpacing: 4,
                       crossAxisSpacing: 4,
                       children: snapshot.data!.map((e) {
                         NotesModel notes = e;
 
                         if (notes.checkListModel.validate().isNotEmpty) {
+                          /// On long press show the lock + unlock to-do list dialog
                           return GestureDetector(
                             onLongPress: () {
                               HapticFeedback.vibrate();
                               lockNoteOption(notesModel: notes);
                             },
+
+                            /// To-do notes container style
                             child: Container(
                               decoration: boxDecorationWithShadow(
                                 borderRadius: BorderRadius.circular(8),
@@ -153,6 +158,7 @@ class NotesScreenState extends State<NotesScreen> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
+                                  /// To show a lock on locked notes
                                   notes.isLock.validate()
                                       ? Container(
                                               child: Icon(Icons.lock,
@@ -163,6 +169,8 @@ class NotesScreenState extends State<NotesScreen> {
                                           shrinkWrap: true,
                                           physics:
                                               NeverScrollableScrollPhysics(),
+
+                                          /// Show only 5 items on the overview
                                           itemCount: notes.checkListModel!
                                               .take(5)
                                               .length,
@@ -170,10 +178,11 @@ class NotesScreenState extends State<NotesScreen> {
                                             CheckListModel checkListData =
                                                 notes.checkListModel![index];
 
+                                            /// To-do list
                                             return Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
+                                              crossAxisAlignment: CrossAxisAlignment.center,
                                               children: [
+                                                /// To-do list tick/ check icon
                                                 Container(
                                                   height: 12,
                                                   width: 12,
@@ -181,38 +190,39 @@ class NotesScreenState extends State<NotesScreen> {
                                                       color: Colors.transparent,
                                                       border: Border.all(
                                                           color: Colors.black)),
-                                                  child: checkListData
-                                                          .isCompleted!
+                                                  child: checkListData.isCompleted!
                                                       ? Icon(Icons.check,
                                                           size: 10,
                                                           color: Colors.black)
                                                       : SizedBox(),
                                                 ).paddingAll(8),
+
+                                                /// Strikethrough the text if marked completed
                                                 Text(
                                                   checkListData.todo.validate(),
                                                   style: primaryTextStyle(
-                                                    decoration: checkListData
-                                                            .isCompleted!
-                                                        ? TextDecoration
-                                                            .lineThrough
+                                                    decoration: checkListData.isCompleted!
+                                                        ? TextDecoration.lineThrough
                                                         : TextDecoration.none,
-                                                    color: checkListData
-                                                            .isCompleted!
+                                                    color: checkListData.isCompleted!
                                                         ? Colors.grey
                                                         : Colors.black,
                                                   ),
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
+                                                  overflow: TextOverflow.ellipsis,
                                                 ).expand(),
                                               ],
                                             );
                                           },
                                         ).paddingTop(8),
+
+                                  /// Show a lock with 'more...' text if the to-do list is longer tha 5 items
                                   notes.checkListModel!.length > 5
                                       ? Text('more...',
                                               style: secondaryTextStyle())
                                           .paddingLeft(8)
                                       : SizedBox(),
+
+                                  /// Show the last edited time
                                   Align(
                                     child: Text(
                                         formatTime(notes
@@ -231,7 +241,8 @@ class NotesScreenState extends State<NotesScreen> {
                                               shape: BoxShape.circle,
                                               color: Colors.grey.shade300),
                                           child: Text(
-                                              notes.collaborateWith!.first![0],
+                                              notes
+                                                  .collaborateWith!.first![0],
                                               style: boldTextStyle(
                                                   color: Colors.black,
                                                   size: 12)),
@@ -256,7 +267,10 @@ class NotesScreenState extends State<NotesScreen> {
                               }
                             }),
                           );
+
+                          /// End if the to-do/ checklist
                         } else {
+                          /// On long press show the lock + unlock note dialog
                           return GestureDetector(
                             onLongPress: () {
                               HapticFeedback.vibrate();
@@ -267,10 +281,12 @@ class NotesScreenState extends State<NotesScreen> {
                               decoration: boxDecorationWithShadow(
                                 borderRadius:
                                     BorderRadius.circular(defaultRadius),
-                                backgroundColor: getColorFromHex(notes.color!),
+                                backgroundColor:
+                                    getColorFromHex(notes.color!),
                                 spreadRadius: 0.0,
                                 blurRadius: 0.0,
-                                border: Border.all(color: Colors.grey.shade400),
+                                border:
+                                    Border.all(color: Colors.grey.shade400),
                               ),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -286,20 +302,17 @@ class NotesScreenState extends State<NotesScreen> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(notes.noteTitle.validate(),
-                                                style: boldTextStyle(
-                                                    color: Colors.black),
+                                                style: boldTextStyle(color: Colors.black),
                                                 maxLines: 1,
                                                 textAlign: TextAlign.start,
-                                                overflow:
-                                                    TextOverflow.ellipsis),
+                                                overflow: TextOverflow.ellipsis),
                                             Text(notes.note!,
                                                 style: primaryTextStyle(
                                                     size: 12,
                                                     color: Colors.black),
                                                 maxLines: 10,
                                                 textAlign: TextAlign.start,
-                                                overflow:
-                                                    TextOverflow.ellipsis),
+                                                overflow: TextOverflow.ellipsis),
                                           ],
                                         ),
                                   Align(
@@ -589,4 +602,5 @@ class NotesScreenState extends State<NotesScreen> {
       }),
     );
   }
+
 }
