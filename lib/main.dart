@@ -23,6 +23,7 @@ FirebaseFirestore db = FirebaseFirestore.instance;
 
 AuthService service = AuthService();
 UserDBService userDBService = UserDBService();
+UserDBService userService = UserDBService();
 NotesService notesService = NotesService();
 LabelsService labelsService = LabelsService();
 SubscriptionService subscriptionService = SubscriptionService();
