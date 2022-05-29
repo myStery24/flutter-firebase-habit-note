@@ -13,6 +13,7 @@ dependencies:
     sdk: flutter
 
   # COMMON
+  audioplayers: ^0.20.1
   bottom_navy_bar: ^6.0.0
   camera: ^0.9.4+19
   cached_network_image: ^3.2.0
@@ -24,9 +25,11 @@ dependencies:
   flutter_svg: ^1.0.3
   image_picker: ^0.8.4+4
   intl: ^0.17.0
+  material_tag_editor: ^0.1.2
   mobx: ^2.0.6+1
   nb_utils: ^4.4.14
   provider: ^6.0.2
+  shared_preferences: ^2.0.15
   url_launcher: ^6.0.20
 
   # FIREBASE PACKAGES
@@ -84,8 +87,8 @@ flutter_icons:
   adaptive_icon_background: "#ffb347"
 
 flutter:
-
   uses-material-design: true
+
   assets:
    - assets/images/
    - assets/google_fonts/Lato/
@@ -93,3 +96,4 @@ flutter:
    - assets/terms_of_use.md
    - assets/privacy_policy.md
    - assets/about_app.md
+   - assets/sfx/
