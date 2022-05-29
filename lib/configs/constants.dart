@@ -58,6 +58,7 @@ const IS_LOGGED_IN = 'IS_LOGGED_IN';
 const IS_FIRST_TIME = 'IS_FIRST_TIME';
 const NOTE_ID = 'NOTE_ID';
 const USER_ID = 'USER_ID';
+const LABEL_ID = 'LABEL_ID';
 const USERNAME = 'USERNAME';
 const PASSWORD = 'PASSWORD';
 const USER_EMAIL = 'USER_EMAIL';
@@ -225,6 +226,7 @@ const continue_with_apple = 'Continue with apple';
 const next_payment = 'Next payment';
 const subscription_exp = 'Subscription expired. No notification available';
 const subscription_detail = 'Subscription Detail';
+const labels = 'Labels';
 
 /// Testing devices
 List<String> testDevices = [''];
