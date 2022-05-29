@@ -7,6 +7,7 @@ import 'package:timezone/data/latest.dart' as tz;
 
 import 'screens/splash/splash_screen.dart';
 import 'services/auth_service.dart';
+import 'services/labels_service.dart';
 import 'services/notes_service.dart';
 import 'services/notification_manager.dart';
 import 'services/subscription_service.dart';
@@ -23,9 +24,9 @@ FirebaseFirestore db = FirebaseFirestore.instance;
 AuthService service = AuthService();
 UserDBService userDBService = UserDBService();
 NotesService notesService = NotesService();
+LabelsService labelsService = LabelsService();
 SubscriptionService subscriptionService = SubscriptionService();
 NotificationManager manager = NotificationManager();
-UserDBService userService = UserDBService();
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
