@@ -36,12 +36,31 @@ class _MeScreenState extends State<MeScreen> {
             ? AppColors.kPrimaryVariantColorDark
             : Theme.of(context).scaffoldBackgroundColor,
         appBar: AppBar(
-          title: Text(AppStrings.meScreen,
+          title: Text(
+            AppStrings.meScreen,
             style: GoogleFonts.fugazOne(),
           ),
           actions: [
+            TextButton(
+              onPressed: () async {
+                bool? res = await showConfirmDialog(context, log_out_text,
+                    positiveText: log_out, buttonColor: AppColors.kHabitOrange);
+
+                if (res ?? false) {
+                  service.signOutFromEmailPassword(context);
+                }
+              },
+              child: Text(
+                AppStrings.logout,
+                style: TextStyle(
+                  color: getBoolAsync(IS_DARK_MODE)
+                      ? AppColors.kHabitOrange
+                      : AppColors.kTextBlack,
+                ),
+              ),
+            ),
             IconButton(
-              tooltip: 'Log out',
+                tooltip: 'Log out',
                 onPressed: (() async {
                   bool? res = await showConfirmDialog(context, log_out_text,
                       positiveText: log_out,
