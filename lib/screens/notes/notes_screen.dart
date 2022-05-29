@@ -50,7 +50,8 @@ class NotesScreenState extends State<NotesScreen> {
       appStore.isDarkMode
           ? AppColors.kPrimaryVariantColorDark
           : AppColors.kAppBarColor,
-      statusBarIconBrightness: appStore.isDarkMode ? Brightness.dark : Brightness.light,
+      statusBarIconBrightness:
+          appStore.isDarkMode ? Brightness.dark : Brightness.light,
       delayInMilliSeconds: 100,
     );
 
@@ -79,7 +80,8 @@ class NotesScreenState extends State<NotesScreen> {
       child: WillPopScope(
         onWillPop: () async {
           DateTime now = DateTime.now();
-          if (currentBackPressTime == null || now.difference(currentBackPressTime!) > 2.seconds) {
+          if (currentBackPressTime == null ||
+              now.difference(currentBackPressTime!) > 2.seconds) {
             currentBackPressTime = now;
             toast(AppStrings.pressAgain);
             return Future.value(false);
@@ -119,7 +121,8 @@ class NotesScreenState extends State<NotesScreen> {
           ),
           drawer: DashboardDrawerWidget(),
           body: StreamBuilder<List<NotesModel>>(
-            stream: notesService.fetchNotes(color: colorFilter),
+            stream: notesService.fetchNotes(
+                color: colorFilter), // build connection with the database table
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 if (snapshot.data!.length == 0) {
@@ -130,9 +133,11 @@ class NotesScreenState extends State<NotesScreen> {
                     padding: EdgeInsets.only(
                         left: 8.0, top: 16.0, right: 8, bottom: 90),
                     child: StaggeredGrid.count(
-                      crossAxisCount: getStringAsync(SELECTED_LAYOUT_TYPE_DASHBOARD) == LIST_VIEW
-                          ? 1
-                          : crossAxisCount,
+                      crossAxisCount:
+                          getStringAsync(SELECTED_LAYOUT_TYPE_DASHBOARD) ==
+                                  LIST_VIEW
+                              ? 1
+                              : crossAxisCount,
                       mainAxisSpacing: 4,
                       crossAxisSpacing: 4,
                       children: snapshot.data!.map((e) {
@@ -180,7 +185,8 @@ class NotesScreenState extends State<NotesScreen> {
 
                                             /// To-do list
                                             return Row(
-                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
                                               children: [
                                                 /// To-do list tick/ check icon
                                                 Container(
@@ -190,7 +196,8 @@ class NotesScreenState extends State<NotesScreen> {
                                                       color: Colors.transparent,
                                                       border: Border.all(
                                                           color: Colors.black)),
-                                                  child: checkListData.isCompleted!
+                                                  child: checkListData
+                                                          .isCompleted!
                                                       ? Icon(Icons.check,
                                                           size: 10,
                                                           color: Colors.black)
@@ -201,14 +208,18 @@ class NotesScreenState extends State<NotesScreen> {
                                                 Text(
                                                   checkListData.todo.validate(),
                                                   style: primaryTextStyle(
-                                                    decoration: checkListData.isCompleted!
-                                                        ? TextDecoration.lineThrough
+                                                    decoration: checkListData
+                                                            .isCompleted!
+                                                        ? TextDecoration
+                                                            .lineThrough
                                                         : TextDecoration.none,
-                                                    color: checkListData.isCompleted!
+                                                    color: checkListData
+                                                            .isCompleted!
                                                         ? Colors.grey
                                                         : Colors.black,
                                                   ),
-                                                  overflow: TextOverflow.ellipsis,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
                                                 ).expand(),
                                               ],
                                             );
@@ -241,8 +252,7 @@ class NotesScreenState extends State<NotesScreen> {
                                               shape: BoxShape.circle,
                                               color: Colors.grey.shade300),
                                           child: Text(
-                                              notes
-                                                  .collaborateWith!.first![0],
+                                              notes.collaborateWith!.first![0],
                                               style: boldTextStyle(
                                                   color: Colors.black,
                                                   size: 12)),
@@ -281,12 +291,10 @@ class NotesScreenState extends State<NotesScreen> {
                               decoration: boxDecorationWithShadow(
                                 borderRadius:
                                     BorderRadius.circular(defaultRadius),
-                                backgroundColor:
-                                    getColorFromHex(notes.color!),
+                                backgroundColor: getColorFromHex(notes.color!),
                                 spreadRadius: 0.0,
                                 blurRadius: 0.0,
-                                border:
-                                    Border.all(color: Colors.grey.shade400),
+                                border: Border.all(color: Colors.grey.shade400),
                               ),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -302,17 +310,20 @@ class NotesScreenState extends State<NotesScreen> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(notes.noteTitle.validate(),
-                                                style: boldTextStyle(color: Colors.black),
+                                                style: boldTextStyle(
+                                                    color: Colors.black),
                                                 maxLines: 1,
                                                 textAlign: TextAlign.start,
-                                                overflow: TextOverflow.ellipsis),
+                                                overflow:
+                                                    TextOverflow.ellipsis),
                                             Text(notes.note!,
                                                 style: primaryTextStyle(
                                                     size: 12,
                                                     color: Colors.black),
                                                 maxLines: 10,
                                                 textAlign: TextAlign.start,
-                                                overflow: TextOverflow.ellipsis),
+                                                overflow:
+                                                    TextOverflow.ellipsis),
                                           ],
                                         ),
                                   Align(
@@ -602,5 +613,4 @@ class NotesScreenState extends State<NotesScreen> {
       }),
     );
   }
-
 }
