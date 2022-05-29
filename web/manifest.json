@@ -1,11 +1,11 @@
 {
-    "name": "mighty_notes",
-    "short_name": "mighty_notes",
+    "name": "habit_note",
+    "short_name": "habit_note",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter application.",
+    "background_color": "#ffb347",
+    "theme_color": "#ffb347",
+    "description": "HaBIT Note is an Android-based mobile application built with Flutter and Firebase for note-taking.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
