@@ -1,6 +1,6 @@
 # HaBIT Note
 
-HaBIT Note is a Android-based mobile application built with Flutter and Firebase for note-taking.
+HaBIT Note is an Android-based mobile application built with Flutter and Firebase for note-taking.
 
 ## Getting Started
 
@@ -21,8 +21,11 @@ samples, guidance on mobile development, and a full API reference.
 - Sync notes: Access to created notes with a single account.
 - Filter notes: Filter out notes with the colour filter.
 - Lock/Unlock notes: Lock notes with 4-digit passwords.
-- Colour-code/Tags: Categorise your notes with colour and tags (soon).
-- Text recognition: Upload images from gallery or camera and grab the texts in images through the Google ML Kit Text Recognition API.
+- Colour-code: Categorise your notes with colour.
+- Text recognition: Upload images from gallery or camera and grab the texts in images through the [Google ML Kit Text Recognition API](https://developers.google.com/ml-kit/vision/text-recognition).
 - Dark Mode: Light and dark modes.
 - Tutorial: User guide which explain how to use the application (in progress).
 - Flutter UI: Modern UI created using Flutter.
+
+**Upcoming Features**
+- Label notes: Add labels to your notes.
