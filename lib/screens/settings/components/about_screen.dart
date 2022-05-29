@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../configs/colors.dart';
 import '../../../configs/constants.dart';
@@ -74,7 +74,8 @@ class _AboutAppScreenState extends State<AboutAppScreen> {
                             data: snapshot.requireData,
                             // open link in browser
                             onTapLink: (text, href, title) {
-                              href != null ? launch(href) : null;
+                              // href != null ? launch(href) : null;
+                              href != null ? launchUrlString(href) : null;
                             },
                           );
                         }
@@ -124,6 +125,18 @@ class _AboutAppScreenState extends State<AboutAppScreen> {
         title: Text('About Us'),
         actions: [
           /// Software licenses
+          TextButton(
+            onPressed: () {
+              LicensesScreen().launch(context);
+            },
+            child: Text('Licenses',
+              style: TextStyle(
+                color: getBoolAsync(IS_DARK_MODE)
+                    ? AppColors.kHabitOrange
+                    : AppColors.kTextBlack,
+              ),
+            ),
+          ),
           IconButton(
             icon: Icon(Icons.copyright_outlined),
             tooltip: 'View licenses',
