@@ -129,7 +129,7 @@ class _AboutAppScreenState extends State<AboutAppScreen> {
             onPressed: () {
               LicensesScreen().launch(context);
             },
-            child: Text('Licenses',
+            child: Text('LICENSES',
               style: TextStyle(
                 color: getBoolAsync(IS_DARK_MODE)
                     ? AppColors.kHabitOrange
