@@ -4,7 +4,7 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habit_note/configs/constants.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../configs/colors.dart';
 import '../../main.dart';
@@ -90,7 +90,7 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
                           selectable: false,
                           data: snapshot.requireData,
                           onTapLink: (text, href, title) {
-                            href != null ? launch(href) : null;
+                            href != null ? launchUrlString(href) : null;
                           },
                         );
                       }
