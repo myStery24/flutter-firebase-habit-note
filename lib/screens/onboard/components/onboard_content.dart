@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../../configs/constants.dart';
 import 'onboard_screen_data.dart';
 import 'page_indicator.dart';
 
+// ignore: must_be_immutable
 class OnboardContent extends StatefulWidget {
-  // Number of onboarding pages
+  // Number of onboard pages
   @required
   late final int numOfPages;
 
@@ -64,22 +64,22 @@ class _OnboardContentState extends State<OnboardContent> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    var onBoardPage =
-        MediaQuery.of(context).orientation == Orientation.landscape;
+    // var onBoardPage = MediaQuery.of(context).orientation == Orientation.landscape;
 
     return SafeArea(
       child: SizedBox(
         // Center images in the column
-        width: getProportionateScreenWidth(size.width * 1.0),
+        width: size.width,
+        height: size.height * 0.6,
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 50.0),
+          padding: const EdgeInsets.fromLTRB(0, 32, 0, 0),
+          //padding: const EdgeInsets.symmetric(vertical: 32.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               SizedBox(
-                height: onBoardPage
-                    ? getProportionateScreenHeight(500)
-                    : getProportionateScreenHeight(400),
+                height: size.height * 0.5,
+                // height: onBoardPage ? size.height * 0.8 : size.height * 0.5,
                 child: PageView(
                   physics: const ClampingScrollPhysics(),
                   controller: _pageController,
@@ -95,6 +95,9 @@ class _OnboardContentState extends State<OnboardContent> {
                       onboardScreenData(widget.numOfPages, widget.onboardData),
                 ),
               ),
+
+              /// The space between the text and dot indicator
+              SizedBox(height: size.width * 0.015),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
 
@@ -102,6 +105,9 @@ class _OnboardContentState extends State<OnboardContent> {
                 children: buildPageIndicator(widget.numOfPages, _currentPage,
                     widget.isPageIndicatorCircle),
               ),
+
+              /// The space between the dot indicator and the buttons
+              SizedBox(height: size.width * 0.015),
             ],
           ),
         ),
