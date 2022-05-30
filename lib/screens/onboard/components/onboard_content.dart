@@ -72,8 +72,8 @@ class _OnboardContentState extends State<OnboardContent> {
         width: size.width,
         height: size.height * 0.6,
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(0, 32, 0, 0),
-          //padding: const EdgeInsets.symmetric(vertical: 32.0),
+          padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+          //padding: const EdgeInsets.symmetric(vertical: 30.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
@@ -91,8 +91,7 @@ class _OnboardContentState extends State<OnboardContent> {
                   },
 
                   /// Onboard screen data
-                  children:
-                      onboardScreenData(widget.numOfPages, widget.onboardData),
+                  children: onboardScreenData(widget.numOfPages, widget.onboardData),
                 ),
               ),
 
@@ -102,8 +101,7 @@ class _OnboardContentState extends State<OnboardContent> {
                 mainAxisAlignment: MainAxisAlignment.center,
 
                 /// Dot indicator
-                children: buildPageIndicator(widget.numOfPages, _currentPage,
-                    widget.isPageIndicatorCircle),
+                children: buildPageIndicator(widget.numOfPages, _currentPage, widget.isPageIndicatorCircle),
               ),
 
               /// The space between the dot indicator and the buttons
