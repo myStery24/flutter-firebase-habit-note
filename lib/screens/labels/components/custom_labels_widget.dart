@@ -15,7 +15,7 @@ class CreateLabelSectionWidget extends StatelessWidget {
     return Padding(
       padding: EdgeInsetsDirectional.fromSTEB(24, 0, 0, 5),
       child: Text(
-        'Create labels',
+        'Create a new label',
         style: GoogleFonts.lato(
           fontSize: 18.0,
           color: getBoolAsync(IS_DARK_MODE)
