@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:clipboard/clipboard.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,7 +12,6 @@ import 'package:nb_utils/nb_utils.dart';
 import '../../configs/colors.dart';
 import '../../configs/constants.dart';
 import '../../main.dart';
-import '../../widgets/dashboard_drawer_widget.dart';
 import 'widgets/custom_deco_box.dart';
 import 'widgets/text_area_widget.dart';
 
@@ -30,9 +30,10 @@ class _OCRScreenState extends State<OCRScreen> {
   XFile? imageFile; // Store user picked image
   String scannedText = ""; // Store the recognised text
   bool textScanning = false;
-  CustomPaint? customPaint;
+  // CustomPaint? customPaint; // Draw boxes on a scanned image
 
   GlobalKey<ScaffoldState> _scaffoldState = GlobalKey<ScaffoldState>();
+  FirebaseStorage _storage = FirebaseStorage.instance;
 
   @override
   void initState() {
@@ -77,8 +78,8 @@ class _OCRScreenState extends State<OCRScreen> {
             // ),
             actions: [
               IconButton(
-                icon:
-                    Icon(Icons.clear_all, semanticLabel: 'clear image and text'),
+                icon: Icon(Icons.clear_all,
+                    semanticLabel: 'clear image and text'),
                 tooltip: 'Clear all',
                 onPressed: () {
                   /// Clear image and scanned text
@@ -132,14 +133,12 @@ class _OCRScreenState extends State<OCRScreen> {
                       color: appStore.isDarkMode ? Colors.white12 : Colors.white,
                     ),
 
-                    /// if the image state is not null, show the image else display a photo icon placeholder
+                    /// If the image state is not null,
                     child: imageFile != null
-                        ? Image.file(File(imageFile!.path))
-                        : Icon(Icons.photo, size: 80, color: Colors.black),
+                        ? Image.file(File(imageFile!.path)) // show the image
+                        : Icon(Icons.photo, size: 80, color: Colors.black), // else display a photo icon placeholder
                   ),
-                  SizedBox(
-                    height: 18.0,
-                  ),
+                  SizedBox(height: 18.0),
 
                   /// Scanning indicator
                   Row(
@@ -149,7 +148,8 @@ class _OCRScreenState extends State<OCRScreen> {
                       CustomDecoBox(
                           margin: const EdgeInsets.all(8.0),
                           lightModeColor: AppColors.kHabitOrange,
-                          lightModeShadowColor: AppColors.kPrimaryVariantColorDark,
+                          lightModeShadowColor:
+                              AppColors.kPrimaryVariantColorDark,
                           darkModeColor: AppColors.kHabitDark,
                           darkModeShadowColor: AppColors.kHabitOrange,
                           padding: const EdgeInsets.all(10.0),
@@ -175,7 +175,8 @@ class _OCRScreenState extends State<OCRScreen> {
                       CustomDecoBox(
                         margin: const EdgeInsets.all(8.0),
                         lightModeColor: AppColors.kHabitOrange,
-                        lightModeShadowColor: AppColors.kPrimaryVariantColorDark,
+                        lightModeShadowColor:
+                            AppColors.kPrimaryVariantColorDark,
                         darkModeColor: AppColors.kHabitDark,
                         darkModeShadowColor: AppColors.kHabitOrange,
                         padding: const EdgeInsets.all(10.0),
@@ -247,6 +248,18 @@ class _OCRScreenState extends State<OCRScreen> {
     );
   }
 
+  /// Upload image
+  Future uploadOcrImage() async {
+    // UploadTask? upload;
+    final path = 'images/ocr/${getStringAsync(USER_ID)}/${imageFile!.name}'; // Path to store the images
+    final storageRef = _storage.ref().child(path); // A reference to the location of uploaded images in Firebase Storage
+    final ocrImage = File(imageFile!.path); // Convert picked file/image to a file object
+
+    storageRef.putFile(ocrImage); // Upload the file to Firebase Storage
+    // upload = storageRef.putFile(ocrImage);
+    // await upload.whenComplete(() => print('Uploaded image successfully'));
+  }
+
   /// Get image
   Future<void> getImage(ImageSource source) async {
     try {
@@ -260,6 +273,7 @@ class _OCRScreenState extends State<OCRScreen> {
         imageFile = pickedImage; // set the image path to the imageFile object
         /// Update the state variables once the process is complete
         if (mounted) {
+          uploadOcrImage(); // upload the image to firebase storage
           setState(() {}); // update the UI to show the image
         }
         await getRecognisedText(pickedImage); // scan text from the picked image
