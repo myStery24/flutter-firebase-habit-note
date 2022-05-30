@@ -22,8 +22,8 @@ class _LabelsListScreenState extends State<LabelsListScreen> {
 
   TextEditingController _labelNameController = TextEditingController();
   TextEditingController _newLabelNameController = new TextEditingController();
-  final CollectionReference _selectedLabels = FirebaseFirestore.instance
-      .collection('labels'); // Collection of label in firebase firestore
+  final CollectionReference _labelsRef = FirebaseFirestore.instance.collection('labels'); // Collection of label in firebase firestore
+  List _selectedLabels = [];
   bool kIsUpdate = false;
 
   FocusNode labelFocus = FocusNode();
@@ -189,7 +189,7 @@ class _LabelsListScreenState extends State<LabelsListScreen> {
               /// Show all the created labels in list
               /// StreamBuilder() keeps persistence connection with Firestore database
               StreamBuilder(
-                stream: _selectedLabels
+                stream: _labelsRef
                     .where('userId', isEqualTo: getStringAsync(USER_ID))
                     .snapshots(), // Build connection
                 // stream: labelsService.labels(),
@@ -351,6 +351,21 @@ class _LabelsListScreenState extends State<LabelsListScreen> {
                       shapeBorder: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(8.0)),
                       ),
+                      child: Text(cancel,
+                          style: boldTextStyle(
+                              color: AppColors.kHabitDark.withOpacity(0.5))),
+                      padding: EdgeInsets.all(8.0),
+                      color: Colors.grey.shade300,
+                      width: 70,
+                      height: 36,
+                      onTap: () async {
+                        finish(context);
+                      },
+                    ),
+                    AppButton(
+                      shapeBorder: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                      ),
                       child: Text('Save changes',
                           style: boldTextStyle(
                               color: appStore.isDarkMode
@@ -368,25 +383,10 @@ class _LabelsListScreenState extends State<LabelsListScreen> {
                             .text; // save the new changes
 
                         /// Pass to the update method
-                        await _selectedLabels
+                        await _labelsRef
                             .doc(labelSnapshot!.id) // pass the document id
                             .update({"labelName": newLabelName}); // update
                         //_newLabelNameController.text = '';
-                      },
-                    ),
-                    AppButton(
-                      shapeBorder: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                      ),
-                      child: Text(cancel,
-                          style: boldTextStyle(
-                              color: AppColors.kHabitDark.withOpacity(0.5))),
-                      padding: EdgeInsets.all(8.0),
-                      color: Colors.grey.shade300,
-                      width: 70,
-                      height: 36,
-                      onTap: () async {
-                        finish(context);
                       },
                     ),
                   ],
@@ -407,4 +407,18 @@ class _LabelsListScreenState extends State<LabelsListScreen> {
       toast(error.toString());
     });
   }
+
+  /// Tick the label to add to notes
+  void _onLabelSelected(bool selected, String labelName) {
+    if (selected) {
+      setState(() {
+        _selectedLabels.add(labelName);
+      });
+    } else {
+      setState(() {
+        _selectedLabels.remove(labelName);
+      });
+    }
+  }
 }
+
