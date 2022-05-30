@@ -36,6 +36,12 @@ class _OnboardScreenState extends State<OnboardScreen> {
       delayInMilliSeconds: 100,
     );
 
+    /// When loading the onboard screen, set the orientation portrait
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
     setState(() {});
   }
 
@@ -46,6 +52,13 @@ class _OnboardScreenState extends State<OnboardScreen> {
 
   @override
   void dispose() {
+    /// When leaving the onboard screen,set back to normal (applies to all screens after login)
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     super.dispose();
   }
 
@@ -53,7 +66,8 @@ class _OnboardScreenState extends State<OnboardScreen> {
   Widget build(BuildContext context) {
     /// Call it on starting screen only
     SizeConfig().init(context);
-    Size size = MediaQuery.of(context).size;
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
 
     /// Control the back button
     return WillPopScope(
@@ -84,42 +98,47 @@ class _OnboardScreenState extends State<OnboardScreen> {
           body: SingleChildScrollView(
             child: AnnotatedRegion<SystemUiOverlayStyle>(
               value: SystemUiOverlayStyle.light,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  /// A welcome title text with app name
-                  const OnboardTitle(),
+              child: Container(
+                width: screenWidth,
+                height: screenHeight,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    /// A welcome title text with app name
+                    const OnboardTitle(),
 
-                  /// A scrollable widget with image, header and body text
-                  OnboardContent(),
+                    /// A scrollable widget with image, header and body text
+                    OnboardContent(),
 
-                  /// Arrange the buttons
-                  ButtonBar(
-                    children: <Widget>[
-                      /// Create account button
-                      CustomButton(
-                        text: AppStrings.createAccount,
-                        /// Open create account (register) screen
-                        onPressed: () {
-                          Navigator.push(context, AppRoutes().createAccountScreen);
-                        },
-                      ),
-                      32.height,
+                    /// Arrange the buttons
+                    ButtonBar(
+                      children: <Widget>[
+                        /// Create account button
+                        CustomButton(
+                          text: AppStrings.createAccount,
+                          /// Open create account (register) screen
+                          onPressed: () {
+                            Navigator.push(context, AppRoutes().createAccountScreen);
+                          },
+                        ),
+                        18.height,
 
-                      /// Login button
-                      CustomButton(
-                        text: AppStrings.login,
-                        textColor: AppColors.kHabitOrange,
-                        color: AppColors.kTextWhite,
-                        /// Open login screen
-                        onPressed: () {
-                          Navigator.push(context, AppRoutes().loginScreen);
-                        },
-                      ),
-                      16.height,
-                    ],
-                  ),
-                ],
+                        /// Login button
+                        CustomButton(
+                          text: AppStrings.login,
+                          textColor: AppColors.kHabitOrange,
+                          color: AppColors.kTextWhite,
+                          /// Open login screen
+                          onPressed: () {
+                            Navigator.push(context, AppRoutes().loginScreen);
+                          },
+                        ),
+                        16.height,
+                      ],
+                    ),
+                    SizedBox(height: screenHeight * 0.015),
+                  ],
+                ),
               ),
             ),
           ),
