@@ -7,7 +7,7 @@ class NotesModel {
   String? note;
   String? color;
   String? noteImage;
-  // List<String?>? label;
+  String? noteLabel;
   DateTime? createdAt;
   DateTime? updatedAt;
   List<CheckListModel>? checkListModel;
@@ -22,7 +22,7 @@ class NotesModel {
     this.note,
     this.color,
     this.noteImage,
-    // this.label,
+    this.noteLabel,
     this.createdAt,
     this.updatedAt,
     this.checkListModel,
@@ -38,7 +38,7 @@ class NotesModel {
       note: json['note'],
       color: json['color'],
       noteImage: json['noteImage'],
-      // label: json['label'] !=null ? (json['label'] as List).map<String>((e) => e).toList() : null,
+      noteLabel: json['noteLabel'],
       createdAt: json['createdAt'] != null ? (json['createdAt'] as Timestamp).toDate() : null,
       updatedAt: json['updatedAt'] != null ? (json['updatedAt'] as Timestamp).toDate() : null,
       checkListModel: json['checkList'] != null ? (json['checkList'] as List).map<CheckListModel>((e) => CheckListModel.fromJson(e)).toList() : null,
@@ -56,7 +56,7 @@ class NotesModel {
     data['note'] = this.note;
     data['color'] = this.color;
     data['noteImage'] = this.noteImage;
-    // data['label'] = this.label;
+    data['noteLabel'] = this.noteLabel;
     data['createdAt'] = this.createdAt;
     data['updatedAt'] = this.updatedAt;
 
@@ -72,7 +72,6 @@ class NotesModel {
 
 class CheckListModel {
   String? todo;
-  // List<String?>? label;
   bool? isCompleted;
 
   CheckListModel({this.todo, this.isCompleted});
@@ -80,7 +79,6 @@ class CheckListModel {
   factory CheckListModel.fromJson(Map<String, dynamic> json) {
     return CheckListModel(
       todo: json['todo'],
-      // label: json['label'],
       isCompleted: json['isCompleted'],
     );
   }
@@ -89,7 +87,6 @@ class CheckListModel {
     Map<String, dynamic> data = Map<String, dynamic>();
 
     data['todo'] = this.todo;
-    // data['label'] = this.label;
     data['isCompleted'] = this.isCompleted;
 
     return data;
