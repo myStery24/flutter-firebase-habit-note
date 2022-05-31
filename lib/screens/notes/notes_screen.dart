@@ -488,7 +488,7 @@ class NotesScreenState extends State<NotesScreen> {
                       notesService
                           .removeDocument(notesModel.noteId)
                           .then((value) {
-                        toast('Note deleted');
+                        toast('Note deleted forever');
                       }).catchError((error) {
                         toast(error.toString());
                       });
