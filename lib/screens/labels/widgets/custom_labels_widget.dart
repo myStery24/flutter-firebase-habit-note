@@ -7,8 +7,8 @@ import '../../../configs/constants.dart';
 import '../../../main.dart';
 
 /// [Create labels] Header
-class CreateLabelSectionWidget extends StatelessWidget {
-  const CreateLabelSectionWidget({Key? key}) : super(key: key);
+class CreateLabelSectionTitleWidget extends StatelessWidget {
+  const CreateLabelSectionTitleWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +29,8 @@ class CreateLabelSectionWidget extends StatelessWidget {
 }
 
 /// [Labels in your notes] Header
-class LabelsSectionWidget extends StatelessWidget {
-  const LabelsSectionWidget({Key? key}) : super(key: key);
+class LabelsSectionTitleWidget extends StatelessWidget {
+  const LabelsSectionTitleWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
