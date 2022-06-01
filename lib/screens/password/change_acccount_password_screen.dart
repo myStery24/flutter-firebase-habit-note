@@ -228,7 +228,7 @@ class ChangeAppPasswordScreenState extends State<ChangeAppPasswordScreen> {
                           ),
                         ),
                         Text(
-                            'This section does not apply to accounts created through Google services/ third-party login.'),
+                            'This section does not apply to accounts created through Google services/third-party login.'),
                       ],
                     ),
                   ),
