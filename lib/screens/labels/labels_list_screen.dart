@@ -224,6 +224,7 @@ class _LabelsListScreenState extends State<LabelsListScreen> {
                                 _editLabel(labelSnapshot);
                               },
                             ),
+
                             /// Swipe
                             background: SwipeActionBackground(),
                             key: Key(labelSnapshot.id),
@@ -255,7 +256,7 @@ class _LabelsListScreenState extends State<LabelsListScreen> {
       appStore.setLoading(true);
 
       LabelsModel model = LabelsModel();
-      // model.labelId = getStringAsync(LABEL_ID);
+
       model.labelName = _labelNameController.text.trim();
       model.userId = getStringAsync(USER_ID);
 
@@ -421,4 +422,3 @@ class _LabelsListScreenState extends State<LabelsListScreen> {
     }
   }
 }
-
