@@ -326,6 +326,7 @@ class _SettingsCategoryState extends State<SettingsCategory> {
         ),
 
         /// Delete user account
+        /// Not yet tested
         // Container(
         //   alignment: Alignment.center,
         //   padding: EdgeInsets.all(8.0),
