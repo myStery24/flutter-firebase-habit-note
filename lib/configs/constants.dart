@@ -29,7 +29,7 @@ class AppStrings {
 
   // App copyright
   static const String appCopyright =
-      '© Copyright HABIT 2022. All rights reserved';
+      '© Copyright HaBIT Note 2022. All rights reserved.';
 
   // Texts
   static const String createAccount = 'CREATE ACCOUNT';
