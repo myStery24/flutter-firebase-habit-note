@@ -1,4 +1,4 @@
-# HaBIT Note For Android
+# HaBIT Note for Android
 
 HaBIT Note is a Android-based mobile application built with [Flutter](https://flutter.dev/docs) and Firebase for note-taking.
 
