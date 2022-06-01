@@ -20,7 +20,7 @@ class LabelsModel {
 
   Map<String, dynamic> toJson() {
     Map<String, dynamic> data = Map<String, dynamic>();
-    data['labelId'] = this.labelId;
+    data['id'] = this.labelId;
     data['labelName'] = this.labelName;
     data['userId'] = this.userId;
 
