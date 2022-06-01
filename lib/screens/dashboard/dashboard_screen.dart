@@ -12,6 +12,7 @@ import '../../widgets/dashboard_drawer_widget.dart';
 import '../help/help_screen.dart';
 import '../notes/notes_screen.dart';
 
+/// The home screen after login
 class DashboardScreen extends StatefulWidget {
   static String tag = '/DashboardScreen';
 
@@ -25,27 +26,12 @@ class DashboardScreenState extends State<DashboardScreen> {
   int index = 0;
   int activeTab = 0;
 
-  // String colorFilter = '';
-  //
-  // String? name;
-  // String? userEmail;
-  // String? imageUrl;
-
   DateTime? currentBackPressTime;
-
-  // late int crossAxisCount;
-  // late int fitWithCount;
 
   @override
   void initState() {
     super.initState();
-    // init();
   }
-
-  // Future<void> init() async {
-  //   fitWithCount = getIntAsync(FIT_COUNT, defaultValue: 1);
-  //   crossAxisCount = getIntAsync(CROSS_COUNT, defaultValue: 2);
-  // }
 
   @override
   void setState(fn) {
@@ -76,11 +62,11 @@ class DashboardScreenState extends State<DashboardScreen> {
           drawer: DashboardDrawerWidget(),
           body: buildBody(),
 
-          /// Custom Bottom Navigation Bar
-          bottomNavigationBar: buildBottomNavBar(),
+            /// Custom Bottom Navigation Bar
+            bottomNavigationBar: buildBottomNavBar(),
+          ),
         ),
-      ),
-    );
+      );
   }
 
   Widget buildBody() {
@@ -104,9 +90,11 @@ class DashboardScreenState extends State<DashboardScreen> {
 
   /// Custom navigation bar
   Widget buildBottomNavBar() {
-    final inactiveColor = Colors.grey;
+    final inactiveColor =  AppColors.kPrimaryVariantColorDark;
+    final activeColor = Colors.white;
+
     return BottomNavyBar(
-      backgroundColor: AppColors.kHabitDark,
+      backgroundColor: AppColors.kHabitOrange,
       containerHeight: 70.0,
       itemCornerRadius: 12,
       selectedIndex: index,
@@ -115,28 +103,28 @@ class DashboardScreenState extends State<DashboardScreen> {
           icon: Icon(Icons.sticky_note_2_sharp),
           title: Text('Notes'),
           textAlign: TextAlign.center,
-          activeColor: AppColors.kHabitOrange,
+          activeColor: activeColor,
           inactiveColor: inactiveColor,
         ),
         BottomNavyBarItem(
           icon: Icon(Icons.image_search_outlined),
           title: Text('OCR'),
           textAlign: TextAlign.center,
-          activeColor: AppColors.kHabitOrange,
+          activeColor: activeColor,
           inactiveColor: inactiveColor,
         ),
         BottomNavyBarItem(
           icon: Icon(Icons.help_outline),
           title: Text('Help'),
           textAlign: TextAlign.center,
-          activeColor: AppColors.kHabitOrange,
+          activeColor: activeColor,
           inactiveColor: inactiveColor,
         ),
         BottomNavyBarItem(
           icon: Icon(Icons.person_outline),
           title: Text('Me'),
           textAlign: TextAlign.center,
-          activeColor: AppColors.kHabitOrange,
+          activeColor: activeColor,
           inactiveColor: inactiveColor,
         ),
       ],
