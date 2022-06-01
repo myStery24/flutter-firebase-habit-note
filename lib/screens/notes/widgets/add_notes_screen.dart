@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:habit_note/models/labels_model.dart';
@@ -14,7 +13,7 @@ import '../../../models/notes_model.dart';
 import '../../../widgets/custom_chips.dart';
 
 /// TODO : Add labels to note, save to Firestore, map to the note
-/// ISSUE: The label does not save once exited the note editor
+/// ISSUE: The label does not save to database, currently display dummy data as labels
 class AddNotesScreen extends StatefulWidget {
   static String tag = '/AddNotesScreen';
   final NotesModel? notesModel;
@@ -28,11 +27,12 @@ class AddNotesScreen extends StatefulWidget {
 
 class AddNotesScreenState extends State<AddNotesScreen> {
   List<String> collaborateList = [];
-  List<String> _selectedLabels = [];
+  List<LabelsModel> _notesLabels = [];
+  List<String> _selectedLabels = ['Notes'];
 
   TextEditingController titleController = TextEditingController();
   TextEditingController notesController = TextEditingController();
-  TextEditingController _newLabelController = new TextEditingController();
+  TextEditingController notesLabelController = TextEditingController();
 
   FocusNode noteNode = FocusNode();
   FocusNode _labelNode = FocusNode();
@@ -48,7 +48,8 @@ class AddNotesScreenState extends State<AddNotesScreen> {
   }
 
   Future<void> init() async {
-    setStatusBarColor(Colors.transparent, statusBarIconBrightness: Brightness.light, delayInMilliSeconds: 100);
+    setStatusBarColor(Colors.transparent,
+        statusBarIconBrightness: Brightness.light, delayInMilliSeconds: 100);
 
     _kIsUpdateNote = widget.notesModel != null;
 
@@ -59,7 +60,7 @@ class AddNotesScreenState extends State<AddNotesScreen> {
     if (_kIsUpdateNote) {
       titleController.text = widget.notesModel!.noteTitle!;
       notesController.text = widget.notesModel!.note!;
-      //_newLabelController.text = widget.notesModel!.noteLabel!;
+      _notesLabels.addAll(widget.notesModel!.noteLabel!);
       _kSelectColor = getColorFromHex(widget.notesModel!.color!);
     }
   }
@@ -77,7 +78,6 @@ class AddNotesScreenState extends State<AddNotesScreen> {
             : AppColors.kAppBarColor,
         delayInMilliSeconds: 100);
     addNotes();
-    // saveLabel();
     super.dispose();
   }
 
@@ -100,12 +100,19 @@ class AddNotesScreenState extends State<AddNotesScreen> {
               finish(context);
             },
           ),
+          // IconButton(
+          //   icon: Icon(Icons.label_outline),
+          //   color: AppColors.kHabitDark,
+          //   onPressed: () async {
+          //     hideKeyboard(context);
+          //     LabelsListScreen().launch(context);
+          //   },
+          // ),
           IconButton(
             icon: Icon(Icons.more_vert_rounded),
             color: AppColors.kHabitDark,
             onPressed: () async {
               hideKeyboard(context);
-
               noteColorPicker();
             },
           ),
@@ -120,18 +127,80 @@ class AddNotesScreenState extends State<AddNotesScreen> {
           height: double.infinity,
           child: Column(
             children: [
-              _kIsUpdateNote && widget.notesModel!.collaborateWith!.first != getStringAsync(USER_EMAIL)
+              /// Note labels
+              Row(
+                children: [
+                  Expanded(
+                    child: TagEditor(
+                      maxLines: 1,
+                      controller: notesLabelController,
+                      // get the length of note label in database
+                      length: _selectedLabels.length,
+                      // length: snapshot.data!.length,
+                      focusNode: _labelNode,
+                      delimiters: [',', ' '],
+                      hasAddButton: false,
+                      resetTextOnSubmitted: true,
+                      // Text color of the label
+                      textStyle: const TextStyle(color: AppColors.kTextBlack),
+                      inputDecoration: const InputDecoration(
+                        hintText: 'Add labels...',
+                        hintStyle:
+                            TextStyle(color: AppColors.kHintTextLightGrey),
+                        hintMaxLines: 1,
+                        border: InputBorder.none,
+                      ),
+                      // save to database noteLabel field
+                      onSubmitted: (val) {
+                        setState(() {
+                          _selectedLabels.add(val);
+                          print(_selectedLabels);
+                          toast(
+                              'Sorry, adding labels is not working in current version.');
+                          //snapshot.toString();
+                        });
+                      },
+                      onTagChanged: (newValue) {
+                        setState(() {
+                          _selectedLabels.add(newValue);
+                          //snapshot.toString();
+                        });
+                      },
+                      tagBuilder: (context, index) => CustomChips(
+                        index: index,
+                        label: _selectedLabels[index],
+                        // label: snapshot.toString(),
+                        onDeleted: _onDelete,
+                      ),
+                      // InputFormatters example, this disallow \ and /
+                      inputFormatters: [
+                        FilteringTextInputFormatter.deny(RegExp(r'[/\\]'))
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              Divider(),
+
+              /// Note editor
+              _kIsUpdateNote &&
+                      widget.notesModel!.collaborateWith!.first !=
+                          getStringAsync(USER_EMAIL)
                   ? Row(
                       children: [
                         Text('$shared_by :',
-                            style: boldTextStyle(color: Colors.black, size: 18)),
+                            style:
+                                boldTextStyle(color: Colors.black, size: 18)),
                         4.width,
                         Text(
-                            widget.notesModel!.collaborateWith!.first.validate(),
-                            style: boldTextStyle(color: Colors.black, size: 18)),
+                            widget.notesModel!.collaborateWith!.first
+                                .validate(),
+                            style:
+                                boldTextStyle(color: Colors.black, size: 18)),
                       ],
                     )
                   : SizedBox(),
+
               /// Title
               TextField(
                 autofocus: _kIsUpdateNote ? false : true,
@@ -149,6 +218,7 @@ class AddNotesScreenState extends State<AddNotesScreen> {
                 },
                 maxLines: 1,
               ),
+
               /// Content
               SingleChildScrollView(
                 physics: BouncingScrollPhysics(),
@@ -159,7 +229,8 @@ class AddNotesScreenState extends State<AddNotesScreen> {
                   decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: 'Type something awesome here',
-                      hintStyle: TextStyle(color: AppColors.kHintTextLightGrey)),
+                      hintStyle:
+                          TextStyle(color: AppColors.kHintTextLightGrey)),
                   style: primaryTextStyle(color: Colors.black),
                   textInputAction: TextInputAction.newline,
                   textCapitalization: TextCapitalization.sentences,
@@ -167,43 +238,6 @@ class AddNotesScreenState extends State<AddNotesScreen> {
                   maxLines: null,
                 ),
               ).expand(),
-              /// Labels
-              Divider(),
-              TagEditor(
-                // autofocus: _kIsUpdateNote ? false : true,
-                controller: _newLabelController,
-                length: _selectedLabels.length,
-                focusNode: _labelNode,
-                delimiters: [',', ' '],
-                hasAddButton: true,
-                resetTextOnSubmitted: true,
-                textStyle: const TextStyle(color: AppColors.kTextBlack), // Text color of the label
-                onSubmitted: (outstandingValue) {
-                  setState(() {
-                    _selectedLabels.add(outstandingValue);
-
-                  });
-                },
-                inputDecoration: const InputDecoration(
-                  hintMaxLines: 2,
-                  border: InputBorder.none,
-                  hintText: 'Sorry, adding labels is not working in current version...',
-                ),
-                onTagChanged: (newValue) {
-                  setState(() {
-                    _selectedLabels.add(newValue);
-                  });
-                },
-                tagBuilder: (context, index) => CustomChips(
-                  index: index,
-                  label: _selectedLabels[index],
-                  onDeleted: _onDelete,
-                ),
-                // InputFormatters example, this disallow \ and /
-                inputFormatters: [
-                  FilteringTextInputFormatter.deny(RegExp(r'[/\\]'))
-                ],
-              ),
             ],
           ),
         ),
@@ -211,15 +245,26 @@ class AddNotesScreenState extends State<AddNotesScreen> {
     );
   }
 
+  void displayEditedDetail() {
+    NotesModel notesData = NotesModel();
+    if (notesData.noteId.isEmptyOrNull) {
+      Text('Editing');
+    } else {
+      notesData.createdAt = DateTime.now();
+    }
+  }
+
   /// Add a [Note] to the note list
   void addNotes() {
     if (titleController.text.trim().isNotEmpty ||
-        notesController.text.trim().isNotEmpty) {
+        notesController.text.trim().isNotEmpty ||
+        notesLabelController.text.trim().isNotEmpty) {
       NotesModel notesData = NotesModel();
 
       notesData.userId = getStringAsync(USER_ID);
       notesData.noteTitle = titleController.text.trim();
       notesData.note = notesController.text.trim();
+      notesData.noteLabel = _notesLabels;
 
       if (_kSelectColor != null) {
         notesData.color = _kSelectColor!.toHex().toString();
@@ -229,12 +274,13 @@ class AddNotesScreenState extends State<AddNotesScreen> {
 
       if (_kIsUpdateNote) {
         notesData.noteId = widget.notesModel!.noteId;
-        notesData.noteLabel = widget.notesModel!.noteLabel;
         notesData.createdAt = widget.notesModel!.createdAt;
         notesData.updatedAt = DateTime.now();
         notesData.checkListModel = widget.notesModel!.checkListModel.validate();
-        notesData.collaborateWith = widget.notesModel!.collaborateWith.validate();
+        notesData.collaborateWith =
+            widget.notesModel!.collaborateWith.validate();
         notesData.isLock = widget.notesModel!.isLock;
+        notesData.noteLabel = []; // set to [] because it cant be null
 
         notesService
             .updateDocument(notesData.toJson(), notesData.noteId)
@@ -246,7 +292,7 @@ class AddNotesScreenState extends State<AddNotesScreen> {
         notesData.createdAt = DateTime.now();
         notesData.updatedAt = DateTime.now();
         notesData.collaborateWith = collaborateList.validate();
-        notesData.checkListModel = [];
+        notesData.checkListModel = []; // set to [] because it cant be null
 
         notesService
             .addDocument(notesData.toJson())
@@ -255,6 +301,14 @@ class AddNotesScreenState extends State<AddNotesScreen> {
           toast(error.toString());
         });
       }
+      // if the note is empty
+    } else {
+      // delete the note
+      notesService.removeDocument(widget.notesModel!.noteId).then((value) {
+        toast("Note discarded");
+      }).catchError((error) {
+        toast(error.toString());
+      });
     }
   }
 
@@ -279,11 +333,12 @@ class AddNotesScreenState extends State<AddNotesScreen> {
                   title: Text(delete_note, style: primaryTextStyle()),
                   onTap: () {
                     if (widget.notesModel == null ||
-                        widget.notesModel!.collaborateWith!.first == getStringAsync(USER_EMAIL)) {
+                        widget.notesModel!.collaborateWith!.first ==
+                            getStringAsync(USER_EMAIL)) {
                       notesService
                           .removeDocument(widget.notesModel!.noteId)
                           .then((value) {
-                        toast('Note deleted');
+                        toast('Note deleted forever');
                         finish(context);
                         DashboardScreen().launch(context, isNewTask: true);
                       }).catchError((error) {
@@ -336,31 +391,10 @@ class AddNotesScreenState extends State<AddNotesScreen> {
     );
   }
 
-  /// Save label to Firestore labels collection
-  void saveLabel() async {
-    if (_newLabelController.text.trim().isNotEmpty) {
-      LabelsModel labelsData = LabelsModel();
-
-      labelsData.labelName = _newLabelController.text.trim();
-
-      await FirebaseFirestore.instance.collection('labels').add({
-        "noteLabel": _newLabelController.text,
-      },
-      );
-      setState(() {
-        notesService
-            .addDocument(labelsData.toJson())
-            .then((value) {})
-            .catchError((error) {
-          toast(error.toString());
-        });
-      });
-    }
-  }
-
   /// Delete the labels by pressing x
   void _onDelete(index) {
     setState(() {
+      toast('Label removed');
       _selectedLabels.removeAt(index);
     });
   }
