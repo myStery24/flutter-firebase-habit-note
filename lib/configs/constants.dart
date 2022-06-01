@@ -61,8 +61,7 @@ class AppImages {
 
   // Images
   static const launcherIcon = '$imageDir/icon.png';
-  static const logoLight = '$imageDir/logo_light_mode.png';
-  static const logoNight = '$imageDir/logo_night_mode.png';
+  static const launcherIcon2 = '$imageDir/icon_transparent.png';
 
   static const userIcon = '$imageDir/user.png';
   static const userIcon2 = '$imageDir/user_creativity.png';
