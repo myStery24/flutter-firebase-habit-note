@@ -153,6 +153,7 @@ class NotesScreenState extends State<NotesScreen> {
 
                             /// To-do notes container style
                             child: Container(
+                              padding: EdgeInsets.all(8.0),
                               decoration: boxDecorationWithShadow(
                                 borderRadius: BorderRadius.circular(8),
                                 backgroundColor: getColorFromHex(notes.color!),
@@ -236,16 +237,17 @@ class NotesScreenState extends State<NotesScreen> {
                                   /// Show the last edited time
                                   Align(
                                     child: Text(
-                                        formatTime(notes
-                                            .updatedAt!.millisecondsSinceEpoch
-                                            .validate()),
+                                        "Edited " +
+                                            formatTime(notes.updatedAt!
+                                                .millisecondsSinceEpoch
+                                                .validate()),
                                         style: secondaryTextStyle(
                                             size: 10,
                                             color: Colors.grey.shade900)),
                                     alignment: Alignment.bottomRight,
                                   ).paddingAll(16),
                                   notes.collaborateWith!.first !=
-                                          getStringAsync(USER_EMAIL)
+                                      getStringAsync(USER_EMAIL)
                                       ? Container(
                                           padding: EdgeInsets.all(12),
                                           decoration: BoxDecoration(
@@ -278,7 +280,7 @@ class NotesScreenState extends State<NotesScreen> {
                             }),
                           );
 
-                          /// End if the to-do/ checklist
+                          /// End if the to-do/checklist
                         } else {
                           /// On long press show the lock + unlock note dialog
                           return GestureDetector(
@@ -286,8 +288,10 @@ class NotesScreenState extends State<NotesScreen> {
                               HapticFeedback.vibrate();
                               lockNoteOption(notesModel: notes);
                             },
+
+                            /// Notes container style
                             child: Container(
-                              padding: EdgeInsets.all(16),
+                              padding: EdgeInsets.all(8.0),
                               decoration: boxDecorationWithShadow(
                                 borderRadius:
                                     BorderRadius.circular(defaultRadius),
@@ -328,9 +332,10 @@ class NotesScreenState extends State<NotesScreen> {
                                         ),
                                   Align(
                                     child: Text(
-                                        formatTime(notes
-                                            .updatedAt!.millisecondsSinceEpoch
-                                            .validate()),
+                                        "Edited " +
+                                            formatTime(notes.updatedAt!
+                                                .millisecondsSinceEpoch
+                                                .validate()),
                                         style: secondaryTextStyle(
                                             size: 10,
                                             color: Colors.grey.shade900)),
