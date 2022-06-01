@@ -29,7 +29,7 @@ class SplashScreenState extends State<SplashScreen> {
       statusBarIconBrightness: appStore.isDarkMode ? Brightness.dark : Brightness.light,
       delayInMilliSeconds: 100,
     );
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(Duration(seconds: 3));
     if (appStore.isLoggedIn.validate()) {
       DashboardScreen().launch(context, isNewTask: true);
     } else {
@@ -60,9 +60,7 @@ class SplashScreenState extends State<SplashScreen> {
               // padding: const EdgeInsets.all(8.0),
               padding: const EdgeInsets.only(top: 120.0),
               child: commonCacheImageWidget(
-                  getBoolAsync(IS_DARK_MODE)
-                      ? AppImages.logoNight
-                      : AppImages.logoLight,
+                  AppImages.launcherIcon2,
                   150,
                   fit: BoxFit.cover),
             ),
