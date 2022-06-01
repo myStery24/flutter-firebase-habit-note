@@ -3,6 +3,10 @@ import 'colors.dart';
 
 const kAnimationDuration = Duration(milliseconds: 200);
 const imageRadius = 40.0;
+const double appPadding = 25.0;
+const double spacer = 50.0;
+const double smallSpacer = 30.0;
+const double miniSpacer = 10.0;
 
 /// Text
 class TextFontWeight {
@@ -56,16 +60,22 @@ class AppImages {
   static const launcherIcon = '$imageDir/icon.png';
   static const logoLight = '$imageDir/logo_light_mode.png';
   static const logoNight = '$imageDir/logo_night_mode.png';
-  static const notificationLogo = '$imageDir/logo-square.png';
-  static const empty = '$imageDir/empty.png';
-  static const user = '$imageDir/user.png';
-  static const placeholder = '$imageDir/placeholder.png';
-  static const appleLogo = '$imageDir/ic_apple.png';
+
+  static const userIcon = '$imageDir/user.png';
+  static const userIcon2 = '$imageDir/user_creativity.png';
+  static const userIcon3 = '$imageDir/user_start-up.png';
 
   static const onboard = '$imageDir/onboard.png';
   static const onboard1 = '$imageDir/onboard1.png';
   static const onboard2 = '$imageDir/onboard2.png';
-  static const success = '$imageDir/success.svg';
+  static const success = '$imageDir/success_icon.svg';
+
+  static const empty = '$imageDir/empty.png';
+  static const appleLogo = '$imageDir/ic_apple.png';
+  static const placeholder = '$imageDir/placeholder.png';
+  static const search = '$imageDir/search_icon.svg';
+  static const filter = '$imageDir/filter_icon.svg';
+  static const notificationLogo = '$imageDir/logo-square.png';
 }
 
 class SizeConfig {
