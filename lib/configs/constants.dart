@@ -22,11 +22,14 @@ class TextFontWeight {
 class AppStrings {
   // App name
   static const String appName = 'HaBIT Note';
+
   // App version
-  static const String appVersionText = 'V0.0.5';
-  static const String appVersionText2 = 'Version 0.0.5';
+  static const String appVersionText = 'V0.0.6';
+  static const String appVersionText2 = 'Version 0.0.6';
+
   // App copyright
-  static const String appCopyright = '© Copyright HABIT 2022. All rights reserved';
+  static const String appCopyright =
+      '© Copyright HABIT 2022. All rights reserved';
 
   // Texts
   static const String createAccount = 'CREATE ACCOUNT';
