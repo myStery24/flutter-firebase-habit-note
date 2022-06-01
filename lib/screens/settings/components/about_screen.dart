@@ -49,7 +49,7 @@ class _AboutAppScreenState extends State<AboutAppScreen> {
                   ),
                 ),
                 background: Image.asset(
-                  AppImages.launcherIcon,
+                  AppImages.launcherIcon2,
                   fit: BoxFit.fitHeight,
                 ),
               ),
