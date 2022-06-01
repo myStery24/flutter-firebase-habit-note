@@ -28,7 +28,7 @@ class _LicensesScreenState extends State<LicensesScreen> {
         applicationName: AppStrings.appName,
         applicationIcon: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Image.asset(AppImages.logoLight,
+          child: Image.asset(AppImages.launcherIcon,
               width: size.width * 0.15, height: size.height * 0.15),
         ),
         applicationVersion: AppStrings.appVersionText,
