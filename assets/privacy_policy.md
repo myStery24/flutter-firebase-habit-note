@@ -35,6 +35,7 @@ We also collect information from mobile devices for a better user experience, al
 Link to the privacy policy of third-party service providers used by our app:
 - [Google Play Services](https://policies.google.com/privacy)
 - [Google Analytics for Firebase](https://firebase.google.com/policies/analytics)
+- [Google ML Kit APIs](https://developers.google.com/ml-kit/terms)
 
 ## When does HaBIT Note use end user information from third parties?
 HaBIT Note will collect End User Data necessary to provide the HaBIT Note services to our customers. End-users may voluntarily provide us with the information they have made available on social media websites. If you provide us with any such information, we may collect publicly available information from the social media websites you have indicated. You can control how much of your information social media websites make public by visiting these websites and changing your privacy settings.

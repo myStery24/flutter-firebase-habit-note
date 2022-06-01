@@ -72,6 +72,7 @@ We may display, include or make available third-party content (including data, i
 Link to Terms and Conditions of third-party service providers used by the app:
 - [Google Play Services](https://policies.google.com/terms)
 - [Google Analytics for Firebase](https://firebase.google.com/terms/analytics)
+- [Google ML Kit APIs](https://developers.google.com/ml-kit/terms)
 
 ## Term and Termination
 This Agreement shall remain in effect until terminated by you or us. We may, in its sole discretion, at any time and for any or no reason, suspend or terminate this Agreement with or without prior notice. This Agreement will terminate immediately, without prior notice from us, in the event that you fail to comply with any provision of this Agreement. You may also terminate this Agreement by deleting the service and all copies thereof from your computer. Upon termination of this Agreement, you shall cease all use of the service and delete all copies of the service from your computer. Termination of this Agreement will not limit any of our rights or remedies at law or in equity in case of breach by you (during the term of this Agreement) of any of your obligations under the present Agreement.
