@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:habit_note/screens/labels/components/custom_labels_widget.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../configs/colors.dart';
 import '../../configs/constants.dart';
 import '../../main.dart';
 import '../../models/labels_model.dart';
+import 'widgets/custom_labels_widget.dart';
 
 class LabelsListScreen extends StatefulWidget {
   final LabelsModel? labelsModel;
@@ -118,7 +118,7 @@ class _LabelsListScreenState extends State<LabelsListScreen> {
               15.height,
 
               /// Create labels
-              CreateLabelSectionWidget(),
+              CreateLabelSectionTitleWidget(),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(16, 8, 16, 12),
                 child: Row(
@@ -184,7 +184,7 @@ class _LabelsListScreenState extends State<LabelsListScreen> {
               15.height,
 
               /// Display label
-              LabelsSectionWidget(),
+              LabelsSectionTitleWidget(),
 
               /// Show all the created labels in list
               /// StreamBuilder() keeps persistence connection with Firestore database
