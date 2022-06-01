@@ -65,26 +65,27 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^1.0.0
-  flutter_native_splash: ^2.1.1
+  flutter_native_splash: ^2.1.6
   flutter_launcher_icons: ^0.9.2
   build_runner: ^2.1.8
   mobx_codegen: ^2.0.5+2
   #flutter packages pub run build_runner build --delete-conflicting-outputs
 
 flutter_native_splash:
-  color: "#ffb347"
+  background_image: "assets/images/icon_background.png"
   image: assets/images/splash.png
-  color_dark: "#ffb347"
+  background_image_dark: "assets/images/icon_background.png"
   image_dark: assets/images/splash.png
   android: true
   ios: true
 
 flutter_icons:
-  image_path: "assets/images/icon.png"
+  image_path_android: "assets/images/icon.png"
+  image_path_ios: "assets/images/icon_ios.png"
   android: true
   ios: true
-  adaptive_icon_foreground: "assets/images/play_store_512.png"
-  adaptive_icon_background: "#ffb347"
+  adaptive_icon_foreground: "assets/images/icon_foreground.png"
+  adaptive_icon_background: "assets/images/icon_background.png"
 
 flutter:
   uses-material-design: true
