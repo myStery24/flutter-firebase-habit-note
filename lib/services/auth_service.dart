@@ -111,10 +111,10 @@ class AuthService {
       });
     }).catchError((error) async {
       if (!await isNetworkAvailable()) {
-        throw 'Please check network connection';
+        throw "Please check your network connection and try again later.";
       }
       log(error.toString());
-      throw 'The password is invalid or the user does not have a password';
+      throw "Invalid credentials. If you're a new user, please create an account.";
     });
   }
 
