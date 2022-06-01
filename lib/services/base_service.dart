@@ -1,12 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-/// Create collection, update, delete
+/// Create collection, add, update, delete
 abstract class BaseService {
   late CollectionReference ref;
 
   Future<DocumentReference> addDocument(Map<String, dynamic> data) async {
     var doc = await ref.add(data);
     doc.update({'id': doc.id}); // Update the document id
+    // in database will appear as id: "ur doc id"
     return doc;
   }
 
