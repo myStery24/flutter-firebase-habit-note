@@ -16,6 +16,7 @@ HaBIT Note is a Android-based mobile application built with [Flutter](https://fl
 
 **Upcoming Features**
 - Label notes: Add labels to your notes.
+- Local notification: Set a reminder to get notified by your important notes.
 
 **Contributor**
 - [Lee Zi Hui](https://github.com/myStery24) (Developer & App Design)

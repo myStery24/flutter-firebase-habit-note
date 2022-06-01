@@ -29,3 +29,4 @@ samples, guidance on mobile development, and a full API reference.
 
 **Upcoming Features**
 - Label notes: Add labels to your notes.
+- Local notification: Set a reminder to get notified by your important notes.
