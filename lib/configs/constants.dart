@@ -24,8 +24,8 @@ class AppStrings {
   static const String appName = 'HaBIT Note';
 
   // App version
-  static const String appVersionText = 'V0.0.6';
-  static const String appVersionText2 = 'Version 0.0.6';
+  static const String appVersionText = 'V0.0.7';
+  static const String appVersionText2 = 'Version 0.0.7';
 
   // App copyright
   static const String appCopyright =
@@ -78,7 +78,7 @@ class AppImages {
   static const placeholder = '$imageDir/placeholder.png';
   static const search = '$imageDir/search_icon.svg';
   static const filter = '$imageDir/filter_icon.svg';
-  static const notificationLogo = '$imageDir/logo-square.png';
+  static const notificationLogo = '$imageDir/logo_notification.png';
 }
 
 class SizeConfig {
@@ -163,6 +163,7 @@ const add_todo = 'To-do';
 const delete_note = 'Delete note';
 const delete_todo = 'Delete to-do';
 const select_colour = 'Select colour';
+const select_colour2 = 'SELECT COLOUR';
 const delete = 'Delete';
 const password = 'Password';
 const cancel = 'Cancel';
@@ -215,7 +216,7 @@ const log_out_text = 'Are you sure you want to log out ?';
 const reminder_empty_note = 'Create your first reminder !';
 const sub_reminder = 'Subscription Reminder';
 const add_subscription = 'Add Subscription';
-const update = 'Update';
+const update = 'UPDATE';
 const save = 'SAVE';
 const MYR = 'MYR';
 const ringgit_icon = 'RM';
@@ -227,18 +228,20 @@ const recurring = 'Recurring';
 const one_time = 'One time';
 const billing_period = 'Billing period';
 const first_payment = 'First payment';
-const exp_date = 'Expiry Date';
+const exp_date = 'Expiry date';
 const pay_method = 'Payment method';
 const shared_by = 'Shared By';
 const notification = 'Notification';
-const on_same_day = 'On the Same day';
+const on_same_day = 'On the same day';
 const next_payment = 'Next payment';
 const subscription_exp = 'Subscription expired. No notification available';
 const subscription_detail = 'Subscription Detail';
-const share_note_change_not_allow = 'This is shared note, changes are not allow';
+const share_note_change_not_allow =
+    'This is shared note, changes are not allow';
 const collaborator = 'Collaborator';
 const collaborators = 'Collaborators';
-const delete_account = 'Are you sure you want to delete your account? By deleting your account, it will become inaccessible, unrecoverable, and permanently closed.';
+const delete_account =
+    'Are you sure you want to delete your account? By deleting your account, it will become inaccessible, unrecoverable, and permanently closed.';
 
 /// Testing devices
 List<String> testDevices = [''];
