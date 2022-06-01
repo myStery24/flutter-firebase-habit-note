@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:habit_note/models/labels_model.dart';
 
 class NotesModel {
   String? noteId;
@@ -7,7 +8,7 @@ class NotesModel {
   String? note;
   String? color;
   String? noteImage;
-  String? noteLabel;
+  List<LabelsModel>? noteLabel; // String? noteLabel;
   DateTime? createdAt;
   DateTime? updatedAt;
   List<CheckListModel>? checkListModel;
@@ -38,7 +39,7 @@ class NotesModel {
       note: json['note'],
       color: json['color'],
       noteImage: json['noteImage'],
-      noteLabel: json['noteLabel'],
+      noteLabel: json['noteLabel'] != null ? (json['noteLabel'] as List).map<LabelsModel>((e) => LabelsModel.fromJson(e)).toList() : null, // noteLabel: json['noteLabel'],
       createdAt: json['createdAt'] != null ? (json['createdAt'] as Timestamp).toDate() : null,
       updatedAt: json['updatedAt'] != null ? (json['updatedAt'] as Timestamp).toDate() : null,
       checkListModel: json['checkList'] != null ? (json['checkList'] as List).map<CheckListModel>((e) => CheckListModel.fromJson(e)).toList() : null,
@@ -56,7 +57,8 @@ class NotesModel {
     data['note'] = this.note;
     data['color'] = this.color;
     data['noteImage'] = this.noteImage;
-    data['noteLabel'] = this.noteLabel;
+    data['noteLabel'] = this.noteLabel!.map((e) => e.toJson()).toList();
+    // data['noteLabel'] = this.noteLabel;
     data['createdAt'] = this.createdAt;
     data['updatedAt'] = this.updatedAt;
 
