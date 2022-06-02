@@ -85,6 +85,9 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
                 child: FutureBuilder(
                     future: rootBundle.loadString('assets/privacy_policy.md'),
                     builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                      if(snapshot.hasError){
+                        return Text(snapshot.error.toString());
+                      }
                       if (snapshot.hasData) {
                         return Markdown(
                           selectable: false,

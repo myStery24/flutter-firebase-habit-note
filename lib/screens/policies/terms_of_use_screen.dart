@@ -85,6 +85,9 @@ class _TermsOfUseScreenState extends State<TermsOfUseScreen> {
                 child: FutureBuilder(
                   future: rootBundle.loadString('assets/terms_of_use.md'),
                     builder: (BuildContext context, AsyncSnapshot<String> snapshot){
+                      if(snapshot.hasError){
+                        return Text(snapshot.error.toString());
+                      }
                     if (snapshot.hasData) {
                       return Markdown(
                         selectable: false,
