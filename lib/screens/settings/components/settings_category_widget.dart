@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:habit_note/screens/policies/delete_account_consent_screen.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../../configs/colors.dart';
@@ -66,7 +67,7 @@ class _SettingsCategoryState extends State<SettingsCategory> {
                 /// Avatar
                 CircleAvatar(
                   backgroundColor: Colors.transparent,
-                  child: commonCacheImageWidget(imageUrl, imageRadius,
+                  child: commonCacheImageWidget(imageUrl, imageRadius + 60,
                           fit: BoxFit.cover)
                       .cornerRadiusWithClipRRect(60)
                       .paddingBottom(8),
@@ -325,29 +326,24 @@ class _SettingsCategoryState extends State<SettingsCategory> {
           thickness: 2,
         ),
 
-        /// Delete user account
-        /// Not yet tested
-        // Container(
-        //   alignment: Alignment.center,
-        //   padding: EdgeInsets.all(8.0),
-        //   child: OutlinedButton(
-        //     style: OutlinedButton.styleFrom(
-        //       minimumSize: Size(size.width, 50),
-        //       textStyle: TextStyle(fontSize: 18.0),
-        //       primary: Colors.red, // foreground
-        //       side: BorderSide(width: 3.0, color: Colors.red),
-        //     ),
-        //     onPressed: () async {
-        //       bool? res = await showConfirmDialog(
-        //           context, delete_account,
-        //           positiveText: delete, buttonColor: Colors.red);
-        //       if (res ?? false) {
-        //         // delete user method
-        //       }
-        //     },
-        //     child: Text('Delete My Account'),
-        //   ),
-        // ),
+        /// Request to delete user account
+        Container(
+          alignment: Alignment.center,
+          padding: EdgeInsets.all(8.0),
+          child: OutlinedButton(
+            style: OutlinedButton.styleFrom(
+              minimumSize: Size(size.width, 50),
+              textStyle: TextStyle(fontSize: 18.0),
+              primary: Colors.red, // foreground
+              side: BorderSide(width: 3.0, color: Colors.red),
+            ),
+            onPressed: () {
+              finish(context);
+              DeleteAccountConsentScreen().launch(context);
+            },
+            child: Text('Delete My Account'),
+          ),
+        ),
         SizedBox(height: size.height * .03),
         Container(
           margin: EdgeInsets.all(8.0),
@@ -379,7 +375,7 @@ class _SettingsCategoryState extends State<SettingsCategory> {
             ),
           ),
         ),
-        SizedBox(height: size.height * .03),
+        SizedBox(height: size.height * .02),
       ]),
     );
   }
