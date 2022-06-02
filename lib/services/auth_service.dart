@@ -1,4 +1,3 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -43,15 +42,33 @@ class AuthService {
     return credential;
   }
 
-  /// Delete User
-  Future deleteUser() async {
-    AuthCredential credential = await getGoogleAuthCredential();
-    UserCredential authResult = await _auth.signInWithCredential(credential);
-    User firebaseUser = authResult.user!;
-    await firebaseUser.delete();
+  /// Delete user account that was created using Google but the associated user collection document remains
+  /// Can only delete Google-created user account
+  /// User collection documents not deleted
+  /// User still can access old documents even with different UID
+  Future deleteUser(BuildContext context) async {
+    try {
+      AuthCredential credential = await getGoogleAuthCredential();
+      UserCredential authResult = await _auth.signInWithCredential(credential);
+      _auth.currentUser!.reauthenticateWithCredential(credential);
+      User firebaseUser = authResult.user!;
+      print("User to be deleted: $firebaseUser");
+      await firebaseUser
+          .delete()
+          .whenComplete(() => OnboardScreen().launch(context, isNewTask: true));
+      return true;
+    } catch (e) {
+      log(e);
+      print(e.toString());
+      return null;
+    }
   }
 
-  Future<void> signUpWithEmailPassword({required String email, required String password, String? displayName, String? photoUrl}) async {
+  Future<void> signUpWithEmailPassword(
+      {required String email,
+      required String password,
+      String? displayName,
+      String? photoUrl}) async {
     await _auth
         .createUserWithEmailAndPassword(email: email, password: password)
         .then((value) async {
@@ -66,7 +83,11 @@ class AuthService {
   }
 
   /// Sign In with Email Address and Password
-  Future<void> signInWithEmailPassword({required String email, required String password, String? displayName, String? photoUrl}) async {
+  Future<void> signInWithEmailPassword(
+      {required String email,
+      required String password,
+      String? displayName,
+      String? photoUrl}) async {
     await _auth
         .signInWithEmailAndPassword(email: email, password: password)
         .then((value) async {
@@ -196,7 +217,8 @@ class AuthService {
     appStore.setLoggedIn(true);
   }
 
-  Future<UserModel> loginFromFirebaseUser(User currentUser, String loginType, {String? fullName}) async {
+  Future<UserModel> loginFromFirebaseUser(User currentUser, String loginType,
+      {String? fullName}) async {
     UserModel userModel = UserModel();
 
     if (await userService.isUserExist(currentUser.email, loginType)) {
