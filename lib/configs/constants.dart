@@ -235,13 +235,9 @@ const on_same_day = 'On the same day';
 const next_payment = 'Next payment';
 const subscription_exp = 'Subscription expired. No notification available';
 const subscription_detail = 'Subscription Detail';
-const share_note_change_not_allow =
-    'This is shared note, changes are not allow';
+const share_note_change_not_allow = 'This is shared note, changes are not allow';
 const collaborator = 'Collaborator';
 const collaborators = 'Collaborators';
-const delete_account =
-    'Are you sure you want to delete your account? By deleting your account, it will become inaccessible, unrecoverable, and permanently closed.';
 
 /// Testing devices
 List<String> testDevices = [''];
-// List<String> testDevices = ['551597FF6B95q52FEBB440722967BCB6F'];
