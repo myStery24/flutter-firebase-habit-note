@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:habit_note/screens/password/forgot_password_screen.dart';
 import 'package:habit_note/screens/policies/privacy_policy_screen.dart';
+import 'package:habit_note/widgets/custom_drawer_header_widget.dart';
 
 import '../configs/colors.dart';
 import '../configs/constants.dart';
@@ -52,7 +52,10 @@ class OnboardDrawerWidget extends StatelessWidget {
                       ),
                     );
                   },
-                  child: const Text('Privacy Policy', style: TextStyle(fontSize: 16.0),),
+                  child: const Text(
+                    'Privacy Policy',
+                    style: TextStyle(fontSize: 16.0),
+                  ),
                 ),
                 const CircleAvatar(
                   backgroundColor: AppColors.kPrimaryVariantColorDark,
@@ -70,7 +73,10 @@ class OnboardDrawerWidget extends StatelessWidget {
                       ),
                     );
                   },
-                  child: const Text('Terms of Use', style: TextStyle(fontSize: 16.0),),
+                  child: const Text(
+                    'Terms of Use',
+                    style: TextStyle(fontSize: 16.0),
+                  ),
                 ),
               ],
             ),
@@ -83,29 +89,33 @@ class OnboardDrawerWidget extends StatelessWidget {
   // Create a header to display app name and version
   Widget _buildHeader(BuildContext context) => SafeArea(
         child: Container(
-          padding: const EdgeInsets.only(top: 20, left: 30, right: 30),
-          child: RichText(
-            text: TextSpan(
-              children: <TextSpan>[
-                TextSpan(
-                  text: "HaBIT Note\n",
-                  style: GoogleFonts.fugazOne(
-                    color: Colors.black,
-                    fontSize: 30.0,
-                    fontWeight: TextFontWeight.regular,
-                  ),
-                ),
-                TextSpan(
-                  text: AppStrings.appVersionText,
-                  style: GoogleFonts.lato(
-                    color: Colors.black,
-                    fontSize: 14.0,
-                    fontWeight: TextFontWeight.regular,
-                  ),
-                ),
-              ],
-            ),
+          padding: const EdgeInsets.fromLTRB(20, 30, 0, 0),
+          child: CustomDrawerHeaderWidget(
+            primaryText: 'Habit Note ',
+            secondaryText: AppStrings.appVersionText,
           ),
+          // RichText(
+          //   text: TextSpan(
+          //     children: <TextSpan>[
+          //       TextSpan(
+          //         text: "HaBIT Note ",
+          //         style: GoogleFonts.fugazOne(
+          //           color: Colors.black,
+          //           fontSize: 28.0,
+          //           fontWeight: TextFontWeight.regular,
+          //         ),
+          //       ),
+          //       TextSpan(
+          //         text: AppStrings.appVersionText,
+          //         style: GoogleFonts.lato(
+          //           color: Colors.black,
+          //           fontSize: 12.0,
+          //           fontWeight: TextFontWeight.regular,
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
         ),
       );
 
