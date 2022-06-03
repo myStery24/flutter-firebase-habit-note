@@ -12,8 +12,8 @@ import 'package:nb_utils/nb_utils.dart';
 import '../../configs/colors.dart';
 import '../../configs/constants.dart';
 import '../../main.dart';
-import 'widgets/custom_deco_box.dart';
-import 'widgets/text_area_widget.dart';
+import 'components/custom_deco_box.dart';
+import 'components/text_area_widget.dart';
 
 /// StatefulWidget to track the selected image
 class OCRScreen extends StatefulWidget {
