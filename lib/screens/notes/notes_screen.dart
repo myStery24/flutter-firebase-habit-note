@@ -12,11 +12,11 @@ import '../../main.dart';
 import '../../models/notes_model.dart';
 import '../../widgets/dashboard_drawer_widget.dart';
 import '../password/set_master_password_dialog_widget.dart';
-import 'widgets/add_notes_screen.dart';
-import 'widgets/add_todo_screen.dart';
-import 'widgets/filter_note_by_colour_dialog_widget.dart';
-import 'widgets/lock_note_dialog_widget.dart';
-import 'widgets/note_layout_dialog_widget.dart';
+import 'components/add_notes_screen.dart';
+import 'components/add_todo_screen.dart';
+import 'components/filter_note_by_colour_dialog_widget.dart';
+import 'components/lock_note_dialog_widget.dart';
+import 'components/note_layout_dialog_widget.dart';
 
 class NotesScreen extends StatefulWidget {
   static String tag = '/DashboardScreen';
