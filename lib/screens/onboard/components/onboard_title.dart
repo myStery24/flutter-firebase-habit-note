@@ -20,14 +20,18 @@ class OnboardTitle extends StatelessWidget {
                 text: "WELCOME TO\n",
                 style: GoogleFonts.lato(
                   fontSize: 18.0,
-                  color: appStore.isDarkMode ? AppColors.kTextWhite : AppColors.kTextBlack,
+                  color: appStore.isDarkMode
+                      ? AppColors.kTextWhite
+                      : AppColors.kTextBlack,
                   fontWeight: TextFontWeight.light,
                 ),
               ),
               TextSpan(
                 text: "HaBIT Note",
                 style: GoogleFonts.fugazOne(
-                  color: appStore.isDarkMode ? AppColors.kHabitOrange : AppColors.kTextBlack,
+                  color: appStore.isDarkMode
+                      ? AppColors.kHabitOrange
+                      : AppColors.kTextBlack,
                   fontSize: 18.0,
                   fontWeight: TextFontWeight.regular,
                 ),
