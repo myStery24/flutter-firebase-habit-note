@@ -17,6 +17,8 @@ import 'widgets/text_area_widget.dart';
 
 /// StatefulWidget to track the selected image
 class OCRScreen extends StatefulWidget {
+  static String tag = '/OCRScreen';
+
   const OCRScreen({Key? key}) : super(key: key);
 
   @override
@@ -24,8 +26,6 @@ class OCRScreen extends StatefulWidget {
 }
 
 class _OCRScreenState extends State<OCRScreen> {
-  static String tag = '/OCRScreen';
-
   /// Nullable [XFile]
   XFile? imageFile; // Store user picked image
   String scannedText = ""; // Store the recognised text
