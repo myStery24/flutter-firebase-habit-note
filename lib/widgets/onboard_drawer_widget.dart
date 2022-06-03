@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:habit_note/screens/password/forgot_password_screen.dart';
 import 'package:habit_note/screens/policies/privacy_policy_screen.dart';
-import 'package:habit_note/widgets/custom_drawer_header_widget.dart';
+import 'package:habit_note/widgets/custom_richtext_widget.dart';
 
 import '../configs/colors.dart';
 import '../configs/constants.dart';
@@ -90,7 +90,7 @@ class OnboardDrawerWidget extends StatelessWidget {
   Widget _buildHeader(BuildContext context) => SafeArea(
         child: Container(
           padding: const EdgeInsets.fromLTRB(20, 30, 0, 0),
-          child: CustomDrawerHeaderWidget(
+          child: CustomRichTextWidget(
             primaryText: 'Habit Note ',
             secondaryText: AppStrings.appVersionText,
           ),
