@@ -39,11 +39,25 @@ class NotesModel {
       note: json['note'],
       color: json['color'],
       noteImage: json['noteImage'],
-      noteLabel: json['noteLabel'] != null ? (json['noteLabel'] as List).map<LabelsModel>((e) => LabelsModel.fromJson(e)).toList() : null, // noteLabel: json['noteLabel'],
-      createdAt: json['createdAt'] != null ? (json['createdAt'] as Timestamp).toDate() : null,
-      updatedAt: json['updatedAt'] != null ? (json['updatedAt'] as Timestamp).toDate() : null,
-      checkListModel: json['checkList'] != null ? (json['checkList'] as List).map<CheckListModel>((e) => CheckListModel.fromJson(e)).toList() : null,
-      collaborateWith: json['collaborateWith'] != null ? (json['collaborateWith'] as List).map<String>((e) => e).toList() : null,
+      noteLabel: json['noteLabel'] != null
+          ? (json['noteLabel'] as List)
+              .map<LabelsModel>((e) => LabelsModel.fromJson(e))
+              .toList()
+          : null, // noteLabel: json['noteLabel'],
+      createdAt: json['createdAt'] != null
+          ? (json['createdAt'] as Timestamp).toDate()
+          : null,
+      updatedAt: json['updatedAt'] != null
+          ? (json['updatedAt'] as Timestamp).toDate()
+          : null,
+      checkListModel: json['checkList'] != null
+          ? (json['checkList'] as List)
+              .map<CheckListModel>((e) => CheckListModel.fromJson(e))
+              .toList()
+          : null,
+      collaborateWith: json['collaborateWith'] != null
+          ? (json['collaborateWith'] as List).map<String>((e) => e).toList()
+          : null,
       isLock: json['isLock'],
     );
   }
