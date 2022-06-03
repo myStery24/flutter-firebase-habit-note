@@ -6,8 +6,8 @@ import 'package:habit_note/configs/constants.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
-import '../../configs/colors.dart';
-import '../../main.dart';
+import '../../../configs/colors.dart';
+import '../../../main.dart';
 
 class DeleteAccountConsentScreen extends StatefulWidget {
   static String tag = '/DeleteAccountConsentScreen';
