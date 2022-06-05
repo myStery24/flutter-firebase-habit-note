@@ -165,12 +165,14 @@ class NotesScreenState extends State<NotesScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   /// To show a lock on locked notes
+                                  // Check the bool value of isLock, if true then give a lock
                                   notes.isLock.validate()
                                       ? Container(
                                               child: Icon(Icons.lock,
                                                   color: AppColors.kHabitDark))
                                           .paddingOnly(top: 16)
                                           .center()
+                                  // else show the checklist items
                                       : ListView.builder(
                                           shrinkWrap: true,
                                           physics:
