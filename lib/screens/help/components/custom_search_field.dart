@@ -55,7 +55,7 @@ class _CustomSearchFieldState extends State<CustomSearchField> {
               height: 38,
               alignment: Alignment.topCenter,
               child: TextField(
-                style: TextStyle(fontSize: 15),
+                style: TextStyle(fontSize: 15, color: AppColors.kTextBlack),
                 cursorColor: AppColors.kTextBlack,
                 decoration: InputDecoration(
                   hintText: widget.hintField,
