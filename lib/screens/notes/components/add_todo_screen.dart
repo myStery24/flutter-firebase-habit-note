@@ -12,8 +12,8 @@ import '../../../models/notes_model.dart';
 import '../../../widgets/custom_chips.dart';
 import '../../dashboard/dashboard_screen.dart';
 
-/// TODO : Add labels to note, save to Firestore, map to the note
-/// ISSUE: The label does not save to database, currently display dummy data as labels
+/// TODO: Add labels to note, save to Firestore, map to the note
+/// ISSUE: The label does not save to database, currently display dummy data as labels and it's read-only
 class AddToDoScreen extends StatefulWidget {
   static String tag = '/AddToDoScreen';
 
@@ -28,8 +28,9 @@ class AddToDoScreen extends StatefulWidget {
 class AddToDoScreenState extends State<AddToDoScreen> {
   List<String> collaborateList = [];
   List<CheckListModel> _checkList = [];
-  List<LabelsModel> _notesLabels = [];
-  List<String> _selectedLabels = ['To-dos'];
+
+  List<String> _labels = ['To-dos', 'Labels section is read-only'];
+  List<LabelsModel> _selectedLabels = [];
 
   TextEditingController todoController = TextEditingController();
   TextEditingController? textController;
@@ -60,7 +61,7 @@ class AddToDoScreenState extends State<AddToDoScreen> {
     if (_kIsUpdateTodo) {
       _kSelectColor = getColorFromHex(widget.notesModel!.color!);
       _checkList.addAll(widget.notesModel!.checkListModel!);
-      _notesLabels.addAll(widget.notesModel!.noteLabel!);
+      // _selectedLabels.addAll(widget.notesModel!.noteLabel!);
     }
   }
 
@@ -94,7 +95,6 @@ class AddToDoScreenState extends State<AddToDoScreen> {
             color: AppColors.kHabitDark,
             onPressed: () async {
               hideKeyboard(context);
-
               finish(context);
             },
           ),
@@ -141,6 +141,8 @@ class AddToDoScreenState extends State<AddToDoScreen> {
                       ],
                     ).paddingLeft(16)
                   : SizedBox(),
+
+              /// Checklist
               addCheckListItemWidget(),
               Divider(indent: 16),
               ListView.builder(
@@ -219,57 +221,60 @@ class AddToDoScreenState extends State<AddToDoScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Expanded(
-                child: TagEditor(
-                  maxLines: 1,
-                  controller: notesLabelController,
-                  // get the length of note label in database
-                  length: _selectedLabels.length,
-                  // length: snapshot.data!.length,
-                  focusNode: _labelNode,
-                  delimiters: [',', ' '],
-                  hasAddButton: false,
-                  resetTextOnSubmitted: true,
-                  // Text color of the label
-                  textStyle: TextStyle(
-                      // ? = is dark mode
-                      // : = is light mode
-                      color: getBoolAsync(IS_DARK_MODE)
-                          ? AppColors.kTextWhite
-                          : AppColors.kTextBlack),
-                  inputDecoration: const InputDecoration(
-                    hintText: 'Add labels...',
-                    hintStyle: TextStyle(color: AppColors.kHintTextLightGrey),
-                    hintMaxLines: 1,
-                    border: InputBorder.none,
-                  ),
-                  // save to database noteLabel field
-                  onSubmitted: (val) {
-                    setState(() {
-                      // _notesLabels.add(LabelsModel(labelName: val));
-                      _selectedLabels.add(val);
-                      toast(
-                          'Sorry, adding labels is not working in current version.');
-                      //snapshot.toString();
-                    });
-                  },
-                  onTagChanged: (newValue) {
-                    setState(() {
-                      _selectedLabels.add(newValue);
-                      //snapshot.toString();
-                    });
-                  },
+                child: GestureDetector(
+                  onDoubleTap: () => toast(
+                      'Sorry, adding labels is not working in current version.'),
+                  child: TagEditor(
+                    readOnly: true,
+                    maxLines: 1,
+                    controller: notesLabelController,
+                    // get the length of note label in database
+                    length: _labels.length,
+                    // length: snapshot.data!.length,
+                    focusNode: _labelNode,
+                    delimiters: [',', ' '],
+                    hasAddButton: false,
+                    resetTextOnSubmitted: true,
+                    // Text color of the label
+                    textStyle: TextStyle(
+                        // ? = is dark mode
+                        // : = is light mode
+                        color: getBoolAsync(IS_DARK_MODE)
+                            ? AppColors.kTextWhite
+                            : AppColors.kTextBlack),
+                    inputDecoration: const InputDecoration(
+                      hintText: 'Add labels...',
+                      hintStyle: TextStyle(color: AppColors.kHintTextLightGrey),
+                      hintMaxLines: 1,
+                      border: InputBorder.none,
+                    ),
+                    // should have saved to database noteLabel field
+                    onSubmitted: (val) {
+                      if (notesLabelController.text.isNotEmpty) {
+                        setState(() {
+                          _labels.add(val);
+                          toast(
+                              'Sorry, adding labels is not working in current version.');
+                        });
+                      }
+                    },
+                    onTagChanged: (newValue) {
+                      setState(() {
+                        _labels.add(newValue);
+                      });
+                    },
 
-                  /// The label design
-                  tagBuilder: (context, index) => CustomChips(
-                    index: index,
-                    label: _selectedLabels[index],
-                    // label: snapshot.toString(),
-                    onDeleted: _onDelete,
+                    /// The label design
+                    tagBuilder: (context, index) => CustomChips(
+                      index: index,
+                      label: _labels[index],
+                      onDeleted: _onDelete,
+                    ),
+                    // InputFormatters example, this disallow \ and /
+                    inputFormatters: [
+                      FilteringTextInputFormatter.deny(RegExp(r'[/\\]'))
+                    ],
                   ),
-                  // InputFormatters example, this disallow \ and /
-                  inputFormatters: [
-                    FilteringTextInputFormatter.deny(RegExp(r'[/\\]'))
-                  ],
                 ),
               ),
             ],
@@ -316,14 +321,14 @@ class AddToDoScreenState extends State<AddToDoScreen> {
   }
 
   void addToDoList() {
-    if (_checkList.isNotEmpty || _notesLabels.isNotEmpty) {
+    if (_checkList.isNotEmpty) {
       NotesModel notesData = NotesModel();
 
       notesData.userId = getStringAsync(USER_ID);
       notesData.checkListModel = _checkList;
       notesData.updatedAt = DateTime.now();
       notesData.collaborateWith = collaborateList.validate();
-      notesData.noteLabel = _notesLabels;
+      notesData.noteLabel = _selectedLabels;
 
       if (_kSelectColor != null) {
         notesData.color = _kSelectColor!.toHex().toString();
@@ -331,6 +336,7 @@ class AddToDoScreenState extends State<AddToDoScreen> {
         notesData.color = Colors.white.toHex();
       }
 
+      /// When second item is added to the checklist, update the note
       if (_kIsUpdateTodo) {
         notesData.noteId = widget.notesModel!.noteId;
         notesData.createdAt = widget.notesModel!.createdAt;
@@ -354,9 +360,9 @@ class AddToDoScreenState extends State<AddToDoScreen> {
           toast(error.toString());
         });
       }
-      // if the list is empty
-    } else if (_checkList.isEmpty) {
-      // delete the to-do
+      // if checklist empty
+    } else {
+      // delete
       notesService.removeDocument(widget.notesModel!.noteId).then((value) {
         toast("To-do discarded");
       }).catchError((error) {
@@ -448,7 +454,7 @@ class AddToDoScreenState extends State<AddToDoScreen> {
   void _onDelete(index) {
     setState(() {
       toast('Label removed');
-      _selectedLabels.removeAt(index);
+      _labels.removeAt(index);
     });
   }
 }
