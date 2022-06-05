@@ -135,7 +135,7 @@ class AddNotesScreenState extends State<AddNotesScreen> {
                   Expanded(
                     child: GestureDetector(
                       onDoubleTap: () => toast(
-                          'Sorry, adding labels is not working in current version.'),
+                          'Sorry, adding labels is not ready in this current version.'),
                       child: TagEditor(
                         readOnly: true,
                         maxLines: 1,

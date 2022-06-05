@@ -223,7 +223,7 @@ class AddToDoScreenState extends State<AddToDoScreen> {
               Expanded(
                 child: GestureDetector(
                   onDoubleTap: () => toast(
-                      'Sorry, adding labels is not working in current version.'),
+                      'Sorry, adding labels is not ready in this current version.'),
                   child: TagEditor(
                     readOnly: true,
                     maxLines: 1,
@@ -253,8 +253,6 @@ class AddToDoScreenState extends State<AddToDoScreen> {
                       if (notesLabelController.text.isNotEmpty) {
                         setState(() {
                           _labels.add(val);
-                          toast(
-                              'Sorry, adding labels is not working in current version.');
                         });
                       }
                     },
