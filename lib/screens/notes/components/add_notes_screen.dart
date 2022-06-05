@@ -75,7 +75,9 @@ class AddNotesScreenState extends State<AddNotesScreen> {
   @override
   void dispose() {
     setStatusBarColor(
-        appStore.isDarkMode ? AppColors.kPrimaryVariantColorDark : AppColors.kAppBarColor,
+        appStore.isDarkMode
+            ? AppColors.kPrimaryVariantColorDark
+            : AppColors.kAppBarColor,
         delayInMilliSeconds: 100);
     addNotes();
     super.dispose();
@@ -132,7 +134,8 @@ class AddNotesScreenState extends State<AddNotesScreen> {
                 children: [
                   Expanded(
                     child: GestureDetector(
-                      onDoubleTap: () => toast('Sorry, adding labels is not working in current version.'),
+                      onDoubleTap: () => toast(
+                          'Sorry, adding labels is not working in current version.'),
                       child: TagEditor(
                         readOnly: true,
                         maxLines: 1,
@@ -145,11 +148,11 @@ class AddNotesScreenState extends State<AddNotesScreen> {
                         hasAddButton: false,
                         resetTextOnSubmitted: true,
                         // Text color of the label
-                        textStyle: TextStyle(
-                            color: AppColors.kTextBlack),
+                        textStyle: TextStyle(color: AppColors.kTextBlack),
                         inputDecoration: const InputDecoration(
                           hintText: 'Add labels...',
-                          hintStyle: TextStyle(color: AppColors.kHintTextLightGrey),
+                          hintStyle:
+                              TextStyle(color: AppColors.kHintTextLightGrey),
                           hintMaxLines: 1,
                           border: InputBorder.none,
                         ),
@@ -185,12 +188,12 @@ class AddNotesScreenState extends State<AddNotesScreen> {
                 ],
               ),
               Divider(),
-             Container(
-
-             ),
+              Container(),
 
               /// Note editor
-              _kIsUpdateNote && widget.notesModel!.collaborateWith!.first != getStringAsync(USER_EMAIL)
+              _kIsUpdateNote &&
+                      widget.notesModel!.collaborateWith!.first !=
+                          getStringAsync(USER_EMAIL)
                   ? Row(
                       children: [
                         Text('$shared_by :',
@@ -273,7 +276,8 @@ class AddNotesScreenState extends State<AddNotesScreen> {
         notesData.createdAt = widget.notesModel!.createdAt;
         notesData.updatedAt = DateTime.now();
         notesData.checkListModel = widget.notesModel!.checkListModel.validate();
-        notesData.collaborateWith = widget.notesModel!.collaborateWith.validate();
+        notesData.collaborateWith =
+            widget.notesModel!.collaborateWith.validate();
         notesData.isLock = widget.notesModel!.isLock;
         notesData.noteLabel = []; // set to [] because it cant be null
 
