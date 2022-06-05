@@ -6,7 +6,7 @@ import '../../configs/colors.dart';
 import '../../configs/constants.dart';
 import '../../main.dart';
 import '../../models/labels_model.dart';
-import 'widgets/custom_labels_widget.dart';
+import 'components/custom_labels_widget.dart';
 
 class LabelsListScreen extends StatefulWidget {
   final LabelsModel? labelsModel;
@@ -22,7 +22,8 @@ class _LabelsListScreenState extends State<LabelsListScreen> {
 
   TextEditingController _labelNameController = TextEditingController();
   TextEditingController _newLabelNameController = new TextEditingController();
-  final CollectionReference _labelsRef = FirebaseFirestore.instance.collection('labels'); // Collection of label in firebase firestore
+  final CollectionReference _labelsRef = FirebaseFirestore.instance
+      .collection('labels'); // Collection of label in firebase firestore
   List _selectedLabels = [];
   bool kIsUpdate = false;
 
