@@ -20,7 +20,7 @@ class CustomChips extends StatelessWidget {
       labelPadding: const EdgeInsets.only(left: 8.0),
       label: Text(label),
       labelStyle: TextStyle(
-        fontWeight:TextFontWeight.bold,
+        fontWeight: TextFontWeight.bold,
       ),
       deleteIcon: const Icon(
         Icons.close,
