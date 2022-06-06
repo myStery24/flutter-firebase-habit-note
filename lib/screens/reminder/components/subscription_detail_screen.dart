@@ -186,11 +186,12 @@ class SubscriptionDetailScreenState extends State<SubscriptionDetailScreen> {
                   /// Billing period
                   widget.model!.duration != null
                       ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(billing_period, style: primaryTextStyle()),
                             8.height,
                             Text(
-                                'every ${widget.model!.duration.validate()}  ${widget.model!.durationUnit.validate()}',
+                                'Every ${widget.model!.duration.validate()}  ${widget.model!.durationUnit.validate()}',
                                 style: secondaryTextStyle()),
                           ],
                         )
