@@ -57,7 +57,7 @@ class DashboardDrawerWidgetState extends State<DashboardDrawerWidget> {
 
   _sectionOne() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(18, 0, 0, 16),
+      padding: const EdgeInsets.fromLTRB(18, 16, 0, 16),
       child: Row(
         children: [
           CustomRichTextWidget(
