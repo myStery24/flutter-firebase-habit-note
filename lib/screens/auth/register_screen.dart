@@ -12,7 +12,7 @@ import '../../configs/routes.dart';
 import '../../main.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/user_agreement_widget.dart';
-import '../dashboard/dashboard_screen.dart';
+import '../../dashboard_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
   static String tag = '/RegisterScreen';

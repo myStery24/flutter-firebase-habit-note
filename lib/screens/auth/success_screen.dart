@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:confetti/confetti.dart';
-import 'package:habit_note/screens/dashboard/dashboard_screen.dart';
+import 'package:habit_note/dashboard_screen.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../configs/colors.dart';

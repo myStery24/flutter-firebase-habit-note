@@ -14,7 +14,7 @@ import '../../configs/routes.dart';
 import '../../main.dart';
 
 import '../../widgets/custom_button.dart';
-import '../dashboard/dashboard_screen.dart';
+import '../../dashboard_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   static String tag = '/LoginScreen';
