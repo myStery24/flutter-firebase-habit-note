@@ -5,7 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habit_note/screens/settings/components/delete_account_consent_screen.dart';
-import 'package:habit_note/widgets/custom_richtext_widget.dart';
+import 'package:habit_note/widgets/custom_rich_text_widget.dart';
 import 'package:habit_note/widgets/custom_setting_item_widget.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nb_utils/nb_utils.dart';
