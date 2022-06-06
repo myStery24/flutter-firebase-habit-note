@@ -55,3 +55,52 @@ class CustomButton extends StatelessWidget {
     );
   }
 }
+
+class CustomButton2 extends StatelessWidget {
+  const CustomButton2({
+    Key? key,
+    required this.text,
+    required this.onPressed,
+    this.width = 120.0,
+    this.height = 60.0,
+    this.borderRadius = 20.0,
+    this.color = AppColors.kHabitOrange,
+    this.fontSize = 18.0,
+    this.fontWeight = TextFontWeight.bold,
+    this.textColor = AppColors.kTextWhite,
+  }) : super(key: key);
+
+  /// Button
+  final String text;
+  final VoidCallback onPressed;
+
+  /// Button style
+  final double width;
+  final double height;
+  final double borderRadius;
+  final Color color;
+
+  /// Button text style
+  final double fontSize;
+  final FontWeight fontWeight;
+  final Color textColor;
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialButton(
+      onPressed: onPressed,
+      height: height,
+      minWidth: width,
+      color: color,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(borderRadius),
+      ),
+      child: Text(
+        text,
+        textAlign: TextAlign.center,
+        style: GoogleFonts.lato(
+            fontSize: fontSize, fontWeight: fontWeight, color: textColor),
+      ),
+    );
+  }
+}
