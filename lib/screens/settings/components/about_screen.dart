@@ -65,7 +65,7 @@ class _AboutAppScreenState extends State<AboutAppScreen> {
                 SizedBox(height: size.width * 0.03),
                 Expanded(
                   child: FutureBuilder(
-                      future: rootBundle.loadString('assets/about_app.md'),
+                      future: rootBundle.loadString(AppMarkdown.aboutApp),
                       builder: (BuildContext context,
                           AsyncSnapshot<String> snapshot) {
                         if (snapshot.hasData) {

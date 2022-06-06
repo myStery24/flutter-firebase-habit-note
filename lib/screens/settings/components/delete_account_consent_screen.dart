@@ -94,9 +94,10 @@ class _DeleteAccountConsentScreenState extends State<DeleteAccountConsentScreen>
               SizedBox(height: size.width * 0.015),
               Expanded(
                 child: FutureBuilder(
-                    future: rootBundle.loadString('assets/delete_account.md'),
-                    builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-                      if(snapshot.hasError){
+                    future: rootBundle.loadString(AppMarkdown.deleteAccount),
+                    builder:
+                        (BuildContext context, AsyncSnapshot<String> snapshot) {
+                      if (snapshot.hasError) {
                         return Text(snapshot.error.toString());
                       }
                       if (snapshot.hasData) {
