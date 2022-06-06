@@ -13,12 +13,12 @@ dependencies:
     sdk: flutter
 
   # COMMON
-  audioplayers: ^0.20.1
   bottom_navy_bar: ^6.0.0
   camera: ^0.9.4+19
   cached_network_image: ^3.2.0
   clipboard: ^0.1.2+8
   cupertino_icons: ^1.0.4
+  date_picker_timeline: ^1.2.3
   file_picker: ^4.4.0
   flutter_markdown: ^0.6.9+1
   flutter_mobx: ^2.0.4
@@ -98,4 +98,3 @@ flutter:
    - assets/privacy_policy.md
    - assets/about_app.md
    - assets/delete_account.md
-   - assets/sfx/
