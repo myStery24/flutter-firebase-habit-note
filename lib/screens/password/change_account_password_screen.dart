@@ -104,27 +104,9 @@ class ChangeAppPasswordScreenState extends State<ChangeAppPasswordScreen> {
                       decoration: appTextFieldInputDeco(hint: new_pwd),
                       errorThisFieldRequired: errorThisFieldRequired,
                     ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        IconButton(
-                            icon: Icon(
-                              Icons.info_outline,
-                              color: getBoolAsync(IS_DARK_MODE)
-                                  ? AppColors.kHabitOrange
-                                  : AppColors.kHabitDark,
-                            ),
-                            onPressed: null),
-                        Text(
-                          'Your password must have at least 6 characters.',
-                          style: TextStyle(
-                            color: getBoolAsync(IS_DARK_MODE)
-                                ? AppColors.kTextWhite
-                                : AppColors.kTextBlack,
-                          ),
-                        ),
-                      ],
-                    ),
+
+                    /// Your password must have at least 6 characters
+                    _pwdInfoBox(),
                     16.height,
                     AppTextField(
                       controller: confirmPwdController,
@@ -167,7 +149,9 @@ class ChangeAppPasswordScreenState extends State<ChangeAppPasswordScreen> {
                     Divider(
                       thickness: 2,
                     ),
-                    infoWidget(),
+
+                    /// Note
+                    _noteInfoBox(),
                   ],
                 ),
               ).center(),
@@ -205,7 +189,31 @@ class ChangeAppPasswordScreenState extends State<ChangeAppPasswordScreen> {
     }
   }
 
-  Widget infoWidget() {
+  Widget _pwdInfoBox() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        IconButton(
+            icon: Icon(
+              Icons.info_outline,
+              color: getBoolAsync(IS_DARK_MODE)
+                  ? AppColors.kHabitOrange
+                  : AppColors.kHabitDark,
+            ),
+            onPressed: null),
+        Text(
+          'Your password must have at least 6 characters.',
+          style: TextStyle(
+            color: getBoolAsync(IS_DARK_MODE)
+                ? AppColors.kTextWhite
+                : AppColors.kTextBlack,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _noteInfoBox() {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Container(
