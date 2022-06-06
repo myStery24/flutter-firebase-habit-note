@@ -10,17 +10,17 @@ import '../../../configs/common.dart';
 import '../../../configs/constants.dart';
 import '../../../models/subscription_model.dart';
 
-class AddSubscriptionReminderScreen extends StatefulWidget {
+/// Press the floating button to add a new subscription
+class AddSubscriptionScreen extends StatefulWidget {
   final SubscriptionModel? subscriptionModel;
 
-  AddSubscriptionReminderScreen({this.subscriptionModel});
+  AddSubscriptionScreen({this.subscriptionModel});
 
   @override
-  AddSubscriptionReminderScreenState createState() =>
-      AddSubscriptionReminderScreenState();
+  AddSubscriptionScreenState createState() => AddSubscriptionScreenState();
 }
 
-class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderScreen> {
+class AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   TextEditingController amountController = TextEditingController();
@@ -36,8 +36,8 @@ class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderSc
   FocusNode descriptionFocus = FocusNode();
 
   String? durationUnit = DAY;
-  bool mRecurring = true;
-  bool mIsUpdate = false;
+  bool kRecurring = true;
+  bool kIsUpdate = false;
 
   Color? reminderColor;
 
@@ -48,10 +48,10 @@ class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderSc
   }
 
   Future<void> init() async {
-    mIsUpdate = widget.subscriptionModel != null;
+    kIsUpdate = widget.subscriptionModel != null;
     reminderColor = Colors.white;
 
-    if (mIsUpdate) {
+    if (kIsUpdate) {
       amountController.text = widget.subscriptionModel!.amount!;
       nameController.text = widget.subscriptionModel!.name!;
       descriptionController.text = widget.subscriptionModel!.description!;
@@ -59,11 +59,11 @@ class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderSc
       reminderColor = getColorFromHex(widget.subscriptionModel!.color!);
 
       if (widget.subscriptionModel!.dueDate != null) {
-        mRecurring = false;
+        kRecurring = false;
         expiryDateController.text =
             DateFormat(date_format).format(widget.subscriptionModel!.dueDate!);
       } else {
-        mRecurring = true;
+        kRecurring = true;
         firstPaymentController.text = DateFormat(date_format)
             .format(widget.subscriptionModel!.firstPayDate!);
         durationController.text = widget.subscriptionModel!.duration.toString();
@@ -73,28 +73,30 @@ class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderSc
     }
   }
 
+  /// Calendar
   Future<void> showDateFrom() async {
     DateTime? date = await showDatePicker(
       context: context,
       initialDate: DateTime.now().add(Duration(days: 1)),
-      firstDate: DateTime(2019),
+      firstDate: DateTime(1990),
       lastDate: DateTime(2222),
       builder: (BuildContext context, Widget? child) {
         return appStore.isDarkMode
             ? Theme(
                 data: ThemeData.dark().copyWith(
                   colorScheme: ColorScheme.fromSwatch(
-                    primarySwatch: Colors.amber,
+                    brightness: Brightness.dark,
+                    primarySwatch: Colors.deepOrange,
                   ),
-                  dialogBackgroundColor: Colors.white,
+                  dialogBackgroundColor: Colors.black,
                 ),
                 child: child!,
               )
             : Theme(
                 data: ThemeData.light().copyWith(
                   colorScheme: ColorScheme.fromSwatch(
-                    primarySwatch: Colors.orange,
-                    // primarySwatch: Colors.teal,
+                    brightness: Brightness.light,
+                    primarySwatch: Colors.deepOrange,
                   ),
                   dialogBackgroundColor: Colors.white,
                 ),
@@ -103,7 +105,8 @@ class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderSc
       },
     );
     if (date != null) {
-      if (mRecurring) {
+      if (kRecurring) {
+        // format the date and return as date_format
         firstPaymentController.text = DateFormat(date_format).format(date);
       } else {
         expiryDateController.text = DateFormat(date_format).format(date);
@@ -127,22 +130,56 @@ class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderSc
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        titleSpacing: 0,
-        title: Text(add_subscription),
+        title: Text(add_new_subscription),
         actions: [
-          mIsUpdate
+          kIsUpdate
               ? TextButton(
-                  onPressed: () {
-                    subscriptionService
-                        .removeDocument(widget.subscriptionModel!.id)
-                        .then((value) {
-                      finish(context);
-                      finish(context);
-                    }).catchError((error) {
-                      toast(error);
-                    });
+                  onPressed: () async {
+                    bool deleted = await showInDialog(
+                      context,
+                      title: Text(
+                        delete_sub,
+                        style: TextStyle(
+                          color: getBoolAsync(IS_DARK_MODE)
+                              ? AppColors.kHabitOrange
+                              : AppColors.kTextBlack,
+                          fontWeight: TextFontWeight.bold,
+                        ),
+                      ),
+                      child: Text(confirm_to_delete_sub,
+                          style: primaryTextStyle()),
+                      actions: [
+                        TextButton(
+                            onPressed: () {
+                              finish(context, false);
+                            },
+                            child: Text(cancel, style: primaryTextStyle())),
+                        TextButton(
+                          onPressed: () {
+                            finish(context, true);
+                          },
+                          child: Text(
+                            delete,
+                            style: primaryTextStyle(
+                              color: AppColors.kHabitOrange,
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                    if (deleted) {
+                      subscriptionService
+                          .removeDocument(widget.subscriptionModel!.id)
+                          .then((value) {
+                        finish(context);
+                        finish(context);
+                        toast('Subscription deleted');
+                      }).catchError((error) {
+                        toast(error);
+                      });
+                    }
                   },
-                  child: Text(delete, style: boldTextStyle()),
+                  child: Text(delete2, style: boldTextStyle(color: Colors.red)),
                 ).paddingOnly(right: 16)
               : SizedBox(),
         ],
@@ -169,9 +206,10 @@ class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderSc
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
+                            /// Price card
                             AppTextField(
                               maxLength: 10,
-                              autoFocus: mIsUpdate ? false : true,
+                              autoFocus: kIsUpdate ? false : true,
                               textFieldType: TextFieldType.PHONE,
                               focus: amountFocus,
                               nextFocus: nameFocus,
@@ -201,33 +239,56 @@ class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderSc
                         ),
                       ),
                       16.height,
+
+                      /// Colour for the card
+                      Container(
+                        width: context.width(),
+                        padding: EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                            color: reminderColor,
+                            border: Border.all(color: Colors.grey.shade300),
+                            borderRadius: BorderRadius.circular(defaultRadius)),
+                        child: Text(select_colour2,
+                            style: primaryTextStyle(
+                                color: reminderColor!.isDark()
+                                    ? Colors.white.withOpacity(0.85)
+                                    : Colors.black),
+                            textAlign: TextAlign.center),
+                      ).onTap(() {
+                        selectColorDialog();
+                      }),
+                      16.height,
+
+                      /// Name
                       Text(name, style: boldTextStyle()),
-                      8.height,
+                      10.height,
                       AppTextField(
                         focus: nameFocus,
                         nextFocus: descriptionFocus,
                         controller: nameController,
-                        cursorColor: Colors.blueAccent,
                         textFieldType: TextFieldType.NAME,
                         decoration:
-                            subscriptionInputDecoration(name: 'e.g. Netflix'),
+                            subscriptionInputDecoration(name: 'e.g. Spotify'),
                       ).cornerRadiusWithClipRRect(defaultRadius),
-                      8.height,
+                      12.height,
+
+                      /// Description
                       Text(description, style: boldTextStyle()),
-                      8.height,
+                      10.height,
                       AppTextField(
                         focus: descriptionFocus,
                         controller: descriptionController,
-                        cursorColor: Colors.blueAccent,
                         textFieldType: TextFieldType.NAME,
-                        decoration: subscriptionInputDecoration(
-                            name: 'e.g. Premium plan'),
+                        decoration:
+                            subscriptionInputDecoration(name: 'e.g. Premium'),
                         isValidationRequired: false,
                       ).cornerRadiusWithClipRRect(defaultRadius),
                     ],
                   ).paddingOnly(left: 16, right: 16, top: 16),
                   16.height,
                   Divider(thickness: 1),
+
+                  /// Recurring and one time tab
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -238,13 +299,13 @@ class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderSc
                             padding: EdgeInsets.all(8),
                             child: Text(recurring,
                                 style: boldTextStyle(
-                                    color: mRecurring
+                                    color: kRecurring
                                         ? appStore.isDarkMode
                                             ? AppColors.kHabitOrange
                                             : AppColors.kHabitDark
                                         : Colors.grey)),
                           ).onTap(() {
-                            mRecurring = true;
+                            kRecurring = true;
                             setState(() {});
                           }),
                           Container(
@@ -252,25 +313,27 @@ class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderSc
                             child: Text(
                               one_time,
                               style: boldTextStyle(
-                                  color: mRecurring
+                                  color: kRecurring
                                       ? Colors.grey
                                       : appStore.isDarkMode
                                           ? AppColors.kHabitOrange
                                           : AppColors.kHabitDark),
                             ),
                           ).onTap(() {
-                            mRecurring = false;
+                            kRecurring = false;
                             setState(() {});
                           })
                         ],
                       ),
                       16.height,
-                      mRecurring
+
+                      /// Billing period
+                      kRecurring
                           ? Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(billing_period, style: boldTextStyle()),
-                                8.height,
+                                10.height,
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -289,6 +352,8 @@ class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderSc
                                             defaultRadius)
                                         .expand(),
                                     16.width,
+
+                                    /// Drop down selection
                                     Container(
                                       padding:
                                           EdgeInsets.only(left: 8, right: 8),
@@ -317,12 +382,14 @@ class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderSc
                                           );
                                         }).toList(),
                                       ),
-                                    ).expand(flex: 2)
+                                    ).expand(flex: 1)
                                   ],
                                 ),
-                                8.height,
+                                12.height,
+
+                                /// First payment
                                 Text(first_payment, style: boldTextStyle()),
-                                8.height,
+                                10.height,
                                 AppTextField(
                                   onTap: () {
                                     showDateFrom();
@@ -335,11 +402,13 @@ class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderSc
                                 ).cornerRadiusWithClipRRect(defaultRadius),
                               ],
                             ).paddingOnly(left: 16, right: 16, bottom: 16)
+
+                          /// Expiry date if choose one time
                           : Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(exp_date, style: boldTextStyle()),
-                                8.height,
+                                10.height,
                                 AppTextField(
                                   onTap: () {
                                     showDateFrom();
@@ -353,44 +422,27 @@ class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderSc
                               ],
                             ).paddingOnly(left: 16, right: 16, bottom: 16),
                       Divider(thickness: 1),
-                      8.height,
+                      12.height,
+
+                      /// Enter payment method
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(pay_method, style: boldTextStyle()),
-                          8.height,
+                          10.height,
                           AppTextField(
                             controller: paymentMethodController,
                             cursorColor: AppColors.kHabitOrange,
                             textFieldType: TextFieldType.NAME,
                             decoration: subscriptionInputDecoration(
-                                name: 'e.g. Credit Card'),
+                                name: 'e.g. Gift card'),
                             isValidationRequired: false,
                           ).cornerRadiusWithClipRRect(defaultRadius),
-                          16.height,
-                          4.height,
-                          Container(
-                            width: context.width(),
-                            padding: EdgeInsets.all(16),
-                            decoration: BoxDecoration(
-                                color: reminderColor,
-                                border: Border.all(color: Colors.grey.shade300),
-                                borderRadius:
-                                    BorderRadius.circular(defaultRadius)),
-                            child: Text(select_colour,
-                                style: primaryTextStyle(
-                                    color: reminderColor!.isDark()
-                                        ? Colors.white.withOpacity(0.85)
-                                        : Colors.black),
-                                textAlign: TextAlign.center),
-                          ).onTap(() {
-                            selectColorDialog();
-                          }),
-                          16.height,
+                          12.height,
+
+                          /// Save button
                           AppButton(
-                            color: appStore.isDarkMode
-                                ? AppColors.kHabitOrange
-                                : AppColors.kHabitDark,
+                            color: AppColors.kHabitOrange,
                             width: context.width(),
                             onTap: () {
                               addSubscriptionReminder().then((value) {
@@ -400,7 +452,7 @@ class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderSc
                                 toast(error.toString());
                               });
                             },
-                            child: Text(mIsUpdate ? update : save,
+                            child: Text(kIsUpdate ? update : save,
                                 style: boldTextStyle(
                                     color: appStore.isDarkMode
                                         ? AppColors.kHabitDark
@@ -414,6 +466,8 @@ class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderSc
               ),
             ),
           ),
+
+          /// Mobx observer
           Observer(
               builder: (_) => Loader(
                       color: appStore.isDarkMode
@@ -426,6 +480,7 @@ class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderSc
     );
   }
 
+  /// Save to Firebase
   Future<void> addSubscriptionReminder() async {
     if (_formKey.currentState!.validate()) {
       appStore.setLoading(true);
@@ -441,7 +496,7 @@ class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderSc
         model.color = Colors.white.toHex();
       }
 
-      if (mRecurring) {
+      if (kRecurring) {
         var firstDate =
             DateTime.parse(firstPaymentController.text.trim().validate());
 
@@ -470,7 +525,7 @@ class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderSc
       model.paymentMethod = paymentMethodController.text.validate();
       model.userId = getStringAsync(USER_ID);
 
-      if (mIsUpdate) {
+      if (kIsUpdate) {
         model.id = widget.subscriptionModel!.id;
 
         subscriptionService
@@ -498,11 +553,12 @@ class AddSubscriptionReminderScreenState extends State<AddSubscriptionReminderSc
     }
   }
 
+  /// Colour the card
   selectColorDialog() {
     return showInDialog(
       context,
       title: Text(select_colour),
-      contentPadding: EdgeInsets.zero,
+      contentPadding: EdgeInsets.all(8),
       builder: (_) => new SelectNoteColor(onTap: (color) {
         setState(() {
           reminderColor = color;

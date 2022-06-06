@@ -8,9 +8,10 @@ import '../../configs/constants.dart';
 import '../../main.dart';
 
 import '../../models/subscription_model.dart';
-import 'components/AddSubscriptionReminderScreen.dart';
-import 'components/SubscriptionDetailScreen.dart';
+import 'components/add_subscription_screen.dart';
+import 'components/subscription_detail_screen.dart';
 
+/// List all the subscriptions
 class SubscriptionReminderListScreen extends StatefulWidget {
   @override
   SubscriptionReminderListScreenState createState() =>
@@ -26,8 +27,10 @@ class SubscriptionReminderListScreenState
   }
 
   Future<void> init() async {
-    setStatusBarColor(appStore.isDarkMode ? AppColors.kPrimaryVariantColorDark : Colors.white,
-        statusBarIconBrightness: Brightness.light, delayInMilliSeconds: 100);
+    setStatusBarColor(
+        appStore.isDarkMode ? AppColors.kPrimaryVariantColorDark : Colors.white,
+        statusBarIconBrightness: Brightness.light,
+        delayInMilliSeconds: 100);
   }
 
   @override
@@ -37,7 +40,8 @@ class SubscriptionReminderListScreenState
 
   @override
   void dispose() {
-    setStatusBarColor(appStore.isDarkMode ? AppColors.kPrimaryVariantColorDark : Colors.white,
+    setStatusBarColor(
+        appStore.isDarkMode ? AppColors.kPrimaryVariantColorDark : Colors.white,
         delayInMilliSeconds: 100);
     super.dispose();
   }
@@ -46,25 +50,25 @@ class SubscriptionReminderListScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        titleSpacing: 0,
         title: Text(sub_reminder),
       ),
       floatingActionButton: Observer(
         builder: (_) => FloatingActionButton(
           onPressed: () {
-            AddSubscriptionReminderScreen().launch(context,
+            AddSubscriptionScreen().launch(context,
                 pageRouteAnimation: PageRouteAnimation.SlideBottomTop,
                 duration: 500.microseconds);
           },
-          backgroundColor: appStore.isDarkMode
-              ? AppColors.kHabitOrange
-              : AppColors.kHabitDark,
+          backgroundColor: AppColors.kHabitOrange,
           child: Icon(Icons.add,
               color: appStore.isDarkMode ? AppColors.kHabitDark : Colors.white),
         ),
       ),
+
+      /// Show the list of created reminder
       body: StreamBuilder<List<SubscriptionModel>>(
-        stream: subscriptionService.subscription(),
+        stream: subscriptionService
+            .subscription(), // build connection with the database table
         builder: (_, snapshot) {
           if (snapshot.hasData) {
             if (snapshot.data!.length == 0) {
@@ -75,11 +79,14 @@ class SubscriptionReminderListScreenState
               padding: EdgeInsets.only(top: 8),
               shrinkWrap: true,
               itemCount: snapshot.data!.length,
+              // The amount of reminder displayed depends on how many reminders were created
               itemBuilder: (_, index) {
-                SubscriptionModel data = snapshot.data![index];
+                SubscriptionModel data =
+                    snapshot.data![index]; // take a snapshot from Firebase
 
                 checkRecurringSubDate(subModel: data);
 
+                /// The reminder properties
                 return InkWell(
                   borderRadius: BorderRadius.circular(defaultRadius),
                   onTap: () {
@@ -103,6 +110,7 @@ class SubscriptionReminderListScreenState
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                /// Name
                                 Text(data.name.validate(),
                                     style: boldTextStyle(
                                         size: 20,
@@ -113,6 +121,8 @@ class SubscriptionReminderListScreenState
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis),
                                 16.width,
+
+                                /// Description
                                 Text(data.description.validate(),
                                     style: primaryTextStyle(
                                         color: getColorFromHex(data.color!)
@@ -123,6 +133,8 @@ class SubscriptionReminderListScreenState
                                     overflow: TextOverflow.ellipsis),
                               ],
                             ).expand(),
+
+                            /// Price
                             Text('$ringgit_icon ${data.amount.validate()}',
                                 style: boldTextStyle(
                                     size: 20,
@@ -161,6 +173,7 @@ class SubscriptionReminderListScreenState
     );
   }
 
+  /// Save to Firebase
   Future<void> checkRecurringSubDate(
       {required SubscriptionModel subModel}) async {
     if (subModel.nextPayDate != null &&
@@ -184,7 +197,7 @@ class SubscriptionReminderListScreenState
         {'nextPayDate': subModel.nextPayDate}, subModel.id).then((value) {
       //
     }).catchError((error) {
-      toast('New error data${error.toString()}');
+      toast('New reminder error data${error.toString()}');
     });
   }
 }

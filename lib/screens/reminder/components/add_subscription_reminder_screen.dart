@@ -9,16 +9,19 @@ import '../../../configs/constants.dart';
 import '../../../main.dart';
 import '../../../models/subscription_model.dart';
 
-class NotificationScreen extends StatefulWidget {
+/// Add reminder
+class AddSubscriptionReminderScreen extends StatefulWidget {
   final SubscriptionModel? subscriptionModel;
 
-  NotificationScreen({this.subscriptionModel});
+  AddSubscriptionReminderScreen({this.subscriptionModel});
 
   @override
-  NotificationScreenState createState() => NotificationScreenState();
+  AddSubscriptionReminderScreenState createState() =>
+      AddSubscriptionReminderScreenState();
 }
 
-class NotificationScreenState extends State<NotificationScreen> {
+class AddSubscriptionReminderScreenState
+    extends State<AddSubscriptionReminderScreen> {
   TextEditingController notificationUnitController = TextEditingController();
 
   String? durationUnit = DAY;
@@ -52,20 +55,27 @@ class NotificationScreenState extends State<NotificationScreen> {
         context: context,
         initialTime: TimeOfDay.fromDateTime(notificationTime!),
         builder: (BuildContext context, Widget? child) {
-          return Theme(
-            data: ThemeData.light().copyWith(
-              colorScheme: ColorScheme.fromSwatch(
-                primarySwatch: Colors.orange,
-                primaryColorDark: Colors.orange,
-                accentColor: Colors.orange,
-                // primarySwatch: Colors.teal,
-                // primaryColorDark: Colors.teal,
-                // accentColor: Colors.teal,
-              ),
-              dialogBackgroundColor: Colors.white,
-            ),
-            child: child!,
-          );
+          return appStore.isDarkMode
+              ? Theme(
+                  data: ThemeData.dark().copyWith(
+                    colorScheme: ColorScheme.fromSwatch(
+                      brightness: Brightness.dark,
+                      primarySwatch: Colors.deepOrange,
+                    ),
+                    dialogBackgroundColor: Colors.black,
+                  ),
+                  child: child!,
+                )
+              : Theme(
+                  data: ThemeData.light().copyWith(
+                    colorScheme: ColorScheme.fromSwatch(
+                      brightness: Brightness.light,
+                      primarySwatch: Colors.deepOrange,
+                    ),
+                    dialogBackgroundColor: Colors.white,
+                  ),
+                  child: child!,
+                );
         });
     if (picked != null) {
       setState(() {
@@ -84,14 +94,16 @@ class NotificationScreenState extends State<NotificationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(notification),
+        title: Text(reminder),
       ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            15.height,
             Row(
               children: [
+                /// Option 1
                 Radio(
                   activeColor: AppColors.kHabitOrange,
                   value: 0,
@@ -109,6 +121,7 @@ class NotificationScreenState extends State<NotificationScreen> {
             16.height,
             Row(
               children: [
+                /// Option 2
                 Radio(
                   activeColor: AppColors.kHabitOrange,
                   value: 1,
@@ -119,6 +132,8 @@ class NotificationScreenState extends State<NotificationScreen> {
                     });
                   },
                 ),
+
+                /// Enter the number of day, week, month or year, default is 1
                 AppTextField(
                   controller: notificationUnitController,
                   cursorColor: AppColors.kHabitOrange,
@@ -127,6 +142,8 @@ class NotificationScreenState extends State<NotificationScreen> {
                   decoration: subscriptionInputDecoration(name: '1'),
                 ).expand(),
                 16.width,
+
+                /// The dropdown menu to choose day, week, month or year
                 Container(
                   margin: EdgeInsets.only(right: 16),
                   padding: EdgeInsets.only(left: 8, right: 8),
@@ -144,7 +161,7 @@ class NotificationScreenState extends State<NotificationScreen> {
                         durationUnit = newValue;
                       });
                     },
-                    items: <String>[DAY]
+                    items: <String>[DAY, WEEK, MONTH, YEAR]
                         .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
@@ -156,6 +173,8 @@ class NotificationScreenState extends State<NotificationScreen> {
               ],
             ),
             8.height,
+
+            /// Choose a notification time
             Text('Time', style: boldTextStyle()),
             InkWell(
               borderRadius: BorderRadius.circular(16),
@@ -175,10 +194,10 @@ class NotificationScreenState extends State<NotificationScreen> {
               ).paddingTop(8),
             ),
             16.height,
+
+            /// Save button
             AppButton(
-              color: appStore.isDarkMode
-                  ? AppColors.kHabitOrange
-                  : AppColors.kHabitDark,
+              color: AppColors.kHabitOrange,
               width: context.width(),
               onTap: () {
                 _handleRadioValueChange(radioValue);
@@ -337,7 +356,7 @@ class NotificationScreenState extends State<NotificationScreen> {
     } else {
       appStore.setLoading(false);
 
-      toast('invalid date');
+      toast('Invalid date');
     }
   }
 }
