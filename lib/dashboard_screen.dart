@@ -6,11 +6,11 @@ import 'package:habit_note/screens/ocr/ocr_screen.dart';
 import 'package:habit_note/screens/settings/me_screen.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import '../../configs/colors.dart';
-import '../../configs/constants.dart';
-import '../../widgets/dashboard_drawer_widget.dart';
-import '../help/help_screen.dart';
-import '../notes/notes_screen.dart';
+import 'configs/colors.dart';
+import 'configs/constants.dart';
+import 'widgets/dashboard_drawer_widget.dart';
+import 'screens/help/help_screen.dart';
+import 'screens/notes/notes_screen.dart';
 
 /// The home screen after login
 class DashboardScreen extends StatefulWidget {
