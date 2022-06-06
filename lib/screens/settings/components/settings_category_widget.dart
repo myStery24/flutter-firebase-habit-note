@@ -94,17 +94,17 @@ class _SettingsCategoryState extends State<SettingsCategory> {
                             .paddingBottom(8),
                         radius: imageRadius,
                       ),
-                      Positioned(
+                      PositionedDirectional(
+                        end: 0,
                         bottom: 5,
-                        right: 0,
                         child: ClipOval(
                           child: Container(
-                            padding: EdgeInsets.all(8.0),
+                            padding: EdgeInsets.all(5.0),
                             color: AppColors.kHabitOrange,
                             child: Icon(
                               Icons.edit,
                               color: Colors.black,
-                              size: 20,
+                              size: 18,
                             ),
                           ),
                         ),
@@ -355,7 +355,7 @@ class _SettingsCategoryState extends State<SettingsCategory> {
   /// Upload to Firebase
   Future<String?> uploadImage() async {
     final path =
-        'image/${getStringAsync(USER_ID)}'; // path of user profile picture
+        'profileImages/user/${getStringAsync(USER_ID)}'; // path of user profile picture
     Reference storageRef =
         FirebaseStorage.instance.ref().child(path); // storage reference
     final userImage = File(imageFile!.path);
