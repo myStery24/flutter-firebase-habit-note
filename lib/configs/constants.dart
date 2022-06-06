@@ -80,6 +80,23 @@ class AppImages {
   static const notificationLogo = '$imageDir/logo_notification.png';
 }
 
+class AppMarkdown {
+  // Markdown file route (directory)
+  static const String imageDir = 'assets';
+
+  static const aboutApp = '$imageDir/about_app.md';
+  static const deleteAccount = '$imageDir/delete_account.md';
+  static const privacyPolicy = '$imageDir/privacy_policy.md';
+  static const termsOfUse = '$imageDir/terms_of_use.md';
+}
+
+class AppLottie {
+  // Lottie animation route (directory)
+  static const String imageDir = 'assets';
+
+  static const helpLottie = '$imageDir/79793-guy-talking-to-robot-ai-help.json';
+}
+
 class SizeConfig {
   static late MediaQueryData _mediaQueryData;
   static late double screenWidth;
