@@ -6,7 +6,7 @@ import '../../configs/colors.dart';
 import '../../configs/common.dart';
 import '../../configs/constants.dart';
 import '../../main.dart';
-import '../dashboard/dashboard_screen.dart';
+import '../../dashboard_screen.dart';
 import '../onboard/onboard_screen.dart';
 
 class SplashScreen extends StatefulWidget {
