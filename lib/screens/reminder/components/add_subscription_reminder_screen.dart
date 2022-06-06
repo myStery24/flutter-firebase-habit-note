@@ -172,10 +172,13 @@ class AddSubscriptionReminderScreenState
                 ).expand(flex: 2),
               ],
             ),
-            8.height,
+            16.height,
+            _reminderDateInfoBox(),
+            16.height,
 
             /// Choose a notification time
             Text('Time', style: boldTextStyle()),
+            10.height,
             InkWell(
               borderRadius: BorderRadius.circular(16),
               onTap: () {
@@ -358,5 +361,29 @@ class AddSubscriptionReminderScreenState
 
       toast('Invalid date');
     }
+  }
+
+  Widget _reminderDateInfoBox() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        IconButton(
+            icon: Icon(
+              Icons.info_outline,
+              color: getBoolAsync(IS_DARK_MODE)
+                  ? AppColors.kHabitOrange
+                  : AppColors.kHabitDark,
+            ),
+            onPressed: null),
+        Text(
+          'Set a date BEFORE the next payment/expiry \ndate. Not applicable to future reminder.',
+          style: TextStyle(
+            color: getBoolAsync(IS_DARK_MODE)
+                ? AppColors.kTextWhite
+                : AppColors.kTextBlack,
+          ),
+        ),
+      ],
+    );
   }
 }
