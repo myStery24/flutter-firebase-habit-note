@@ -5,7 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:google_ml_kit/google_ml_kit.dart';
+import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nb_utils/nb_utils.dart';
 
@@ -30,7 +30,8 @@ class _OCRScreenState extends State<OCRScreen> {
   XFile? imageFile; // Store user picked image
   String scannedText = ""; // Store the recognised text
   bool textScanning = false;
-  // CustomPaint? customPaint; // Draw boxes on a scanned image
+
+  // CustomPaint? _customPaint; // Draw boxes on a scanned image
 
   GlobalKey<ScaffoldState> _scaffoldState = GlobalKey<ScaffoldState>();
   FirebaseStorage _storage = FirebaseStorage.instance;
@@ -130,13 +131,17 @@ class _OCRScreenState extends State<OCRScreen> {
                         color: Colors.black,
                         width: 1,
                       ),
-                      color: appStore.isDarkMode ? Colors.white12 : Colors.white,
+                      color:
+                          appStore.isDarkMode ? Colors.white12 : Colors.white,
                     ),
 
                     /// If the image state is not null,
                     child: imageFile != null
                         ? Image.file(File(imageFile!.path)) // show the image
-                        : Icon(Icons.photo, size: 80, color: Colors.black), // else display a photo icon placeholder
+                        : Icon(Icons.photo,
+                            size: 80,
+                            color: Colors
+                                .black), // else display a photo icon placeholder
                   ),
                   SizedBox(height: 18.0),
 
@@ -251,9 +256,12 @@ class _OCRScreenState extends State<OCRScreen> {
   /// Upload image
   Future uploadOcrImage() async {
     // UploadTask? upload;
-    final path = 'images/ocr/${getStringAsync(USER_ID)}/${imageFile!.name}'; // Path to store the images
-    final storageRef = _storage.ref().child(path); // A reference to the location of uploaded images in Firebase Storage
-    final ocrImage = File(imageFile!.path); // Convert picked file/image to a file object
+    final path =
+        'ocrImages/user/${getStringAsync(USER_ID)}/${imageFile!.name}'; // Path to store the images
+    final storageRef = _storage.ref().child(
+        path); // A reference to the location of uploaded images in Firebase Storage
+    final ocrImage =
+        File(imageFile!.path); // Convert picked file/image to a file object
 
     storageRef.putFile(ocrImage); // Upload the file to Firebase Storage
     // upload = storageRef.putFile(ocrImage);
@@ -295,14 +303,13 @@ class _OCRScreenState extends State<OCRScreen> {
     final inputImage = InputImage.fromFilePath(image.path);
 
     /// Instance of GoogleMLKit Vision class to initialize a text detector
-    final textDetectorV2 = GoogleMlKit.vision.textDetectorV2();
+    // final textDetectorV2 = GoogleMlKit.vision.textDetectorV2();
+    final TextRecognizer _textRecognizer =
+        TextRecognizer(script: TextRecognitionScript.chinese);
 
     /// Call the method to perform text recognition
-    RecognisedText recognisedText = await textDetectorV2
-        .processImage(inputImage, script: TextRecognitionOptions.CHINESE);
-
-    /// Close the detector
-    await textDetectorV2.close();
+    // RecognisedText recognisedText = await textDetectorV2.processImage(inputImage, script: TextRecognitionOptions.CHINESE);
+    final recognisedText = await _textRecognizer.processImage(inputImage);
 
     /// Extract text
     scannedText = "";
@@ -332,6 +339,10 @@ class _OCRScreenState extends State<OCRScreen> {
     if (mounted) {
       setState(() {});
     }
+
+    /// Close the detector
+    // await textDetectorV2.close();
+    await _textRecognizer.close();
   }
 
   void copyToClipboard() {
