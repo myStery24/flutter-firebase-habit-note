@@ -6,6 +6,36 @@ import '../../../configs/colors.dart';
 import '../../../configs/constants.dart';
 import '../../../main.dart';
 
+/// Labels screen header
+Widget labelsInfoBox() {
+  return Padding(
+    padding: EdgeInsetsDirectional.fromSTEB(8, 0, 0, 5),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        IconButton(
+            icon: Icon(
+              Icons.label,
+              color: getBoolAsync(IS_DARK_MODE)
+                  ? AppColors.kHabitOrange
+                  : AppColors.kHabitDark,
+            ),
+            onPressed: null),
+        Text(
+          "Manage all your notes' labels. \nAll in one place.",
+          style: GoogleFonts.lato(
+            fontSize: 18.0,
+            color: getBoolAsync(IS_DARK_MODE)
+                ? AppColors.kTextWhite
+                : AppColors.kTextBlack,
+            fontWeight: TextFontWeight.regular,
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
 /// [Create labels] Header
 class CreateLabelSectionTitleWidget extends StatelessWidget {
   const CreateLabelSectionTitleWidget({Key? key}) : super(key: key);
