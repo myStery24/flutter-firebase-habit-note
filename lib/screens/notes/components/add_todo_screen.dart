@@ -10,7 +10,7 @@ import '../../../configs/constants.dart';
 import '../../../models/labels_model.dart';
 import '../../../models/notes_model.dart';
 import '../../../widgets/custom_chips.dart';
-import '../../dashboard/dashboard_screen.dart';
+import '../../../dashboard_screen.dart';
 
 /// TODO: Add labels to note, save to Firestore, map to the note
 /// ISSUE: The label does not save to database, currently display dummy data as labels and it's read-only
