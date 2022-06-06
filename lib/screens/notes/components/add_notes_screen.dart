@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:habit_note/models/labels_model.dart';
-import 'package:habit_note/screens/dashboard/dashboard_screen.dart';
+import 'package:habit_note/dashboard_screen.dart';
 import 'package:material_tag_editor/tag_editor.dart';
 import 'package:nb_utils/nb_utils.dart';
 
