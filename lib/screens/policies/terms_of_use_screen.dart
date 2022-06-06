@@ -83,18 +83,19 @@ class _TermsOfUseScreenState extends State<TermsOfUseScreen> {
               SizedBox(height: size.width * 0.015),
               Expanded(
                 child: FutureBuilder(
-                  future: rootBundle.loadString('assets/terms_of_use.md'),
-                    builder: (BuildContext context, AsyncSnapshot<String> snapshot){
-                      if(snapshot.hasError){
+                  future: rootBundle.loadString(AppMarkdown.privacyPolicy),
+                    builder:
+                        (BuildContext context, AsyncSnapshot<String> snapshot) {
+                      if (snapshot.hasError) {
                         return Text(snapshot.error.toString());
                       }
-                    if (snapshot.hasData) {
-                      return Markdown(
-                        selectable: false,
-                        data: snapshot.requireData,
-                        onTapLink: (text, href, title) {
-                          href != null ? launchUrlString(href) : null;
-                        },
+                      if (snapshot.hasData) {
+                        return Markdown(
+                          selectable: false,
+                          data: snapshot.requireData,
+                          onTapLink: (text, href, title) {
+                            href != null ? launchUrlString(href) : null;
+                          },
                       );
                     }
                     return Center(
