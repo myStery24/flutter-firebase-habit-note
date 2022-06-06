@@ -24,8 +24,8 @@ class AppStrings {
   static const String appName = 'HaBIT Note';
 
   // App version
-  static const String appVersionText = 'V0.0.7';
-  static const String appVersionText2 = 'Version 0.0.7';
+  static const String appVersionText = 'V0.0.8';
+  static const String appVersionText2 = 'Version 0.0.8';
 
   // App copyright
   static const String appCopyright =
@@ -215,7 +215,7 @@ const log_out = 'Log Out';
 const log_out_text = 'Are you sure you want to log out ?';
 const reminder_empty_note = 'Create your first reminder !';
 const sub_reminder = 'Subscription Reminder';
-const add_new_subscription = 'Add New Subscription';
+const add_new_subscription = 'My Subscription';
 const update = 'UPDATE';
 const save = 'SAVE';
 const MYR = 'MYR';
