@@ -118,6 +118,11 @@ class _LabelsListScreenState extends State<LabelsListScreen> {
             children: [
               15.height,
 
+              /// Info
+              labelsInfoBox(),
+              Divider(thickness: 2, endIndent: 10, indent: 10),
+              15.height,
+
               /// Create labels
               CreateLabelSectionTitleWidget(),
               Padding(
