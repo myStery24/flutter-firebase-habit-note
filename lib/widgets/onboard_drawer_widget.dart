@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:habit_note/screens/password/forgot_password_screen.dart';
 import 'package:habit_note/screens/policies/privacy_policy_screen.dart';
-import 'package:habit_note/widgets/custom_richtext_widget.dart';
+import 'package:habit_note/widgets/custom_rich_text_widget.dart';
 
 import '../configs/colors.dart';
 import '../configs/constants.dart';
