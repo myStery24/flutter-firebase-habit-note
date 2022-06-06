@@ -391,9 +391,7 @@ class NotesScreenState extends State<NotesScreen> {
           ),
           floatingActionButton: Observer(
             builder: (_) => FloatingActionButton(
-              backgroundColor: appStore.isDarkMode
-                  ? AppColors.kHabitOrange
-                  : AppColors.kHabitOrange,
+              backgroundColor: AppColors.kHabitOrange,
               child: Icon(Icons.add,
                   color: appStore.isDarkMode
                       ? AppColors.kHabitDark
