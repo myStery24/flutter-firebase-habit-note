@@ -94,7 +94,11 @@ class AppLottie {
   // Lottie animation route (directory)
   static const String imageDir = 'assets';
 
-  static const helpLottie = '$imageDir/79793-guy-talking-to-robot-ai-help.json';
+  static const helpLottie = '$imageDir/guy-talking-to-robot-ai-help.json';
+  static const notesLottie = '$imageDir/notes.json';
+  static const reminderLottie = '$imageDir/marking-a-calendar.json';
+  static const ocrLottie = '$imageDir/document-ocr-scan.json';
+  static const settingsLottie = '$imageDir/profile-lock.json';
 }
 
 class SizeConfig {
