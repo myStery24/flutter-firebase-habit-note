@@ -28,8 +28,7 @@ class AppStrings {
   static const String appVersionText2 = 'Version 0.0.8';
 
   // App copyright
-  static const String appCopyright =
-      '© Copyright HaBIT Note 2022. All rights reserved.';
+  static const String appCopyright = '© Copyright HaBIT Note 2022. All rights reserved.';
 
   // Texts
   static const String createAccount = 'CREATE ACCOUNT';
@@ -41,6 +40,10 @@ class AppStrings {
   static const String ocrScreen = 'Image to Text';
   static const String helpScreen = 'Help';
   static const String meScreen = 'Me';
+  static const String help_note_title = 'Notes';
+  static const String help_ocr_title = 'Image to text (OCR)';
+  static const String help_sub_reminder_title = 'Subscription reminder';
+  static const String help_account_title = 'My account settings';
 
   // Handle form error
   final RegExp emailValidatorRegex = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
@@ -234,6 +237,7 @@ const pwd_changed_successfully = 'Password changed successfully';
 const pwd_reset_successfully = 'Password reset successfully';
 const log_out = 'Log Out';
 const log_out_text = 'Are you sure you want to log out ?';
+
 const reminder_empty_note = 'Create your first reminder !';
 const sub_reminder = 'Subscription Reminder';
 const add_new_subscription = 'My Subscription';
@@ -255,13 +259,12 @@ const shared_by = 'Shared By';
 const reminder = 'Reminder';
 const on_same_day = 'On the same day';
 const next_payment = 'Next payment';
-const subscription_exp =
-    'Subscription expired. Setting a notification is not allowed';
+const subscription_exp = 'Subscription expired. Setting a notification is not allowed';
 const subscription_detail = 'Subscription Detail';
 const delete_sub = 'Delete subscription';
 const confirm_to_delete_sub = 'Confirm to delete subscription ?';
-const share_note_change_not_allow =
-    'This is shared note, changes are not allow';
+const share_note_change_not_allow = 'This is shared note, changes are not allow';
+
 const collaborator = 'Collaborator';
 const collaborators = 'Collaborators';
 
