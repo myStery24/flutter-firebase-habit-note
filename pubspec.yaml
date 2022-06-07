@@ -14,47 +14,50 @@ dependencies:
 
   # COMMON
   bottom_navy_bar: ^6.0.0
-  camera: ^0.9.4+19
   cached_network_image: ^3.2.0
-  clipboard: ^0.1.2+8
-  cupertino_icons: ^1.0.4
+  clipboard: ^0.1.3
+  cupertino_icons: ^1.0.5
   date_picker_timeline: ^1.2.3
-  file_picker: ^4.4.0
-  flutter_markdown: ^0.6.9+1
-  flutter_mobx: ^2.0.4
+  file_picker: ^4.6.1
+  flutter_markdown: ^0.6.10
+  flutter_mobx: ^2.0.6
   flutter_svg: ^1.0.3
-  image_picker: ^0.8.4+4
+  image_picker: ^0.8.5+3
   intl: ^0.17.0
-  material_tag_editor: ^0.1.2
-  mobx: ^2.0.6+1
-  nb_utils: ^4.4.14
-  provider: ^6.0.2
-  shared_preferences: ^2.0.15
-  url_launcher: ^6.0.20
+  mobx: ^2.0.7
+  nb_utils: ^4.5.2
+  url_launcher: ^6.1.2
 
   # FIREBASE PACKAGES
-  cloud_firestore: ^3.1.10
-  firebase_core: ^1.13.1
-  firebase_auth: ^3.3.11
-  firebase_storage: ^10.2.9
+  cloud_firestore: ^3.1.17
+  firebase_core: ^1.17.1
+  firebase_auth: ^3.3.19
+  firebase_storage: ^10.2.17
 
   # AUTHENTICATION
-  google_sign_in: ^5.2.4
-  google_fonts: ^2.3.1
+  google_sign_in: ^5.3.2
+  google_fonts: ^3.0.1
   the_apple_sign_in: ^1.1.1
-  mailer: ^5.1.0
+
+  # SEND EMAIL
+  mailer: ^5.1.1
 
   # PUSH NOTIFICATION
-  flutter_local_notifications: ^9.4.0
+  flutter_local_notifications: ^9.5.3+1
 
   # UI
   confetti: ^0.6.0
   flutter_staggered_grid_view: ^0.6.1
+  lottie: ^1.3.0
+  material_tag_editor: ^0.1.2
   page_transition: ^2.0.5
+  smooth_page_indicator: ^1.0.0+2
 
   # TEXT RECOGNITION
-  google_ml_kit: ^0.7.3
-  change_app_package_name: ^1.0.0
+  # google_ml_kit: ^0.7.3
+  google_mlkit_text_recognition: ^0.3.0
+
+  # change_app_package_name: ^1.0.0
 
 dev_dependencies:
   flutter_test:
@@ -67,8 +70,8 @@ dev_dependencies:
   flutter_lints: ^1.0.0
   flutter_native_splash: ^2.1.6
   flutter_launcher_icons: ^0.9.2
-  build_runner: ^2.1.8
-  mobx_codegen: ^2.0.5+2
+  build_runner: ^2.1.11
+  mobx_codegen: ^2.0.7
   #flutter packages pub run build_runner build --delete-conflicting-outputs
 
 flutter_native_splash:
@@ -91,10 +94,11 @@ flutter:
   uses-material-design: true
 
   assets:
-   - assets/images/
-   - assets/google_fonts/Lato/
-   - assets/google_fonts/Fugaz_One/
-   - assets/terms_of_use.md
-   - assets/privacy_policy.md
-   - assets/about_app.md
-   - assets/delete_account.md
+    - assets/
+    - assets/images/
+    - assets/google_fonts/Lato/
+    - assets/google_fonts/Fugaz_One/
+#    - assets/terms_of_use.md
+#    - assets/privacy_policy.md
+#    - assets/about_app.md
+#    - assets/delete_account.md
