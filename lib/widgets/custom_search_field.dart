@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../configs/colors.dart';
-import '../../../configs/constants.dart';
+import '../configs/colors.dart';
+import '../configs/constants.dart';
 
 class CustomSearchField extends StatefulWidget {
   const CustomSearchField({
