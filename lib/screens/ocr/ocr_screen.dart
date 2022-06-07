@@ -70,13 +70,6 @@ class _OCRScreenState extends State<OCRScreen> {
               style: GoogleFonts.fugazOne(),
             ),
             centerTitle: false,
-            // leading: IconButton(
-            //   icon: Icon(Icons.menu_rounded),
-            //   color: AppColors.kHabitOrange,
-            //   onPressed: () {
-            //     _scaffoldState.currentState!.openDrawer();
-            //   },
-            // ),
             actions: [
               IconButton(
                 icon: Icon(Icons.clear_all,
@@ -112,9 +105,6 @@ class _OCRScreenState extends State<OCRScreen> {
             ),
           ),
           floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-
-          /// Sidebar Drawer
-          // drawer: DashboardDrawerWidget(),
           body: SingleChildScrollView(
             child: Container(
               margin: const EdgeInsets.all(18),
@@ -124,7 +114,8 @@ class _OCRScreenState extends State<OCRScreen> {
                   /// Image placeholder
                   Container(
                     width: size.width,
-                    height: size.height * 0.42,
+                    //height: size.height * 0.42,
+                    height: size.width / 2,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12.0),
                       border: Border.all(
@@ -145,53 +136,8 @@ class _OCRScreenState extends State<OCRScreen> {
                   ),
                   SizedBox(height: 18.0),
 
-                  /// Scanning indicator
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      /// Deco box 1
-                      CustomDecoBox(
-                          margin: const EdgeInsets.all(8.0),
-                          lightModeColor: AppColors.kHabitOrange,
-                          lightModeShadowColor:
-                              AppColors.kPrimaryVariantColorDark,
-                          darkModeColor: AppColors.kHabitDark,
-                          darkModeShadowColor: AppColors.kHabitOrange,
-                          padding: const EdgeInsets.all(10.0),
-                          text: 'Detect image',
-                          textColor: appStore.isDarkMode
-                              ? AppColors.kHabitOrange
-                              : AppColors.kTextWhite),
-                      SizedBox(width: 8.0),
-
-                      /// Loading
-                      if (textScanning)
-                        const CircularProgressIndicator(
-                            color: AppColors.kHabitOrange),
-                      if (!textScanning)
-                        Icon(Icons.arrow_right_alt,
-                            size: 20,
-                            color: appStore.isDarkMode
-                                ? Colors.white60
-                                : Colors.black),
-
-                      /// Deco box 2
-                      SizedBox(width: 8.0),
-                      CustomDecoBox(
-                        margin: const EdgeInsets.all(8.0),
-                        lightModeColor: AppColors.kHabitOrange,
-                        lightModeShadowColor:
-                            AppColors.kPrimaryVariantColorDark,
-                        darkModeColor: AppColors.kHabitDark,
-                        darkModeShadowColor: AppColors.kHabitOrange,
-                        padding: const EdgeInsets.all(10.0),
-                        text: 'Text',
-                        textColor: appStore.isDarkMode
-                            ? AppColors.kHabitOrange
-                            : AppColors.kTextWhite,
-                      ),
-                    ],
-                  ),
+                  /// Scanning
+                  _scanningIndicator(),
                   SizedBox(height: 12.0),
                   if (!textScanning && imageFile == null)
                     Container(height: getProportionateScreenHeight(10.0)),
@@ -204,6 +150,51 @@ class _OCRScreenState extends State<OCRScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  /// Two decoration boxes and a scanning indicator
+  _scanningIndicator() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        /// Deco box 1
+        CustomDecoBox(
+            margin: const EdgeInsets.all(8.0),
+            lightModeColor: AppColors.kHabitOrange,
+            lightModeShadowColor: AppColors.kPrimaryVariantColorDark,
+            darkModeColor: AppColors.kHabitDark,
+            darkModeShadowColor: AppColors.kHabitOrange,
+            padding: const EdgeInsets.all(10.0),
+            text: 'Detect image',
+            textColor: appStore.isDarkMode
+                ? AppColors.kHabitOrange
+                : AppColors.kTextWhite),
+        SizedBox(width: 8.0),
+
+        /// Loading
+        if (textScanning)
+          const CircularProgressIndicator(color: AppColors.kHabitOrange),
+        if (!textScanning)
+          Icon(Icons.arrow_right_alt,
+              size: 20,
+              color: appStore.isDarkMode ? Colors.white60 : Colors.black),
+
+        /// Deco box 2
+        SizedBox(width: 8.0),
+        CustomDecoBox(
+          margin: const EdgeInsets.all(8.0),
+          lightModeColor: AppColors.kHabitOrange,
+          lightModeShadowColor: AppColors.kPrimaryVariantColorDark,
+          darkModeColor: AppColors.kHabitDark,
+          darkModeShadowColor: AppColors.kHabitOrange,
+          padding: const EdgeInsets.all(10.0),
+          text: 'Text',
+          textColor: appStore.isDarkMode
+              ? AppColors.kHabitOrange
+              : AppColors.kTextWhite,
+        ),
+      ],
     );
   }
 
