@@ -23,8 +23,7 @@ class _LabelsListScreenState extends State<LabelsListScreen> {
 
   TextEditingController _labelNameController = TextEditingController();
   TextEditingController _newLabelNameController = new TextEditingController();
-  final CollectionReference _labelsRef = FirebaseFirestore.instance
-      .collection('labels'); // Collection of label in firebase firestore
+  final CollectionReference _labelsRef = FirebaseFirestore.instance.collection('labels'); // Collection of label in firebase firestore
   List _selectedLabels = [];
   bool kIsUpdate = false;
 
