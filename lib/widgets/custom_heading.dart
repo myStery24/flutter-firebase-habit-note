@@ -45,7 +45,6 @@ class CustomHeading extends StatelessWidget {
 }
 
 /// Screen header
-/// Used in Labels and Ocr screen
 class CustomInfoHeader extends StatelessWidget {
   final String? title;
 
