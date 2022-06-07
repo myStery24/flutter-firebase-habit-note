@@ -6,6 +6,7 @@ import '../../configs/colors.dart';
 import '../../configs/constants.dart';
 import '../../main.dart';
 import '../../models/labels_model.dart';
+import '../../widgets/custom_heading.dart';
 import 'components/custom_labels_widget.dart';
 
 class LabelsListScreen extends StatefulWidget {
@@ -18,7 +19,7 @@ class LabelsListScreen extends StatefulWidget {
 }
 
 class _LabelsListScreenState extends State<LabelsListScreen> {
-  final _formKey = GlobalKey<ScaffoldState>();
+  // final _formKey = GlobalKey<ScaffoldState>();
 
   TextEditingController _labelNameController = TextEditingController();
   TextEditingController _newLabelNameController = new TextEditingController();
@@ -118,8 +119,11 @@ class _LabelsListScreenState extends State<LabelsListScreen> {
             children: [
               15.height,
 
-              /// Info
-              labelsInfoBox(),
+              /// Header
+              CustomInfoHeader(
+                title: "Manage all your notes' labels. \nAll in one place.",
+                icon: Icons.label,
+              ),
               Divider(thickness: 2, endIndent: 10, indent: 10),
               15.height,
 
