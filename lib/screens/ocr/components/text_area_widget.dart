@@ -15,11 +15,13 @@ class RecognisedTextAreaWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Row(
       children: [
         Flexible(
           child: Container(
-            height: 245,
+            // height: 245,
+            height: size.width / 2,
             decoration: BoxDecoration(
                 color: Colors.white12,
                 border: Border.all(),
@@ -36,7 +38,8 @@ class RecognisedTextAreaWidget extends StatelessWidget {
                       : AppColors.kTextBlack),
               showCursor: true,
               scrollPhysics: ClampingScrollPhysics(),
-              toolbarOptions: ToolbarOptions(copy: true, selectAll: true, paste: false),
+              toolbarOptions:
+                  ToolbarOptions(copy: true, selectAll: true, paste: false),
             ),
           ),
         ),
