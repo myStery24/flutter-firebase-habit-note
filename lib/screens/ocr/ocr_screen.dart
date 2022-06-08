@@ -13,7 +13,7 @@ import '../../configs/colors.dart';
 import '../../configs/constants.dart';
 import '../../main.dart';
 import 'components/custom_deco_box.dart';
-import 'components/text_area_widget.dart';
+import 'components/custom_text_area_widget.dart';
 
 /// StatefulWidget to track the selected image
 class OCRScreen extends StatefulWidget {
@@ -57,95 +57,84 @@ class _OCRScreenState extends State<OCRScreen> {
     SizeConfig().init(context);
     Size size = MediaQuery.of(context).size;
 
-    return Observer(
-      builder: (_) => SafeArea(
-        child: Scaffold(
-          key: _scaffoldState,
-          backgroundColor: appStore.isDarkMode
-              ? AppColors.kScaffoldColorDark
-              : AppColors.kScaffoldColor,
-          appBar: AppBar(
-            title: Text(
-              AppStrings.ocrScreen,
-              style: GoogleFonts.fugazOne(),
-            ),
-            centerTitle: false,
-            actions: [
-              IconButton(
-                icon: Icon(Icons.clear_all,
-                    semanticLabel: 'clear image and text'),
-                tooltip: 'Clear all',
-                onPressed: () {
-                  /// Clear image and scanned text
-                  clear();
-                },
-              ),
-              IconButton(
-                icon: Icon(Icons.copy, semanticLabel: 'copy text'),
-                tooltip: 'Copy text',
-                onPressed: () {
-                  /// Copy scanned/recognised text to clipboard
-                  copyToClipboard();
-                },
-              ),
-            ],
+    return SafeArea(
+      child: Scaffold(
+        key: _scaffoldState,
+        backgroundColor: appStore.isDarkMode
+            ? AppColors.kScaffoldColorDark
+            : AppColors.kScaffoldColor,
+        appBar: AppBar(
+          title: Text(
+            AppStrings.ocrScreen,
+            style: GoogleFonts.fugazOne(),
           ),
-          floatingActionButton: Observer(
-            builder: (_) => FloatingActionButton(
+          centerTitle: false,
+          actions: [
+            IconButton(
+              icon:
+                  Icon(Icons.clear_all, semanticLabel: 'clear image and text'),
+              tooltip: 'Clear all',
+              onPressed: () {
+                /// Clear image and scanned text
+                clear();
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.copy, semanticLabel: 'copy text'),
+              tooltip: 'Copy text',
+              onPressed: () {
+                /// Copy scanned/recognised text to clipboard
+                copyToClipboard();
+              },
+            ),
+          ],
+        ),
+        floatingActionButton: Observer(
+          builder: (_) => FloatingActionButton(
               onPressed: () {
                 cameraOrGallery();
               },
-              child: Icon(
-                Icons.add_photo_alternate,
-                color: getBoolAsync(IS_DARK_MODE)
-                    ? AppColors.kHabitDark
-                    : Colors.white,
-              ),
-              backgroundColor: AppColors.kHabitOrange,
-            ),
-          ),
-          floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-          body: SingleChildScrollView(
-            child: Container(
-              margin: const EdgeInsets.all(18),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  /// Image placeholder
-                  Container(
-                    width: size.width,
-                    //height: size.height * 0.42,
-                    height: size.width / 2,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12.0),
-                      border: Border.all(
-                        color: Colors.black,
-                        width: 1,
-                      ),
-                      color:
-                          appStore.isDarkMode ? Colors.white12 : Colors.white,
-                    ),
-
-                    /// If the image state is not null,
-                    child: imageFile != null
-                        ? Image.file(File(imageFile!.path)) // show the image
-                        : Icon(Icons.photo,
-                            size: 80,
-                            color: Colors
-                                .black), // else display a photo icon placeholder
+              child: Icon(Icons.add_photo_alternate,
+                  color: getBoolAsync(IS_DARK_MODE)
+                      ? AppColors.kHabitDark
+                      : Colors.white),
+              backgroundColor: AppColors.kHabitOrange),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+        body: SingleChildScrollView(
+          child: Container(
+            margin: const EdgeInsets.all(18),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                /// Image placeholder
+                Container(
+                  width: size.width,
+                  height: size.width * 1,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12.0),
+                    border: Border.all(color: Colors.black, width: 1),
+                    color: appStore.isDarkMode ? Colors.white12 : Colors.white,
                   ),
-                  SizedBox(height: 18.0),
 
-                  /// Scanning
-                  _scanningIndicator(),
-                  SizedBox(height: 12.0),
-                  if (!textScanning && imageFile == null)
-                    Container(height: getProportionateScreenHeight(10.0)),
+                  /// If the image state is not null,
+                  child: imageFile != null
+                      // show the image
+                      ? Image.file(File(imageFile!.path))
+                      // else display a photo icon placeholder
+                      : Icon(Icons.photo, size: 80, color: Colors.black),
+                ),
+                SizedBox(height: 18.0),
 
-                  /// Display recognised text
-                  RecognisedTextAreaWidget(text: scannedText),
-                ],
-              ),
+                /// Scanning
+                _scanningIndicator(),
+                SizedBox(height: 12.0),
+                if (!textScanning && imageFile == null)
+                  Container(height: getProportionateScreenHeight(10.0)),
+
+                /// Display recognised text
+                RecognisedTextAreaWidget(text: scannedText),
+              ],
             ),
           ),
         ),
