@@ -34,7 +34,7 @@ class AppStrings {
   static const String createAccount = 'CREATE ACCOUNT';
   static const String login = 'LOG IN';
   static const String logout = 'LOG OUT';
-  static const String back = 'Back to Dashboard';
+  static const String back = 'BACK TO DASHBOARD';
   static const String exit = 'Exit';
   static const String optionNo = 'No';
   static const String ocrScreen = 'Image to Text';
