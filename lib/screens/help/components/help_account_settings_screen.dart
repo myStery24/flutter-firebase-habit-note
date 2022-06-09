@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../configs/colors.dart';
@@ -8,16 +7,20 @@ import '../../../main.dart';
 import 'custom_page_view_model.dart';
 
 class HelpAccountSettingsScreen extends StatefulWidget {
+  static String tag = '/HelpAccountSettingsScreen';
+
   const HelpAccountSettingsScreen({Key? key}) : super(key: key);
 
   @override
-  State<HelpAccountSettingsScreen> createState() => _HelpAccountSettingsScreenState();
+  State<HelpAccountSettingsScreen> createState() =>
+      _HelpAccountSettingsScreenState();
 }
 
 class _HelpAccountSettingsScreenState extends State<HelpAccountSettingsScreen> {
   PageController _pageController =
-  PageController(); // Keep track of which page you're on
+      PageController(); // Keep track of which page you're on
   final int pages = 3;
+  final int lastPage = 3;
   bool onLastPage = false; // Keep track of the last page
 
   @override
@@ -32,12 +35,6 @@ class _HelpAccountSettingsScreenState extends State<HelpAccountSettingsScreen> {
       backgroundColor: appStore.isDarkMode
           ? AppColors.kScaffoldColorDark
           : AppColors.kScaffoldColor,
-      appBar: AppBar(
-        title: Text(
-          AppStrings.help_account_title,
-          style: GoogleFonts.fugazOne(),
-        ),
-      ),
       // PageView allows you to swipe horizontally between pages
       body: Stack(
         children: <Widget>[
@@ -52,23 +49,20 @@ class _HelpAccountSettingsScreenState extends State<HelpAccountSettingsScreen> {
             },
             children: [
               CustomPageView(
-                title: 'How to create note?',
-                image: AppImages.onboard,
-                fontWeight: TextFontWeight.bold,
-                subtitle: 'Your description here if any',
-              ),
+                  title: 'Settings',
+                  image: AppHelp.helpAcc,
+                  fontWeight: TextFontWeight.bold,
+                  subtitle: ''),
               CustomPageView(
-                title: 'How to delete note?',
-                image: AppImages.onboard,
-                fontWeight: TextFontWeight.bold,
-                subtitle: 'Your description here if any',
-              ),
+                  title: 'How to Change Master Password?',
+                  image: AppHelp.helpAcc1,
+                  fontWeight: TextFontWeight.bold,
+                  subtitle: ''),
               CustomPageView(
-                title: 'How to lock & unlock note?',
-                image: AppImages.onboard,
-                fontWeight: TextFontWeight.bold,
-                subtitle: 'Your description here if any',
-              ),
+                  title: 'How to Change Account Password?',
+                  image: AppHelp.helpAcc2,
+                  fontWeight: TextFontWeight.bold,
+                  subtitle: ''),
             ],
           ),
           Container(
@@ -79,10 +73,9 @@ class _HelpAccountSettingsScreenState extends State<HelpAccountSettingsScreen> {
                 children: [
                   /// Skip
                   InkWell(
-                    child: Text('SKIP'),
-                    onTap: () =>
-                        _pageController.jumpToPage(3), // jump to the last page
-                  ),
+                      child: Text('SKIP'),
+                      // jump to the last page
+                      onTap: () => _pageController.jumpToPage(lastPage)),
 
                   /// Dot indicator
                   SmoothPageIndicator(
@@ -102,20 +95,20 @@ class _HelpAccountSettingsScreenState extends State<HelpAccountSettingsScreen> {
 
                   /// Next or done
                   onLastPage
-                  // true
+                      // true
                       ? InkWell(
-                      child: Text(
-                        'DONE',
-                        style: TextStyle(
-                            color: AppColors.kHabitOrange, fontSize: 18),
-                      ),
-                      onTap: () => Navigator.pop(context))
-                  // false
+                          child: Text(
+                            'DONE',
+                            style: TextStyle(
+                                color: AppColors.kHabitOrange, fontSize: 18),
+                          ),
+                          onTap: () => Navigator.pop(context))
+                      // false
                       : InkWell(
-                      child: Text('NEXT'),
-                      onTap: () => _pageController.nextPage(
-                          duration: const Duration(microseconds: 500),
-                          curve: Curves.easeInOut)),
+                          child: Text('NEXT'),
+                          onTap: () => _pageController.nextPage(
+                              duration: const Duration(microseconds: 500),
+                              curve: Curves.easeInOut)),
                 ]),
           ),
         ],
