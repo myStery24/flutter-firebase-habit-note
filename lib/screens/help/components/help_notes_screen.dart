@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../configs/colors.dart';
@@ -17,7 +16,8 @@ class HelpNotesScreen extends StatefulWidget {
 class _HelpNotesScreenState extends State<HelpNotesScreen> {
   PageController _pageController =
       PageController(); // Keep track of which page you're on
-  final int pages = 3;
+  final int pages = 7;
+  final int lastPage = 7;
   bool onLastPage = false; // Keep track of the last page
 
   @override
@@ -32,45 +32,59 @@ class _HelpNotesScreenState extends State<HelpNotesScreen> {
       backgroundColor: appStore.isDarkMode
           ? AppColors.kScaffoldColorDark
           : AppColors.kScaffoldColor,
-      appBar: AppBar(
-        title: Text(
-          AppStrings.help_note_title,
-          style: GoogleFonts.fugazOne(),
-        ),
-      ),
       // PageView allows you to swipe horizontally between pages
       body: Stack(
         children: <Widget>[
+          SizedBox(height: spacer),
           PageView(
             controller: _pageController,
             onPageChanged: (index) {
               setState(() {
-                // Check if on last page, if index is 2, then true
+                // Check if on last page, if index is 6, then true
                 // index starts with 0 for first page
-                onLastPage = (index == 2);
+                onLastPage = (index == pages - 1);
               });
             },
             children: [
               CustomPageView(
-                title: 'How to create note?',
-                image: AppImages.onboard,
-                fontWeight: TextFontWeight.bold,
-                subtitle: 'Your description here if any',
-              ),
+                  title: 'Get Started with HaBIT Note',
+                  image: AppHelp.helpNotes,
+                  fontWeight: TextFontWeight.bold,
+                  subtitle: ''),
               CustomPageView(
-                title: 'How to delete note?',
-                image: AppImages.onboard,
-                fontWeight: TextFontWeight.bold,
-                subtitle: 'Your description here if any',
-              ),
+                  title: "Notes",
+                  image: AppHelp.helpNotes1,
+                  fontWeight: TextFontWeight.bold,
+                  subtitle: ''),
               CustomPageView(
-                title: 'How to lock & unlock note?',
-                image: AppImages.onboard,
-                fontWeight: TextFontWeight.bold,
-                subtitle: 'Your description here if any',
-              ),
+                  title: 'Note: Create and/or Edit',
+                  image: AppHelp.helpNotes2,
+                  fontWeight: TextFontWeight.bold,
+                  subtitle: ''),
+              CustomPageView(
+                  title: 'To-do: Create and/or Edit',
+                  image: AppHelp.helpNotes3,
+                  fontWeight: TextFontWeight.bold,
+                  subtitle: ''),
+              CustomPageView(
+                  title: 'Note & To-do Editor: Options',
+                  image: AppHelp.helpNotes4,
+                  fontWeight: TextFontWeight.bold,
+                  subtitle: '1. Delete \t\t 2. Colour picker'),
+              CustomPageView(
+                  title: 'Lock & Delete',
+                  image: AppHelp.helpNotes5,
+                  fontWeight: TextFontWeight.bold,
+                  subtitle: ''),
+              CustomPageView(
+                  title: 'Create & Manage Labels',
+                  image: AppHelp.helpNotes6,
+                  fontWeight: TextFontWeight.bold,
+                  subtitle: 'Upcoming Feature'),
             ],
           ),
+
+          /// Skip, Indicator, Next/Done
           Container(
             alignment: Alignment.bottomCenter,
             padding: const EdgeInsets.only(bottom: 25.0),
@@ -79,21 +93,21 @@ class _HelpNotesScreenState extends State<HelpNotesScreen> {
                 children: [
                   /// Skip
                   InkWell(
-                    child: Text('SKIP'),
-                    onTap: () =>
-                        _pageController.jumpToPage(3), // jump to the last page
-                  ),
+                      child: Text('SKIP'),
+                      onTap: () =>
+                          // jump to the last page
+                          _pageController.jumpToPage(7)),
 
                   /// Dot indicator
                   SmoothPageIndicator(
                       controller: _pageController, // PageController
                       count: pages,
                       effect: ScrollingDotsEffect(
-                        fixedCenter: true,
-                        spacing: 16,
-                        dotColor: AppColors.kHintTextLightGrey,
-                        activeDotColor: AppColors.kHabitOrange,
-                      ), // your preferred effect
+                          fixedCenter: true,
+                          spacing: 16,
+                          dotColor: AppColors.kHintTextLightGrey,
+                          activeDotColor:
+                              AppColors.kHabitOrange), // your preferred effect
                       onDotClicked: (index) {
                         _pageController.animateToPage(index,
                             duration: const Duration(microseconds: 500),
