@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../configs/colors.dart';
@@ -11,13 +10,16 @@ class HelpSubscriptionReminderScreen extends StatefulWidget {
   const HelpSubscriptionReminderScreen({Key? key}) : super(key: key);
 
   @override
-  State<HelpSubscriptionReminderScreen> createState() => _HelpSubscriptionReminderScreenState();
+  State<HelpSubscriptionReminderScreen> createState() =>
+      _HelpSubscriptionReminderScreenState();
 }
 
-class _HelpSubscriptionReminderScreenState extends State<HelpSubscriptionReminderScreen> {
+class _HelpSubscriptionReminderScreenState
+    extends State<HelpSubscriptionReminderScreen> {
   PageController _pageController =
-  PageController(); // Keep track of which page you're on
-  final int pages = 3;
+      PageController(); // Keep track of which page you're on
+  final int pages = 5;
+  final int lastPage = 5;
   bool onLastPage = false; // Keep track of the last page
 
   @override
@@ -32,45 +34,47 @@ class _HelpSubscriptionReminderScreenState extends State<HelpSubscriptionReminde
       backgroundColor: appStore.isDarkMode
           ? AppColors.kScaffoldColorDark
           : AppColors.kScaffoldColor,
-      appBar: AppBar(
-        title: Text(
-          AppStrings.help_sub_reminder_title,
-          style: GoogleFonts.fugazOne(),
-        ),
-      ),
       // PageView allows you to swipe horizontally between pages
       body: Stack(
         children: <Widget>[
+          SizedBox(height: spacer),
           PageView(
-            controller: _pageController,
-            onPageChanged: (index) {
-              setState(() {
-                // Check if on last page, if index is 2, then true
-                // index starts with 0 for first page
-                onLastPage = (index == 2);
-              });
-            },
-            children: [
-              CustomPageView(
-                title: 'How to create note?',
-                image: AppImages.onboard,
-                fontWeight: TextFontWeight.bold,
-                subtitle: 'Your description here if any',
-              ),
-              CustomPageView(
-                title: 'How to delete note?',
-                image: AppImages.onboard,
-                fontWeight: TextFontWeight.bold,
-                subtitle: 'Your description here if any',
-              ),
-              CustomPageView(
-                title: 'How to lock & unlock note?',
-                image: AppImages.onboard,
-                fontWeight: TextFontWeight.bold,
-                subtitle: 'Your description here if any',
-              ),
-            ],
-          ),
+              controller: _pageController,
+              onPageChanged: (index) {
+                setState(() {
+                  // Check if on last page, if index is 2, then true
+                  // index starts with 0 for first page
+                  onLastPage = (index == pages - 1);
+                });
+              },
+              children: [
+                CustomPageView(
+                    title: 'Get Started with\nSubscription Reminder',
+                    image: AppHelp.helpRmd,
+                    fontWeight: TextFontWeight.bold,
+                    subtitle: ''),
+                CustomPageView(
+                    title: 'Set a Recurring Subscription',
+                    image: AppHelp.helpRmd1,
+                    fontWeight: TextFontWeight.bold,
+                    subtitle: ''),
+                CustomPageView(
+                    title: 'Set a One-time Subscription',
+                    image: AppHelp.helpRmd2,
+                    fontWeight: TextFontWeight.bold,
+                    subtitle: ''),
+                CustomPageView(
+                    title:
+                        'Set a Reminder for Any Subscription (Recurring/One-time)',
+                    image: AppHelp.helpRmd3,
+                    fontWeight: TextFontWeight.bold,
+                    subtitle: ''),
+                CustomPageView(
+                    title: 'Local Push Notification',
+                    image: AppHelp.helpRmd4,
+                    fontWeight: TextFontWeight.bold,
+                    subtitle: ''),
+              ]),
           Container(
             alignment: Alignment.bottomCenter,
             padding: const EdgeInsets.only(bottom: 25.0),
@@ -79,10 +83,9 @@ class _HelpSubscriptionReminderScreenState extends State<HelpSubscriptionReminde
                 children: [
                   /// Skip
                   InkWell(
-                    child: Text('SKIP'),
-                    onTap: () =>
-                        _pageController.jumpToPage(3), // jump to the last page
-                  ),
+                      child: Text('SKIP'),
+                      // jump to the last page
+                      onTap: () => _pageController.jumpToPage(lastPage)),
 
                   /// Dot indicator
                   SmoothPageIndicator(
@@ -102,20 +105,20 @@ class _HelpSubscriptionReminderScreenState extends State<HelpSubscriptionReminde
 
                   /// Next or done
                   onLastPage
-                  // true
+                      // true
                       ? InkWell(
-                      child: Text(
-                        'DONE',
-                        style: TextStyle(
-                            color: AppColors.kHabitOrange, fontSize: 18),
-                      ),
-                      onTap: () => Navigator.pop(context))
-                  // false
+                          child: Text(
+                            'DONE',
+                            style: TextStyle(
+                                color: AppColors.kHabitOrange, fontSize: 18),
+                          ),
+                          onTap: () => Navigator.pop(context))
+                      // false
                       : InkWell(
-                      child: Text('NEXT'),
-                      onTap: () => _pageController.nextPage(
-                          duration: const Duration(microseconds: 500),
-                          curve: Curves.easeInOut)),
+                          child: Text('NEXT'),
+                          onTap: () => _pageController.nextPage(
+                              duration: const Duration(microseconds: 500),
+                              curve: Curves.easeInOut)),
                 ]),
           ),
         ],
