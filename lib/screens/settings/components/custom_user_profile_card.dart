@@ -177,8 +177,8 @@ class _CustomUserProfileCardState extends State<CustomUserProfileCard> {
   /// Upload to Firebase
   Future<String?> uploadImage() async {
     final path =
-        'profileImages/user/${getStringAsync(USER_ID)}/${imageFile!.name}'; // path of user profile picture
-    // 'profileImages/user/${getStringAsync(USER_ID)}'; // uploaded image name will be the user id
+        'profileImages/user/${getStringAsync(USER_ID)}'; // uploaded image name will be the user id
+    // 'profileImages/user/${getStringAsync(USER_ID)}/${imageFile!.name}'; // path of user profile picture
     Reference storageRef =
         FirebaseStorage.instance.ref().child(path); // storage reference
     final userImage = File(imageFile!.path);
