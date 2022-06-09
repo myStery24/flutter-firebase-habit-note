@@ -12,7 +12,7 @@ import '../../main.dart';
 import 'components/add_task_screen.dart';
 
 // TODO
-/// List all the subscriptions
+/// List all the Task
 class TaskReminderScreen extends StatefulWidget {
   @override
   TaskReminderScreenState createState() => TaskReminderScreenState();
