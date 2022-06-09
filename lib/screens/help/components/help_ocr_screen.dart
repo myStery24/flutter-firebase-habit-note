@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../configs/colors.dart';
@@ -16,8 +15,9 @@ class HelpOCRScreen extends StatefulWidget {
 
 class _HelpOCRScreenState extends State<HelpOCRScreen> {
   PageController _pageController =
-  PageController(); // Keep track of which page you're on
-  final int pages = 3;
+      PageController(); // Keep track of which page you're on
+  final int pages = 5;
+  final int lastPage = 5;
   bool onLastPage = false; // Keep track of the last page
 
   @override
@@ -32,91 +32,93 @@ class _HelpOCRScreenState extends State<HelpOCRScreen> {
       backgroundColor: appStore.isDarkMode
           ? AppColors.kScaffoldColorDark
           : AppColors.kScaffoldColor,
-      appBar: AppBar(
-        title: Text(
-          AppStrings.help_ocr_title,
-          style: GoogleFonts.fugazOne(),
-        ),
-      ),
       // PageView allows you to swipe horizontally between pages
       body: Stack(
         children: <Widget>[
+          SizedBox(height: spacer),
           PageView(
             controller: _pageController,
             onPageChanged: (index) {
               setState(() {
-                // Check if on last page, if index is 2, then true
+                // Check if on last page, if index is 6, then true
                 // index starts with 0 for first page
-                onLastPage = (index == 2);
+                onLastPage = (index == pages - 1);
               });
             },
             children: [
               CustomPageView(
-                title: 'How to create note?',
-                image: AppImages.onboard,
-                fontWeight: TextFontWeight.bold,
-                subtitle: 'Your description here if any',
-              ),
+                  title: 'Get Started with Optical Text Recognition (OCR)',
+                  image: AppHelp.helpOCR,
+                  fontWeight: TextFontWeight.bold,
+                  subtitle: ''),
               CustomPageView(
-                title: 'How to delete note?',
-                image: AppImages.onboard,
-                fontWeight: TextFontWeight.bold,
-                subtitle: 'Your description here if any',
-              ),
+                  title: "Example 1",
+                  image: AppHelp.helpOCR1,
+                  fontWeight: TextFontWeight.bold,
+                  subtitle: 'English'),
               CustomPageView(
-                title: 'How to lock & unlock note?',
-                image: AppImages.onboard,
-                fontWeight: TextFontWeight.bold,
-                subtitle: 'Your description here if any',
-              ),
+                  title: 'Example 2',
+                  image: AppHelp.helpOCR2,
+                  fontWeight: TextFontWeight.bold,
+                  subtitle: 'Chinese'),
+              CustomPageView(
+                  title: 'Example 3',
+                  image: AppHelp.helpOCR3,
+                  fontWeight: TextFontWeight.bold,
+                  subtitle: 'Japanese'),
+              CustomPageView(
+                  title: 'Example 4',
+                  image: AppHelp.helpOCR4,
+                  fontWeight: TextFontWeight.bold,
+                  subtitle: 'English, Chinese, Japanese'),
             ],
           ),
+
+          /// Skip, Indicator, Next/Done
           Container(
             alignment: Alignment.bottomCenter,
             padding: const EdgeInsets.only(bottom: 25.0),
             child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  /// Skip
-                  InkWell(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                /// Skip
+                InkWell(
                     child: Text('SKIP'),
-                    onTap: () =>
-                        _pageController.jumpToPage(3), // jump to the last page
-                  ),
+                    // jump to the last page
+                    onTap: () => _pageController.jumpToPage(lastPage)),
 
-                  /// Dot indicator
-                  SmoothPageIndicator(
-                      controller: _pageController, // PageController
-                      count: pages,
-                      effect: ScrollingDotsEffect(
-                        fixedCenter: true,
-                        spacing: 16,
-                        dotColor: AppColors.kHintTextLightGrey,
-                        activeDotColor: AppColors.kHabitOrange,
-                      ), // your preferred effect
-                      onDotClicked: (index) {
-                        _pageController.animateToPage(index,
-                            duration: const Duration(microseconds: 500),
-                            curve: Curves.easeIn);
-                      }),
-
-                  /// Next or done
-                  onLastPage
-                  // true
-                      ? InkWell(
-                      child: Text(
-                        'DONE',
-                        style: TextStyle(
-                            color: AppColors.kHabitOrange, fontSize: 18),
-                      ),
-                      onTap: () => Navigator.pop(context))
-                  // false
-                      : InkWell(
-                      child: Text('NEXT'),
-                      onTap: () => _pageController.nextPage(
+                /// Dot indicator
+                SmoothPageIndicator(
+                    controller: _pageController, // PageController
+                    count: pages,
+                    effect: ScrollingDotsEffect(
+                      fixedCenter: true,
+                      spacing: 16,
+                      dotColor: AppColors.kHintTextLightGrey,
+                      activeDotColor: AppColors.kHabitOrange,
+                    ), // your preferred effect
+                    onDotClicked: (index) {
+                      _pageController.animateToPage(index,
                           duration: const Duration(microseconds: 500),
-                          curve: Curves.easeInOut)),
-                ]),
+                          curve: Curves.easeIn);
+                    }),
+
+                /// Next or done
+                onLastPage
+                    // true
+                    ? InkWell(
+                        child: Text('DONE',
+                            style: TextStyle(
+                                color: AppColors.kHabitOrange, fontSize: 18)),
+                        onTap: () => Navigator.pop(context))
+                    // false
+                    : InkWell(
+                        child: Text('NEXT'),
+                        onTap: () => _pageController.nextPage(
+                            duration: const Duration(microseconds: 500),
+                            curve: Curves.easeInOut)),
+              ],
+            ),
           ),
         ],
       ),

@@ -89,48 +89,47 @@ class _HelpNotesScreenState extends State<HelpNotesScreen> {
             alignment: Alignment.bottomCenter,
             padding: const EdgeInsets.only(bottom: 25.0),
             child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  /// Skip
-                  InkWell(
-                      child: Text('SKIP'),
-                      onTap: () =>
-                          // jump to the last page
-                          _pageController.jumpToPage(lastPage)),
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                /// Skip
+                InkWell(
+                    child: Text('SKIP'),
+                    onTap: () =>
+                        // jump to the last page
+                        _pageController.jumpToPage(lastPage)),
 
-                  /// Dot indicator
-                  SmoothPageIndicator(
-                      controller: _pageController, // PageController
-                      count: pages,
-                      effect: ScrollingDotsEffect(
-                          fixedCenter: true,
-                          spacing: 16,
-                          dotColor: AppColors.kHintTextLightGrey,
-                          activeDotColor:
-                              AppColors.kHabitOrange), // your preferred effect
-                      onDotClicked: (index) {
-                        _pageController.animateToPage(index,
-                            duration: const Duration(microseconds: 500),
-                            curve: Curves.easeIn);
-                      }),
+                /// Dot indicator
+                SmoothPageIndicator(
+                    controller: _pageController, // PageController
+                    count: pages,
+                    effect: ScrollingDotsEffect(
+                        fixedCenter: true,
+                        spacing: 16,
+                        dotColor: AppColors.kHintTextLightGrey,
+                        activeDotColor:
+                            AppColors.kHabitOrange), // your preferred effect
+                    onDotClicked: (index) {
+                      _pageController.animateToPage(index,
+                          duration: const Duration(microseconds: 500),
+                          curve: Curves.easeIn);
+                    }),
 
-                  /// Next or done
-                  onLastPage
-                      // true
-                      ? InkWell(
-                          child: Text(
-                            'DONE',
+                /// Next or done
+                onLastPage
+                    // true
+                    ? InkWell(
+                        child: Text('DONE',
                             style: TextStyle(
-                                color: AppColors.kHabitOrange, fontSize: 18),
-                          ),
-                          onTap: () => Navigator.pop(context))
-                      // false
-                      : InkWell(
-                          child: Text('NEXT'),
-                          onTap: () => _pageController.nextPage(
-                              duration: const Duration(microseconds: 500),
-                              curve: Curves.easeInOut)),
-                ]),
+                                color: AppColors.kHabitOrange, fontSize: 18)),
+                        onTap: () => Navigator.pop(context))
+                    // false
+                    : InkWell(
+                        child: Text('NEXT'),
+                        onTap: () => _pageController.nextPage(
+                            duration: const Duration(microseconds: 500),
+                            curve: Curves.easeInOut)),
+              ],
+            ),
           ),
         ],
       ),
