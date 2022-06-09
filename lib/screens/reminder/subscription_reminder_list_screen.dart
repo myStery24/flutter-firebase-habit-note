@@ -13,6 +13,8 @@ import 'components/subscription_detail_screen.dart';
 
 /// List all the subscriptions
 class SubscriptionReminderListScreen extends StatefulWidget {
+  static String tag = '/SubscriptionReminderListScreen';
+
   @override
   SubscriptionReminderListScreenState createState() =>
       SubscriptionReminderListScreenState();
