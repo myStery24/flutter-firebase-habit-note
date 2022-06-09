@@ -40,7 +40,7 @@ class _HelpOCRScreenState extends State<HelpOCRScreen> {
             controller: _pageController,
             onPageChanged: (index) {
               setState(() {
-                // Check if on last page, if index is 6, then true
+                // Check if on last page, if index is 5, then true
                 // index starts with 0 for first page
                 onLastPage = (index == pages - 1);
               });
