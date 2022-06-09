@@ -92,18 +92,17 @@ class ChangeAppPasswordScreenState extends State<ChangeAppPasswordScreen> {
                         }),
                     16.height,
                     AppTextField(
-                      controller: newPwdController,
-                      focus: newPwdNode,
-                      nextFocus: confirmPwdNode,
-                      textFieldType: TextFieldType.PASSWORD,
-                      keyboardType: TextInputType.text,
-                      isPassword: true,
-                      cursorColor: appStore.isDarkMode
-                          ? AppColors.kHabitOrange
-                          : AppColors.kHabitDark,
-                      decoration: appTextFieldInputDeco(hint: new_pwd),
-                      errorThisFieldRequired: errorThisFieldRequired,
-                    ),
+                        controller: newPwdController,
+                        focus: newPwdNode,
+                        nextFocus: confirmPwdNode,
+                        textFieldType: TextFieldType.PASSWORD,
+                        keyboardType: TextInputType.text,
+                        isPassword: true,
+                        cursorColor: appStore.isDarkMode
+                            ? AppColors.kHabitOrange
+                            : AppColors.kHabitDark,
+                        decoration: appTextFieldInputDeco(hint: new_pwd),
+                        errorThisFieldRequired: errorThisFieldRequired),
 
                     /// Your password must have at least 6 characters
                     _pwdInfoBox(),
@@ -146,9 +145,7 @@ class ChangeAppPasswordScreenState extends State<ChangeAppPasswordScreen> {
                       },
                     ),
                     16.height,
-                    Divider(
-                      thickness: 2,
-                    ),
+                    Divider(thickness: 2),
 
                     /// Note
                     _noteInfoBox(),
@@ -194,20 +191,17 @@ class ChangeAppPasswordScreenState extends State<ChangeAppPasswordScreen> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         IconButton(
-            icon: Icon(
-              Icons.info_outline,
-              color: getBoolAsync(IS_DARK_MODE)
-                  ? AppColors.kHabitOrange
-                  : AppColors.kHabitDark,
-            ),
+            icon: Icon(Icons.info_outline,
+                color: getBoolAsync(IS_DARK_MODE)
+                    ? AppColors.kHabitOrange
+                    : AppColors.kHabitDark),
             onPressed: null),
         Text(
           'Your password must have at least 6 characters.',
           style: TextStyle(
-            color: getBoolAsync(IS_DARK_MODE)
-                ? AppColors.kTextWhite
-                : AppColors.kTextBlack,
-          ),
+              color: getBoolAsync(IS_DARK_MODE)
+                  ? AppColors.kTextWhite
+                  : AppColors.kTextBlack),
         ),
       ],
     );
@@ -231,9 +225,7 @@ class ChangeAppPasswordScreenState extends State<ChangeAppPasswordScreen> {
                         Text(
                           'Note: ',
                           textAlign: TextAlign.left,
-                          style: GoogleFonts.lato(
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: GoogleFonts.lato(fontWeight: FontWeight.bold),
                         ),
                         Text(
                             'This section does not apply to accounts created through Google services/third-party login.'),
