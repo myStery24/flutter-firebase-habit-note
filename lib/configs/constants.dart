@@ -24,8 +24,8 @@ class AppStrings {
   static const String appName = 'HaBIT Note';
 
   // App version
-  static const String appVersionText = 'V0.0.8';
-  static const String appVersionText2 = 'Version 0.0.8';
+  static const String appVersionText = 'V0.1.0-beta';
+  static const String appVersionText2 = 'Version 0.1.0-beta';
 
   // App copyright
   static const String appCopyright = '© Copyright HaBIT Note 2022. All rights reserved.';
@@ -102,6 +102,35 @@ class AppLottie {
   static const reminderLottie = '$imageDir/marking-a-calendar.json';
   static const ocrLottie = '$imageDir/document-ocr-scan.json';
   static const settingsLottie = '$imageDir/profile-lock.json';
+}
+
+class AppHelp {
+  // Images route (directory)
+  static const String imageDir = 'assets/help';
+
+  static const helpNotes = '$imageDir/empty_dashboard.png';
+  static const helpNotes1 = '$imageDir/notes.png';
+  static const helpNotes2 = '$imageDir/note_editor.png';
+  static const helpNotes3 = '$imageDir/todo_editor.png';
+  static const helpNotes4 = '$imageDir/options_editor.png';
+  static const helpNotes5 = '$imageDir/options_notes.png';
+  static const helpNotes6 = '$imageDir/labels.png';
+
+  static const helpOCR = '$imageDir/ocr.png';
+  static const helpOCR1 = '$imageDir/ex1.png';
+  static const helpOCR2 = '$imageDir/ex2.png';
+  static const helpOCR3 = '$imageDir/ex3.png';
+  static const helpOCR4 = '$imageDir/ex4.png';
+
+  static const helpRmd = '$imageDir/sub_reminder_list.png';
+  static const helpRmd1 = '$imageDir/reminder_recurring.png';
+  static const helpRmd2 = '$imageDir/reminder_one_time.png';
+  static const helpRmd3 = '$imageDir/reminder_setup.png';
+  static const helpRmd4 = '$imageDir/reminder_example.png';
+
+  static const helpAcc = '$imageDir/settings.png';
+  static const helpAcc1 = '$imageDir/change_master_pwd.png';
+  static const helpAcc2 = '$imageDir/change_acc_pwd.png';
 }
 
 class SizeConfig {
