@@ -96,7 +96,7 @@ class _HelpNotesScreenState extends State<HelpNotesScreen> {
                       child: Text('SKIP'),
                       onTap: () =>
                           // jump to the last page
-                          _pageController.jumpToPage(7)),
+                          _pageController.jumpToPage(lastPage)),
 
                   /// Dot indicator
                   SmoothPageIndicator(
