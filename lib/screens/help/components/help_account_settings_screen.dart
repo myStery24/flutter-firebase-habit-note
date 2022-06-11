@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:habit_note/widgets/custom_button.dart';
+import 'package:habit_note/widgets/custom_buttons.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../configs/colors.dart';
