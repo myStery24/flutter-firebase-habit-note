@@ -159,10 +159,9 @@ class _CustomUserProfileCardState extends State<CustomUserProfileCard> {
 
   /// Get image
   Future<void> getImage(ImageSource source) async {
+    /// Launch the device's camera or native gallery and get an image source
+    final pickedImage = await ImagePicker().pickImage(source: source);
     try {
-      /// Launch the device's camera or native gallery and get an image source
-      final pickedImage = await ImagePicker().pickImage(source: source);
-
       // If there is an image
       if (pickedImage != null) {
         imageFile = pickedImage; // set the image path to the imageFile object
@@ -177,7 +176,7 @@ class _CustomUserProfileCardState extends State<CustomUserProfileCard> {
   /// Upload to Firebase
   Future<String?> uploadImage() async {
     final path =
-        'profileImages/user/${getStringAsync(USER_ID)}'; // uploaded image name will be the user id
+        'profileImages/${getStringAsync(USER_ID)}'; // uploaded image name will be the user id
     // 'profileImages/user/${getStringAsync(USER_ID)}/${imageFile!.name}'; // path of user profile picture
     Reference storageRef =
         FirebaseStorage.instance.ref().child(path); // storage reference
