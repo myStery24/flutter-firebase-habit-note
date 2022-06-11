@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../configs/colors.dart';
 import '../configs/constants.dart';
+import '../main.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({
@@ -102,5 +103,99 @@ class CustomButton2 extends StatelessWidget {
             fontSize: fontSize, fontWeight: fontWeight, color: textColor),
       ),
     );
+  }
+}
+
+class CustomSkipButton extends StatelessWidget {
+  const CustomSkipButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        padding: const EdgeInsets.all(8.0),
+        decoration: BoxDecoration(
+            color: AppColors.kTextWhite,
+            borderRadius: BorderRadius.circular(30.0),
+            boxShadow: [
+              /// Top shadow
+              BoxShadow(
+                  blurRadius: 3,
+                  offset: const Offset(-5, -5),
+                  color: appStore.isDarkMode
+                      ? AppColors.kHabitOrange.withOpacity(0.1)
+                      : AppColors.kHabitDark.withOpacity(0.1)),
+
+              /// Bottom shadow
+              BoxShadow(
+                  blurRadius: 3,
+                  offset: const Offset(5, 5),
+                  color: appStore.isDarkMode
+                      ? AppColors.kHabitOrange.withOpacity(0.1)
+                      : AppColors.kHabitDark.withOpacity(0.1)),
+            ]),
+        child: Text('SKIP', style: TextStyle(color: AppColors.kTextBlack)));
+  }
+}
+
+class CustomNextButton extends StatelessWidget {
+  const CustomNextButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        padding: const EdgeInsets.all(8.0),
+        decoration: BoxDecoration(
+            color: AppColors.kTextWhite,
+            borderRadius: BorderRadius.circular(30.0),
+            boxShadow: [
+              /// Top shadow
+              BoxShadow(
+                  blurRadius: 3,
+                  offset: const Offset(-5, -5),
+                  color: appStore.isDarkMode
+                      ? AppColors.kHabitOrange.withOpacity(0.1)
+                      : AppColors.kHabitDark.withOpacity(0.1)),
+
+              /// Bottom shadow
+              BoxShadow(
+                  blurRadius: 3,
+                  offset: const Offset(5, 5),
+                  color: appStore.isDarkMode
+                      ? AppColors.kHabitOrange.withOpacity(0.1)
+                      : AppColors.kHabitDark.withOpacity(0.1)),
+            ]),
+        child: Text('NEXT', style: TextStyle(color: AppColors.kTextBlack)));
+  }
+}
+
+class CustomDoneButton extends StatelessWidget {
+  const CustomDoneButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        padding: const EdgeInsets.all(8.0),
+        decoration: BoxDecoration(
+            color: AppColors.kHabitOrange,
+            borderRadius: BorderRadius.circular(30.0),
+            boxShadow: [
+              /// Top shadow
+              BoxShadow(
+                  blurRadius: 3,
+                  offset: const Offset(-5, -5),
+                  color: appStore.isDarkMode
+                      ? AppColors.kHabitOrange.withOpacity(0.1)
+                      : AppColors.kHabitDark.withOpacity(0.1)),
+
+              /// Bottom shadow
+              BoxShadow(
+                  blurRadius: 3,
+                  offset: const Offset(5, 5),
+                  color: appStore.isDarkMode
+                      ? AppColors.kHabitOrange.withOpacity(0.1)
+                      : AppColors.kHabitDark.withOpacity(0.1)),
+            ]),
+        child: Text('DONE',
+            style: TextStyle(color: AppColors.kTextBlack, fontSize: 18)));
   }
 }
