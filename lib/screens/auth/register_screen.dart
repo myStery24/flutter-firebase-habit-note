@@ -10,7 +10,7 @@ import '../../configs/common.dart';
 import '../../configs/constants.dart';
 import '../../configs/routes.dart';
 import '../../main.dart';
-import '../../widgets/custom_button.dart';
+import '../../widgets/custom_buttons.dart';
 import '../../widgets/user_agreement_widget.dart';
 import '../../dashboard_screen.dart';
 

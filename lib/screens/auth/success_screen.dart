@@ -9,7 +9,7 @@ import 'package:nb_utils/nb_utils.dart';
 import '../../configs/colors.dart';
 import '../../configs/constants.dart';
 import '../../main.dart';
-import '../../widgets/custom_button.dart';
+import '../../widgets/custom_buttons.dart';
 
 /// Display when login is successful
 class SuccessScreen extends StatefulWidget {

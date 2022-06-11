@@ -13,7 +13,7 @@ import '../../configs/constants.dart';
 import '../../configs/routes.dart';
 import '../../main.dart';
 
-import '../../widgets/custom_button.dart';
+import '../../widgets/custom_buttons.dart';
 import '../../dashboard_screen.dart';
 
 class LoginScreen extends StatefulWidget {
