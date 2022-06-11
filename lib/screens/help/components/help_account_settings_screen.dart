@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:habit_note/widgets/custom_button.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../configs/colors.dart';
@@ -73,7 +74,7 @@ class _HelpAccountSettingsScreenState extends State<HelpAccountSettingsScreen> {
                 children: [
                   /// Skip
                   InkWell(
-                      child: Text('SKIP'),
+                      child: CustomSkipButton(),
                       // jump to the last page
                       onTap: () => _pageController.jumpToPage(lastPage)),
 
@@ -97,15 +98,11 @@ class _HelpAccountSettingsScreenState extends State<HelpAccountSettingsScreen> {
                   onLastPage
                       // true
                       ? InkWell(
-                          child: Text(
-                            'DONE',
-                            style: TextStyle(
-                                color: AppColors.kHabitOrange, fontSize: 18),
-                          ),
+                          child: CustomDoneButton(),
                           onTap: () => Navigator.pop(context))
                       // false
                       : InkWell(
-                          child: Text('NEXT'),
+                          child: CustomNextButton(),
                           onTap: () => _pageController.nextPage(
                               duration: const Duration(microseconds: 500),
                               curve: Curves.easeInOut)),
