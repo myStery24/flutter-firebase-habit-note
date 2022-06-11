@@ -38,7 +38,6 @@ class _HelpSubscriptionReminderScreenState
       // PageView allows you to swipe horizontally between pages
       body: Stack(
         children: <Widget>[
-          SizedBox(height: spacer),
           PageView(
               controller: _pageController,
               onPageChanged: (index) {
