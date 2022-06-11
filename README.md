@@ -33,3 +33,4 @@ samples, guidance on mobile development, and a full API reference.
 
 **Change Log**
 - Upload profile picture: Bug fixed.
+- Help pages: Added borders to the buttons and resized the pages.
