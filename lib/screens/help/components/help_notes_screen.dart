@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:habit_note/widgets/custom_buttons.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -22,7 +23,35 @@ class _HelpNotesScreenState extends State<HelpNotesScreen> {
   bool onLastPage = false; // Keep track of the last page
 
   @override
+  void initState() {
+    super.initState();
+    init();
+  }
+
+  Future<void> init() async {
+    /// When loading the onboard screen, set the orientation portrait
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
+    setState(() {});
+  }
+
+  @override
+  void setState(fn) {
+    if (mounted) super.setState(fn);
+  }
+
+  @override
   void dispose() {
+    /// When leaving the onboard screen,set back to normal (applies to all screens after login)
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     super.dispose();
     _pageController.dispose();
   }
