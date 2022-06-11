@@ -24,8 +24,8 @@ class AppStrings {
   static const String appName = 'HaBIT Note';
 
   // App version
-  static const String appVersionText = 'V0.1.0-beta';
-  static const String appVersionText2 = 'Version 0.1.0-beta';
+  static const String appVersionText = 'V0.1.1-beta';
+  static const String appVersionText2 = 'Version 0.1.1-beta';
 
   // App copyright
   static const String appCopyright = '© Copyright HaBIT Note 2022. All rights reserved.';
