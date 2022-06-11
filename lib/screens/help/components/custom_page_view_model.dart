@@ -25,7 +25,9 @@ class CustomPageView extends StatelessWidget {
     return SingleChildScrollView(
       child: Container(
         width: size.width,
-        height: size.height,
+        height: MediaQuery.of(context).orientation == Orientation.portrait
+            ? size.height * 1.16 // 960
+            : size.height * 3.86,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
