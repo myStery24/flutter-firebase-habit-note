@@ -31,6 +31,12 @@ samples, guidance on mobile development, and a full API reference.
 - Label notes: Add labels to your notes.
 - Local notification: Set a reminder to get notified by your important notes.
 
-**Change Log**
+## Change Log
+
+**6/10/2022**
+- Release Habit Note v0.1.0 Beta.
+
+**6/11/2022**
 - Upload profile picture: Bug fixed.
 - Help pages: Added border to the buttons and resized the pages.
+- Release Habit Note v0.1.1 Beta.
