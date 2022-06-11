@@ -120,7 +120,7 @@ class CustomSkipButton extends StatelessWidget {
               /// Top shadow
               BoxShadow(
                   blurRadius: 3,
-                  offset: const Offset(-5, -5),
+                  offset: const Offset(-3, -3),
                   color: appStore.isDarkMode
                       ? AppColors.kHabitOrange.withOpacity(0.1)
                       : AppColors.kHabitDark.withOpacity(0.1)),
@@ -128,7 +128,7 @@ class CustomSkipButton extends StatelessWidget {
               /// Bottom shadow
               BoxShadow(
                   blurRadius: 3,
-                  offset: const Offset(5, 5),
+                  offset: const Offset(3, 3),
                   color: appStore.isDarkMode
                       ? AppColors.kHabitOrange.withOpacity(0.1)
                       : AppColors.kHabitDark.withOpacity(0.1)),
@@ -151,7 +151,7 @@ class CustomNextButton extends StatelessWidget {
               /// Top shadow
               BoxShadow(
                   blurRadius: 3,
-                  offset: const Offset(-5, -5),
+                  offset: const Offset(-3, -3),
                   color: appStore.isDarkMode
                       ? AppColors.kHabitOrange.withOpacity(0.1)
                       : AppColors.kHabitDark.withOpacity(0.1)),
@@ -159,7 +159,7 @@ class CustomNextButton extends StatelessWidget {
               /// Bottom shadow
               BoxShadow(
                   blurRadius: 3,
-                  offset: const Offset(5, 5),
+                  offset: const Offset(3, 3),
                   color: appStore.isDarkMode
                       ? AppColors.kHabitOrange.withOpacity(0.1)
                       : AppColors.kHabitDark.withOpacity(0.1)),
@@ -182,7 +182,7 @@ class CustomDoneButton extends StatelessWidget {
               /// Top shadow
               BoxShadow(
                   blurRadius: 3,
-                  offset: const Offset(-5, -5),
+                  offset: const Offset(-3, -3),
                   color: appStore.isDarkMode
                       ? AppColors.kHabitOrange.withOpacity(0.1)
                       : AppColors.kHabitDark.withOpacity(0.1)),
@@ -190,7 +190,7 @@ class CustomDoneButton extends StatelessWidget {
               /// Bottom shadow
               BoxShadow(
                   blurRadius: 3,
-                  offset: const Offset(5, 5),
+                  offset: const Offset(3, 3),
                   color: appStore.isDarkMode
                       ? AppColors.kHabitOrange.withOpacity(0.1)
                       : AppColors.kHabitDark.withOpacity(0.1)),
