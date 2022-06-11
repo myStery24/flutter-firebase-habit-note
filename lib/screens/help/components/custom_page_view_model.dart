@@ -21,52 +21,45 @@ class CustomPageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return SingleChildScrollView(
-      child: Container(
-        width: size.width,
-        height: MediaQuery.of(context).orientation == Orientation.portrait
-            ? size.height * 1.16 // 960
-            : size.height * 3.86,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            15.height,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          50.height,
 
-            /// Title
-            Text(title,
-                style: TextStyle(
-                    color: appStore.isDarkMode
-                        ? AppColors.kTextWhite
-                        : AppColors.kTextBlack,
-                    fontSize: 24,
-                    fontWeight: fontWeight),
-                textAlign: TextAlign.center),
-            SizedBox(height: miniSpacer),
+          /// Title
+          Text(title,
+              style: TextStyle(
+                  color: appStore.isDarkMode
+                      ? AppColors.kTextWhite
+                      : AppColors.kTextBlack,
+                  fontSize: 24,
+                  fontWeight: fontWeight),
+              textAlign: TextAlign.center),
+          SizedBox(height: miniSpacer),
 
-            /// Image
-            Image.asset(image,
-                fit: BoxFit.scaleDown,
-                width: double.infinity,
-                alignment: Alignment.center),
-            SizedBox(height: miniSpacer),
+          /// Image
+          Image.asset(image,
+              fit: BoxFit.scaleDown,
+              width: double.infinity,
+              alignment: Alignment.center),
+          SizedBox(height: miniSpacer),
 
-            /// Description
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Text(
-                subtitle,
-                style: TextStyle(
-                    color: appStore.isDarkMode
-                        ? AppColors.kTextWhite
-                        : AppColors.kTextBlack,
-                    fontSize: 18,
-                    fontWeight: TextFontWeight.regular),
-              ),
+          /// Description
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Text(
+              subtitle,
+              style: TextStyle(
+                  color: appStore.isDarkMode
+                      ? AppColors.kTextWhite
+                      : AppColors.kTextBlack,
+                  fontSize: 18,
+                  fontWeight: TextFontWeight.regular),
             ),
-            SizedBox(height: miniSpacer),
-          ],
-        ),
+          ),
+          SizedBox(height: miniSpacer),
+        ],
       ),
     );
   }
