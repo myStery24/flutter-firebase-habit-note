@@ -24,7 +24,7 @@ samples, guidance on mobile development, and a full API reference.
 - Colour-code: Categorise your notes with colour.
 - Text recognition: Upload images from gallery or camera and grab the texts in images through the [Google ML Kit Text Recognition API](https://developers.google.com/ml-kit/vision/text-recognition).
 - Dark Mode: Light and dark modes.
-- Tutorial: User guide which explain how to use the application (in progress).
+- Tutorial: User guide which explain how to use the application.
 - Flutter UI: Modern UI created using Flutter.
 
 **Upcoming Features**
