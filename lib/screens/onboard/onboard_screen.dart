@@ -6,7 +6,7 @@ import '../../configs/colors.dart';
 import '../../configs/constants.dart';
 import '../../configs/routes.dart';
 import '../../main.dart';
-import '../../widgets/custom_button.dart';
+import '../../widgets/custom_buttons.dart';
 import '../../widgets/onboard_drawer_widget.dart';
 import 'components/onboard_content.dart';
 import 'components/onboard_title.dart';
