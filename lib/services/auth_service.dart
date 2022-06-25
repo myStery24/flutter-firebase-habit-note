@@ -93,7 +93,7 @@ class AuthService {
         .then((value) async {
       final User user = value.user!;
 
-      /// Create user
+      /// UserModel class reference
       UserModel userModel = UserModel();
 
       userModel.email = user.email;
