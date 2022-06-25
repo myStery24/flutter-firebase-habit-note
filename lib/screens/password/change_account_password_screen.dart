@@ -228,7 +228,9 @@ class ChangeAppPasswordScreenState extends State<ChangeAppPasswordScreen> {
                           style: GoogleFonts.lato(fontWeight: FontWeight.bold),
                         ),
                         Text(
-                            'This section does not apply to accounts created through Google services/third-party login.'),
+                            '1) This password reset method does not apply to accounts created through Google services/third-party login.'),
+                        Text(
+                            '2) Require a recent sign-in activity. If the password reset fails, please login again and return to this screen.'),
                       ],
                     ),
                   ),
