@@ -142,8 +142,7 @@ Widget noDataWidget(BuildContext context) {
     builder: (_) => Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Image.asset(AppImages.empty),
-        // Image.asset(AppImages.empty, height: 80, fit: BoxFit.fitHeight),
+        Image.asset(AppImages.empty, scale: 8.0),
         8.height,
         Text(home_empty_note,
                 style: boldTextStyle(
@@ -162,10 +161,29 @@ Widget noReminderDataWidget(BuildContext context) {
     builder: (_) => Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Image.asset(AppImages.empty),
+        Image.asset(AppImages.empty, scale: 8.0),
         // Image.asset(AppImages.empty, height: 80, fit: BoxFit.fitHeight),
         8.height,
         Text(reminder_empty_note,
+                style: boldTextStyle(
+                    color: appStore.isDarkMode
+                        ? Colors.white
+                        : AppColors.kHabitDark))
+            .center(),
+      ],
+    ).center(),
+  );
+}
+
+/// Empty Gallery Screen Placeholder
+Widget noImagesDataWidget(BuildContext context) {
+  return Observer(
+    builder: (_) => Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Image.asset(AppImages.onboard2, scale: 1.5),
+        8.height,
+        Text('Post your first image !',
                 style: boldTextStyle(
                     color: appStore.isDarkMode
                         ? Colors.white
