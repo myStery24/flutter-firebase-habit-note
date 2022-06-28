@@ -53,6 +53,7 @@ dependencies:
   material_tag_editor: ^0.1.2
   page_transition: ^2.0.5
   smooth_page_indicator: ^1.0.0+2
+  transparent_image: ^2.0.0
 
   # TEXT RECOGNITION
   # google_ml_kit: ^0.7.3
