@@ -166,14 +166,14 @@ class NotesScreenState extends State<NotesScreen> {
                                   BoxShadow(
                                       blurRadius: 5,
                                       offset: const Offset(-3, -3), // x, y
-                                      color: AppColors.kHabitDark
+                                      color: AppColors.kHintTextLightGrey
                                           .withOpacity(0.2)),
 
                                   /// Bottom shadow
                                   BoxShadow(
                                       blurRadius: 5,
                                       offset: const Offset(3, 3),
-                                      color: AppColors.kHabitDark
+                                      color: AppColors.kHintTextLightGrey
                                           .withOpacity(0.2)),
                                 ],
                               ),
@@ -322,14 +322,14 @@ class NotesScreenState extends State<NotesScreen> {
                                   BoxShadow(
                                       blurRadius: 5,
                                       offset: const Offset(-3, -3), // x, y
-                                      color: AppColors.kHabitDark
+                                      color: AppColors.kHintTextLightGrey
                                           .withOpacity(0.2)),
 
                                   /// Bottom shadow
                                   BoxShadow(
                                       blurRadius: 5,
                                       offset: const Offset(3, 3),
-                                      color: AppColors.kHabitDark
+                                      color: AppColors.kHintTextLightGrey
                                           .withOpacity(0.2)),
                                 ],
                               ),
