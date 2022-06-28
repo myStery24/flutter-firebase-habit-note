@@ -107,20 +107,18 @@ class SubscriptionReminderListScreenState
                             blurRadius: 5,
                             offset: const Offset(-3, -3), // x, y
                             color: appStore.isDarkMode
-                                ? AppColors.kHabitOrange
-                                .withOpacity(0.2)
-                                : AppColors.kHabitDark
-                                .withOpacity(0.2)),
+                                ? AppColors.kHabitOrange.withOpacity(0.2)
+                                : AppColors.kHintTextLightGrey
+                                    .withOpacity(0.2)),
 
                         /// Bottom shadow
                         BoxShadow(
                             blurRadius: 5,
                             offset: const Offset(3, 3),
                             color: appStore.isDarkMode
-                                ? AppColors.kHabitOrange
-                                .withOpacity(0.2)
-                                : AppColors.kHabitDark
-                                .withOpacity(0.2)),
+                                ? AppColors.kHabitOrange.withOpacity(0.2)
+                                : AppColors.kHintTextLightGrey
+                                    .withOpacity(0.2)),
                       ],
                     ),
                     child: Stack(
