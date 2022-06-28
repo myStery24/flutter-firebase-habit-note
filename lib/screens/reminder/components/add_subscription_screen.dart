@@ -213,7 +213,7 @@ class AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
                                   offset: const Offset(-3, -3), // x, y
                                   color: appStore.isDarkMode
                                       ? AppColors.kHabitOrange.withOpacity(0.2)
-                                      : AppColors.kHabitDark.withOpacity(0.2)),
+                                      : AppColors.kHintTextLightGrey.withOpacity(0.2)),
 
                               /// Bottom shadow
                               BoxShadow(
@@ -221,7 +221,7 @@ class AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
                                   offset: const Offset(3, 3),
                                   color: appStore.isDarkMode
                                       ? AppColors.kHabitOrange.withOpacity(0.2)
-                                      : AppColors.kHabitDark.withOpacity(0.2)),
+                                      : AppColors.kHintTextLightGrey.withOpacity(0.2)),
                             ],
                           ),
                           child: Column(
@@ -276,7 +276,7 @@ class AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
                                   offset: const Offset(-3, -3), // x, y
                                   color: appStore.isDarkMode
                                       ? AppColors.kHabitOrange.withOpacity(0.2)
-                                      : AppColors.kHabitDark.withOpacity(0.2)),
+                                      : AppColors.kHintTextLightGrey.withOpacity(0.2)),
 
                               /// Bottom shadow
                               BoxShadow(
@@ -284,7 +284,7 @@ class AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
                                   offset: const Offset(3, 3),
                                   color: appStore.isDarkMode
                                       ? AppColors.kHabitOrange.withOpacity(0.2)
-                                      : AppColors.kHabitDark.withOpacity(0.2)),
+                                      : AppColors.kHintTextLightGrey.withOpacity(0.2)),
                             ],
                           ),
                           child: Text(select_colour2,
