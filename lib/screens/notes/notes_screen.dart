@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:habit_note/screens/gallery/components/add_image_screen.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../configs/colors.dart';
@@ -160,6 +161,27 @@ class NotesScreenState extends State<NotesScreen> {
                                 spreadRadius: 0.0,
                                 blurRadius: 0.0,
                                 border: Border.all(color: Colors.grey.shade400),
+                                boxShadow: [
+                                  /// Top shadow
+                                  BoxShadow(
+                                      blurRadius: 5,
+                                      offset: const Offset(-3, -3), // x, y
+                                      color: appStore.isDarkMode
+                                          ? AppColors.kHabitOrange
+                                              .withOpacity(0.2)
+                                          : AppColors.kHabitDark
+                                              .withOpacity(0.2)),
+
+                                  /// Bottom shadow
+                                  BoxShadow(
+                                      blurRadius: 5,
+                                      offset: const Offset(3, 3),
+                                      color: appStore.isDarkMode
+                                          ? AppColors.kHabitOrange
+                                              .withOpacity(0.2)
+                                          : AppColors.kHabitDark
+                                              .withOpacity(0.2)),
+                                ],
                               ),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -172,7 +194,7 @@ class NotesScreenState extends State<NotesScreen> {
                                                   color: AppColors.kHabitDark))
                                           .paddingOnly(top: 16)
                                           .center()
-                                  // else show the checklist items
+                                      // else show the checklist items
                                       : ListView.builder(
                                           shrinkWrap: true,
                                           physics:
@@ -249,7 +271,7 @@ class NotesScreenState extends State<NotesScreen> {
                                     alignment: Alignment.bottomRight,
                                   ).paddingAll(16),
                                   notes.collaborateWith!.first !=
-                                      getStringAsync(USER_EMAIL)
+                                          getStringAsync(USER_EMAIL)
                                       ? Container(
                                           padding: EdgeInsets.all(12),
                                           decoration: BoxDecoration(
@@ -301,6 +323,27 @@ class NotesScreenState extends State<NotesScreen> {
                                 spreadRadius: 0.0,
                                 blurRadius: 0.0,
                                 border: Border.all(color: Colors.grey.shade400),
+                                boxShadow: [
+                                  /// Top shadow
+                                  BoxShadow(
+                                      blurRadius: 5,
+                                      offset: const Offset(-3, -3), // x, y
+                                      color: appStore.isDarkMode
+                                          ? AppColors.kHabitOrange
+                                              .withOpacity(0.2)
+                                          : AppColors.kHabitDark
+                                              .withOpacity(0.2)),
+
+                                  /// Bottom shadow
+                                  BoxShadow(
+                                      blurRadius: 5,
+                                      offset: const Offset(3, 3),
+                                      color: appStore.isDarkMode
+                                          ? AppColors.kHabitOrange
+                                              .withOpacity(0.2)
+                                          : AppColors.kHabitDark
+                                              .withOpacity(0.2)),
+                                ],
                               ),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -542,6 +585,17 @@ class NotesScreenState extends State<NotesScreen> {
                 onTap: () {
                   finish(context);
                   AddToDoScreen().launch(context);
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.photo_outlined,
+                    color: appStore.isDarkMode
+                        ? AppColors.kHabitOrange
+                        : AppColors.kScaffoldSecondaryDark),
+                title: Text(add_image, style: primaryTextStyle()),
+                onTap: () {
+                  finish(context);
+                  AddImageScreen().launch(context);
                 },
               ),
             ],
