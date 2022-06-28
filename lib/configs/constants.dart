@@ -37,6 +37,7 @@ class AppStrings {
   static const String back = 'BACK TO DASHBOARD';
   static const String exit = 'Exit';
   static const String optionNo = 'No';
+  static const String galleryNotesScreen = 'Gallery';
   static const String ocrScreen = 'Image to Text';
   static const String helpScreen = 'Help';
   static const String meScreen = 'Me';
@@ -71,8 +72,8 @@ class AppImages {
   static const userIcon3 = '$imageDir/user_start-up.png';
 
   static const onboard = '$imageDir/onboard.png';
-  static const onboard1 = '$imageDir/onboard1.png';
-  static const onboard2 = '$imageDir/onboard2.png';
+  static const onboard1 = '$imageDir/onboard_1.png';
+  static const onboard2 = '$imageDir/onboard_2.png';
   static const success = '$imageDir/success_icon.svg';
 
   static const empty = '$imageDir/empty.png';
@@ -212,6 +213,7 @@ const dark_mode = 'Dark Mode';
 const home_empty_note = 'Create your first note !';
 const add_note = 'Note';
 const add_todo = 'To-do';
+const add_image = 'Note with Image';
 const delete_note = 'Delete note';
 const delete_todo = 'Delete to-do';
 const select_colour = 'Select colour';
