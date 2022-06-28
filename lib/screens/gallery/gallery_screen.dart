@@ -11,7 +11,7 @@ import '../../main.dart';
 import 'components/add_image_screen.dart';
 import 'components/custom_post_card.dart';
 
-/// Failed to get the url update in the cloud firestore
+/// Screen to display the feed post.
 class GalleryScreen extends StatefulWidget {
   const GalleryScreen({Key? key}) : super(key: key);
 
