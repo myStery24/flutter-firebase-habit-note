@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:habit_note/screens/gallery/gallery_screen.dart';
 import 'package:habit_note/screens/ocr/ocr_screen.dart';
 import 'package:habit_note/screens/settings/me_screen.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -62,23 +63,25 @@ class DashboardScreenState extends State<DashboardScreen> {
           drawer: DashboardDrawerWidget(),
           body: buildBody(),
 
-            /// Custom Bottom Navigation Bar
-            bottomNavigationBar: buildBottomNavBar(),
-          ),
+          /// Custom Bottom Navigation Bar
+          bottomNavigationBar: buildBottomNavBar(),
         ),
-      );
+      ),
+    );
   }
 
   Widget buildBody() {
     switch (index) {
       case 1:
+        /// Post image
+        return GalleryScreen();
+      case 2:
         /// OCR
         return OCRScreen();
-      case 2:
-        /// FAQ
-        // TODO: HELP
-        return HelpScreen();
       case 3:
+        /// FAQ
+        return HelpScreen();
+      case 4:
         /// Settings
         return MeScreen();
       case 0:
@@ -90,7 +93,7 @@ class DashboardScreenState extends State<DashboardScreen> {
 
   /// Custom navigation bar
   Widget buildBottomNavBar() {
-    final inactiveColor =  AppColors.kPrimaryVariantColorDark;
+    final inactiveColor = AppColors.kPrimaryVariantColorDark;
     final activeColor = Colors.white;
 
     return BottomNavyBar(
@@ -102,6 +105,13 @@ class DashboardScreenState extends State<DashboardScreen> {
         BottomNavyBarItem(
           icon: Icon(Icons.sticky_note_2_sharp),
           title: Text('Notes'),
+          textAlign: TextAlign.center,
+          activeColor: activeColor,
+          inactiveColor: inactiveColor,
+        ),
+        BottomNavyBarItem(
+          icon: Icon(Icons.photo_library),
+          title: Text('Gallery'),
           textAlign: TextAlign.center,
           activeColor: activeColor,
           inactiveColor: inactiveColor,
