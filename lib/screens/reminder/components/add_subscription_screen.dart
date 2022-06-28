@@ -203,10 +203,27 @@ class AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
                           height: 180,
                           width: context.width(),
                           decoration: BoxDecoration(
-                              color: reminderColor,
-                              border: Border.all(color: Colors.grey.shade300),
-                              borderRadius:
-                                  BorderRadius.circular(defaultRadius)),
+                            color: reminderColor,
+                            border: Border.all(color: Colors.grey.shade300),
+                            borderRadius: BorderRadius.circular(defaultRadius),
+                            boxShadow: [
+                              /// Top shadow
+                              BoxShadow(
+                                  blurRadius: 5,
+                                  offset: const Offset(-3, -3), // x, y
+                                  color: appStore.isDarkMode
+                                      ? AppColors.kHabitOrange.withOpacity(0.2)
+                                      : AppColors.kHabitDark.withOpacity(0.2)),
+
+                              /// Bottom shadow
+                              BoxShadow(
+                                  blurRadius: 5,
+                                  offset: const Offset(3, 3),
+                                  color: appStore.isDarkMode
+                                      ? AppColors.kHabitOrange.withOpacity(0.2)
+                                      : AppColors.kHabitDark.withOpacity(0.2)),
+                            ],
+                          ),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -249,10 +266,27 @@ class AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
                           width: context.width(),
                           padding: EdgeInsets.all(16),
                           decoration: BoxDecoration(
-                              color: reminderColor,
-                              border: Border.all(color: Colors.grey.shade300),
-                              borderRadius:
-                                  BorderRadius.circular(defaultRadius)),
+                            color: reminderColor,
+                            border: Border.all(color: Colors.grey.shade300),
+                            borderRadius: BorderRadius.circular(defaultRadius),
+                            boxShadow: [
+                              /// Top shadow
+                              BoxShadow(
+                                  blurRadius: 5,
+                                  offset: const Offset(-3, -3), // x, y
+                                  color: appStore.isDarkMode
+                                      ? AppColors.kHabitOrange.withOpacity(0.2)
+                                      : AppColors.kHabitDark.withOpacity(0.2)),
+
+                              /// Bottom shadow
+                              BoxShadow(
+                                  blurRadius: 5,
+                                  offset: const Offset(3, 3),
+                                  color: appStore.isDarkMode
+                                      ? AppColors.kHabitOrange.withOpacity(0.2)
+                                      : AppColors.kHabitDark.withOpacity(0.2)),
+                            ],
+                          ),
                           child: Text(select_colour2,
                               style: primaryTextStyle(
                                   color: reminderColor!.isDark()
