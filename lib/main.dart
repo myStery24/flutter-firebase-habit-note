@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:habit_note/services/images_service.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:timezone/data/latest.dart' as tz;
 
@@ -25,9 +26,10 @@ AuthService service = AuthService();
 UserDBService userDBService = UserDBService();
 UserDBService userService = UserDBService();
 NotesService notesService = NotesService();
-LabelsService labelsService = LabelsService();
 SubscriptionService subscriptionService = SubscriptionService();
 NotificationManager manager = NotificationManager();
+LabelsService labelsService = LabelsService();
+ImagesService imagesService = ImagesService();
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,8 +40,7 @@ Future<void> main() async {
   await initialize();
 
   /// Initialize Firebase
-  await Firebase.initializeApp().then((value) {
-  });
+  await Firebase.initializeApp().then((value) {});
   tz.initializeTimeZones();
 
   /// Set state for app theme
