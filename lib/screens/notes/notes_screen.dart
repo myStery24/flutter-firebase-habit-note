@@ -499,8 +499,10 @@ class NotesScreenState extends State<NotesScreen> {
                           fontWeight: TextFontWeight.bold,
                         ),
                       ),
-                      child: Text(confirm_to_delete_note,
+                      builder: (_) => new Text(confirm_to_delete_note,
                           style: primaryTextStyle()),
+                      // child: Text(confirm_to_delete_note,
+                      //     style: primaryTextStyle()),
                       actions: [
                         TextButton(
                             onPressed: () {
