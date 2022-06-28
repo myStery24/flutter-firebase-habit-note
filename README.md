@@ -22,7 +22,9 @@ samples, guidance on mobile development, and a full API reference.
 - Filter notes: Filter out notes with the colour filter.
 - Lock/Unlock notes: Lock notes with 4-digit passwords.
 - Colour-code: Categorise your notes with colour.
+- Post images: Create notes with image and post them as feed in the Gallery section.
 - Text recognition: Upload images from gallery or camera and grab the texts in images through the [Google ML Kit Text Recognition API](https://developers.google.com/ml-kit/vision/text-recognition).
+- Subscription reminder: Set a reminder to get notified by your subscriptions.
 - Dark Mode: Light and dark modes.
 - Tutorial: User guide which explain how to use the application.
 - Flutter UI: Modern UI created using Flutter.
@@ -32,6 +34,11 @@ samples, guidance on mobile development, and a full API reference.
 - Local notification: Set a reminder to get notified by your important notes.
 
 ## Change Log
+**6/28/2022**
+- New section: Gallery
+- Post images
+- Release HaBIT Note v0.1.2 Beta.
+
 **6/25/2022**
 - Change account password screen: Added a new instruction under 'Note:'.
 
