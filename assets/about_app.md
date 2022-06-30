@@ -9,7 +9,9 @@ HaBIT Note is a Android-based mobile application built with [Flutter](https://fl
 - Filter notes: Filter out notes with the colour filter.
 - Lock/Unlock notes: Lock notes with 4-digit passwords.
 - Colour-code: Categorise your notes with colour.
+- Post images: Create notes with image and post them as feed in the Gallery section.
 - Text recognition: Upload images from gallery or camera and grab the texts in images through the [Google ML Kit Text Recognition API](https://developers.google.com/ml-kit/vision/text-recognition).
+- Subscription reminder: Set a reminder to get notified by your subscriptions.
 - Dark Mode: Light and dark modes.
 - Tutorial: User guide which explain how to use the application.
 - Flutter UI: Modern UI created using Flutter.
