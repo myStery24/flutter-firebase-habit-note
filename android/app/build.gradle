@@ -42,8 +42,8 @@ android {
         applicationId "com.habit.habit_note"
         minSdkVersion 23
         targetSdkVersion 31
-        versionCode 4
-        versionName "0.1.2"
+        versionCode 5
+        versionName "0.1.2-beta2"
         multiDexEnabled true
     }
 
