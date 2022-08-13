@@ -34,6 +34,10 @@ samples, guidance on mobile development, and a full API reference.
 - Local notification: Set a reminder to get notified by your important notes.
 
 ## Change Log
+**8/13/2022**
+- Minor bug fix.
+- Release HaBIT Note v0.1.2 Beta3.
+
 **6/29/2022**
 - Me > INFO > About Us: Minor update.
 - Release HaBIT Note v0.1.2 Beta2.
