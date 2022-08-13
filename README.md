@@ -2,6 +2,8 @@
 
 HaBIT Note is an Android-based mobile application built with Flutter and Firebase for note-taking.
 
+<img src="https://github.com/myStery24/flutter-firebase-habit-note/blob/6c34dd95903558bf252dff8dd1ef20e655cb62ee/Intro%20HaBIT%20Note%20GIF.gif"/>
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
