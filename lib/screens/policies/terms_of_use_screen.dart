@@ -83,7 +83,7 @@ class _TermsOfUseScreenState extends State<TermsOfUseScreen> {
               SizedBox(height: size.width * 0.015),
               Expanded(
                 child: FutureBuilder(
-                  future: rootBundle.loadString(AppMarkdown.privacyPolicy),
+                  future: rootBundle.loadString(AppMarkdown.termsOfUse),
                     builder:
                         (BuildContext context, AsyncSnapshot<String> snapshot) {
                       if (snapshot.hasError) {
